@@ -1,4 +1,4 @@
-package DP;
+package DP2;
 
 public class Balancedparenthesis {
     public static void main(String[] args) {

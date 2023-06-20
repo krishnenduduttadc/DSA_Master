@@ -1,4 +1,4 @@
-package DP;
+package DP2;
 
 public class PerfectSquare {
     public static void main(String[] args) {

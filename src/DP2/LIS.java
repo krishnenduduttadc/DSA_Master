@@ -1,34 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package DP2;
+package DP;
 
-/**
- *
- * @author krish
- */
 public class LIS {
-
     public static void main(String[] args) {
-        int arr[] = {5, 6, 7, 8, 3};
-        int omax = 0;
-        int dp[] = new int[arr.length];
+        int arr[]={10,22,9,33,21,50,41,60,80,3};
+        int n=arr.length;
+        int[] dp=new int[n];
+        int omax=0;
+
         for (int i = 0; i < dp.length; i++) {
-            int max = 0;
+            int max=0;
             for (int j = 0; j < i; j++) {
-                if (arr[j] < arr[i]) {
-                    if (dp[j] > max) {
-                        max = dp[j];
+                if(arr[i]>arr[j]){
+                    if(dp[j]>max){
+                        max=dp[j];
                     }
                 }
             }
-            dp[i] = max + 1;
-            if (dp[i] > omax) {
-                omax = dp[i];
+            dp[i]=max+1;
+
+            if(dp[i]>omax){
+                omax=dp[i];
             }
         }
-        System.out.println("" + omax);
+        System.out.print(omax+" ");
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(dp[i]+" ");
+        }
+
     }
 }
