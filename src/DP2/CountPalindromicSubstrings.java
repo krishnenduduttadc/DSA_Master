@@ -1,4 +1,4 @@
-package DP;
+package DP1;
 
 public class CountPalindromicSubstrings {
     public static void main(String[] args) {

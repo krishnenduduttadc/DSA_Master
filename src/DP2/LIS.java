@@ -1,4 +1,4 @@
-package DP;
+package DP1;
 
 public class LIS {
     public static void main(String[] args) {
