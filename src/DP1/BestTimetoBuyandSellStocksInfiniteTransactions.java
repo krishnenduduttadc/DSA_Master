@@ -3,7 +3,7 @@ package DP1;
 public class BestTimetoBuyandSellStocksInfiniteTransactions {
     public static void main(String[] args) throws Exception {
         // write your code here
-        
+
         int n =9;
 
         int[] arr = {11,6,7,19,4,1,6,18,4};
