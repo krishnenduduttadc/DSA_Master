@@ -1,4 +1,4 @@
-package RecBT2;
+package RecursionAndBacktrackingL2;
 
 public class FriendsPairing {
     public static void main(String[] args) {

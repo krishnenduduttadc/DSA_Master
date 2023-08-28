@@ -1,4 +1,4 @@
-package DynamicProgramming2;
+package DynamicProgramming1;
 
 public class ClimbingStairs {
     public static void main(String[] args) {

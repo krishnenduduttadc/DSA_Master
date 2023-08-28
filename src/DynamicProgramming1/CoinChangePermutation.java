@@ -1,4 +1,4 @@
-package DynamicProgramming2;
+package DynamicProgramming1;
 
 public class CoinChangePermutation {
     public static void main(String[] args) {
