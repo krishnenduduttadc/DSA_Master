@@ -1,7 +1,5 @@
 package RecursionAndBacktrackingL2;
 
-import java.util.Scanner;
-
 public class FriendsPairing2 {
     static int counter = 1;
 
@@ -35,8 +33,8 @@ public class FriendsPairing2 {
     }
 
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        //Scanner sc = new Scanner(System.in);
+        int n = 3;
         boolean[] used = new boolean[n + 1];
         solution(1, n, used, "");
     }
