@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author krish
  */
-public class PairDivisileByK {
+public class ArrayPairDivisileByK {
     public static void main(String[] args) {
         int arr[]={22,12,45,55,65,78,88,75};
         int k=7;
