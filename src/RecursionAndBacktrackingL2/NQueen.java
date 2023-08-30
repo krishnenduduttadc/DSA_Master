@@ -1,11 +1,9 @@
 package RecursionAndBacktrackingL2;
 
-import java.util.Scanner;
-
 public class NQueen {
     public static void main(String[] args) throws Exception {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
+        //Scanner scn = new Scanner(System.in);
+        int n = 4;
         boolean[][] board = new boolean[n][n];
         //write your code here
         boolean[] cols=new boolean[n];
