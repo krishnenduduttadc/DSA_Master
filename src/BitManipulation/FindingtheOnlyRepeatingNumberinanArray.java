@@ -11,6 +11,5 @@ public class FindingtheOnlyRepeatingNumberinanArray {
             xor ^= i;
         }
         System.out.println("Repeating number: " + xor); // Output: 2
-
     }
 }
