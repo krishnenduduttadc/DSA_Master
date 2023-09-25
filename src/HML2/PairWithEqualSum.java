@@ -1,12 +1,15 @@
 package HML2;
 
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class PairWithEqualSum {
-    public static boolean solution(int[] arr) {
-        // write your code here
+    public static void main(String[] args) {
+        int arr[]={2,9,3,5,8,6,4};
+        boolean ans=sol(arr);
+        System.out.println(ans);
+    }
 
+    private static boolean sol(int[] arr) {
         HashSet<Integer> set=new HashSet<>();
         for (int i = 0; i < arr.length; i++) {
             for (int j = i+1; j < arr.length; j++) {
@@ -18,22 +21,6 @@ public class PairWithEqualSum {
                 }
             }
         }
-
         return false;
     }
-
-    public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = scn.nextInt();
-        }
-        System.out.println(solution(arr));
-    }
-
 }
-/*
-8
-1 2 998 72 87576 21 45 -1
- */

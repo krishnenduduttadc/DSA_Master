@@ -2,57 +2,41 @@ package HML2;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class TaskCompletion {
-    public static void completeTask(int n, int m, int[] arr) {
-        // write your code here
-        HashSet<Integer> completed=new HashSet<>();
-        for(int val:arr){
-            completed.add(val);
+    public static void main(String[] args) {
+        int n = 156;
+        int m = 256794;
+        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        complete(n,m,arr);
+    }
+
+    static void complete(int n, int m, int[] arr) {
+        HashSet<Integer> comp = new HashSet<>();
+        for (int val : arr) {
+            comp.add(val);
         }
-
-        boolean flag=true;
-        ArrayList<Integer> one = new ArrayList<Integer>();
-        ArrayList<Integer> two = new ArrayList<Integer>();
-
-        for (int i = 1; i <=n; i++) {
-            if(completed.contains(i)==false){
-                if(flag){
+        boolean flag = true;
+        ArrayList<Integer> one = new ArrayList<>();
+        ArrayList<Integer> two = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if (comp.contains(i) == false) {
+                if (flag) {
                     one.add(i);
-                }else{
+                } else {
                     two.add(i);
                 }
-                flag=!flag;
+                flag = !flag;
             }
         }
 
-        for (int var : one) {
-            System.out.print(var+" ");
+        for (int val : one) {
+            System.out.println(val + " ");
         }
         System.out.println();
-        for (int var : two) {
-            System.out.print(var+" ");
+        for (int val : two) {
+            System.out.println(val + " ");
         }
         System.out.println();
-
-
     }
-
-    public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int m = scn.nextInt();
-        int[] num = new int[m];
-        for (int i = 0; i < m; i++) {
-            num[i] = scn.nextInt();
-        }
-        completeTask(n, m, num);
-    }
-
 }
-
-/*
-15 6
-2 5 6 7 9 4
- */
