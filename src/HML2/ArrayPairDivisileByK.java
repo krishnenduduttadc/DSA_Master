@@ -32,11 +32,11 @@ public class ArrayPairDivisileByK {
             int rem=val%k;
             
             if(rem==0){
-               int fq=rfmap.get(rem) ;
-               if(fq%2==1){
-                   System.out.println(false);
-                   return;
-               }            
+                   int fq=rfmap.get(rem) ;
+                   if(fq%2==1){
+                       System.out.println(false);
+                       return;
+                   }
             }
             
             else if(2*rem==k){
