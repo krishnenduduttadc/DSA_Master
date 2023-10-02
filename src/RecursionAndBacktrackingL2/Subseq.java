@@ -14,6 +14,6 @@ public class Subseq {
         char ch=q.charAt(0);
         String rest=q.substring(1);
         sol(rest,a);
-        //sol(rest,a+ch);
+        sol(rest,a+ch);
     }
 }
