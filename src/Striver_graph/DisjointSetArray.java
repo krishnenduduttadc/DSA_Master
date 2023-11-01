@@ -1,10 +1,10 @@
 package Striver_graph;
 
-public class DisjointSet2 {
+public class DisjointSetArray {
     int[] rank;
     int[] parent;
 
-    public DisjointSet2(int n) {
+    public DisjointSetArray(int n) {
         rank = new int[n + 1];
         parent = new int[n + 1];
         for (int i = 0; i <= n; i++) {
@@ -37,7 +37,7 @@ public class DisjointSet2 {
     }
 
     public static void main(String[] args) {
-        DisjointSet2 ds = new DisjointSet2(7);
+        DisjointSetArray ds = new DisjointSetArray(7);
         ds.unionByRank(1, 2);
         ds.unionByRank(2, 3);
         ds.unionByRank(4, 5);
