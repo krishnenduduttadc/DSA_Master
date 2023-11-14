@@ -1,7 +1,6 @@
 package RecursionAndBacktrackingL2;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GoldMine2 {
     static int max = 0;
@@ -42,15 +41,14 @@ public class GoldMine2 {
 
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int m = scn.nextInt();
-        int[][] arr = new int[m][n];
-        for(int i = 0; i < arr.length; i++){
-            for(int j = 0 ; j  < arr[0].length; j++){
-                arr[i][j] = scn.nextInt();
-            }
-        }
+        int arr[][] = {
+                {0, 1, 4, 2, 8, 2},
+                {4, 3, 6, 5, 0, 4},
+                {1, 2, 4, 1, 4, 6},
+                {2, 0, 7, 3, 2, 2},
+                {3, 1, 5, 9, 2, 4},
+                {2, 7, 0, 8, 5, 1}
+        };
         getMaxGold(arr);
         System.out.println(max);
     }
