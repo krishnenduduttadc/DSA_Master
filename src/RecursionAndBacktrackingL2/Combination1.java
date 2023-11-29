@@ -1,29 +1,22 @@
 package RecursionAndBacktrackingL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class Combination1 {
-    public static void combinations(int cb, int tb, int ssf, int ts, String asf){
-        // write your code here
+    public static void main(String[] args) throws Exception {
+        int nboxes = 3;
+        int ritems = 2;
+        combinations(1, nboxes, 0, ritems, "");
+    }
 
-        if(cb>tb){
-            if(ssf==ts){
+    public static void combinations(int cb, int nboxes, int ssf, int ritems, String asf) {
+        if (cb > nboxes) {
+            if(ssf==ritems){
                 System.out.println(asf);
             }
             return;
         }
-        combinations(cb+1,tb,ssf+1,ts,asf+"i");
-        combinations(cb+1,tb,ssf,ts,asf+"-");
+        combinations(cb+1,nboxes,ssf+1,ritems,asf+"i");
+        combinations(cb+1,nboxes,ssf,ritems,asf+"-");
 
-
-    }
-
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int nboxes = Integer.parseInt(br.readLine());
-        int ritems = Integer.parseInt(br.readLine());
-        combinations(1, nboxes, 0, ritems, "");
     }
 }
 
