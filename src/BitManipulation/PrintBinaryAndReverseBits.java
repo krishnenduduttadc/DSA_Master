@@ -2,7 +2,7 @@ package BitManipulation;
 
 public class PrintBinaryAndReverseBits {
     public static void main(String[] args){
-        
+
         int n = 7;
 
         boolean flag = false;
