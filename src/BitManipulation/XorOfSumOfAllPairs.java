@@ -10,7 +10,7 @@ public class XorOfSumOfAllPairs {
 
         return ans;    }
     public static void main(String[] args) {
-        int[] arr = {2,3,4,5,6};
+        int[] arr = {1,2,3,4};
         System.out.println(solution(arr));
     }
 
