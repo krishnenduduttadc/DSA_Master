@@ -2,11 +2,9 @@ package Striver_graph;
 
 import java.util.ArrayList;
 
-
-
-
-class ArticulationPoint {
+public class ArticulationPoint {
     private int timer = 1;
+
     private void dfs(int node, int parent, int[] vis,
                      int tin[], int low[], int[] mark,
                      ArrayList<ArrayList<Integer>> adj) {
@@ -19,7 +17,6 @@ class ArticulationPoint {
             if (vis[it] == 0) {
                 dfs(it, node, vis, tin, low, mark, adj);
                 low[node] = Math.min(low[node], low[it]);
-                // node --- it
                 if (low[it] >= tin[node] && parent != -1) {
                     mark[node] = 1;
                 }
@@ -32,7 +29,7 @@ class ArticulationPoint {
             mark[node] = 1;
         }
     }
-    //Function to return Breadth First Traversal of given graph.
+
     public ArrayList<Integer> articulationPoints(int n,
                                                  ArrayList<ArrayList<Integer>> adj) {
         int[] vis = new int[n];
@@ -55,10 +52,8 @@ class ArticulationPoint {
         }
         return ans;
     }
-}
 
-class Main8 {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         int n = 5;
         int[][] edges = {
                 {0, 1}, {1, 4},

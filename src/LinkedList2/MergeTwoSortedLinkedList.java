@@ -1,9 +1,7 @@
 package LinkedList2;
 
-import java.util.Scanner;
-
 public class MergeTwoSortedLinkedList {
-    public static Scanner scn = new Scanner(System.in);
+    //public static Scanner scn = new Scanner(System.in);
 
     public static class ListNode {
         int val = 0;
@@ -47,25 +45,37 @@ public class MergeTwoSortedLinkedList {
         }
     }
 
-    public static ListNode createList(int n) {
-        ListNode dummy = new ListNode(-1);
-        ListNode prev = dummy;
-        while (n-- > 0) {
-            prev.next = new ListNode(scn.nextInt());
-            prev = prev.next;
-        }
 
-        return dummy.next;
+
+     static ListNode head1,head2;
+
+    void push(int new_data) {
+        ListNode new_node = new ListNode(new_data);
+        new_node.next = head1;
+        head1 = new_node;
     }
-
+    void push2(int new_data) {
+        ListNode new_node = new ListNode(new_data);
+        new_node.next = head2;
+        head2 = new_node;
+    }
     public static void main(String[] args) {
-        int n = scn.nextInt();
-        ListNode h1 = createList(n);
-        int m = scn.nextInt();
-        ListNode h2 = createList(m);
+        MergeTwoSortedLinkedList llist1=new MergeTwoSortedLinkedList();
+        llist1.push(1);
+        llist1.push(2);
+        llist1.push(3);
+
+//        ListNode h1 = createList(n);
+//        int m = scn.nextInt();
+
+        MergeTwoSortedLinkedList llist2=new MergeTwoSortedLinkedList();
+        llist2.push(1);
+        llist2.push(2);
+        llist2.push(3);
+        //ListNode h2 = createList(m);
 
 
-        ListNode head = mergeTwoLists(h1, h2);
-        printList(head);
+        ListNode head3 = mergeTwoLists(head1, head2);
+        printList(head3);
     }
 }

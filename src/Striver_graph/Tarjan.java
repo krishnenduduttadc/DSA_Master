@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-
 class Tarjan {
     private int timer = 1;
+
     private void dfs(int node, int parent, int[] vis,
                      ArrayList<ArrayList<Integer>> adj, int tin[], int low[],
                      List<List<Integer>> bridges) {
@@ -28,14 +27,15 @@ class Tarjan {
             }
         }
     }
+
     public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
-        ArrayList<ArrayList<Integer>> adj =
-                new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<Integer>());
         }
         for (List<Integer> it : connections) {
-            int u = it.get(0); int v = it.get(1);
+            int u = it.get(0);
+            int v = it.get(1);
             adj.get(u).add(v);
             adj.get(v).add(u);
         }
@@ -46,10 +46,8 @@ class Tarjan {
         dfs(0, -1, vis, adj, tin, low, bridges);
         return bridges;
     }
-}
 
-class Main7 {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         int n = 4;
         int[][] edges = {
                 {0, 1}, {1, 2},

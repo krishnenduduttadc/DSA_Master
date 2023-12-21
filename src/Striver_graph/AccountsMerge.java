@@ -2,15 +2,11 @@ package Striver_graph;
 
 import java.util.*;
 
-
-
-
-
-//User function Template for Java
 class AccountsMerge {
     List<Integer> rank = new ArrayList<>();
     List<Integer> parent = new ArrayList<>();
     List<Integer> size = new ArrayList<>();
+
     public AccountsMerge(int n) {
         for (int i = 0; i <= n; i++) {
             rank.add(0);
@@ -55,11 +51,10 @@ class AccountsMerge {
             size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
         }
     }
-}
-class Solution2 {
-    static List<List<String>> accountsMerge(List<List<String>> details) {
+
+    public List<List<String>> accountsMerge(List<List<String>> details) {
         int n = details.size();
-        DisjointSet ds = new DisjointSet(n);
+        AccountsMerge ds = new AccountsMerge(n);
         HashMap<String, Integer> mapMailNode = new HashMap<String, Integer>();
 
         for (int i = 0; i < n; i++) {
@@ -94,12 +89,9 @@ class Solution2 {
             ans.add(temp);
         }
         return ans;
-
     }
-}
 
-class Main2 {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         List<List<String>> accounts = new ArrayList() {
             {
                 add(new ArrayList<String>(Arrays.asList("John", "j1@com", "j2@com", "j3@com")));
@@ -108,11 +100,10 @@ class Main2 {
                 add(new ArrayList<String>(Arrays.asList("John", "j1@com", "j5@com")));
                 add(new ArrayList<String>(Arrays.asList("Raj", "r2@com", "r3@com")));
                 add(new ArrayList<String>(Arrays.asList("Mary", "m1@com")));
-
             }
         };
 
-        Solution2 obj = new Solution2();
+        AccountsMerge obj = new AccountsMerge(accounts.size());
         List<List<String>> ans = obj.accountsMerge(accounts);
 
         int n = ans.size();
@@ -125,6 +116,5 @@ class Main2 {
 
             System.out.println("");
         }
-
     }
 }

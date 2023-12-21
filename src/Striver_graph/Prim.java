@@ -3,35 +3,33 @@ package Striver_graph;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-
-class Pair12 {
-    int node;
-    int distance;
-
-    public Pair12(int distance, int node) {
-        this.node = node;
-        this.distance = distance;
-    }
-}
-
 class Prim {
-    //Function to find sum of weights of edges of the Minimum Spanning Tree.
-    static int spanningTree(int V,
-                            ArrayList<ArrayList<ArrayList<Integer>>> adj) {
-        PriorityQueue<Pair12> pq =
-                new PriorityQueue<Pair12>((x, y) -> x.distance - y.distance);
+    static class Pair {
+        int node;
+        int distance;
+
+        public Pair(int distance, int node) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
+
+    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
+        PriorityQueue<Pair> pq =
+                new PriorityQueue<>((x, y) -> x.distance - y.distance);
 
         int[] vis = new int[V];
         // {wt, node}
-        pq.add(new Pair12(0, 0));
+        pq.add(new Pair(0, 0));
         int sum = 0;
-        while (pq.size() > 0) {
+        while (!pq.isEmpty()) {
             int wt = pq.peek().distance;
             int node = pq.peek().node;
             pq.remove();
 
             if (vis[node] == 1) continue;
-            // add it to the mst
+            // add it to the MST
             vis[node] = 1;
             sum += wt;
 
@@ -39,22 +37,21 @@ class Prim {
                 int edW = adj.get(node).get(i).get(1);
                 int adjNode = adj.get(node).get(i).get(0);
                 if (vis[adjNode] == 0) {
-                    pq.add(new Pair12(edW, adjNode));
+                    pq.add(new Pair(edW, adjNode));
                 }
             }
         }
         return sum;
     }
-}
 
-class tUf11 {
     public static void main(String[] args) {
         int V = 5;
-        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<ArrayList<ArrayList<Integer>>>();
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+
         int[][] edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
 
         for (int i = 0; i < V; i++) {
-            adj.add(new ArrayList<ArrayList<Integer>>());
+            adj.add(new ArrayList<>());
         }
 
         for (int i = 0; i < 6; i++) {
@@ -62,8 +59,8 @@ class tUf11 {
             int v = edges[i][1];
             int w = edges[i][2];
 
-            ArrayList<Integer> tmp1 = new ArrayList<Integer>();
-            ArrayList<Integer> tmp2 = new ArrayList<Integer>();
+            ArrayList<Integer> tmp1 = new ArrayList<>();
+            ArrayList<Integer> tmp2 = new ArrayList<>();
             tmp1.add(v);
             tmp1.add(w);
 

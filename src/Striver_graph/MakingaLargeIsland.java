@@ -1,15 +1,15 @@
 package Striver_graph;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-
 
 class MakingaLargeIsland {
     List<Integer> rank = new ArrayList<>();
     List<Integer> parent = new ArrayList<>();
     List<Integer> size = new ArrayList<>();
+
     public MakingaLargeIsland(int n) {
         for (int i = 0; i <= n; i++) {
             rank.add(0);
@@ -54,20 +54,18 @@ class MakingaLargeIsland {
             size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
         }
     }
-}
-class Solution4 {
+
     private boolean isValid(int newr, int newc, int n) {
         return newr >= 0 && newr < n && newc >= 0 && newc < n;
     }
 
     public int MaxConnection(int grid[][]) {
         int n = grid.length;
-        DisjointSet ds = new DisjointSet(n * n);
         // step - 1
-        for (int row = 0; row < n ; row++) {
-            for (int col = 0; col < n ; col++) {
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
                 if (grid[row][col] == 0) continue;
-                int dr[] = { -1, 0, 1, 0};
+                int dr[] = {-1, 0, 1, 0};
                 int dc[] = {0, -1, 0, 1};
                 for (int ind = 0; ind < 4; ind++) {
                     int newr = row + dr[ind];
@@ -75,7 +73,7 @@ class Solution4 {
                     if (isValid(newr, newc, n) && grid[newr][newc] == 1) {
                         int nodeNo = row * n + col;
                         int adjNodeNo = newr * n + newc;
-                        ds.unionBySize(nodeNo, adjNodeNo);
+                        unionBySize(nodeNo, adjNodeNo);
                     }
                 }
             }
@@ -85,7 +83,7 @@ class Solution4 {
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
                 if (grid[row][col] == 1) continue;
-                int dr[] = { -1, 0, 1, 0};
+                int dr[] = {-1, 0, 1, 0};
                 int dc[] = {0, -1, 0, 1};
                 HashSet<Integer> components = new HashSet<>();
                 for (int ind = 0; ind < 4; ind++) {
@@ -93,34 +91,31 @@ class Solution4 {
                     int newc = col + dc[ind];
                     if (isValid(newr, newc, n)) {
                         if (grid[newr][newc] == 1) {
-                            components.add(ds.findUPar(newr * n + newc));
+                            components.add(findUPar(newr * n + newc));
                         }
                     }
                 }
                 int sizeTotal = 0;
                 for (Integer parents : components) {
-                    sizeTotal += ds.size.get(parents);
+                    sizeTotal += size.get(parents);
                 }
                 mx = Math.max(mx, sizeTotal + 1);
             }
         }
         for (int cellNo = 0; cellNo < n * n; cellNo++) {
-            mx = Math.max(mx, ds.size.get(ds.findUPar(cellNo)));
+            mx = Math.max(mx, size.get(findUPar(cellNo)));
         }
         return mx;
     }
 
-}
-
-class Main4 {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         int[][] grid = {
                 {1, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 1, 0},
                 {1, 1, 0, 1, 1, 0}, {0, 0, 1, 0, 0, 0},
                 {0, 0, 1, 1, 1, 0}, {0, 0, 1, 1, 1, 0}
         };
 
-        Solution4 obj = new Solution4();
+        MakingaLargeIsland obj = new MakingaLargeIsland(grid.length * grid[0].length);
         int ans = obj.MaxConnection(grid);
         System.out.println("The largest group of connected 1s is of size: " + ans);
     }

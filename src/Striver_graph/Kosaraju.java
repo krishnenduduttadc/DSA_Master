@@ -3,12 +3,8 @@ package Striver_graph;
 import java.util.ArrayList;
 import java.util.Stack;
 
-
-
-
 class Kosaraju {
-    private void dfs(int node, int []vis, ArrayList<ArrayList<Integer>> adj,
-                     Stack<Integer> st) {
+    private void dfs(int node, int[] vis, ArrayList<ArrayList<Integer>> adj, Stack<Integer> st) {
         vis[node] = 1;
         for (Integer it : adj.get(node)) {
             if (vis[it] == 0) {
@@ -17,51 +13,58 @@ class Kosaraju {
         }
         st.push(node);
     }
-    private void dfs3(int node, int[] vis, ArrayList<ArrayList<Integer>> adjT) {
+
+    private void dfsTranspose(int node, int[] vis, ArrayList<ArrayList<Integer>> adjT) {
         vis[node] = 1;
         for (Integer it : adjT.get(node)) {
             if (vis[it] == 0) {
-                dfs3(it, vis, adjT);
+                dfsTranspose(it, vis, adjT);
             }
         }
     }
-    //Function to find number of strongly connected components in the graph.
+
+    // Function to find the number of strongly connected components in the graph.
     public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj) {
         int[] vis = new int[V];
-        Stack<Integer> st = new Stack<Integer>();
+        Stack<Integer> st = new Stack<>();
+
+        // Step 1: Perform DFS and fill the stack.
         for (int i = 0; i < V; i++) {
             if (vis[i] == 0) {
                 dfs(i, vis, adj, st);
             }
         }
 
-        ArrayList<ArrayList<Integer>> adjT = new ArrayList<ArrayList<Integer>>();
+        // Step 2: Create the transposed graph.
+        ArrayList<ArrayList<Integer>> adjT = new ArrayList<>();
         for (int i = 0; i < V; i++) {
-            adjT.add(new ArrayList<Integer>());
+            adjT.add(new ArrayList<>());
         }
+
         for (int i = 0; i < V; i++) {
             vis[i] = 0;
             for (Integer it : adj.get(i)) {
-                // i -> it
-                // it -> i
+                // i -> it in the original graph, so it -> i in the transposed graph.
                 adjT.get(it).add(i);
             }
         }
-        int scc = 0;
+
+        // Step 3: Count SCCs using DFS on the transposed graph.
+        int sccCount = 0;
         while (!st.isEmpty()) {
             int node = st.peek();
             st.pop();
             if (vis[node] == 0) {
-                scc++;
-                dfs3(node, vis, adjT);
+                sccCount++;
+                dfsTranspose(node, vis, adjT);
             }
         }
-        return scc;
-    }
-}
 
-class Main6 {
-    public static void main (String[] args) {
+        return sccCount;
+    }
+
+    // Main method for testing the Kosaraju algorithm.
+    public static void main(String[] args) {
         int n = 5;
         int[][] edges = {
                 {1, 0}, {0, 2},
@@ -70,7 +73,7 @@ class Main6 {
         };
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<Integer>());
+            adj.add(new ArrayList<>());
         }
         for (int i = 0; i < n; i++) {
             adj.get(edges[i][0]).add(edges[i][1]);

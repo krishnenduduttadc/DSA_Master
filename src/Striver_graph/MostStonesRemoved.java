@@ -5,13 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 class MostStonesRemoved {
-    List<Integer> rank = new ArrayList<>();
-    List<Integer> parent = new ArrayList<>();
-    List<Integer> size = new ArrayList<>();
+    List<Integer> rank;
+    List<Integer> parent;
+    List<Integer> size;
+
     public MostStonesRemoved(int n) {
+        rank = new ArrayList<>();
+        parent = new ArrayList<>();
+        size = new ArrayList<>();
+
         for (int i = 0; i <= n; i++) {
             rank.add(0);
             parent.add(i);
@@ -55,8 +58,6 @@ class MostStonesRemoved {
             size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
         }
     }
-}
-class Solution5 {
 
     int maxRemove(int[][] stones, int n) {
         int maxRow = 0;
@@ -65,7 +66,7 @@ class Solution5 {
             maxRow = Math.max(maxRow, stones[i][0]);
             maxCol = Math.max(maxCol, stones[i][1]);
         }
-        DisjointSet ds = new DisjointSet(maxRow + maxCol + 1);
+        MostStonesRemoved ds = new MostStonesRemoved(maxRow + maxCol + 1);
         HashMap<Integer, Integer> stoneNodes = new HashMap<>();
         for (int i = 0; i < n; i++) {
             int nodeRow = stones[i][0];
@@ -83,10 +84,8 @@ class Solution5 {
         }
         return n - cnt;
     }
-};
 
-class Main5 {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         int n = 6;
         int[][] stones = {
                 {0, 0}, {0, 2},
@@ -94,7 +93,7 @@ class Main5 {
                 {3, 2}, {4, 3}
         };
 
-        Solution5 obj = new Solution5();
+        MostStonesRemoved obj = new MostStonesRemoved(n);
         int ans = obj.maxRemove(stones, n);
         System.out.println("The maximum number of stones we can remove is: " + ans);
     }
