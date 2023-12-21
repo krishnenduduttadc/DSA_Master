@@ -53,12 +53,12 @@ class NumberofIslandsII {
         }
     }
 
-    private static class Solution {
-        private boolean isValid(int adjr, int adjc, int n, int m) {
+
+        private static boolean isValid(int adjr, int adjc, int n, int m) {
             return adjr >= 0 && adjr < n && adjc >= 0 && adjc < m;
         }
 
-        public List<Integer> numOfIslands(int n, int m, int[][] operators) {
+        public static List<Integer> numOfIslands(int n, int m, int[][] operators) {
             NumberofIslandsII ds = new NumberofIslandsII(n * m);
             int[][] vis = new int[n][m];
             int cnt = 0;
@@ -96,7 +96,7 @@ class NumberofIslandsII {
             }
             return ans;
         }
-    }
+
 
     public static void main(String[] args) {
         int n = 4, m = 5;
@@ -104,8 +104,8 @@ class NumberofIslandsII {
                 {0, 3}, {1, 3}, {0, 4}, {3, 2}, {2, 2}, {1, 2}, {0, 2}
         };
 
-        Solution obj = new Solution();
-        List<Integer> ans = obj.numOfIslands(n, m, operators);
+        //Solution obj = new Solution();
+        List<Integer> ans = numOfIslands(n, m, operators);
 
         int sz = ans.size();
         for (int i = 0; i < sz; i++) {
