@@ -27,11 +27,11 @@ public class Word_Ladder_1 {
 
     public int wordLadderLength(String startWord, String targetWord, String[] wordList) {
         // Creating a queue ds of type {word,transitions to reach ‘word’}.
-        Queue<Pair> q = new LinkedList<>();
+        Queue<Pair4> q = new LinkedList<>();
 
         // BFS traversal with pushing values in queue
         // when after a transformation, a word is found in wordList.
-        q.add(new Pair(startWord, 1));
+        q.add(new Pair4(startWord, 1));
 
         // Push all values of wordList into a set
         // to make deletion from it easier and in less time complexity.
@@ -61,7 +61,7 @@ public class Word_Ladder_1 {
                     // check if it exists in the set and push it in the queue.
                     if (st.contains(replacedWord)) {
                         st.remove(replacedWord);
-                        q.add(new Pair(replacedWord, steps + 1));
+                        q.add(new Pair4(replacedWord, steps + 1));
                     }
                 }
             }
@@ -70,11 +70,11 @@ public class Word_Ladder_1 {
         return 0;
     }
 
-    static class Pair {
+    static class Pair4 {
         String first;
         int second;
 
-        Pair(String _first, int _second) {
+        Pair4(String _first, int _second) {
             this.first = _first;
             this.second = _second;
         }
