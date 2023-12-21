@@ -6,6 +6,15 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class CycleUndirectedBFS {
+
+    static class Node {
+        int first;
+        int second;
+        public Node(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
     static boolean checkForCycle(ArrayList<ArrayList<Integer>> adj, int s,
                                  boolean vis[], int parent[])
     {
@@ -82,11 +91,4 @@ public class CycleUndirectedBFS {
     }
 }
 
-class Node {
-    int first;
-    int second;
-    public Node(int first, int second) {
-        this.first = first;
-        this.second = second;
-    }
-}
+

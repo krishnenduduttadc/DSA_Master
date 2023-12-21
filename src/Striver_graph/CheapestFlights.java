@@ -15,10 +15,10 @@ class CheapestFlights {
         }
     }
 
-    static class Tuple {
+    static class Tuple2 {
         int first, second, third;
 
-        public Tuple(int first, int second, int third) {
+        public Tuple2(int first, int second, int third) {
             this.first = first;
             this.second = second;
             this.third = third;
@@ -41,9 +41,9 @@ class CheapestFlights {
         // Create a queue which stores the node and their distances from the
         // source in the form of {stops, {node, dist}} with ‘stops’ indicating
         // the no. of nodes between src and current node.
-        Queue<Tuple> q = new LinkedList<>();
+        Queue<Tuple2> q = new LinkedList<>();
 
-        q.add(new Tuple(0, src, 0));
+        q.add(new Tuple2(0, src, 0));
 
         // Distance array to store the updated distances from the source.
         int[] dist = new int[n];
@@ -55,7 +55,7 @@ class CheapestFlights {
         // Iterate through the graph using a queue like in Dijkstra with
         // popping out the element with min stops first.
         while (!q.isEmpty()) {
-            Tuple it = q.peek();
+            Tuple2 it = q.peek();
             q.remove();
             int stops = it.first;
             int node = it.second;
@@ -71,7 +71,7 @@ class CheapestFlights {
                 // less than the prev and the stops are also within limits.
                 if (cost + edW < dist[adjNode] && stops <= K) {
                     dist[adjNode] = cost + edW;
-                    q.add(new Tuple(stops + 1, adjNode, cost + edW));
+                    q.add(new Tuple2(stops + 1, adjNode, cost + edW));
                 }
             }
         }

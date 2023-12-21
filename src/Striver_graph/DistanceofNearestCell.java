@@ -12,13 +12,13 @@ public class DistanceofNearestCell {
         int vis[][] = new int[n][m];
         int dist[][] = new int[n][m];
         // <coordinates, steps>
-        Queue<Node> q = new LinkedList<Node>();
+        Queue<NodeT> q = new LinkedList<NodeT>();
         // traverse the matrix
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 // start BFS if cell contains 1
                 if (grid[i][j] == 1) {
-                    q.add(new Node(i, j, 0));
+                    q.add(new NodeT(i, j, 0));
                     vis[i][j] = 1;
                 } else {
                     // mark unvisited
@@ -46,7 +46,7 @@ public class DistanceofNearestCell {
                 if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m
                         && vis[nrow][ncol] == 0) {
                     vis[nrow][ncol] = 1;
-                    q.add(new Node(nrow, ncol, steps + 1));
+                    q.add(new NodeT(nrow, ncol, steps + 1));
                 }
             }
         }
@@ -72,12 +72,12 @@ public class DistanceofNearestCell {
         }
     }
 
-    static class Node {
+    static class NodeT {
         int first;
         int second;
         int third;
 
-        Node(int _first, int _second, int _third) {
+        NodeT(int _first, int _second, int _third) {
             this.first = _first;
             this.second = _second;
             this.third = _third;

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-public class Word_ladder_1 {
+public class Word_Ladder_2 {
     public static void main(String[] args) throws IOException {
         String startWord = "der", targetWord = "dfs";
         String[] wordList = {
@@ -17,7 +17,7 @@ public class Word_ladder_1 {
                 "dfs"
         };
 
-        Word_ladder_1 obj = new Word_ladder_1();
+        Word_Ladder_2 obj = new Word_Ladder_2();
         int ans = obj.wordLadderLength(startWord, targetWord, wordList);
 
         System.out.print(ans);
@@ -27,15 +27,15 @@ public class Word_ladder_1 {
 
     public int wordLadderLength(String startWord, String targetWord, String[] wordList) {
         // Creating a queue ds of type {word,transitions to reach ‘word’}.
-        Queue< Pair4 > q = new LinkedList< >();
+        Queue<Pair> q = new LinkedList<>();
 
         // BFS traversal with pushing values in queue
         // when after a transformation, a word is found in wordList.
-        q.add(new Pair4(startWord, 1));
+        q.add(new Pair(startWord, 1));
 
         // Push all values of wordList into a set
         // to make deletion from it easier and in less time complexity.
-        Set< String > st = new HashSet< String >();
+        Set<String> st = new HashSet<>();
         int len = wordList.length;
         for (int i = 0; i < len; i++) {
             st.add(wordList[i]);
@@ -47,37 +47,36 @@ public class Word_ladder_1 {
             q.remove();
 
             // we return the steps as soon as
-            // the first occurence of targetWord is found.
-            if (word.equals(targetWord) == true) return steps;
+            // the first occurrence of targetWord is found.
+            if (word.equals(targetWord)) return steps;
 
             // Now, replace each character of ‘word’ with char
             // from a-z then check if ‘word’ exists in wordList.
             for (int i = 0; i < word.length(); i++) {
                 for (char ch = 'a'; ch <= 'z'; ch++) {
-                    char replacedCharArray[] = word.toCharArray();
+                    char[] replacedCharArray = word.toCharArray();
                     replacedCharArray[i] = ch;
                     String replacedWord = new String(replacedCharArray);
 
                     // check if it exists in the set and push it in the queue.
-                    if (st.contains(replacedWord) == true) {
+                    if (st.contains(replacedWord)) {
                         st.remove(replacedWord);
-                        q.add(new Pair4(replacedWord, steps + 1));
+                        q.add(new Pair(replacedWord, steps + 1));
                     }
                 }
-
             }
         }
         // If there is no transformation sequence possible
         return 0;
     }
-}
 
+    static class Pair {
+        String first;
+        int second;
 
-class Pair4 {
-    String first;
-    int second;
-    Pair4(String _first, int _second) {
-        this.first = _first;
-        this.second = _second;
+        Pair(String _first, int _second) {
+            this.first = _first;
+            this.second = _second;
+        }
     }
 }
