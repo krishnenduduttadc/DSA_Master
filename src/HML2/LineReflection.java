@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class LineReflection {
     public static boolean isReflected(int[][] points) {
@@ -38,26 +37,13 @@ public class LineReflection {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-
-        int[][] points = new int[n][2];
-        for (int i = 0; i < points.length; i++) {
-            for (int j = 0; j < points[0].length; j++) {
-                points[i][j] = scn.nextInt();
-            }
-        }
-
+        int n = 3;
+        int[][] points = {
+                {1,1,9},
+                {1,8,2}
+        };
         System.out.println(isReflected(points));
     }
 
 }
-/*
-3
-1
-1
-9
-1
-8
-2
- */
+

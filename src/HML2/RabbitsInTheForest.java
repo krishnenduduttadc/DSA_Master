@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class RabbitsInTheForest {
     public static int solution(int[] arr) {
@@ -22,16 +21,8 @@ public class RabbitsInTheForest {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0 ; i < n; i++){
-            arr[i] = scn.nextInt();
-        }
+        int[] arr = {1, 0, 1, 0, 0};
         System.out.println(solution(arr));
     }
 }
-/*
-5
-1 0 1 0 0
- */
+

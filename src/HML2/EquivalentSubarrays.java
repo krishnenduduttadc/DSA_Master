@@ -2,17 +2,13 @@ package HML2;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class EquivalentSubarrays {
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
         int ans=0;
-        int[] arr = new int[n];
+        int[] arr = {2, 1, 3, 2, 3};
         HashSet<Integer> set=new HashSet<>();
-        for(int i = 0 ; i  < n; i++){
-            arr[i] = scn.nextInt();
+        for(int i = 0 ; i  < arr.length; i++){
             set.add(arr[i]);
         }
         //write your code here
@@ -60,7 +56,4 @@ public class EquivalentSubarrays {
     }
 }
 
-/*
-5
-2 1 3 2 3
- */
+

@@ -57,12 +57,4 @@ public class EmployeesUnderManager {
         }
 
     }
-}/*
-6
-A C
-B C
-C F
-D E
-E F
-F F
- */
+}

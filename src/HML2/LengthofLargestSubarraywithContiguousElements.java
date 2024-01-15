@@ -7,10 +7,7 @@ package HML2;
 
 import java.util.HashSet;
 
-/**
- *
- * @author krish
- */
+
 public class LengthofLargestSubarraywithContiguousElements {
 
     public static void main(String[] args) {

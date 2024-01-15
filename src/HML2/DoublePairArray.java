@@ -29,21 +29,12 @@ public class DoublePairArray {
             freqMap.put(ele,freqMap.get(ele)-1);
             freqMap.put(2*ele,freqMap.get(2*ele)-1);
         }
-
         return true;
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0 ; i < n; i++){
-            arr[i] = scn.nextInt();
-        }
+        int[] arr = {3, 1, 3, 6};
         System.out.println(solution(arr));
     }
 }
-/*
-4
-3 1 3 6
- */
+

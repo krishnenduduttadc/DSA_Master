@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class CheckArithmeticSequence {
     public static boolean solution(int[] arr) {
@@ -30,17 +29,9 @@ public class CheckArithmeticSequence {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0 ; i < n; i++){
-            arr[i] = scn.nextInt();
-        }
+        int[] arr = {3,5,1};
         System.out.println(solution(arr));
     }
 
 }
-/*
-3
-3 5 1
- */
+

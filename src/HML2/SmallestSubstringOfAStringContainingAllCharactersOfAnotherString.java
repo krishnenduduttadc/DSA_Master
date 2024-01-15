@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class SmallestSubstringOfAStringContainingAllCharactersOfAnotherString {
     public static String solution(String s1, String s2){
@@ -63,14 +62,10 @@ public class SmallestSubstringOfAStringContainingAllCharactersOfAnotherString {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String s1 = scn.next();
-        String s2 = scn.next();
+        String s1 = "timetopractice";
+        String s2 = "toc";
         System.out.println(solution(s1,s2));
     }
 }
 
-/*
-timetopractice
-toc
- */
+

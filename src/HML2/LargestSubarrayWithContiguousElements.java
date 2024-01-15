@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class LargestSubarrayWithContiguousElements {
     public static int solution(int[] arr) {
@@ -34,17 +33,10 @@ public class LargestSubarrayWithContiguousElements {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int[] arr = new int[scn.nextInt()];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = scn.nextInt();
-        }
+        int[] arr = {10, 12, 11};
         System.out.println(solution(arr));
     }
 
 }
 
-/*
-3
-10 12 11
- */
+

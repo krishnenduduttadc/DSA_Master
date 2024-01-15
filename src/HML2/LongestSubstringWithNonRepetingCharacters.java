@@ -31,7 +31,6 @@ public class LongestSubstringWithNonRepetingCharacters {
                 }
             }
 
-
             while(j<i){
                 f2=true;
                 j++;
@@ -42,7 +41,6 @@ public class LongestSubstringWithNonRepetingCharacters {
                 }
             }
 
-
             if(f1==false && f2==false){
                 break;
             }
@@ -52,13 +50,9 @@ public class LongestSubstringWithNonRepetingCharacters {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
+        String str = "aabcbcdbca";
         System.out.println(solution(str));
     }
-
 }
 
-/*
-aabcbcdbca
- */
+

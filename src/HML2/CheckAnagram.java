@@ -29,14 +29,10 @@ public class CheckAnagram {
         return map.size()==0;
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String s1 = scn.next();
-        String s2 = scn.next();
+        String s1 = "pepcoding";
+        String s2 = "codingpep";
         System.out.println(solution(s1,s2));
     }
 }
 
-/*
-pepcoding
-codingpep
- */
+

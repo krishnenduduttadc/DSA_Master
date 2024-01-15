@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class CheckIfAnArrayCanBeDividedIntoPairsWhoseSumIsDivisibleByK {
     public static void solution(int[] arr, int k){
@@ -41,23 +40,17 @@ public class CheckIfAnArrayCanBeDividedIntoPairsWhoseSumIsDivisibleByK {
             }
         }
         System.out.println(true);
-
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0 ; i < n; i++){
-            arr[i] = scn.nextInt();
-        }
-        int k = scn.nextInt();
+        int[] arr = {9, 7, 5, 3};
+        int k = 6;
         solution(arr,k);
     }
 }
 
 /*
 4
-9 7 5 3
+
 6
  */

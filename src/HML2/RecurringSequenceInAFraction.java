@@ -1,7 +1,6 @@
 package HML2;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class RecurringSequenceInAFraction {
     public static String solution(int num, int den) {
@@ -34,21 +33,14 @@ public class RecurringSequenceInAFraction {
                 }
             }
         }
-
-
         return ans.toString();
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int num = scn.nextInt();
-        int den = scn.nextInt();
+        int num = 8;
+        int den = 4;
         System.out.println(solution(num , den));
     }
-
 }
 
-/*
-8
-4
- */
+
