@@ -1,8 +1,20 @@
 package HML2;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class EmployeesUnderManager {
+    public static void main(String[] args){
+        HashMap<String,String> map=new HashMap<String,String>();
+        map.put("A","C");
+        map.put("B","C");
+        map.put("C","F");
+        map.put("D","E");
+        map.put("E","F");
+        map.put("F","F");
+
+        findCount(map);
+    }
     static int getSize(HashMap<String, HashSet<String>> tree, String man, HashMap<String,Integer> result){
         if(tree.containsKey(man)==false){
             result.put(man,0);
@@ -20,7 +32,6 @@ public class EmployeesUnderManager {
     static void findCount(HashMap<String,String> map){
         HashMap<String,HashSet<String>> tree=new HashMap<>();
         String ceo="";
-
         for(String emp:map.keySet()){
             String man=map.get(emp);
             if(man.equals(emp)){
@@ -46,23 +57,7 @@ public class EmployeesUnderManager {
         }
 
     }
-
-    public static void main(String[] args){
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-
-        //write your code here
-
-        HashMap<String,String> map=new HashMap<String,String>();
-        for(int i=0;i<n;i++){
-            map.put(scn.next(),scn.next());
-        }
-        findCount(map);
-    }
-}
-
-
-/*
+}/*
 6
 A C
 B C
