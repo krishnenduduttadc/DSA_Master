@@ -18,40 +18,39 @@ public class TopView {
 
     static Node root;
 
+
+
     public static ArrayList<Integer> topView(Node root) {
         ArrayList<Integer> topViewNodes = new ArrayList<>();
         if (root == null) {
             return topViewNodes;
         }
-
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
 
-        while (!queue.isEmpty()) {
-            Node current = queue.poll();
-            int hd = 0; // Horizontal distance
-
+        while (!q.isEmpty()) {
+            Node f = q.poll();
+            int hd = 0;
             if (!map.containsKey(hd)) {
-                map.put(hd, current.key);
+                map.put(hd, f.key);
             }
-
-            if (current.left != null) {
-                queue.add(current.left);
-                map.put(hd - 1, current.left.key);
+            if (f.left != null) {
+                q.add(f.left);
+                map.put(hd-1,f.left.key);
             }
-            if (current.right != null) {
-                queue.add(current.right);
-                map.put(hd + 1, current.right.key);
+            if (f.right != null) {
+                q.add(f.right);
+                map.put(hd+1,f.right.key);
             }
         }
 
-        for (int value : map.values()) {
-            topViewNodes.add(value);
+        for(int x:map.values()){
+            topViewNodes.add(x);
         }
-
         return topViewNodes;
     }
+
 
     public static void main(String[] args) {
         TopView tree = new TopView();

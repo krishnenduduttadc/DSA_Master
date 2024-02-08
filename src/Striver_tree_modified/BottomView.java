@@ -2,7 +2,6 @@ package Striver_tree_modified;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
@@ -24,29 +23,26 @@ public class BottomView {
         if (root == null) {
             return bottomViewNodes;
         }
-
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
 
-        while (!queue.isEmpty()) {
-            Node current = queue.poll();
-            int hd = 0; // Horizontal distance
-
-            map.put(hd, current.key);
-
-            if (current.left != null) {
-                queue.add(current.left);
-                map.put(hd - 1, current.left.key);
+        while (!q.isEmpty()) {
+            Node f = q.poll();
+            int hd=0;
+            map.put(hd,f.key);
+            if (f.left != null) {
+                q.add(f.left);
+                map.put(hd-1,f.left.key);
             }
-            if (current.right != null) {
-                queue.add(current.right);
-                map.put(hd + 1, current.right.key);
+            if (f.right != null) {
+                q.add(f.right);
+                map.put(hd+1,f.right.key);
             }
         }
 
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            bottomViewNodes.add(entry.getValue());
+        for(int x:map.values()){
+            bottomViewNodes.add(x);
         }
 
         return bottomViewNodes;
@@ -68,4 +64,3 @@ public class BottomView {
         }
     }
 }
-

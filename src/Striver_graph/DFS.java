@@ -1,37 +1,16 @@
 package Striver_graph;
 
-import java.util.*;
+import java.util.ArrayList;
+
 class DFS {
 
-    public static void dfs(int node, boolean vis[], ArrayList<ArrayList<Integer>> adj,
-                           ArrayList<Integer> ls) {
-
-        //marking current node as visited
-        vis[node] = true;
-        ls.add(node);
-
-        //getting neighbour nodes
-        for(Integer it: adj.get(node)) {
-            if(vis[it] == false) {
-                dfs(it, vis, adj, ls);
-            }
-        }
-    }
-    // Function to return a list containing the DFS traversal of the graph.
-    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
-        //boolean array to keep track of visited vertices
-        boolean vis[] = new boolean[V+1];
-        vis[0] = true;
-        ArrayList<Integer> ls = new ArrayList<>();
-        dfs(0, vis, adj, ls);
-        return ls;
-    }
-
     public static void main(String args[]) {
-
-        ArrayList < ArrayList < Integer >> adj = new ArrayList < > ();
+        int V = 5;
+        boolean[] vis = new boolean[V];
+        ArrayList<Integer> ls = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            adj.add(new ArrayList < > ());
+            adj.add(new ArrayList<>());
         }
         adj.get(0).add(2);
         adj.get(2).add(0);
@@ -42,11 +21,27 @@ class DFS {
         adj.get(2).add(4);
         adj.get(4).add(2);
 
-        DFS sl = new DFS();
-        ArrayList < Integer > ans = sl.dfsOfGraph(5, adj);
-        int n = ans.size();
-        for(int i = 0;i<n;i++) {
-            System.out.print(ans.get(i)+" ");
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            if(vis[i]==false){
+                ArrayList<Integer> ress = new ArrayList<>();
+                ress=dfs(i, vis, adj, ls);
+                res.add(ress);
+            }
         }
+        System.out.println(res);
+    }
+
+
+    public static ArrayList<Integer> dfs(int s, boolean vis[], ArrayList<ArrayList<Integer>> adj,
+                                         ArrayList<Integer> ls) {
+        vis[s] = true;
+        ls.add(s);
+        for (int it : adj.get(s)) {
+            if (vis[it] == false) {
+                dfs(it, vis, adj, ls);
+            }
+        }
+        return ls;
     }
 }
