@@ -1,8 +1,5 @@
 package RecursionAndBacktrackingL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class NknightsCombinations2dAs1dKnightChooses {
     public static boolean IsKnightSafe(boolean[][] chess, int i, int j) {
         // write your code here
@@ -50,8 +47,7 @@ public class NknightsCombinations2dAs1dKnightChooses {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int n = 2;
         boolean[][] chess = new boolean[n][n];
 
         nknights(0, n, chess, -1);

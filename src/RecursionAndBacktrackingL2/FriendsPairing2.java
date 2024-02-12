@@ -33,7 +33,6 @@ public class FriendsPairing2 {
     }
 
     public static void main(String[] args) throws Exception {
-        //Scanner sc = new Scanner(System.in);
         int n = 3;
         boolean[] used = new boolean[n + 1];
         solution(1, n, used, "");

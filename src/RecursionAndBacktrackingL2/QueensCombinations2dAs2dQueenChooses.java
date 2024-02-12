@@ -1,8 +1,5 @@
 package RecursionAndBacktrackingL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class QueensCombinations2dAs2dQueenChooses {
     public static void queensCombinations(int qpsf, int tq, boolean[][] chess, int i, int j){
         // write your code here
@@ -37,10 +34,8 @@ public class QueensCombinations2dAs2dQueenChooses {
 
     }
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int n = 2;
         boolean[][] chess = new boolean[n][n];
-
         queensCombinations(0, n, chess, 0, -1);
     }
 }

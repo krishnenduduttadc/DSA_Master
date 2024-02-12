@@ -1,7 +1,5 @@
 package RecursionAndBacktrackingL2;
 
-import java.util.Scanner;
-
 public class Abbreviation {
     public static void solution(String str, String asf,int count, int pos){
         //write your code here
@@ -25,8 +23,7 @@ public class Abbreviation {
 
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.nextLine();
+        String str = "pep";
         solution(str,"",0,0);
     }
 

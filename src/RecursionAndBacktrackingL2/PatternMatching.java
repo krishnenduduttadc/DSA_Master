@@ -2,7 +2,6 @@ package RecursionAndBacktrackingL2;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class PatternMatching {
     public static void solution(String str, String pattern, HashMap<Character,String> map, String op){
@@ -48,9 +47,8 @@ public class PatternMatching {
 
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
-        String pattern = scn.next();
+        String str = "graphtreesgraph";
+        String pattern = "pep";
         HashMap<Character,String> map = new HashMap<>();
         solution(str,pattern,map,pattern);
     }

@@ -1,7 +1,5 @@
 package RecursionAndBacktrackingL2;
 
-import java.util.Scanner;
-
 public class Josephus {
     public static int solution(int n, int k){
         //write your code here
@@ -13,9 +11,8 @@ public class Josephus {
         return y;
     }
     public static void main(String[] args){
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int k = scn.nextInt();
+        int n = 4;
+        int k = 2;
         System.out.println(solution(n,k));
     }
 }

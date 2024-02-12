@@ -1,7 +1,5 @@
 package RecursionAndBacktrackingL2;
 
-import java.util.Scanner;
-
 public class LargestAfterKswaps {
     static String max;
     public static void findMaximum(String str, int k) {
@@ -35,9 +33,8 @@ public class LargestAfterKswaps {
     }
     public static void main(String[] args) {
 
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
-        int k = scn.nextInt();
+        String str = "1234567";
+        int k = 4;
         max = str;
         findMaximum(str, k);
         System.out.println(max);
@@ -45,7 +42,4 @@ public class LargestAfterKswaps {
     }
 }
 
-/*
-1234567
-4
- */
+
