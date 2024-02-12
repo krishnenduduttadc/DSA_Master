@@ -1,12 +1,8 @@
 package ArraysL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class Reverse {
     public static void display(int[] a){
         StringBuilder sb = new StringBuilder();
-
         for(int val: a){
             sb.append(val + " ");
         }
@@ -27,14 +23,8 @@ public class Reverse {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n = Integer.parseInt(br.readLine());
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = Integer.parseInt(br.readLine());
-        }
-
+        int n = 5;
+        int[] a = {1, 2, 3, 4, 5};
         reverse(a);
         display(a);
     }

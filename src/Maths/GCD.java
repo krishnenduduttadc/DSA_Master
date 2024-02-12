@@ -1,18 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Maths;
 
+/**
+ *
+ * @author krish
+ */
 public class GCD {
-    public static void main(String[] args) {
-        int a=8;
-        int b=4;
-        int r=gcd(a,b);
-        System.out.println(r);
-    }
 
-    private static int gcd(int a, int b) {
-        if(b==0){
+    public static void main(String[] args) {
+        System.out.println("" + gcd(30, 36));
+    }
+    
+
+    static int gcd(int a, int b) {
+        if (b == 0) {
             return a;
-        }else{
-            return gcd(b,a%b);
+        } else {
+            return gcd(b, a % b);
         }
     }
 }

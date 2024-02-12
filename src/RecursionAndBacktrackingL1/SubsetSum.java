@@ -11,15 +11,19 @@ package RecursionAndBacktrackingL1;
  */
 public class SubsetSum {
 
-    static int subsets(int arr[], int n, int sum) {
-        if (n == 0) {
-            return (sum == 0) ? 1 : 0;
+    static void subsetSums(int[] arr, int l,
+            int r, int sum) {
+        if (l > r) {
+            System.out.print(sum + " ");
+            return;
         }
-        return subsets(arr, n - 1, sum) + subsets(arr, n - 1, sum - arr[n - 1]);
-
+        subsetSums(arr, l + 1, r, sum + arr[l]);
     }
 
-    public static void main(String a[]) {
-        System.out.println("" + subsets(new int[]{10, 20, 25}, 3, 25));
+    public static void main(String[] args) {
+        int[] arr = {5, 4, 3, 5, 4};
+        int n = arr.length;
+
+        subsetSums(arr, 0, n - 1, 0);
     }
 }

@@ -1,8 +1,5 @@
 package ArraysL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class Inverse {
     public static void display(int[] a){
         StringBuilder sb = new StringBuilder();
@@ -27,14 +24,9 @@ public class Inverse {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(br.readLine());
-        int[] a = new int[n];
-        for(int i = 0; i < n; i++){
-            a[i] = Integer.parseInt(br.readLine());
-        }
-
+        int n = 5;
+        int[] a = {4, 0, 2, 3, 1};
         int[] inv = inverse(a);
         display(inv);
     }

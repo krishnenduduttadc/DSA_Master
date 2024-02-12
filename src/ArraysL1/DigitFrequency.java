@@ -1,12 +1,9 @@
 package ArraysL1;
 
-import java.util.Scanner;
-
 public class DigitFrequency {
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        int d = scn.nextInt();
+        int n = 994543234;
+        int d = 4;
         int f = getDigitFrequency(n, d);
         System.out.println(f);
     }
