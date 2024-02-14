@@ -7,19 +7,20 @@ package RecursionAndBacktrackingL1;
 
 /**
  *
- * @author krishnendu
+ * @author krish
  */
-public class Fact {
+public class fact {
 
-    public static void main(String a[]) {
-        System.out.println(fact(4));
+    public static void main(String[] args) {
+        System.out.println(""+fact(6));
     }
 
     static int fact(int n) {
         if (n == 0) {
             return 1;
         } else {
-            return n * fact(n - 1);
+            int prev = fact(n - 1);
+            return n * prev;
         }
     }
 }
