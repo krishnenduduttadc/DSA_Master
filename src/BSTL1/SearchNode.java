@@ -15,13 +15,13 @@ public class SearchNode {
         if (root == null) {
             return false;
         }
-        if (root.data == k) {
+        if (root.key == k) {
             return true;
         }
-        if (k < root.data) {
+        if (k < root.key) {
             return searchInBST(root.left, k);
         }
-        if (k > root.data) {
+        if (k > root.key) {
             return searchInBST(root.right, k);
         }
         return false;

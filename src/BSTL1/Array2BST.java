@@ -13,6 +13,8 @@ import java.util.*;
  */
 public class Array2BST {
 
+
+
     public static Node SortedArrayToBST(int[] arr, int n) {
         return SortedArrayToBSThelper(arr, 0, n - 1);
     }
@@ -35,7 +37,7 @@ public class Array2BST {
             int size = q.size();
             for (int i = 0; i < size; i++) {
                 Node front = q.remove();
-                System.out.print(front.data + " ");
+                System.out.print(front.key + " ");
                 if (front.left != null) {
                     q.add(front.left);
                 }

@@ -18,20 +18,20 @@ public class FindPath {
         if (root == null) {
             return null;
         }
-        if (root.data == data) {
+        if (root.key == data) {
             ArrayList<Integer> op = new ArrayList<>();
-            op.add(root.data);
+            op.add(root.key);
             return op;
         }
 
         ArrayList<Integer> rl = getPath(root.left, data);
         if (rl != null) {
-            rl.add(root.data);
+            rl.add(root.key);
             return rl;
         }
         ArrayList<Integer> rr = getPath(root.right, data);
         if (rr != null) {
-            rr.add(root.data);
+            rr.add(root.key);
             return rr;
         } else {
             return null;

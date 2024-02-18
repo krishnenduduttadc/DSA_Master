@@ -13,17 +13,17 @@ public class LCA {
 
     public static int getLCA(Node root, int a, int b) {
         Node node = getLCA2(root, a, b);
-        return node.data;
+        return node.key;
     }
 
     static Node getLCA2(Node node, int n1, int n2) {
         if (node == null) {
             return null;
         }
-        if (node.data > n1 && node.data > n2) {
+        if (node.key > n1 && node.key > n2) {
             return getLCA2(node.left, n1, n2);
         }
-        if (node.data < n1 && node.data < n2) {
+        if (node.key < n1 && node.key < n2) {
             return getLCA2(node.right, n1, n2);
         }
         return node;

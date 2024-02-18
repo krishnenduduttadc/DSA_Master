@@ -1,7 +1,7 @@
 package ArraysL2;
 
 public class MajorityElement {
-    public static int v(int[] arr){
+    public static int majority(int[] arr){
         int val = arr[0];
         int count = 1;
 
@@ -25,7 +25,7 @@ public class MajorityElement {
 
     public static void printMajorityElement(int[] arr) {
         // write your code here
-        int value = v(arr);
+        int value = majority(arr);
 
         int count = 0;
 

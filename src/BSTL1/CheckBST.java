@@ -15,14 +15,14 @@ public class CheckBST {
         if (root == null) {
             return Integer.MIN_VALUE;
         }
-        return Math.max(root.data, Math.max(max(root.left), max(root.right)));
+        return Math.max(root.key, Math.max(max(root.left), max(root.right)));
     }
 
     static int min(Node root) {
         if (root == null) {
             return Integer.MAX_VALUE;
         }
-        return Math.min(root.data, Math.min(min(root.left), min(root.right)));
+        return Math.min(root.key, Math.min(min(root.left), min(root.right)));
     }
 
     public static boolean isBST(Node root) {
@@ -31,10 +31,10 @@ public class CheckBST {
         }
         int lmax = max(root.left);
         int rmin = min(root.right);
-        if (root.data < lmax) {
+        if (root.key < lmax) {
             return false;
         }
-        if (root.data > rmin) {
+        if (root.key > rmin) {
             return false;
         }
         boolean isLeftBST = isBST(root.left);
