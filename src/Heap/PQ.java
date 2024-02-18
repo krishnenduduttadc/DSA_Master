@@ -22,5 +22,7 @@ public class PQ {
         System.out.println(p.peek());
         System.out.println(p.poll());
         System.out.println(p.peek());
+        System.out.println(p.peek());
+        System.out.println(p.peek());
     }
 }
