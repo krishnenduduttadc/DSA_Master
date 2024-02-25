@@ -3,42 +3,69 @@ package GraphL1;
 import java.util.ArrayList;
 
 public class GetConnectedComponents {
-    static void addEdge(ArrayList<ArrayList<Integer>> adj, int u, int v) {
-        adj.get(u).add(v);
-        adj.get(v).add(u);
+    static class Edge {
+        int src;
+        int nbr;
+        int wt;
+
+        Edge(int src, int nbr, int wt) {
+            this.src = src;
+            this.nbr = nbr;
+            this.wt = wt;
+        }
     }
 
-    public static void main(String[] args) {
-        int V = 7;
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<ArrayList<Integer>>(V);
+    public static void main(String[] args) throws Exception {
+        int vtces = 6; // Number of vertices
+        int edges = 7; // Number of edges
 
-        for (int i = 0; i < V; i++) {
-            adj.add(new ArrayList<Integer>());
+        // Define the edge information statically
+        int[][] edgeInfo = {
+                {0, 1, 10},
+                {0, 2, 10},
+                {1, 2, 10},
+                {2, 3, 10},
+                {3, 4, 10},
+                {4, 5, 10},
+                {5, 3, 10}
+        };
+
+        // Create the graph
+        ArrayList<Edge>[] graph = new ArrayList[vtces];
+        for (int i = 0; i < vtces; i++) {
+            graph[i] = new ArrayList<>();
         }
 
-        addEdge(adj, 0, 1);
-        addEdge(adj, 0, 2);
-        addEdge(adj, 2, 3);
-        addEdge(adj, 1, 3);
-        addEdge(adj, 1, 4);
-        addEdge(adj, 3, 4);
-        ArrayList<ArrayList<Integer>> comps=new ArrayList<ArrayList<Integer>>();
-        boolean[] visited = new boolean[V];
-        for (int i = 0; i < V; i++) {
-            if(visited[i]==false){
-                ArrayList<Integer> comp=new ArrayList<>();
-                drawTree(adj,i,comp,visited);
-                comps.add(comp);
+        // Add edges to the graph
+        for (int[] info : edgeInfo) {
+            int v1 = info[0];
+            int v2 = info[1];
+            int wt = info[2];
+            graph[v1].add(new Edge(v1, v2, wt));
+            graph[v2].add(new Edge(v2, v1, wt));
+        }
+
+        ArrayList<ArrayList<Integer>> cs = new ArrayList<>();
+
+        // write your code here
+        boolean[] visited = new boolean[vtces];
+        for(int v = 0; v < vtces;v++){
+            if(visited[v] == false){
+                ArrayList<Integer> c = new ArrayList<>();
+                d(graph, v, c, visited);
+                cs.add(c);
             }
         }
+
+        System.out.println(cs);
     }
 
-    static void drawTree(ArrayList<ArrayList<Integer>> adj, int src, ArrayList<Integer> comp, boolean[] visited) {
-        visited[src]=true;
-        comp.add(src);
-        for(int nbr:adj.get(src)){
-            if(visited[nbr]==false){
-                drawTree(adj,nbr,comp,visited);
+    public static void d(ArrayList<Edge>[] graph, int src, ArrayList<Integer> c, boolean[] visited){
+        visited[src] = true;
+        c.add(src);
+        for(Edge e: graph[src]){
+            if(visited[e.nbr] == false){
+                d(graph, e.nbr, c, visited);
             }
         }
     }

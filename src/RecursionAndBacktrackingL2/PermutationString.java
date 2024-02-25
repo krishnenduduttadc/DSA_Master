@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class PermutationString {
     public static void main(String[] args) {
-        String str="aabb";
+        String str="abc";
         HashMap<Character,Integer> fmap=new HashMap<>();
         for(char ch:str.toCharArray()){
             if(fmap.containsKey(ch)){
