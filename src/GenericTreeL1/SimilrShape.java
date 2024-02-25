@@ -1,7 +1,5 @@
 package GenericTreeL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -99,22 +97,12 @@ public class SimilrShape {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n1 = Integer.parseInt(br.readLine());
-        int[] arr1 = new int[n1];
-        String[] values1 = br.readLine().split(" ");
-        for (int i = 0; i < n1; i++) {
-            arr1[i] = Integer.parseInt(values1[i]);
-        }
+        // Static data representing the first tree
+        int[] arr1 = {10, 20, 50, -1, 60, -1, -1, 30, 70, -1, 80, 110, -1, 120, -1, -1, 90, -1, -1, 40, 100, -1, -1, -1};
         Node root1 = construct(arr1);
 
-        int n2 = Integer.parseInt(br.readLine());
-        int[] arr2 = new int[n2];
-        String[] values2 = br.readLine().split(" ");
-        for (int i = 0; i < n2; i++) {
-            arr2[i] = Integer.parseInt(values2[i]);
-        }
+        // Static data representing the second tree
+        int[] arr2 = {1, 2, 5, -1, 6, -1, -1, 3, 7, -1, 8, 11, -1, 12, -1, -1, 9, -1, -1, 4, 10, -1, -1, -1};
         Node root2 = construct(arr2);
 
         boolean similar = areSimilar(root1, root2);

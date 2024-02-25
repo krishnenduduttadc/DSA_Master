@@ -1,7 +1,5 @@
 package GenericTreeL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -102,22 +100,12 @@ public class IsMirror {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n1 = Integer.parseInt(br.readLine());
-        int[] arr1 = new int[n1];
-        String[] values1 = br.readLine().split(" ");
-        for (int i = 0; i < n1; i++) {
-            arr1[i] = Integer.parseInt(values1[i]);
-        }
+        // Static data for the first tree
+        int[] arr1 = {10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1};
         Node root1 = construct(arr1);
 
-        int n2 = Integer.parseInt(br.readLine());
-        int[] arr2 = new int[n2];
-        String[] values2 = br.readLine().split(" ");
-        for (int i = 0; i < n2; i++) {
-            arr2[i] = Integer.parseInt(values2[i]);
-        }
+        // Static data for the second tree
+        int[] arr2 = {100, 200, -1, 300, 500, -1, 600, -1, -1, 400, -1, -1};
         Node root2 = construct(arr2);
 
         boolean mirror = areMirror(root1, root2);
