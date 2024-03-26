@@ -23,7 +23,6 @@ public class Mirror {
         Node t = root.right;
         root.right = root.left;
         root.left = t;
-        return;
     }
 
     public static void printLevelWise(Node root) {
