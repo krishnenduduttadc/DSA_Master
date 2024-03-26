@@ -11,12 +11,12 @@ package Recursion;
  */
 public class CopyString {
 
-    static void myCopy(char s1[], char s2[], int index) {
-        s2[index] = s1[index];
-        if (index == s1.length - 1) {
+    static void myCopy(char s1[], char s2[], int i) {
+        if(i==s2.length){
             return;
         }
-        myCopy(s1, s2, index + 1);
+        s2[i]=s1[i];
+        myCopy(s1,s2,i+1);
     }
 
     public static void main(String[] args) {

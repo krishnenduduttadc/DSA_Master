@@ -9,7 +9,7 @@ package Recursion;
  *
  * @author krishnendu
  */
-public class Test {
+public class Basics {
 
     public static void main(String a[]) {
         String inp = "aaabaaa";

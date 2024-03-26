@@ -17,12 +17,12 @@ public class Dec2Binary {
         }
 
         fun(n / 2);
-        System.out.println(n % 2);
+        System.out.print(n % 2);
 
     }
     
 
     public static void main(String a[]) {
-        fun(8);
+        fun(15);
     }
 }
