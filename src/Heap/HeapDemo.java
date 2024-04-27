@@ -10,54 +10,53 @@ package Heap;
  * @author krish
  */
 public class HeapDemo {
+    int[] arr;
+    int size;
+    int capacity;
 
-    public static class MinHeap {
+    public HeapDemo(int c) {
+        size = 0;
+        capacity = c;
+        arr = new int[c];
+    }
 
-        int arr[];
-        int size;
-        int capacity;
+    int left(int i) {
+        return 2 * i + 1;
+    }
 
-        MinHeap(int c) {
-            size = 0;
-            capacity = c;
-            arr = new int[c];
+    int right(int i) {
+        return 2 * i + 2;
+    }
+
+    int parent(int i) {
+        return (i - 1) / 2;
+    }
+
+    public void show() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public void insert(int x) {
+        if (size == capacity) {
+            return;
+        }
+        size++;
+        arr[size - 1] = x;
+        int i = size - 1;
+        while (i != 0 && arr[parent(i)] > arr[i]) {
+            int tmp = arr[i];
+            arr[i] = arr[parent(i)];
+            arr[parent(i)] = tmp;
+            i = parent(i);
         }
 
-        int left(int i) {
-            return (2 * i + 1);
-        }
-
-        int right(int i) {
-            return (2 * i + 2);
-        }
-
-        int parent(int i) {
-            return (i - 1) / 2;
-        }
-
-        public void insert(int x) {
-            if (size == capacity) {
-                return;
-            }
-            size++;
-            arr[size - 1] = x;
-            for (int i = size - 1; i != 0 && arr[parent(i)] > arr[i];) {
-                int temp = arr[i];
-                arr[i] = arr[parent(i)];
-                arr[parent(i)] = temp;
-                i = parent(i);
-            }
-        }
-
-        public void show() {
-            for (int i = 0; i < arr.length; i++) {
-                System.out.print(arr[i]+" ");
-            }
-        }
     }
 
     public static void main(String args[]) {
-        MinHeap h = new MinHeap(9);
+        HeapDemo h = new HeapDemo(9);
         h.insert(10);
         h.insert(20);
         h.insert(15);
@@ -66,10 +65,8 @@ public class HeapDemo {
         h.insert(100);
         h.insert(25);
         h.insert(45);
-        
-        h.show();
-        
-     
 
+        h.show();
     }
+
 }

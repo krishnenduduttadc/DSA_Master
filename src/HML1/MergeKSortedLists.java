@@ -45,19 +45,34 @@ public class MergeKSortedLists {
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int k = Integer.parseInt(br.readLine());
+        int k = 4;//Integer.parseInt(br.readLine());
         ArrayList<ArrayList<Integer>> lists = new ArrayList<>();
-        for(int i = 0; i < k; i++){
-            ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list0 = new ArrayList<>();
+        list0.add(10);
+        list0.add(20);
+        list0.add(30);
+        list0.add(40);
+        list0.add(50);
 
-            int n = Integer.parseInt(br.readLine());
-            String[] elements = br.readLine().split(" ");
-            for(int j = 0; j < n; j++){
-                list.add(Integer.parseInt(elements[j]));
-            }
+        ArrayList<Integer> list1 = new ArrayList<>();
+        list1.add(5);
+        list1.add(7);
+        list1.add(9);
+        list1.add(11);
+        list1.add(19);
+        list1.add(55);
+        list1.add(57);
 
-            lists.add(list);
-        }
+
+        ArrayList<Integer> list2 = new ArrayList<>();
+        list2.add(1);
+        list2.add(2);
+        list2.add(3);
+
+        lists.add(list0);
+        lists.add(list1);
+        lists.add(list2);
+
 
         ArrayList<Integer> mlist = mergeKSortedLists(lists);
         for(int val: mlist){

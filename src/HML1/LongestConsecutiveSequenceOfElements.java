@@ -1,17 +1,10 @@
 package HML1;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class LongestConsecutiveSequenceOfElements {
     public static void main(String[] args) throws Exception {
-        // write your code here
-        Scanner s=new Scanner(System.in);
-        int n=s.nextInt();
-        int[] arr=new int[n];
-        for(int i=0;i<n;i++){
-            arr[i]=s.nextInt();
-        }
+        int[] arr={17, 12, 5, 1, 2, 10, 2, 13, 7, 11, 8, 9, 11, 8, 9, 5, 6, 11};
         HashMap<Integer,Boolean> map=new HashMap<>();
         for(int a:arr){
             map.put(a,true);
@@ -45,23 +38,4 @@ public class LongestConsecutiveSequenceOfElements {
     }
 }
 
-/*
-17
-12
-5
-1
-2
-10
-2
-13
-7
-11
-8
-9
-11
-8
-9
-5
-6
-11
- */
+

@@ -7,7 +7,7 @@ public class HighestFrequencyCharacter {
     public static void main(String[] args) throws Exception {
         // write your code here
         Scanner scn = new Scanner(System.in);
-        String str = scn.nextLine();
+        String str = "zmszeqxllzvheqwrofgcuntypejcxovtaqbnqyqlmrwitc";
 
         HashMap<Character,Integer> hm=new HashMap<>();
         for(int i=0;i<str.length();i++){
