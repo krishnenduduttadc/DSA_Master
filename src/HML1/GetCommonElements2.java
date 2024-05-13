@@ -1,13 +1,12 @@
 package HML1;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class GetCommonElements2 {
     public static void main(String[] args) throws Exception {
         // write your code here
-        Scanner s=new Scanner(System.in);
-        int n1=s.nextInt();
+        //Scanner s=new Scanner(System.in);
+        int n1=7;//s.nextInt();
         int[] a1={1, 1, 2, 2, 2, 3, 5};
 
         int[] a2={1, 1, 1, 2, 2, 4, 5};

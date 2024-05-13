@@ -15,16 +15,17 @@ public class ElementsinRange {
         if (root == null) {
             return;
         }
-        if (k1 < root.key) {
-            elementsInRangeK1K2(root.left, k1, k2);
-        }
 
-        if (root.key >= k1 && root.key <= k2) {
+        if(root.key>=k1 && root.key<=k2){
             System.out.println(root.key);
         }
 
-        if (k2 > root.key) {
-            elementsInRangeK1K2(root.right, k1, k2);
+        if(root.key>k1){
+            elementsInRangeK1K2(root.left,k1,k2);
+        }
+
+        if(root.key<k2){
+            elementsInRangeK1K2(root.right,k1,k2);
         }
     }
 

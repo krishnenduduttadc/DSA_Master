@@ -1,12 +1,11 @@
 package HML1;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class HighestFrequencyCharacter {
     public static void main(String[] args) throws Exception {
         // write your code here
-        Scanner scn = new Scanner(System.in);
+        //Scanner scn = new Scanner(System.in);
         String str = "zmszeqxllzvheqwrofgcuntypejcxovtaqbnqyqlmrwitc";
 
         HashMap<Character,Integer> hm=new HashMap<>();
