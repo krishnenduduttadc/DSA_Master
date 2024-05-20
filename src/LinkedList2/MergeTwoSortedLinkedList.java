@@ -3,23 +3,23 @@ package LinkedList2;
 public class MergeTwoSortedLinkedList {
     //public static Scanner scn = new Scanner(System.in);
 
-    public static class ListNode {
+    public static class Node {
         int val = 0;
-        ListNode next = null;
+        Node next = null;
 
-        ListNode(int val) {
+        Node(int val) {
             this.val = val;
         }
     }
 
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public static Node mergeTwoLists(Node l1, Node l2) {
         if(l1 == null || l2 == null) return l1 != null ? l1:l2;
 
-        ListNode dummy = new ListNode(-1);
-        ListNode prev =dummy;
+        Node dummy = new Node(-1);
+        Node prev =dummy;
 
-        ListNode c1 = l1;
-        ListNode c2 = l2;
+        Node c1 = l1;
+        Node c2 = l2;
 
         while(c1 != null && c2 != null){
             if(c1.val < c2.val){
@@ -38,7 +38,7 @@ public class MergeTwoSortedLinkedList {
         return dummy.next;
     }
 
-    public static void printList(ListNode node) {
+    public static void printList(Node node) {
         while (node != null) {
             System.out.print(node.val + " ");
             node = node.next;
@@ -47,15 +47,15 @@ public class MergeTwoSortedLinkedList {
 
 
 
-     static ListNode head1,head2;
+     static Node head1,head2;
 
     void push(int new_data) {
-        ListNode new_node = new ListNode(new_data);
+        Node new_node = new Node(new_data);
         new_node.next = head1;
         head1 = new_node;
     }
     void push2(int new_data) {
-        ListNode new_node = new ListNode(new_data);
+        Node new_node = new Node(new_data);
         new_node.next = head2;
         head2 = new_node;
     }
@@ -65,17 +65,17 @@ public class MergeTwoSortedLinkedList {
         llist1.push(2);
         llist1.push(3);
 
-//        ListNode h1 = createList(n);
+//        Node h1 = createList(n);
 //        int m = scn.nextInt();
 
         MergeTwoSortedLinkedList llist2=new MergeTwoSortedLinkedList();
         llist2.push(1);
         llist2.push(2);
         llist2.push(3);
-        //ListNode h2 = createList(m);
+        //Node h2 = createList(m);
 
 
-        ListNode head3 = mergeTwoLists(head1, head2);
+        Node head3 = mergeTwoLists(head1, head2);
         printList(head3);
     }
 }

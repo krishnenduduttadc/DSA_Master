@@ -1,25 +1,23 @@
 package LinkedList2;
 
-import java.util.Scanner;
-
 public class Unfold {
-    public static class ListNode {
+    public static class Node {
         int val = 0;
-        ListNode next = null;
+        Node next = null;
 
-        ListNode(int val) {
+        Node(int val) {
             this.val = val;
         }
     }
 
-    public static ListNode reverse(ListNode head){
-        if(head == null || head.next == null) return head;
+    public static Node reverse(Node head) {
+        if (head == null || head.next == null) return head;
 
-        ListNode prev = null;
-        ListNode curr = head;
-        ListNode forw = null;
+        Node prev = null;
+        Node curr = head;
+        Node forw = null;
 
-        while(curr != null){
+        while (curr != null) {
             forw = curr.next;
             curr.next = prev;
 
@@ -30,17 +28,17 @@ public class Unfold {
         return prev;
     }
 
-    public static void unfold(ListNode head) {
-        if(head == null || head.next == null) return;
+    public static void unfold(Node head) {
+        if (head == null || head.next == null) return;
 
-        ListNode fh = head;
-        ListNode fp = fh;
+        Node fh = head;
+        Node fp = fh;
 
-        ListNode sh = head.next;
-        ListNode sp = sh;
+        Node sh = head.next;
+        Node sp = sh;
 
-        while(sp != null && sp.next != null){
-            ListNode f = sp.next;
+        while (sp != null && sp.next != null) {
+            Node f = sp.next;
 
             fp.next = f;
             sp.next = f.next;
@@ -55,25 +53,27 @@ public class Unfold {
         fp.next = sh;
     }
 
-    static void printList(ListNode node) {
+    static void printList(Node node) {
         while (node != null) {
             System.out.print(node.val + " ");
             node = node.next;
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        ListNode dummy = new ListNode(-1);
-        ListNode prev = dummy;
-        while (n-- > 0) {
-            prev.next = new ListNode(scn.nextInt());
-            prev = prev.next;
-        }
+        // Hardcoding the linked list
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
+        head.next.next.next.next.next = new Node(6);
 
-        ListNode head = dummy.next;
+        // Unfolding the list
         unfold(head);
+
+        // Printing the unfolded list
         printList(head);
     }
 }

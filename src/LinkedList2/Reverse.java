@@ -1,19 +1,19 @@
 package LinkedList2;
 
 public class Reverse {
-    public static class ListNode {
+    public static class Node {
         int val = 0;
-        ListNode next = null;
+        Node next = null;
 
-        ListNode(int val) {
+        Node(int val) {
             this.val = val;
         }
     }
 
-    static ListNode th = null;
-    static ListNode tt = null;
+    static Node th = null;
+    static Node tt = null;
 
-    public static void addFirst(ListNode node) {
+    public static void addFirst(Node node) {
         if (th == null) {
             th = node;
             tt = node;
@@ -23,10 +23,10 @@ public class Reverse {
         }
     }
 
-    public static ListNode reverse(ListNode head) {
-        ListNode curr = head;
+    public static Node reverse(Node head) {
+        Node curr = head;
         while (curr != null) {
-            ListNode forw = curr.next;
+            Node forw = curr.next;
             curr.next = null;
             addFirst(curr);
 
@@ -36,10 +36,10 @@ public class Reverse {
         return th;
     }
 
-    static ListNode head;
+    static Node head;
 
     void push(int new_data) {
-        ListNode new_node = new ListNode(new_data);
+        Node new_node = new Node(new_data);
         new_node.next = head;
         head = new_node;
     }
@@ -51,10 +51,20 @@ public class Reverse {
         llist.push(10);
         llist.push(9);
         llist.push(6);
-        ListNode head1 = reverse(head);
+
+        Node head2 = head;
+        while (head2 != null) {
+            System.out.print(head2.val + " ");
+            head2 = head2.next;
+        }
+        System.out.println("\n----------");
+
+        Node head1 = reverse(head);
         while (head1 != null) {
             System.out.print(head1.val + " ");
             head1 = head1.next;
         }
     }
+
+
 }

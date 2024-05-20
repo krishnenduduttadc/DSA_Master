@@ -3,20 +3,20 @@ package LinkedList2;
 import java.util.Scanner;
 
 public class Middle {
-    public static class ListNode {
+    public static class Node {
         int val = 0;
-        ListNode next = null;
+        Node next = null;
 
-        ListNode(int val) {
+        Node(int val) {
             this.val = val;
         }
     }
 
-    public static ListNode midNode(ListNode head) {
+    public static Node midNode(Node head) {
         if(head == null || head.next == null) return head;
 
-        ListNode slow = head;
-        ListNode fast = head;
+        Node slow = head;
+        Node fast = head;
 
         while(fast.next != null && fast.next.next != null){
             slow = slow.next;
@@ -28,14 +28,14 @@ public class Middle {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         int n = scn.nextInt();
-        ListNode dummy = new ListNode(-1);
-        ListNode prev = dummy;
+        Node dummy = new Node(-1);
+        Node prev = dummy;
         while (n-- > 0) {
-            prev.next = new ListNode(scn.nextInt());
+            prev.next = new Node(scn.nextInt());
             prev = prev.next;
         }
 
-        ListNode head = midNode(dummy.next);
+        Node head = midNode(dummy.next);
         while (head != null) {
             System.out.print(head.val + " ");
             head = head.next;

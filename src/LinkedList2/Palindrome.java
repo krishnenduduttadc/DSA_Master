@@ -1,24 +1,22 @@
 package LinkedList2;
 
-import java.util.Scanner;
-
 public class Palindrome {
-    public static class ListNode {
+    public static class Node {
         int val = 0;
-        ListNode next = null;
+        Node next = null;
 
-        ListNode(int val) {
+        Node(int val) {
             this.val = val;
         }
     }
 
-    public static ListNode midNode(ListNode head){
-        if(head == null ||head.next == null) return head;
+    public static Node midNode(Node head) {
+        if (head == null || head.next == null) return head;
 
-        ListNode slow = head;
-        ListNode fast = head;
+        Node slow = head;
+        Node fast = head;
 
-        while(fast.next != null && fast.next.next != null){
+        while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -26,17 +24,16 @@ public class Palindrome {
         return slow;
     }
 
-    public static ListNode reverseOfLL(ListNode head){
-        if(head == null || head.next == null) return head;
+    public static Node reverseOfLL(Node head) {
+        if (head == null || head.next == null) return head;
 
-        ListNode prev = null;
-        ListNode curr = head;
-        ListNode forw = null;
+        Node prev = null;
+        Node curr = head;
+        Node forw = null;
 
-        while(curr != null){
+        while (curr != null) {
             forw = curr.next;
             curr.next = prev;
-
             prev = curr;
             curr = forw;
         }
@@ -44,20 +41,24 @@ public class Palindrome {
         return prev;
     }
 
-    public static boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null) return true;
-        ListNode mid = midNode(head);
-        ListNode nHead = mid.next;
-        mid.next = null;
+    public static boolean isPalindrome(Node head) {
+        if (head == null || head.next == null) return true;
 
+        // Find the middle of the linked list
+        Node mid = midNode(head);
+
+        // Reverse the second half of the list
+        Node nHead = mid.next;
+        mid.next = null;  // Split the list into two halves
         nHead = reverseOfLL(nHead);
 
-        ListNode c1 = head;
-        ListNode c2 = nHead;
+        // Compare the two halves
+        Node c1 = head;
+        Node c2 = nHead;
 
         boolean res = true;
-        while(c1 != null){
-            if(c1.val != c2.val){
+        while (c2 != null) {  // Only need to compare until c2 ends
+            if (c1.val != c2.val) {
                 res = false;
                 break;
             }
@@ -65,21 +66,19 @@ public class Palindrome {
             c2 = c2.next;
         }
 
+        // Restore the original list
         nHead = reverseOfLL(nHead);
         mid.next = nHead;
         return res;
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        ListNode dummy = new ListNode(-1);
-        ListNode prev = dummy;
-        while (n-- > 0) {
-            prev.next = new ListNode(scn.nextInt());
-            prev = prev.next;
-        }
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(2);
+        head.next.next.next.next = new Node(1);
 
-        System.out.println(isPalindrome(dummy.next));
+        System.out.println(isPalindrome(head)); // should print true
     }
 }
