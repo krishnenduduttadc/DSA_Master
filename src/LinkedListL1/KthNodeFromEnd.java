@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class KthNodeFromEnd {
     public static class Node {
         int data;
@@ -61,241 +58,45 @@ public class KthNodeFromEnd {
             }
         }
 
-        public int getLast() {
-            if (size == 0) {
-                System.out.println("List is empty");
-                return -1;
-            } else {
-                return tail.data;
-            }
-        }
-
-        public int getAt(int idx) {
-            if (size == 0) {
-                System.out.println("List is empty");
-                return -1;
-            } else if (idx < 0 || idx >= size) {
-                System.out.println("Invalid arguments");
-                return -1;
-            } else {
-                Node temp = head;
-                for (int i = 0; i < idx; i++) {
-                    temp = temp.next;
-                }
-                return temp.data;
-            }
-        }
-
-        public void addFirst(int val) {
-            Node temp = new Node();
-            temp.data = val;
-            temp.next = head;
-            head = temp;
-
-            if (size == 0) {
-                tail = temp;
-            }
-
-            size++;
-        }
-
-        public void addAt(int idx, int val) {
-            if (idx < 0 || idx > size) {
-                System.out.println("Invalid arguments");
-            } else if (idx == 0) {
-                addFirst(val);
-            } else if (idx == size) {
-                addLast(val);
-            } else {
-                Node node = new Node();
-                node.data = val;
-
-                Node temp = head;
-                for (int i = 0; i < idx - 1; i++) {
-                    temp = temp.next;
-                }
-                node.next = temp.next;
-
-                temp.next = node;
-                size++;
-            }
-        }
-
-        public void removeLast() {
-            if (size == 0) {
-                System.out.println("List is empty");
-            } else if (size == 1) {
-                head = tail = null;
-                size = 0;
-            } else {
-                Node temp = head;
-                for (int i = 0; i < size - 2; i++) {
-                    temp = temp.next;
-                }
-
-                tail = temp;
-                tail.next = null;
-                size--;
-            }
-        }
-
-        public void removeAt(int idx) {
-            if (idx < 0 || idx >= size) {
-                System.out.println("Invalid arguments");
-            } else if (idx == 0) {
-                removeFirst();
-            } else if (idx == size - 1) {
-                removeLast();
-            } else {
-                Node temp = head;
-                for (int i = 0; i < idx - 1; i++) {
-                    temp = temp.next;
-                }
-
-                temp.next = temp.next.next;
-                size--;
-            }
-        }
-
-        private Node getNodeAt(int idx) {
-            Node temp = head;
-            for (int i = 0; i < idx; i++) {
-                temp = temp.next;
-            }
-            return temp;
-        }
-
-        public void reverseDI() {
-            int li = 0;
-            int ri = size - 1;
-            while(li < ri){
-                Node left = getNodeAt(li);
-                Node right = getNodeAt(ri);
-
-                int temp = left.data;
-                left.data = right.data;
-                right.data = temp;
-
-                li++;
-                ri--;
-            }
-        }
-
-        public void reversePI(){
-            if(size <= 1){
-                return;
-            }
-
-            Node prev = null;
-            Node curr = head;
-            while(curr != null){
-                Node next = curr.next;
-
-                curr.next = prev;
-                prev = curr;
-                curr = next;
-            }
-
-            Node temp = head;
-            head = tail;
-            tail = temp;
-        }
-
-        public int kthFromLast(int k){
-            // write your code here
-            Node s=head;
-            Node f=head;
+        public int kthFromLast(int k) {
+            Node slow = head;
+            Node fast = head;
             for (int i = 0; i < k; i++) {
-                f=f.next;
+                if (fast == null) {
+                    System.out.println("List size is less than k");
+                    return -1;
+                }
+                fast = fast.next;
             }
 
-            while(f!=tail){
-                s=s.next;
-                f=f.next;
+            while (fast != null) {
+                slow = slow.next;
+                fast = fast.next;
             }
 
-            return s.data;
+            return slow.data;
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while (str.equals("quit") == false) {
-            if (str.startsWith("addLast")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addLast(val);
-            } else if (str.startsWith("size")) {
-                System.out.println(list.size());
-            } else if (str.startsWith("display")) {
-                list.display();
-            } else if (str.startsWith("removeFirst")) {
-                list.removeFirst();
-            } else if (str.startsWith("getFirst")) {
-                int val = list.getFirst();
-                if (val != -1) {
-                    System.out.println(val);
-                }
-            } else if (str.startsWith("getLast")) {
-                int val = list.getLast();
-                if (val != -1) {
-                    System.out.println(val);
-                }
-            } else if (str.startsWith("getAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = list.getAt(idx);
-                if (val != -1) {
-                    System.out.println(val);
-                }
-            } else if (str.startsWith("addFirst")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addFirst(val);
-            } else if (str.startsWith("addAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = Integer.parseInt(str.split(" ")[2]);
-                list.addAt(idx, val);
-            } else if (str.startsWith("removeLast")) {
-                list.removeLast();
-            } else if (str.startsWith("removeAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                list.removeAt(idx);
-            } else if(str.startsWith("reverseDI")){
-                list.reverseDI();
-            } else if(str.startsWith("reversePI")){
-                list.reversePI();
-            } else if(str.startsWith("kthFromEnd")){
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                System.out.println(list.kthFromLast(idx));
-            }
-            str = br.readLine();
+        // Adding elements to the list
+        list.addLast(10);
+        list.addLast(20);
+        list.addLast(30);
+        list.addLast(40);
+        list.addLast(50);
+
+        // Displaying the list
+        System.out.println("Original list:");
+        list.display();
+
+        // Getting the value of the kth node from the end
+        int k = 3;
+        int kthValue = list.kthFromLast(k);
+        if (kthValue != -1) {
+            System.out.println("Value of the " + k + "th node from the end: " + kthValue);
         }
     }
 }
-
-/*
-
-
-addLast 10
-getFirst
-addLast 20
-addLast 30
-getFirst
-getLast
-getAt 1
-addLast 40
-kthFromEnd 3
-getLast
-addLast 50
-removeFirst
-getFirst
-removeFirst
-removeFirst
-kthFromEnd 0
-removeFirst
-removeFirst
-getFirst
-quit
-
- */

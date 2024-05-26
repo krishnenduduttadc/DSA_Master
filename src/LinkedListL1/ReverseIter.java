@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class ReverseIter {
     public static class Node {
         int data;
@@ -168,7 +165,7 @@ public class ReverseIter {
         public void reverseDI() {
             int li = 0;
             int ri = size - 1;
-            while(li < ri){
+            while (li < ri) {
                 Node left = getNodeAt(li);
                 Node right = getNodeAt(ri);
 
@@ -181,86 +178,82 @@ public class ReverseIter {
             }
         }
 
-        public void reversePI(){
-            // write your code here
-            Node prev=null;
-            Node curr=head;
+        public void reversePI() {
+            Node prev = null;
+            Node curr = head;
 
-            while(curr!=null){
-                Node next=curr.next;
-                curr.next=prev;
-                prev=curr;
-                curr=next;
+            while (curr != null) {
+                Node next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
             }
-            Node temp=head;
-            head=tail;
-            tail=temp;
+            Node temp = head;
+            head = tail;
+            tail = temp;
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while (str.equals("quit") == false) {
-            if (str.startsWith("addLast")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addLast(val);
-            } else if (str.startsWith("size")) {
-                System.out.println(list.size());
-            } else if (str.startsWith("display")) {
+        // Hardcoded commands
+        String[] commands = {
+                "addFirst 10",
+                "addFirst 20",
+                "addLast 30",
+                "addLast 40",
+                "addLast 50",
+                "addFirst 60",
+                "removeAt 2",
+                "display",
+                "reversePI",
+                "display",
+                "quit"
+        };
+
+        for (String command : commands) {
+            if (command.startsWith("addFirst")) {
+                int val = Integer.parseInt(command.split(" ")[1]);
+                list.addFirst(val);
+            } else if (command.startsWith("display")) {
                 list.display();
-            } else if (str.startsWith("removeFirst")) {
+            } else if (command.startsWith("removeFirst")) {
                 list.removeFirst();
-            } else if (str.startsWith("getFirst")) {
+            } else if (command.startsWith("size")) {
+                System.out.println(list.size());
+            } else if (command.startsWith("getFirst")) {
                 int val = list.getFirst();
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("getLast")) {
+            } else if (command.startsWith("getLast")) {
                 int val = list.getLast();
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("getAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
+            } else if (command.startsWith("getAt")) {
+                int idx = Integer.parseInt(command.split(" ")[1]);
                 int val = list.getAt(idx);
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("addFirst")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addFirst(val);
-            } else if (str.startsWith("addAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = Integer.parseInt(str.split(" ")[2]);
+            } else if (command.startsWith("addAt")) {
+                int idx = Integer.parseInt(command.split(" ")[1]);
+                int val = Integer.parseInt(command.split(" ")[2]);
                 list.addAt(idx, val);
-            } else if (str.startsWith("removeLast")) {
+            } else if (command.startsWith("removeLast")) {
                 list.removeLast();
-            } else if (str.startsWith("removeAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
+            } else if (command.startsWith("removeAt")) {
+                int idx = Integer.parseInt(command.split(" ")[1]);
                 list.removeAt(idx);
-            } else if(str.startsWith("reverseDI")){
+            } else if (command.startsWith("reverseDI")) {
                 list.reverseDI();
-            } else if(str.startsWith("reversePI")){
+            } else if (command.startsWith("reversePI")) {
                 list.reversePI();
+            } else if (command.equals("quit")) {
+                break;
             }
-            str = br.readLine();
         }
     }
 }
-
-/*
-addFirst 10
-addFirst 20
-addLast 30
-addLast 40
-addLast 50
-addFirst 60
-removeAt 2
-display
-reversePI
-display
-quit
- */

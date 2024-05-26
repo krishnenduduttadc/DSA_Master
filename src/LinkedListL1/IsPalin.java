@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class IsPalin {
     public static class Node {
         int data;
@@ -326,7 +323,7 @@ public class IsPalin {
                 this.size = odd.size;
             } else if (even.size > 0) {
                 this.head = even.head;
-                this.tail = even.tail;
+                this.tail =even.tail;
                 this.size = even.size;
             }
         }
@@ -394,47 +391,44 @@ public class IsPalin {
             tail = temp;
             tail.next = null;
         }
+
         static Node pleft;
+
         public boolean IsPalindrome() {
             // write your code here
-            pleft=head;
+            pleft = head;
             return IsPalindromeHelper(head);
         }
 
-
-        static boolean IsPalindromeHelper(Node right){
-            if(right==null){
+        static boolean IsPalindromeHelper(Node right) {
+            if (right == null) {
                 return true;
             }
-            boolean rres=IsPalindromeHelper(right.next);
-            if(rres==false){
+            boolean rres = IsPalindromeHelper(right.next);
+            if (rres == false) {
                 return false;
-            }else if(pleft.data!=right.data){
+            } else if (pleft.data != right.data) {
                 return false;
-            }else{
-                pleft=pleft.next;
+            } else {
+                pleft = pleft.next;
                 return true;
             }
 
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        // Create a linked list
+        LinkedList list = new LinkedList();
 
-        int n1 = Integer.parseInt(br.readLine());
-        LinkedList l1 = new LinkedList();
-        String[] values1 = br.readLine().split(" ");
-        for (int i = 0; i < n1; i++) {
-            int d = Integer.parseInt(values1[i]);
-            l1.addLast(d);
-        }
+        // Add elements to the linked list
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(2);
+        list.addLast(1);
 
-        System.out.println(l1.IsPalindrome());
+        // Check if the linked list is a palindrome
+        System.out.println(list.IsPalindrome()); // Output: true
     }
 }
-
-/*
-5
-1 2 3 2 1
- */

@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class Fold {
     public static class Node {
         int data;
@@ -395,58 +392,55 @@ public class Fold {
             tail.next = null;
         }
 
-        static void foldHelper(Node right,int floor){
-            if(right==null){
+        static void foldHelper(Node right, int floor) {
+            if (right == null) {
                 return;
             }
-            foldHelper(right.next,floor+1);
+            foldHelper(right.next, floor + 1);
 
-            if(floor>size/2){
-                Node temp=fleft.next;
-                fleft.next=right;
-                right.next=temp;
-                fleft=temp;
+            if (floor > size / 2) {
+                Node temp = fleft.next;
+                fleft.next = right;
+                right.next = temp;
+                fleft = temp;
 
-            }else if(floor==size/2){
-                tail=right;
-                tail.next=null;
+            } else if (floor == size / 2) {
+                tail = right;
+                tail.next = null;
             }
 
         }
 
         static Node fleft;
         public void fold() {
-            // write your code here
-            fleft=head;
-            foldHelper(head,0);
+            fleft = head;
+            foldHelper(head, 0);
         }
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n1 = Integer.parseInt(br.readLine());
         LinkedList l1 = new LinkedList();
-        String[] values1 = br.readLine().split(" ");
-        for (int i = 0; i < n1; i++) {
-            int d = Integer.parseInt(values1[i]);
-            l1.addLast(d);
+
+        // Hardcoded sequence of operations
+        int[] values = {1, 2, 3, 4, 5};
+        for (int value : values) {
+            l1.addLast(value);
         }
 
-        int a = Integer.parseInt(br.readLine());
-        int b = Integer.parseInt(br.readLine());
+        int a = 10;
+        int b = 20;
 
-        l1.display();
-        l1.fold();
-        l1.display();
-        l1.addFirst(a);
-        l1.addLast(b);
-        l1.display();
+        l1.display(); // Display the list before folding
+        l1.fold(); // Fold the list
+        l1.display(); // Display the list after folding
+        l1.addFirst(a); // Add a value to the front
+        l1.addLast(b); // Add a value to the end
+        l1.display(); // Display the final list
     }
 }
 /*
-5
+Expected Output:
 1 2 3 4 5
-10
-20
- */
+1 5 2 4 3
+10 1 5 2 4 3 20
+*/

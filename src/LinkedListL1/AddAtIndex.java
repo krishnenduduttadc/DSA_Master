@@ -1,7 +1,6 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
 
 public class AddAtIndex {
     public static class Node {
@@ -92,103 +91,67 @@ public class AddAtIndex {
             temp.next = head;
             head = temp;
 
-            if(size == 0){
+            if (size == 0) {
                 tail = temp;
             }
 
             size++;
         }
 
-        public void addAt(int idx, int val){
-            // write your code here
-            if(idx<0 || idx>size){
+        public void addAt(int idx, int val) {
+            if (idx < 0 || idx > size) {
                 System.out.println("Invalid arguments");
-            }else if(idx==0){
+            } else if (idx == 0) {
                 addFirst(val);
-            }else if(idx==size){
+            } else if (idx == size) {
                 addLast(val);
-            }else{
-                Node node=new Node();
-                node.data=val;
-                Node temp=head;
-                for (int i = 0; i < idx-1; i++) {
-                    temp=temp.next;
+            } else {
+                Node node = new Node();
+                node.data = val;
+                Node temp = head;
+                for (int i = 0; i < idx - 1; i++) {
+                    temp = temp.next;
                 }
 
-                node.next=temp.next;
-                temp.next=node;
+                node.next = temp.next;
+                temp.next = node;
 
                 size++;
-
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while (str.equals("quit") == false) {
-            if (str.startsWith("addLast")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addLast(val);
-            } else if (str.startsWith("size")) {
-                System.out.println(list.size());
-            } else if (str.startsWith("display")) {
-                list.display();
-            } else if (str.startsWith("removeFirst")) {
-                list.removeFirst();
-            } else if (str.startsWith("getFirst")) {
-                int val = list.getFirst();
-                if (val != -1) {
-                    System.out.println(val);
-                }
-            } else if (str.startsWith("getLast")) {
-                int val = list.getLast();
-                if (val != -1) {
-                    System.out.println(val);
-                }
-            } else if (str.startsWith("getAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = list.getAt(idx);
-                if (val != -1) {
-                    System.out.println(val);
-                }
-            } else if (str.startsWith("addFirst")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addFirst(val);
-            } else if (str.startsWith("addAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = Integer.parseInt(str.split(" ")[2]);
-                list.addAt(idx, val);
-            }
-            str = br.readLine();
-        }
+        list.addFirst(10);
+        System.out.println(list.getFirst()); // 10
+
+        list.addAt(0, 20);
+        System.out.println(list.getFirst()); // 20
+        System.out.println(list.getLast()); // 10
+
+        list.display(); // 20 10
+
+        System.out.println(list.size()); // 2
+
+        list.addAt(2, 40);
+        System.out.println(list.getLast()); // 40
+
+        list.addAt(1, 50);
+        list.addFirst(30);
+        list.removeFirst();
+        System.out.println(list.getFirst()); // 20
+
+        list.removeFirst();
+        list.removeFirst();
+        list.addAt(2, 60);
+        list.display(); // 50 10 60
+
+        System.out.println(list.size()); // 3
+
+        list.removeFirst();
+        list.removeFirst();
+        System.out.println(list.getFirst()); // 60
     }
 }
-
-/*
-addFirst 10
-getFirst
-addAt 0 20
-getFirst
-getLast
-display
-size
-addAt 2 40
-getLast
-addAt 1 50
-addFirst 30
-removeFirst
-getFirst
-removeFirst
-removeFirst
-addAt 2 60
-display
-size
-removeFirst
-removeFirst
-getFirst
-quit
- */

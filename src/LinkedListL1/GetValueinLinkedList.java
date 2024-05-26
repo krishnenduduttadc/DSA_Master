@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class GetValueinLinkedList {
     public static class Node {
         int data;
@@ -53,98 +50,69 @@ public class GetValueinLinkedList {
         }
 
         public int getFirst(){
-            // write your code here
-            if(size==0){
+            if(size == 0){
                 System.out.println("List is empty");
                 return -1;
-            }else{
+            } else {
                 return head.data;
             }
         }
 
         public int getLast(){
-            // write your code here
-            if(size==0){
+            if(size == 0){
                 System.out.println("List is empty");
                 return -1;
-            }else{
+            } else {
                 return tail.data;
             }
         }
 
         public int getAt(int idx){
-            // write your code here
-            if(size==0){
+            if(size == 0){
                 System.out.println("List is empty");
                 return -1;
-            }else if(idx<0 || idx>=size){
+            } else if(idx < 0 || idx >= size){
                 System.out.println("Invalid arguments");
                 return -1;
-            }else{
-                Node t=head;
-                for(int i=0;i<idx;i++){
-                    t=t.next;
+            } else {
+                Node t = head;
+                for(int i = 0; i < idx; i++){
+                    t = t.next;
                 }
                 return t.data;
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while(str.equals("quit") == false){
-            if(str.startsWith("addLast")){
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addLast(val);
-            } else if(str.startsWith("size")){
-                System.out.println(list.size());
-            } else if(str.startsWith("display")){
-                list.display();
-            } else if(str.startsWith("removeFirst")){
-                list.removeFirst();
-            } else if(str.startsWith("getFirst")){
-                int val = list.getFirst();
-                if(val != -1){
-                    System.out.println(val);
-                }
-            } else if(str.startsWith("getLast")){
-                int val = list.getLast();
-                if(val != -1){
-                    System.out.println(val);
-                }
-            } else if(str.startsWith("getAt")){
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = list.getAt(idx);
-                if(val != -1){
-                    System.out.println(val);
-                }
-            }
-            str = br.readLine();
-        }
+        // Hardcoded sequence of operations
+        list.addLast(10);
+        System.out.println(list.getFirst()); // Expected Output: 10
+
+        list.addLast(20);
+        list.addLast(30);
+        System.out.println(list.getFirst()); // Expected Output: 10
+        System.out.println(list.getLast());  // Expected Output: 30
+
+        System.out.println(list.getAt(1));   // Expected Output: 20
+
+        list.addLast(40);
+        System.out.println(list.getLast());  // Expected Output: 40
+
+        list.addLast(50);
+        list.removeFirst();
+        System.out.println(list.getFirst()); // Expected Output: 20
+
+        list.removeFirst();
+        list.removeFirst();
+        System.out.println(list.getAt(3));   // Expected Output: Invalid arguments
+
+        list.removeFirst();
+        list.removeFirst();
+        System.out.println(list.getFirst()); // Expected Output: List is empty
+
+        list.display(); // Expected Output: List is empty
     }
 }
-
-/*
-addLast 10
-getFirst
-addLast 20
-addLast 30
-getFirst
-getLast
-getAt 1
-addLast 40
-getLast
-addLast 50
-removeFirst
-getFirst
-removeFirst
-removeFirst
-getAt 3
-removeFirst
-removeFirst
-getFirst
-quit
- */

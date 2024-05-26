@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class RemoveFirst {
     public static class Node {
         int data;
@@ -29,70 +26,67 @@ public class RemoveFirst {
             size++;
         }
 
-        public int size(){
+        public int size() {
             return size;
         }
 
-        public void display(){
-            for(Node temp = head; temp != null; temp = temp.next){
+        public void display() {
+            for (Node temp = head; temp != null; temp = temp.next) {
                 System.out.print(temp.data + " ");
             }
             System.out.println();
         }
 
-        public void removeFirst(){
-            // write your code here
-            if(size==0){
+        public void removeFirst() {
+            if (size == 0) {
                 System.out.println("List is empty");
-
-            }else if(size==1){
-                head=null;
-                tail=null;
-                size=0;
-            }else{
-                head=head.next;
+            } else if (size == 1) {
+                head = null;
+                tail = null;
+                size = 0;
+            } else {
+                head = head.next;
                 size--;
-
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while(str.equals("quit") == false){
-            if(str.startsWith("addLast")){
-                int val = Integer.parseInt(str.split(" ")[1]);
+        // Hardcoded commands
+        String[] commands = {
+                "addLast 10",
+                "addLast 20",
+                "addLast 30",
+                "display",
+                "removeFirst",
+                "size",
+                "addLast 40",
+                "addLast 50",
+                "removeFirst",
+                "display",
+                "size",
+                "removeFirst",
+                "removeFirst",
+                "removeFirst",
+                "removeFirst",
+                "quit"
+        };
+
+        for (String command : commands) {
+            if (command.startsWith("addLast")) {
+                int val = Integer.parseInt(command.split(" ")[1]);
                 list.addLast(val);
-            } else if(str.startsWith("size")){
-                System.out.println(list.size());
-            } else if(str.startsWith("display")){
+            } else if (command.startsWith("display")) {
                 list.display();
-            } else if(str.startsWith("removeFirst")){
+            } else if (command.startsWith("removeFirst")) {
                 list.removeFirst();
+            } else if (command.startsWith("size")) {
+                System.out.println(list.size());
+            } else if (command.equals("quit")) {
+                break;
             }
-            str = br.readLine();
         }
     }
 }
-
-/*
-addLast 10
-addLast 20
-addLast 30
-display
-removeFirst
-size
-addLast 40
-addLast 50
-removeFirst
-display
-size
-removeFirst
-removeFirst
-removeFirst
-removeFirst
-quit
- */

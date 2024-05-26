@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class OddEven {
     public static class Node {
         int data;
@@ -256,11 +253,11 @@ public class OddEven {
             return ml;
         }
 
-        public static Node midNode(Node head, Node tail){
+        public static Node midNode(Node head, Node tail) {
             Node f = head;
             Node s = head;
 
-            while(f != tail && f.next != tail){
+            while (f != tail && f.next != tail) {
                 f = f.next.next;
                 s = s.next;
             }
@@ -268,8 +265,8 @@ public class OddEven {
             return s;
         }
 
-        public static LinkedList mergeSort(Node head, Node tail){
-            if(head == tail){
+        public static LinkedList mergeSort(Node head, Node tail) {
+            if (head == tail) {
                 LinkedList br = new LinkedList();
                 br.addLast(head.data);
                 return br;
@@ -282,14 +279,14 @@ public class OddEven {
             return sl;
         }
 
-        public void removeDuplicates(){
+        public void removeDuplicates() {
             LinkedList res = new LinkedList();
 
-            while(this.size() > 0){
+            while (this.size() > 0) {
                 int val = this.getFirst();
                 this.removeFirst();
 
-                if(res.size() == 0 || val != res.tail.data){
+                if (res.size() == 0 || val != res.tail.data) {
                     res.addLast(val);
                 }
             }
@@ -299,66 +296,74 @@ public class OddEven {
             this.size = res.size;
         }
 
-        public void oddEven(){
+        public void oddEven() {
             // write your code here
-            LinkedList odd=new LinkedList();
-            LinkedList even=new LinkedList();
+            LinkedList odd = new LinkedList();
+            LinkedList even = new LinkedList();
 
-            while(this.size>0){
-                int val=this.getFirst();
+            while (this.size > 0) {
+                int val = this.getFirst();
                 this.removeFirst();
 
 
-                if(val%2==0){
+                if (val % 2 == 0) {
                     even.addLast(val);
-                }else{
+                } else {
                     odd.addLast(val);
                 }
             }
-            if(odd.size>0 && even.size>0){
-                odd.tail.next=even.head;
-                this.head=odd.head;
-                this.tail=even.tail;
-                this.size=odd.size+even.size;
-            }else if(odd.size>0){
-                this.head=odd.head;
-                this.tail=odd.tail;
-                this.size=odd.size;
-            }else if(even.size>0){
-                this.head=even.head;
-                this.tail=even.tail;
-                this.size=even.size;
+            if (odd.size > 0 && even.size > 0) {
+                odd.tail.next = even.head;
+                this.head = odd.head;
+                this.tail = even.tail;
+                this.size = odd.size + even.size;
+            } else if (odd.size > 0) {
+                this.head = odd.head;
+                this.tail = odd.tail;
+                this.size = odd.size;
+            } else if (even.size > 0) {
+                this.head = even.head;
+                this.tail = even.tail;
+                this.size = even.size;
             }
 
         }
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n1 = Integer.parseInt(br.readLine());
+        // Initialize LinkedList
         LinkedList l1 = new LinkedList();
-        String[] values1 = br.readLine().split(" ");
-        for (int i = 0; i < n1; i++) {
-            int d = Integer.parseInt(values1[i]);
-            l1.addLast(d);
-        }
 
-        int a = Integer.parseInt(br.readLine());
-        int b = Integer.parseInt(br.readLine());
+        // Add elements to the LinkedList
+        l1.addLast(2);
+        l1.addLast(8);
+        l1.addLast(9);
+        l1.addLast(1);
+        l1.addLast(5);
+        l1.addLast(4);
+        l1.addLast(3);
 
+        // Display original list
+        System.out.print("Original List: ");
         l1.display();
+
+        // Perform odd-even segregation
         l1.oddEven();
+
+        // Display list after odd-even segregation
+        System.out.print("List after Odd-Even Segregation: ");
         l1.display();
+
+        // Add elements at the beginning and end
+        int a = 10;
+        int b = 100;
         l1.addFirst(a);
         l1.addLast(b);
+
+        // Display list after adding elements
+        System.out.print("List after adding " + a + " at the beginning and " + b + " at the end: ");
         l1.display();
     }
 }
 
-/*
-7
-2 8 9 1 5 4 3
-10
-100
- */
+

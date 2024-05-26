@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class ReverseRec {
     public static class Node {
         int data;
@@ -290,7 +287,7 @@ public class ReverseRec {
                 this.removeFirst();
 
                 if (res.size() == 0 || val != res.tail.data) {
-                    res.addLast(val);
+                    res                .addLast(val);
                 }
             }
 
@@ -366,68 +363,68 @@ public class ReverseRec {
             this.size = prev.size;
         }
 
-        private void displayReverseHelper(Node node){
-            if(node == null){
+        private void displayReverseHelper(Node node) {
+            if (node == null) {
                 return;
             }
             displayReverseHelper(node.next);
             System.out.print(node.data + " ");
         }
 
-        public void displayReverse(){
+        public void displayReverse() {
             displayReverseHelper(head);
             System.out.println();
         }
 
-        private void reversePRHelper(Node node){
+        private void reversePRHelper(Node node) {
             // write your code here
-            if(node==null){
+            if (node == null) {
                 return;
             }
 
             reversePRHelper(node.next);
-            if(node==tail){
+            if (node == tail) {
 
-            }else{
-                node.next.next=node;
+            } else {
+                node.next.next = node;
             }
         }
 
-        public void reversePR(){
+        public void reversePR() {
             // write your code here
             reversePRHelper(head);
-            head.next=null;
-            Node temp=head;
-            head=tail;
-            tail=temp;
+            head.next = null;
+            Node temp = head;
+            head = tail;
+            tail = temp;
         }
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n1 = Integer.parseInt(br.readLine());
         LinkedList l1 = new LinkedList();
-        String[] values1 = br.readLine().split(" ");
-        for (int i = 0; i < n1; i++) {
-            int d = Integer.parseInt(values1[i]);
-            l1.addLast(d);
-        }
+        l1.addLast(1);
+        l1.addLast(2);
+        l1.addLast(3);
+        l1.addLast(4);
+        l1.addLast(5);
 
-        int a = Integer.parseInt(br.readLine());
-        int b = Integer.parseInt(br.readLine());
-
+        System.out.print("Original List: ");
         l1.display();
+
+        System.out.print("Reverse Display: ");
+        l1.displayReverse();
+
+        System.out.print("Reversing List using Pointers Recursively: ");
         l1.reversePR();
-        l1.addLast(a);
-        l1.addFirst(b);
+        l1.display();
+
+        System.out.print("Adding 100 at the end: ");
+        l1.addLast(100);
+        l1.display();
+
+        System.out.print("Adding 200 at the beginning: ");
+        l1.addFirst(200);
         l1.display();
     }
 }
 
-/*
-11
-1 2 3 4 5 6 7 8 9 10 11
-100
-200
- */

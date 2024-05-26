@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class Display {
     public static class Node {
         int data;
@@ -29,50 +26,33 @@ public class Display {
             size++;
         }
 
-        public int size(){
-            // write code here
+        public int size() {
             return size;
         }
 
-        public void display(){
-            // write code here
-            Node t=head;
-            while(t!=null){
-                System.out.print(t.data+" ");
-                t=t.next;
+        public void display() {
+            Node t = head;
+            while (t != null) {
+                System.out.print(t.data + " ");
+                t = t.next;
             }
             System.out.println();
         }
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while(str.equals("quit") == false){
-            if(str.startsWith("addLast")){
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addLast(val);
-            } else if(str.startsWith("size")){
-                System.out.println(list.size());
-            } else if(str.startsWith("display")){
-                list.display();
-            }
-            str = br.readLine();
-        }
+        // Hardcoded sequence of operations
+        list.addLast(10);
+        list.addLast(20);
+        list.addLast(30);
+        list.display(); // Should display: 10 20 30
+        System.out.println(list.size()); // Should display: 3
+
+        list.addLast(40);
+        list.addLast(50);
+        list.display(); // Should display: 10 20 30 40 50
+        System.out.println(list.size()); // Should display: 5
     }
 }
-
-/*
-addLast 10
-addLast 20
-addLast 30
-display
-size
-addLast 40
-addLast 50
-display
-size
-quit
- */

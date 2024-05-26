@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class Intersection {
     public static class Node {
         int data;
@@ -422,27 +419,24 @@ public class Intersection {
 
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n1 = Integer.parseInt(br.readLine());
+    public static void main(String[] args) {
+        // Hardcoded input
+        int n1 = 5;
         LinkedList l1 = new LinkedList();
-        String[] values1 = br.readLine().split(" ");
+        int[] values1 = {1, 2, 3, 4, 5};
         for (int i = 0; i < n1; i++) {
-            int d = Integer.parseInt(values1[i]);
-            l1.addLast(d);
+            l1.addLast(values1[i]);
         }
 
-        int n2 = Integer.parseInt(br.readLine());
+        int n2 = 8;
         LinkedList l2 = new LinkedList();
-        String[] values2 = br.readLine().split(" ");
+        int[] values2 = {11, 22, 33, 44, 55, 66, 77, 88};
         for (int i = 0; i < n2; i++) {
-            int d = Integer.parseInt(values2[i]);
-            l2.addLast(d);
+            l2.addLast(values2[i]);
         }
 
-        int li = Integer.parseInt(br.readLine());
-        int di = Integer.parseInt(br.readLine());
+        int li = 2;
+        int di = 3;
         if(li == 1){
             Node n = l1.getNodeAt(di);
             l2.tail.next = n;
@@ -456,15 +450,6 @@ public class Intersection {
         }
 
         int inter = LinkedList.findIntersection(l1, l2);
-        System.out.println(inter);
+        System.out.println(inter);  // Expected output: intersection value
     }
 }
-
-/*
-5
-1 2 3 4 5
-8
-11 22 33 44 55 66 77 88
-2
-3
- */

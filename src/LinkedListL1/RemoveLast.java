@@ -1,8 +1,5 @@
 package LinkedListL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class RemoveLast {
     public static class Node {
         int data;
@@ -92,26 +89,26 @@ public class RemoveLast {
             temp.next = head;
             head = temp;
 
-            if(size == 0){
+            if (size == 0) {
                 tail = temp;
             }
 
             size++;
         }
 
-        public void addAt(int idx, int val){
-            if(idx < 0 || idx > size){
+        public void addAt(int idx, int val) {
+            if (idx < 0 || idx > size) {
                 System.out.println("Invalid arguments");
-            } else if(idx == 0){
+            } else if (idx == 0) {
                 addFirst(val);
-            } else if(idx == size){
+            } else if (idx == size) {
                 addLast(val);
             } else {
                 Node node = new Node();
                 node.data = val;
 
                 Node temp = head;
-                for(int i = 0; i < idx - 1; i++){
+                for (int i = 0; i < idx - 1; i++) {
                     temp = temp.next;
                 }
                 node.next = temp.next;
@@ -121,93 +118,89 @@ public class RemoveLast {
             }
         }
 
-        public void removeLast(){
-            // write your code here
-            if(size==0){
+        public void removeLast() {
+            if (size == 0) {
                 System.out.println("List is empty");
-            }else if(size==1){
-                head=tail=null;
-                size=0;
-            }else{
-                Node temp=head;
-                for (int i = 0; i < size-2; i++) {
-                    temp=temp.next;
+            } else if (size == 1) {
+                head = tail = null;
+                size = 0;
+            } else {
+                Node temp = head;
+                for (int i = 0; i < size - 2; i++) {
+                    temp = temp.next;
                 }
 
-                tail=temp;
-                temp.next=null;
+                tail = temp;
+                tail.next = null;
                 size--;
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
-        String str = br.readLine();
-        while (str.equals("quit") == false) {
-            if (str.startsWith("addLast")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addLast(val);
-            } else if (str.startsWith("size")) {
-                System.out.println(list.size());
-            } else if (str.startsWith("display")) {
+        // Hardcoded commands
+        String[] commands = {
+                "addFirst 10",
+                "getFirst",
+                "addAt 0 20",
+                "getFirst",
+                "getLast",
+                "display",
+                "size",
+                "addAt 2 40",
+                "getLast",
+                "addAt 1 50",
+                "addFirst 30",
+                "removeFirst",
+                "getFirst",
+                "removeLast",
+                "removeLast",
+                "addAt 2 60",
+                "display",
+                "size",
+                "removeFirst",
+                "removeLast",
+                "getFirst",
+                "quit"
+        };
+
+        for (String command : commands) {
+            if (command.startsWith("addFirst")) {
+                int val = Integer.parseInt(command.split(" ")[1]);
+                list.addFirst(val);
+            } else if (command.startsWith("display")) {
                 list.display();
-            } else if (str.startsWith("removeFirst")) {
+            } else if (command.startsWith("removeFirst")) {
                 list.removeFirst();
-            } else if (str.startsWith("getFirst")) {
+            } else if (command.startsWith("size")) {
+                System.out.println(list.size());
+            } else if (command.startsWith("getFirst")) {
                 int val = list.getFirst();
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("getLast")) {
+            } else if (command.startsWith("getLast")) {
                 int val = list.getLast();
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("getAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
+            } else if (command.startsWith("getAt")) {
+                int idx = Integer.parseInt(command.split(" ")[1]);
                 int val = list.getAt(idx);
                 if (val != -1) {
                     System.out.println(val);
                 }
-            } else if (str.startsWith("addFirst")) {
-                int val = Integer.parseInt(str.split(" ")[1]);
-                list.addFirst(val);
-            } else if (str.startsWith("addAt")) {
-                int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = Integer.parseInt(str.split(" ")[2]);
+            } else if (command.startsWith("addAt")) {
+                int idx = Integer.parseInt(command.split(" ")[1]);
+                int val = Integer.parseInt(command.split(" ")[2]);
                 list.addAt(idx, val);
-            } else if (str.startsWith("removeLast")) {
+            } else if (command.startsWith("removeLast")) {
                 list.removeLast();
+            } else if (command.equals("quit")) {
+                break;
             }
-            str = br.readLine();
         }
     }
 }
-
-/*
-addFirst 10
-getFirst
-addAt 0 20
-getFirst
-getLast
-display
-size
-addAt 2 40
-getLast
-addAt 1 50
-addFirst 30
-removeFirst
-getFirst
-removeLast
-removeLast
-addAt 2 60
-display
-size
-removeFirst
-removeLast
-getFirst
-quit
- */
