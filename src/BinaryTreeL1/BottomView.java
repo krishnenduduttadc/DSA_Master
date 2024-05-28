@@ -17,7 +17,6 @@ public class BottomView {
     }
 
     static class QueueObj {
-
         Node node;
         int hd;
 
