@@ -15,56 +15,48 @@ public class Dijkastra {
     }
     public static void main(String[] args) {
         int V = 3, E = 3, S = 2;
-        ArrayList<Integer> node1 = new ArrayList<Integer>() {{
-            add(1);
-            add(1);
-        }};
-        ArrayList<Integer> node2 = new ArrayList<Integer>() {{
-            add(2);
-            add(6);
-        }};
-        ArrayList<Integer> node3 = new ArrayList<Integer>() {{
-            add(2);
-            add(3);
-        }};
-        ArrayList<Integer> node4 = new ArrayList<Integer>() {{
-            add(0);
-            add(1);
-        }};
-        ArrayList<Integer> node5 = new ArrayList<Integer>() {{
-            add(1);
-            add(3);
-        }};
-        ArrayList<Integer> node6 = new ArrayList<Integer>() {{
-            add(0);
-            add(6);
-        }};
+        ArrayList<Integer> node1 = new ArrayList<>();
+        node1.add(1);
+        node1.add(1);
 
-        ArrayList<ArrayList<Integer>> inter1 = new ArrayList<ArrayList<Integer>>() {
-            {
-                add(node1);
-                add(node2);
-            }
-        };
-        ArrayList<ArrayList<Integer>> inter2 = new ArrayList<ArrayList<Integer>>() {
-            {
-                add(node3);
-                add(node4);
-            }
-        };
-        ArrayList<ArrayList<Integer>> inter3 = new ArrayList<ArrayList<Integer>>() {
-            {
-                add(node5);
-                add(node6);
-            }
-        };
-        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<ArrayList<ArrayList<Integer>>>() {
-            {
-                add(inter1); // for 1st node
-                add(inter2); // for 2nd node
-                add(inter3); // for 3rd node
-            }
-        };
+        ArrayList<Integer> node2 = new ArrayList<>();
+        node2.add(2);
+        node2.add(6);
+
+        ArrayList<Integer> node3 = new ArrayList<>();
+        node3.add(2);
+        node3.add(3);
+
+        ArrayList<Integer> node4 = new ArrayList<>();
+        node4.add(0);
+        node4.add(1);
+
+        ArrayList<Integer> node5 = new ArrayList<>();
+        node5.add(1);
+        node5.add(3);
+
+        ArrayList<Integer> node6 = new ArrayList<>();
+        node6.add(0);
+        node6.add(6);
+
+        // Initialize inter1, inter2, inter3
+        ArrayList<ArrayList<Integer>> inter1 = new ArrayList<>();
+        inter1.add(node1);
+        inter1.add(node2);
+
+        ArrayList<ArrayList<Integer>> inter2 = new ArrayList<>();
+        inter2.add(node3);
+        inter2.add(node4);
+
+        ArrayList<ArrayList<Integer>> inter3 = new ArrayList<>();
+        inter3.add(node5);
+        inter3.add(node6);
+
+        // Initialize adj
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+        adj.add(inter1); // for 1st node
+        adj.add(inter2); // for 2nd node
+        adj.add(inter3); // for 3rd node
 
         int[] res = dijkstra(V, adj, S);
 
