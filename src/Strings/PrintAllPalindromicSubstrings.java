@@ -1,7 +1,5 @@
 package Strings;
 
-import java.util.Scanner;
-
 public class PrintAllPalindromicSubstrings {
     static boolean isPalin(String s){
         int i=0;
@@ -32,8 +30,7 @@ public class PrintAllPalindromicSubstrings {
     }
 
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
+        String str = "abcc";
         solution(str);
     }
 }

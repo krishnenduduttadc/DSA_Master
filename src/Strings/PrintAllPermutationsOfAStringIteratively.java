@@ -1,7 +1,5 @@
 package Strings;
 
-import java.util.Scanner;
-
 public class PrintAllPermutationsOfAStringIteratively {
     public static void solution(String str){
         // write your code here
@@ -31,8 +29,7 @@ public class PrintAllPermutationsOfAStringIteratively {
         return val;
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
+        String str = "abc";
         solution(str);
     }
 }

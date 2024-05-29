@@ -1,7 +1,5 @@
 package Strings;
 
-import java.util.Scanner;
-
 public class StringCompression {
     public static String compression1(String str){
         // write your code here
@@ -44,13 +42,10 @@ public class StringCompression {
         return s;
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
+        String str = "wwwwaaadexxxxxx";
         System.out.println(compression1(str));
         System.out.println(compression2(str));
     }
 }
 
-/*
-wwwwaaadexxxxxx
- */
+

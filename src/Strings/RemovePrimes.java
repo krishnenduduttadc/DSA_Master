@@ -1,7 +1,6 @@
 package Strings;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RemovePrimes {
     static boolean isprime(int val){
@@ -24,12 +23,12 @@ public class RemovePrimes {
 
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
         ArrayList<Integer> al = new ArrayList<>();
-        for(int i = 0 ; i < n; i++){
-            al.add(scn.nextInt());
-        }
+        al.add(3);
+        al.add(12);
+        al.add(13);
+        al.add(15);
+
         solution(al);
         System.out.println(al);
     }

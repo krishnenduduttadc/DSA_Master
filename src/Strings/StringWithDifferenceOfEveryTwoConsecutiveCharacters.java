@@ -1,7 +1,5 @@
 package Strings;
 
-import java.util.Scanner;
-
 public class StringWithDifferenceOfEveryTwoConsecutiveCharacters {
     public static String solution(String str){
         // write your code here
@@ -19,8 +17,7 @@ public class StringWithDifferenceOfEveryTwoConsecutiveCharacters {
         return sb.toString();
     }
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
+        String str = "pepCODinG";
         System.out.println(solution(str));
     }
 }

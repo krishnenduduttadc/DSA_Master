@@ -1,11 +1,8 @@
 package Strings;
 
-import java.util.Scanner;
-
 public class ToggleOpticaDocument {
     public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
-        String str = scn.next();
+        String str = "pepCODinG";
         System.out.println(toggleCase(str));
     }
 
