@@ -40,7 +40,7 @@ public class CycleUndirectedBFS {
                 }
 
                 // if adjacent node is visited and is not its own parent node
-                else if(par != it) return true;
+                else if(it!=par) return true;
             }
         }
 
