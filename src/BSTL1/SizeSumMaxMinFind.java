@@ -1,9 +1,5 @@
 package BSTL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Stack;
-
 public class SizeSumMaxMinFind {
     public static class Node {
         int data;
@@ -25,46 +21,6 @@ public class SizeSumMaxMinFind {
             this.node = node;
             this.state = state;
         }
-    }
-
-    public static Node construct(Integer[] arr) {
-        Node root = new Node(arr[0], null, null);
-        Pair rtp = new Pair(root, 1);
-
-        Stack<Pair> st = new Stack<>();
-        st.push(rtp);
-
-        int idx = 0;
-        while (st.size() > 0) {
-            Pair top = st.peek();
-            if (top.state == 1) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(top.node.left, 1);
-                    st.push(lp);
-                } else {
-                    top.node.left = null;
-                }
-
-                top.state++;
-            } else if (top.state == 2) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.right = new Node(arr[idx], null, null);
-                    Pair rp = new Pair(top.node.right, 1);
-                    st.push(rp);
-                } else {
-                    top.node.right = null;
-                }
-
-                top.state++;
-            } else {
-                st.pop();
-            }
-        }
-
-        return root;
     }
 
     public static void display(Node node) {
@@ -135,39 +91,36 @@ public class SizeSumMaxMinFind {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Integer[] arr = new Integer[n];
-        String[] values = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            if (values[i].equals("n") == false) {
-                arr[i] = Integer.parseInt(values[i]);
-            } else {
-                arr[i] = null;
-            }
-        }
+        // Hardcode the binary search tree
+        Node root = new Node(50,
+                new Node(25,
+                        new Node(12, null, null),
+                        new Node(37,
+                                new Node(30, null, null),
+                                null
+                        )
+                ),
+                new Node(75,
+                        new Node(62, null, null),
+                        new Node(87, null, null)
+                )
+        );
 
-        int data = Integer.parseInt(br.readLine());
+        // Read the data to find from input
+        int data = 6;//Integer.parseInt(br.readLine());
 
-        Node root = construct(arr);
-
+        // Perform operations on the BST
         int size = size(root);
         int sum = sum(root);
         int max = max(root);
         int min = min(root);
         boolean found = find(root, data);
 
+        // Print the results
         System.out.println(size);
         System.out.println(sum);
         System.out.println(max);
         System.out.println(min);
         System.out.println(found);
     }
-
 }
-
-/*
-19
-50 25 12 n n 37 30 n n n 75 62 n 70 n n 87 n n
-70
- */

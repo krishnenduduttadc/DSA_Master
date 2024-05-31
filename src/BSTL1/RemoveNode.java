@@ -1,9 +1,5 @@
 package BSTL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Stack;
-
 public class RemoveNode {
     public static class Node {
         int data;
@@ -27,46 +23,6 @@ public class RemoveNode {
         }
     }
 
-    public static Node construct(Integer[] arr) {
-        Node root = new Node(arr[0], null, null);
-        Pair rtp = new Pair(root, 1);
-
-        Stack<Pair> st = new Stack<>();
-        st.push(rtp);
-
-        int idx = 0;
-        while (st.size() > 0) {
-            Pair top = st.peek();
-            if (top.state == 1) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(top.node.left, 1);
-                    st.push(lp);
-                } else {
-                    top.node.left = null;
-                }
-
-                top.state++;
-            } else if (top.state == 2) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.right = new Node(arr[idx], null, null);
-                    Pair rp = new Pair(top.node.right, 1);
-                    st.push(rp);
-                } else {
-                    top.node.right = null;
-                }
-
-                top.state++;
-            } else {
-                st.pop();
-            }
-        }
-
-        return root;
-    }
-
     public static void display(Node node) {
         if (node == null) {
             return;
@@ -82,35 +38,34 @@ public class RemoveNode {
         display(node.right);
     }
 
-    static int max(Node node){
-        if(node.right!=null){
+    static int max(Node node) {
+        if (node.right != null) {
             return max(node.right);
-        }else{
+        } else {
             return node.data;
         }
     }
 
     public static Node remove(Node node, int data) {
         // write your code here
-        if(node==null){
+        if (node == null) {
             return null;
         }
-        if(data>node.data){
-            node.right=remove(node.right,data);
-        }else if(data<node.data){
-            node.left=remove(node.left,data);
-        }else{
-            if(node.left!=null && node.right!=null){
-                int lmax=max(node.left);
-                node.data=lmax;
-                node.left=remove(node.left,lmax);
+        if (data > node.data) {
+            node.right = remove(node.right, data);
+        } else if (data < node.data) {
+            node.left = remove(node.left, data);
+        } else {
+            if (node.left != null && node.right != null) {
+                int lmax = max(node.left);
+                node.data = lmax;
+                node.left = remove(node.left, lmax);
                 return node;
-
-            }else if(node.left!=null){
+            } else if (node.left != null) {
                 return node.left;
-            }else if(node.right!=null){
+            } else if (node.right != null) {
                 return node.right;
-            }else{
+            } else {
                 return null;
             }
         }
@@ -118,30 +73,25 @@ public class RemoveNode {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Integer[] arr = new Integer[n];
-        String[] values = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            if (values[i].equals("n") == false) {
-                arr[i] = Integer.parseInt(values[i]);
-            } else {
-                arr[i] = null;
-            }
-        }
+        // Hardcode the binary search tree
+        Node root = new Node(50,
+                new Node(25,
+                        new Node(12, null, null),
+                        new Node(37, null, null)
+                ),
+                new Node(75,
+                        new Node(62, null, null),
+                        new Node(87, null, null)
+                )
+        );
 
-        int data = Integer.parseInt(br.readLine());
+        // Data to be removed
+        int data = 62;
 
-        Node root = construct(arr);
+        // Remove the node
         root = remove(root, data);
 
+        // Display the updated BST
         display(root);
     }
-
 }
-
-/*
-15
-50 25 12 n n 37 n n 75 62 n n 87 n n
-62
- */
