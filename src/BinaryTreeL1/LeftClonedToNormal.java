@@ -1,9 +1,5 @@
 package BinaryTreeL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Stack;
-
 public class LeftClonedToNormal {
     public static class Node {
         int data;
@@ -15,56 +11,6 @@ public class LeftClonedToNormal {
             this.left = left;
             this.right = right;
         }
-    }
-
-    public static class Pair {
-        Node node;
-        int state;
-
-        Pair(Node node, int state) {
-            this.node = node;
-            this.state = state;
-        }
-    }
-
-    public static Node construct(Integer[] arr) {
-        Node root = new Node(arr[0], null, null);
-        Pair rtp = new Pair(root, 1);
-
-        Stack<Pair> st = new Stack<>();
-        st.push(rtp);
-
-        int idx = 0;
-        while (st.size() > 0) {
-            Pair top = st.peek();
-            if (top.state == 1) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(top.node.left, 1);
-                    st.push(lp);
-                } else {
-                    top.node.left = null;
-                }
-
-                top.state++;
-            } else if (top.state == 2) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.right = new Node(arr[idx], null, null);
-                    Pair rp = new Pair(top.node.right, 1);
-                    st.push(rp);
-                } else {
-                    top.node.right = null;
-                }
-
-                top.state++;
-            } else {
-                st.pop();
-            }
-        }
-
-        return root;
     }
 
     public static void display(Node node) {
@@ -82,39 +28,58 @@ public class LeftClonedToNormal {
         display(node.right);
     }
 
-    public static Node transBackFromLeftClonedTree(Node node){
-        // write your code here
-        if(node==null){
+    public static Node transBackFromLeftClonedTree(Node node) {
+        if (node == null) {
             return null;
         }
-        Node lnn=transBackFromLeftClonedTree(node.left.left);
-        Node rnn=transBackFromLeftClonedTree(node.right);
+        Node lnn = transBackFromLeftClonedTree(node.left.left);
+        Node rnn = transBackFromLeftClonedTree(node.right);
 
-        node.left=lnn;
-        node.right=rnn;
+        node.left = lnn;
+        node.right = rnn;
         return node;
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Integer[] arr = new Integer[n];
-        String[] values = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            if (values[i].equals("n") == false) {
-                arr[i] = Integer.parseInt(values[i]);
-            } else {
-                arr[i] = null;
-            }
-        }
+        // Hardcoded tree construction for the left cloned tree
+        Node root = new Node(50, null, null);
+        root.left = new Node(50, null, null);
+        root.left.left = new Node(25, null, null);
+        root.left.left.left = new Node(25, null, null);
+        root.left.left.left.left = new Node(12, null, null);
+        root.left.left.left.left.left = new Node(12, null, null);
+        root.left.left.left.left.left.left = null;
+        root.left.left.left.left.left.right = null;
+        root.left.left.left.left.right = null;
+        root.left.left.left.right = null;
+        root.left.left.right = new Node(37, null, null);
+        root.left.left.right.left = new Node(37, null, null);
+        root.left.left.right.left.left = new Node(30, null, null);
+        root.left.left.right.left.left.left = new Node(30, null, null);
+        root.left.left.right.left.left.left.left = null;
+        root.left.left.right.left.left.left.right = null;
+        root.left.left.right.left.left.right = null;
+        root.left.left.right.right = null;
+        root.left.right = null;
+        root.right = new Node(75, null, null);
+        root.right.left = new Node(75, null, null);
+        root.right.left.left = new Node(62, null, null);
+        root.right.left.left.left = new Node(62, null, null);
+        root.right.left.left.left.left = null;
+        root.right.left.left.left.right = null;
+        root.right.left.left.right = null;
+        root.right.left.right = new Node(70, null, null);
+        root.right.left.right.left = new Node(70, null, null);
+        root.right.left.right.left.left = null;
+        root.right.left.right.left.right = null;
+        root.right.left.right.right = null;
+        root.right.right = new Node(87, null, null);
+        root.right.right.left = new Node(87, null, null);
+        root.right.right.left.left = null;
+        root.right.right.left.right = null;
+        root.right.right.right = null;
 
-        Node root = construct(arr);
         root = transBackFromLeftClonedTree(root);
         display(root);
     }
 }
-
-/*
-37
-50 50 25 25 12 12 n n n n 37 37 30 30 n n n n n n 75 75 62 62 n n 70 70 n n n n 87 87 n n n
- */

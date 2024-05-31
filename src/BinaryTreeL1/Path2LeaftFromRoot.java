@@ -1,9 +1,5 @@
 package BinaryTreeL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Stack;
-
 public class Path2LeaftFromRoot {
     public static class Node {
         int data;
@@ -15,56 +11,6 @@ public class Path2LeaftFromRoot {
             this.left = left;
             this.right = right;
         }
-    }
-
-    public static class Pair {
-        Node node;
-        int state;
-
-        Pair(Node node, int state) {
-            this.node = node;
-            this.state = state;
-        }
-    }
-
-    public static Node construct(Integer[] arr) {
-        Node root = new Node(arr[0], null, null);
-        Pair rtp = new Pair(root, 1);
-
-        Stack<Pair> st = new Stack<>();
-        st.push(rtp);
-
-        int idx = 0;
-        while (st.size() > 0) {
-            Pair top = st.peek();
-            if (top.state == 1) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(top.node.left, 1);
-                    st.push(lp);
-                } else {
-                    top.node.left = null;
-                }
-
-                top.state++;
-            } else if (top.state == 2) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.right = new Node(arr[idx], null, null);
-                    Pair rp = new Pair(top.node.right, 1);
-                    st.push(rp);
-                } else {
-                    top.node.right = null;
-                }
-
-                top.state++;
-            } else {
-                st.pop();
-            }
-        }
-
-        return root;
     }
 
     public static void display(Node node) {
@@ -82,48 +28,41 @@ public class Path2LeaftFromRoot {
         display(node.right);
     }
 
-    public static void pathToLeafFromRoot(Node node, String path, int sum, int lo, int hi){
-        // write your code here
-        if(node==null){
+    public static void pathToLeafFromRoot(Node node, String path, int sum, int lo, int hi) {
+        if (node == null) {
             return;
         }
 
-        if(node.left==null && node.right==null){
-            sum+=node.data;
-            if(sum>=lo && sum<=hi){
-                System.out.println(path+node.data);
-                return;
+        if (node.left == null && node.right == null) {
+            sum += node.data;
+            if (sum >= lo && sum <= hi) {
+                System.out.println(path + node.data);
             }
+            return;
         }
-        pathToLeafFromRoot(node.left,path+node.data+" ",sum+node.data,lo,hi);
-        pathToLeafFromRoot(node.right,path+node.data+" ",sum+node.data,lo,hi);
 
+        pathToLeafFromRoot(node.left, path + node.data + " ", sum + node.data, lo, hi);
+        pathToLeafFromRoot(node.right, path + node.data + " ", sum + node.data, lo, hi);
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Integer[] arr = new Integer[n];
-        String[] values = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            if (values[i].equals("n") == false) {
-                arr[i] = Integer.parseInt(values[i]);
-            } else {
-                arr[i] = null;
-            }
-        }
+        // Hardcoded values for lo and hi
+        int lo = 150;
+        int hi = 250;
 
-        int lo = Integer.parseInt(br.readLine());
-        int hi = Integer.parseInt(br.readLine());
+        // Hardcoded tree construction
+        Node root = new Node(50, null, null);
+        root.left = new Node(25, null, null);
+        root.left.left = new Node(12, null, null);
+        root.left.right = new Node(37, null, null);
+        root.left.right.left = new Node(30, null, null);
+        root.left.right.right = new Node(40, null, null);
+        root.right = new Node(75, null, null);
+        root.right.left = new Node(62, null, null);
+        root.right.left.left = new Node(60, null, null);
+        root.right.left.right = new Node(70, null, null);
+        root.right.right = new Node(87, null, null);
 
-        Node root = construct(arr);
         pathToLeafFromRoot(root, "", 0, lo, hi);
     }
 }
-
-/*
-23
-50 25 12 n n 37 30 n n 40 n n 75 62 60 n n 70 n n 87 n n
-150
-250
- */

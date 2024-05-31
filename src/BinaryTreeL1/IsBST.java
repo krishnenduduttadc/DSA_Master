@@ -1,9 +1,5 @@
 package BinaryTreeL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Stack;
-
 public class IsBST {
     public static class Node {
         int data;
@@ -15,56 +11,6 @@ public class IsBST {
             this.left = left;
             this.right = right;
         }
-    }
-
-    public static class Pair {
-        Node node;
-        int state;
-
-        Pair(Node node, int state) {
-            this.node = node;
-            this.state = state;
-        }
-    }
-
-    public static Node construct(Integer[] arr) {
-        Node root = new Node(arr[0], null, null);
-        Pair rtp = new Pair(root, 1);
-
-        Stack<Pair> st = new Stack<>();
-        st.push(rtp);
-
-        int idx = 0;
-        while (st.size() > 0) {
-            Pair top = st.peek();
-            if (top.state == 1) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(top.node.left, 1);
-                    st.push(lp);
-                } else {
-                    top.node.left = null;
-                }
-
-                top.state++;
-            } else if (top.state == 2) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.right = new Node(arr[idx], null, null);
-                    Pair rp = new Pair(top.node.right, 1);
-                    st.push(rp);
-                } else {
-                    top.node.right = null;
-                }
-
-                top.state++;
-            } else {
-                st.pop();
-            }
-        }
-
-        return root;
     }
 
     public static void display(Node node) {
@@ -94,53 +40,44 @@ public class IsBST {
         return th;
     }
 
-    public static class BSTPair{
+    public static class BSTPair {
         boolean isBST;
         int min;
         int max;
     }
 
-    public static BSTPair isBST(Node node){
-        if(node==null){
-            BSTPair b=new BSTPair();
-            b.isBST=true;
-            b.min=Integer.MAX_VALUE;
-            b.max=Integer.MIN_VALUE;
+    public static BSTPair isBST(Node node) {
+        if (node == null) {
+            BSTPair b = new BSTPair();
+            b.isBST = true;
+            b.min = Integer.MAX_VALUE;
+            b.max = Integer.MIN_VALUE;
             return b;
         }
-        BSTPair lp=isBST(node.left);
-        BSTPair rp=isBST(node.right);
+        BSTPair lp = isBST(node.left);
+        BSTPair rp = isBST(node.right);
 
-        BSTPair mp=new BSTPair();
-        mp.isBST=lp.isBST && rp.isBST && (node.data>= lp.max && node.data<=rp.min);
-        mp.min=Math.min(node.data, Math.min(lp.min,rp.min));
-        mp.max=Math.max(node.data, Math.max(lp.max,rp.max));
+        BSTPair mp = new BSTPair();
+        mp.isBST = lp.isBST && rp.isBST && (node.data >= lp.max && node.data <= rp.min);
+        mp.min = Math.min(node.data, Math.min(lp.min, rp.min));
+        mp.max = Math.max(node.data, Math.max(lp.max, rp.max));
         return mp;
     }
 
-
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Integer[] arr = new Integer[n];
-        String[] values = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            if (values[i].equals("n") == false) {
-                arr[i] = Integer.parseInt(values[i]);
-            } else {
-                arr[i] = null;
-            }
-        }
+        // Hardcoded tree construction
+        Node root = new Node(50, null, null);
+        root.left = new Node(25, null, null);
+        root.right = new Node(75, null, null);
 
-        Node root = construct(arr);
+        root.left.left = new Node(12, null, null);
+        root.left.right = new Node(37, null, null);
 
-        // write your code here
-        BSTPair bp=isBST(root);
+        root.right.left = new Node(62, null, null);
+        root.right.right = new Node(87, null, null);
+
+        // Check if the tree is a BST
+        BSTPair bp = isBST(root);
         System.out.println(bp.isBST);
     }
 }
-
-/*
-15
-50 25 12 n n 37 n n 75 62 n n 87 n n
- */

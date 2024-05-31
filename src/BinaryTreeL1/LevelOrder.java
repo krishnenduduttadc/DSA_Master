@@ -1,10 +1,7 @@
 package BinaryTreeL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class LevelOrder {
     public static class Node {
@@ -17,56 +14,6 @@ public class LevelOrder {
             this.left = left;
             this.right = right;
         }
-    }
-
-    public static class Pair {
-        Node node;
-        int state;
-
-        Pair(Node node, int state) {
-            this.node = node;
-            this.state = state;
-        }
-    }
-
-    public static Node construct(Integer[] arr) {
-        Node root = new Node(arr[0], null, null);
-        Pair rtp = new Pair(root, 1);
-
-        Stack<Pair> st = new Stack<>();
-        st.push(rtp);
-
-        int idx = 0;
-        while (st.size() > 0) {
-            Pair top = st.peek();
-            if (top.state == 1) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.left = new Node(arr[idx], null, null);
-                    Pair lp = new Pair(top.node.left, 1);
-                    st.push(lp);
-                } else {
-                    top.node.left = null;
-                }
-
-                top.state++;
-            } else if (top.state == 2) {
-                idx++;
-                if (arr[idx] != null) {
-                    top.node.right = new Node(arr[idx], null, null);
-                    Pair rp = new Pair(top.node.right, 1);
-                    st.push(rp);
-                } else {
-                    top.node.right = null;
-                }
-
-                top.state++;
-            } else {
-                st.pop();
-            }
-        }
-
-        return root;
     }
 
     public static void display(Node node) {
@@ -85,48 +32,43 @@ public class LevelOrder {
     }
 
     public static void levelOrder(Node node) {
-        // write your code here
-        Queue<Node> q=new LinkedList<>();
-        q.add(node);
-        while(!q.isEmpty()){
+        if (node == null) {
+            return;
+        }
 
-            int size=q.size();
-            for(int i=0;i<size;i++){
-                Node front=q.remove();
-                System.out.print(front.data+" ");
-                if(front.left!=null){
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                Node front = q.remove();
+                System.out.print(front.data + " ");
+                if (front.left != null) {
                     q.add(front.left);
                 }
-
-                if(front.right!=null){
+                if (front.right != null) {
                     q.add(front.right);
                 }
-
             }
             System.out.println();
         }
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        Integer[] arr = new Integer[n];
-        String[] values = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            if (values[i].equals("n") == false) {
-                arr[i] = Integer.parseInt(values[i]);
-            } else {
-                arr[i] = null;
-            }
-        }
+        // Hardcoded tree construction
+        Node root = new Node(50, null, null);
+        root.left = new Node(25, null, null);
+        root.right = new Node(75, null, null);
 
-        Node root = construct(arr);
+        root.left.left = new Node(12, null, null);
+        root.left.right = new Node(37, null, null);
+        root.left.right.left = new Node(30, null, null);
+
+        root.right.left = new Node(62, null, null);
+        root.right.left.right = new Node(70, null, null);
+        root.right.right = new Node(87, null, null);
+
+        // Level Order Traversal
         levelOrder(root);
     }
-
 }
-
-/*
-19
-50 25 12 n n 37 30 n n n 75 62 n 70 n n 87 n n
- */
