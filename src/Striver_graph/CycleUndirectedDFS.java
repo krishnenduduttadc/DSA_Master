@@ -3,35 +3,10 @@ package Striver_graph;
 import java.util.ArrayList;
 
 public class CycleUndirectedDFS {
-    private boolean dfs(int node, int parent, int vis[], ArrayList<ArrayList<Integer>>
-            adj) {
-        vis[node] = 1;
-        // go to all adjacent nodes
-        for(int adjacentNode: adj.get(node)) {
-            if(vis[adjacentNode]==0) {
-                if(dfs(adjacentNode, node, vis, adj) == true)
-                    return true;
-            }
-            // if adjacent node is visited and is not its own parent node
-            else if(adjacentNode != parent) return true;
-        }
-        return false;
-    }
-    // Function to detect cycle in an undirected graph.
-    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
-        int vis[] = new int[V];
-        for(int i = 0;i<V;i++) {
-            if(vis[i] == 0) {
-                if(dfs(i, -1, vis, adj) == true) return true;
-            }
-        }
-        return false;
-    }
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            adj.add(new ArrayList < > ());
+            adj.add(new ArrayList<>());
         }
         adj.get(1).add(2);
         adj.get(2).add(1);
@@ -41,8 +16,33 @@ public class CycleUndirectedDFS {
         CycleUndirectedDFS obj = new CycleUndirectedDFS();
         boolean ans = obj.isCycle(4, adj);
         if (ans)
-            System.out.println("1");
+            System.out.println("cycle exists");
         else
-            System.out.println("0");
+            System.out.println("cycle does not exist");
+    }
+
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+        boolean vis[] = new boolean[V];
+        for (int i = 0; i < V; i++) {
+            if (vis[i] == false) {
+                if (dfs(i, -1, vis, adj) == true) return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean dfs(int node, int parent, boolean vis[], ArrayList<ArrayList<Integer>>
+            adj) {
+        vis[node] = true;
+        for (int it : adj.get(node)) {
+            if (vis[it] == false) {
+                if (dfs(it, node, vis, adj) == true) {
+                    return true;
+                }
+            } else if (it != parent) {
+                return true;
+            }
+        }
+        return false;
     }
 }

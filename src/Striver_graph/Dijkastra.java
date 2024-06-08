@@ -57,6 +57,7 @@ public class Dijkastra {
         adj.add(inter1); // for 1st node
         adj.add(inter2); // for 2nd node
         adj.add(inter3); // for 3rd node
+        System.out.println(adj);
 
         int[] res = dijkstra(V, adj, S);
 
@@ -73,7 +74,7 @@ public class Dijkastra {
         int[] dist = new int[V];
         for (int i = 0; i < V; i++) dist[i] = (int) (1e9);
         dist[s]=0;
-        pq.add(new Pair(0,s));
+        pq.add(new Pair(s,0));
 
         while (pq.size() != 0) {
             int dis = pq.peek().distance;
@@ -81,8 +82,9 @@ public class Dijkastra {
             pq.remove();
             // Check for all adjacent nodes of the popped-out
             for (int i = 0; i < adj.get(node).size(); i++) {
-                int edgeWeight = adj.get(node).get(i).get(1);
+
                 int adjNode = adj.get(node).get(i).get(0);
+                int edgeWeight = adj.get(node).get(i).get(1);
                 if (dis + edgeWeight < dist[adjNode]) {
                     dist[adjNode] = dis + edgeWeight;
                     pq.add(new Pair(dist[adjNode], adjNode));
