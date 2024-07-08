@@ -1,49 +1,38 @@
 package GraphL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Arrays;
 
 public class MinimumNumberOfSwapsRequiredToSortAnArray {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
-
-        String[] st = br.readLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(st[i]);
-        }
-
+    public static void main(String[] args) {
+        int[] arr = {10, 19, 6, 3, 5};
         System.out.println(minSwaps(arr));
     }
 
     public static int minSwaps(int[] arr1) {
-        int n=arr1.length;
-        Pair[] arr=new Pair[n];
+        int n = arr1.length;
+        Pair[] arr = new Pair[n];
 
         for (int i = 0; i < n; i++) {
-            arr[i]=new Pair(arr1[i],i);
+            arr[i] = new Pair(arr1[i], i);
         }
         Arrays.sort(arr);
-        int ans=0;
-        boolean[] vis=new boolean[n];
+        int ans = 0;
+        boolean[] vis = new boolean[n];
         for (int i = 0; i < n; i++) {
-            if(vis[i]==true || arr[i].idx==i){
+            if (vis[i] || arr[i].idx == i) {
                 continue;
             }
 
-            int clen=0;
-            int j=i;
-            while(vis[j]==false){
-                vis[j]=true;
+            int clen = 0;
+            int j = i;
+            while (!vis[j]) {
+                vis[j] = true;
                 clen++;
-                j=arr[j].idx;
+                j = arr[j].idx;
             }
-            ans+=(clen-1);
+            ans += (clen - 1);
         }
         return ans;
-
     }
 
     private static class Pair implements Comparable<Pair> {
@@ -61,7 +50,3 @@ public class MinimumNumberOfSwapsRequiredToSortAnArray {
         }
     }
 }
-/*
-5
-10 19 6 3 5
- */

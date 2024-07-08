@@ -1,17 +1,17 @@
 package GraphL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class MotherVertex {
-    public static void main(String args[]) throws Exception {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] st = br.readLine().split(" ");
-        int n = Integer.parseInt(st[0]);
-        int m = Integer.parseInt(st[1]);
+    public static void main(String args[]) {
+        int n = 4;
+        int m = 3;
+        int[][] edges = {
+                {1, 2},
+                {2, 3},
+                {3, 4}
+        };
 
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -19,66 +19,63 @@ public class MotherVertex {
         }
 
         for (int i = 0; i < m; i++) {
-            st = br.readLine().split(" ");
-            int u = Integer.parseInt(st[0]) - 1;
-            int v = Integer.parseInt(st[1]) - 1;
+            int u = edges[i][0] - 1;
+            int v = edges[i][1] - 1;
             graph.get(u).add(v);
         }
 
         System.out.println(findMotherVertex(n, graph));
     }
-    public static int findMotherVertex(int N, ArrayList<ArrayList<Integer>>adj){
 
-        Stack<Integer> stack=new Stack<>();
-        boolean[] vis=new boolean[N];;
+    public static int findMotherVertex(int N, ArrayList<ArrayList<Integer>> adj) {
+        boolean[] visited = new boolean[N];
+        Stack<Integer> stack = new Stack<>();
 
-        for(int i=0;i<N;i++){
-            if(vis[i]==false){
-                dfs(adj,vis,i,stack);
+        // Step 1: Perform DFS and fill the stack
+        for (int i = 0; i < N; i++) {
+            if (!visited[i]) {
+                dfs(adj, visited, i, stack);
             }
         }
 
-        int ans=stack.pop();
-        vis=new boolean[N];
-        count=0;
+        // Step 2: Find the last finished vertex in DFS (top of the stack)
+        int potentialMother = stack.pop();
 
-        dfs(adj,vis,ans);
-        if(count==N){
-            return ans+1;
-        }else{
+        // Step 3: Reset visited array and perform DFS from the potential mother vertex
+        visited = new boolean[N];
+        int count = 0; // Local count to check if all vertices are reachable
+
+        dfs(adj, visited, potentialMother, count); // Pass count to DFS
+
+        // Step 4: Check if all vertices are reachable from the potential mother vertex
+        if (count == N) {
+            return potentialMother + 1; // Convert zero-based index to one-based index
+        } else {
             return -1;
         }
-
     }
 
-    static int count;
-    static void dfs(ArrayList<ArrayList<Integer>> graph,boolean[] visited,int cur,
-                    Stack<Integer> stack){
-        visited[cur]=true;
+    // DFS to fill the stack
+    static void dfs(ArrayList<ArrayList<Integer>> graph, boolean[] visited, int cur, Stack<Integer> stack) {
+        visited[cur] = true;
 
-        for(int nbrs:graph.get(cur)){
-            if(visited[nbrs]==false){
-                dfs(graph,visited,nbrs,stack);
+        for (int nbrs : graph.get(cur)) {
+            if (!visited[nbrs]) {
+                dfs(graph, visited, nbrs, stack);
             }
         }
         stack.push(cur);
     }
 
-    static void dfs(ArrayList<ArrayList<Integer>> graph, boolean[] visited, int cur){
-        visited[cur]=true;
-        count++;
-        for(int nbrs:graph.get(cur)){
-            if(visited[nbrs]==false){
-                dfs(graph,visited,nbrs);
+    // DFS to count reachable vertices
+    static void dfs(ArrayList<ArrayList<Integer>> graph, boolean[] visited, int cur, int count) {
+        visited[cur] = true;
+        count++; // Increment count for each reachable vertex
+
+        for (int nbrs : graph.get(cur)) {
+            if (!visited[nbrs]) {
+                dfs(graph, visited, nbrs, count);
             }
         }
-
     }
 }
-
-/*
-4 3
-1 2
-2 3
-3 4
- */

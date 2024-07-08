@@ -1,81 +1,69 @@
 package GraphL2;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 
 public class AsFarFromLandAsPossible {
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        // Hardcoded input values
+        int n = 3; // Size of the grid
+        int[][] grid = {
+                {0, 0, 0},
+                {0, 1, 1},
+                {1, 1, 1}
+        };
 
-        int n = Integer.parseInt(br.readLine());
-        int[][] arr = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            String[] st = br.readLine().split(" ");
-            for (int j = 0; j < n; j++) {
-                arr[i][j] = Integer.parseInt(st[j]);
-            }
-        }
-
-        System.out.println(maxDistance(arr));
-
+        System.out.println(maxDistance(grid));
     }
-    public static class Pair{
+
+    public static class Pair {
         int row;
         int col;
-        Pair(int row,int col)
-        {
-            this.row=row;
-            this.col=col;
+
+        Pair(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
     }
 
     public static int maxDistance(int[][] grid) {
-        //write your code here
-        LinkedList<Pair> q=new LinkedList<>();
+        LinkedList<Pair> q = new LinkedList<>();
 
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]==1){
-                    q.addLast(new Pair(i,j));
+        // Enqueue all land cells initially
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    q.addLast(new Pair(i, j));
                 }
             }
         }
 
-        if(q.size()==0 || q.size()==grid.length*grid[0].length){
-            return -1;
+        if (q.size() == 0 || q.size() == grid.length * grid[0].length) {
+            return -1; // If there are no water cells or all are land
         }
-        int dirs[][]={{0,1},{1,0},{0,-1},{-1,0}};
-        int level=-1;
-        while(q.size()>0){
+
+        int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int level = -1;
+
+        while (!q.isEmpty()) {
             level++;
-            int size=q.size();
+            int size = q.size();
 
-            while(size-->0){
-                Pair rem=q.removeFirst();
-                for(int i=0;i<4;i++){
-                    int rowdash=rem.row+dirs[i][0];
-                    int coldash=rem.col+dirs[i][1];
+            while (size-- > 0) {
+                Pair current = q.removeFirst();
 
-                    if(rowdash<0 || coldash<0 || rowdash>=grid.length ||
-                            coldash>=grid[0].length || grid[rowdash][coldash]==1){
-                        continue;
+                for (int[] dir : dirs) {
+                    int row_dash = current.row + dir[0];
+                    int col_dash = current.col + dir[1];
+
+                    if (row_dash < 0 || col_dash < 0 || row_dash >= grid.length || col_dash >= grid[0].length || grid[row_dash][col_dash] == 1) {
+                        continue; // Skip if out of bounds or cell is land
                     }
 
-                    q.addLast(new Pair(rowdash,coldash));
-                    grid[rowdash][coldash]=1;
+                    q.addLast(new Pair(row_dash, col_dash));
+                    grid[row_dash][col_dash] = 1; // Mark as visited
                 }
             }
         }
-        return level;
 
+        return level;
     }
 }
-/*
-3
-0 0 0
-0 1 1
-1 1 1
-
- */

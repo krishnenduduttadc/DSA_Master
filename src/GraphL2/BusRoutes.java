@@ -1,94 +1,77 @@
 package GraphL2;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
 public class BusRoutes {
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        // Hardcoded input values
+        int n = 2; // number of routes
+        int m = 3; // number of stops in each route
+        int[][] routes = {
+                {1, 2, 7},
+                {3, 6, 7}
+        };
+        int src = 1; // source bus stop
+        int dest = 6; // destination bus stop
 
-        int n = Integer.parseInt(br.readLine());
-        int m = Integer.parseInt(br.readLine());
-
-        int[][] arr = new int[n][m];
-
-        for (int i = 0; i < n; i++) {
-            String[] st = br.readLine().split(" ");
-            for (int j = 0; j < m; j++) {
-                arr[i][j] = Integer.parseInt(st[j]);
-            }
-        }
-
-        String[] st1 = br.readLine().split(" ");
-        int src = Integer.parseInt(st1[0]);
-        int dest = Integer.parseInt(st1[1]);
-        System.out.println(numBusesToDestination(arr, src, dest));
-
+        System.out.println(numBusesToDestination(routes, src, dest));
     }
 
     public static int numBusesToDestination(int[][] routes, int S, int T) {
-        int n=routes.length;
-        HashMap<Integer, ArrayList<Integer>> map=new HashMap<>();
+        int n = routes.length;
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<routes[i].length;j++){
-                int bustopno=routes[i][j];
-                ArrayList<Integer> busno = map.getOrDefault(bustopno,new ArrayList<>());
-                busno.add(i);
-                map.put(bustopno,busno);
+        // Building a map of bus stops to their respective bus routes
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < routes[i].length; j++) {
+                int busStopNo = routes[i][j];
+                ArrayList<Integer> busNos = map.getOrDefault(busStopNo, new ArrayList<>());
+                busNos.add(i);
+                map.put(busStopNo, busNos);
             }
         }
 
-        LinkedList<Integer> q=new LinkedList<>();
-        HashSet<Integer> busstopvis=new HashSet<>();
-        HashSet<Integer> busvis=new HashSet<>();
-        int level=0;
+        LinkedList<Integer> q = new LinkedList<>();
+        HashSet<Integer> busStopVisited = new HashSet<>();
+        HashSet<Integer> busVisited = new HashSet<>();
+        int level = 0;
         q.addLast(S);
-        busstopvis.add(S);
+        busStopVisited.add(S);
 
-
-        while(q.size()>0){
-            int size=q.size();
-            while(size-->0){
-                int rem=q.removeFirst();
-                if(rem==T){
+        // Performing BFS to find the minimum number of buses
+        while (!q.isEmpty()) {
+            int size = q.size();
+            while (size-- > 0) {
+                int currentStop = q.removeFirst();
+                if (currentStop == T) {
                     return level;
                 }
 
-                ArrayList<Integer> buses = map.get(rem);
-                for(int bus:buses){
-                    if(busvis.contains(bus)==true){
-                        continue;
-                    }
-
-                    int[] arr=routes[bus];
-                    for(int busstop:arr){
-                        if(busstopvis.contains(busstop)==true){
+                ArrayList<Integer> buses = map.get(currentStop);
+                if (buses != null) {
+                    for (int bus : buses) {
+                        if (busVisited.contains(bus)) {
                             continue;
                         }
 
-                        q.addLast(busstop);
-                        busstopvis.add(busstop);
+                        int[] busRoute = routes[bus];
+                        for (int nextStop : busRoute) {
+                            if (busStopVisited.contains(nextStop)) {
+                                continue;
+                            }
+
+                            q.addLast(nextStop);
+                            busStopVisited.add(nextStop);
+                        }
+                        busVisited.add(bus);
                     }
-                    busvis.add(bus);
                 }
             }
             level++;
         }
-        return -1;
-
+        return -1; // If destination is not reachable
     }
 }
-
-/*
-2
-3
-1 2 7
-3 6 7
-1 6
- */
