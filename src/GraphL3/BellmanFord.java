@@ -1,6 +1,6 @@
 package GraphL3;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Arrays;
 
 public class BellmanFord {
@@ -8,17 +8,18 @@ public class BellmanFord {
     public static void main(String[] args) {
         int V = 6;
         int s = 0;
-        ArrayList<ArrayList<Integer>> edges = new ArrayList<>() {
-            {
-                add(new ArrayList<Integer>(Arrays.asList(3, 2, 6)));
-                add(new ArrayList<Integer>(Arrays.asList(5, 3, 1)));
-                add(new ArrayList<Integer>(Arrays.asList(0, 1, 5)));
-                add(new ArrayList<Integer>(Arrays.asList(1, 5, -3)));
-                add(new ArrayList<Integer>(Arrays.asList(1, 2, -2)));
-                add(new ArrayList<Integer>(Arrays.asList(3, 4, -2)));
-                add(new ArrayList<Integer>(Arrays.asList(2, 4, 3)));
-            }
-        };
+
+
+        List<List<Integer>> edges = new ArrayList<>();
+
+        edges.add(Arrays.asList(3, 2, 6));
+        edges.add(Arrays.asList(5, 3, 1));
+        edges.add(Arrays.asList(0, 1, 5));
+        edges.add(Arrays.asList(1, 5, -3));
+        edges.add(Arrays.asList(1, 2, -2));
+        edges.add(Arrays.asList(3, 4, -2));
+        edges.add(Arrays.asList(2, 4, 3));
+
 
 
 
@@ -30,12 +31,12 @@ public class BellmanFord {
     }
 
     static int[] bellman_ford(int V,
-                              ArrayList<ArrayList<Integer>> edges, int s) {
+                              List<List<Integer>> edges, int s) {
         int[] dist = new int[V];
         for (int i = 0; i < V; i++) dist[i] = (int)(1e8);
         dist[s]=0;
         for (int i = 0; i < V - 1; i++) {
-            for (ArrayList<Integer> it : edges) {
+            for (List<Integer> it : edges) {
                 int u = it.get(0);
                 int v = it.get(1);
                 int wt = it.get(2);
@@ -45,7 +46,7 @@ public class BellmanFord {
             }
         }
         // Nth relaxation to check negative cycle
-        for (ArrayList<Integer> it : edges) {
+        for (List<Integer> it : edges) {
             int u = it.get(0);
             int v = it.get(1);
             int wt = it.get(2);
