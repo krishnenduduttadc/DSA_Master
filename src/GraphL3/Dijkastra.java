@@ -15,40 +15,40 @@ public class Dijkastra {
     }
     public static void main(String[] args) {
         int V = 3, E = 3, S = 2;
-        ArrayList<Integer> node1 = new ArrayList<>();
+        ArrayList<Integer> node1 = new ArrayList<>(); //[1,1]
         node1.add(1);
         node1.add(1);
 
-        ArrayList<Integer> node2 = new ArrayList<>();
+        ArrayList<Integer> node2 = new ArrayList<>(); //[2,6]
         node2.add(2);
         node2.add(6);
 
-        ArrayList<Integer> node3 = new ArrayList<>();
+        ArrayList<Integer> node3 = new ArrayList<>(); //[2,3]
         node3.add(2);
         node3.add(3);
 
-        ArrayList<Integer> node4 = new ArrayList<>();
+        ArrayList<Integer> node4 = new ArrayList<>(); //[0,1]
         node4.add(0);
         node4.add(1);
 
-        ArrayList<Integer> node5 = new ArrayList<>();
+        ArrayList<Integer> node5 = new ArrayList<>();//[1,3]
         node5.add(1);
         node5.add(3);
 
-        ArrayList<Integer> node6 = new ArrayList<>();
+        ArrayList<Integer> node6 = new ArrayList<>();//[0,6]
         node6.add(0);
         node6.add(6);
 
         // Initialize inter1, inter2, inter3
-        ArrayList<ArrayList<Integer>> inter1 = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> inter1 = new ArrayList<>();//[[1,1],[2,6]]
         inter1.add(node1);
         inter1.add(node2);
 
-        ArrayList<ArrayList<Integer>> inter2 = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> inter2 = new ArrayList<>();//[[1,1],[0,1]]
         inter2.add(node3);
         inter2.add(node4);
 
-        ArrayList<ArrayList<Integer>> inter3 = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> inter3 = new ArrayList<>();//[[1,3],[0,6]]
         inter3.add(node5);
         inter3.add(node6);
 
