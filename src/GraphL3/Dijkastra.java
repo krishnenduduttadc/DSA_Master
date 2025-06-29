@@ -13,6 +13,7 @@ public class Dijkastra {
             this.distance = distance;
         }
     }
+
     public static void main(String[] args) {
         int V = 3, E = 3, S = 2;
         ArrayList<Integer> node1 = new ArrayList<>(); //[1,1]
@@ -58,6 +59,13 @@ public class Dijkastra {
         adj.add(inter2); // for 2nd node
         adj.add(inter3); // for 3rd node
         System.out.println(adj);
+        /*
+        [
+          [ [1, 1], [2, 6] ],
+          [ [2, 3], [0, 1] ],
+          [ [1, 3], [0, 6] ]
+        ]
+*/
 
         int[] res = dijkstra(V, adj, S);
 
@@ -73,8 +81,8 @@ public class Dijkastra {
                 new PriorityQueue<Pair>((x, y) -> x.distance - y.distance);
         int[] dist = new int[V];
         for (int i = 0; i < V; i++) dist[i] = (int) (1e9);
-        dist[s]=0;
-        pq.add(new Pair(s,0));
+        dist[s] = 0;
+        pq.add(new Pair(s, 0));
 
         while (pq.size() != 0) {
             int dis = pq.peek().distance;
