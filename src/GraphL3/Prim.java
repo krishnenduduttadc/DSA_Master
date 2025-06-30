@@ -4,16 +4,6 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 class Prim {
-    static class Pair {
-        int node;
-        int distance;
-
-        public Pair(int distance, int node) {
-            this.node = node;
-            this.distance = distance;
-        }
-    }
-
     // Function to find sum of weights of edges of the Minimum Spanning Tree.
     static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
         PriorityQueue<Pair> pq =
@@ -34,8 +24,8 @@ class Prim {
             sum += wt;
 
             for (int i = 0; i < adj.get(node).size(); i++) {
-                int edW = adj.get(node).get(i).get(1);
                 int adjNode = adj.get(node).get(i).get(0);
+                int edW = adj.get(node).get(i).get(1);
                 if (vis[adjNode] == 0) {
                     pq.add(new Pair(edW, adjNode));
                 }
@@ -74,5 +64,16 @@ class Prim {
         Prim obj = new Prim();
         int sum = obj.spanningTree(V, adj);
         System.out.println("The sum of all the edge weights: " + sum);
+    }
+
+    static class Pair {
+
+        int distance;
+        int node;
+
+        public Pair(int distance, int node) {
+            this.node = node;
+            this.distance = distance;
+        }
     }
 }
