@@ -42,8 +42,8 @@ public class EventualSafeState {
             }
         }
         List<Integer> safeNodes = new ArrayList<>();
-        for (int i = 0; i <V; i++) {
-            if (check[i] == 01) {
+        for (int i = 0; i < V; i++) {
+            if (check[i] == 1) {
                 safeNodes.add(i);
             }
         }
@@ -65,8 +65,8 @@ public class EventualSafeState {
                 return true;
             }
         }
-        check[s]=1;
-        pathVis[s]=0;
+        check[s] = 1;
+        pathVis[s] = 0;
         return false;
     }
 }
