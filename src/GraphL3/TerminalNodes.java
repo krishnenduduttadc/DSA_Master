@@ -1,34 +1,12 @@
 package GraphL3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TerminalNodes {
     private Map<Integer, List<Integer>> adjacencyList;
 
     public TerminalNodes() {
         adjacencyList = new HashMap<>();
-    }
-
-    public void addEdge(int source, int destination) {
-        adjacencyList.putIfAbsent(source, new ArrayList<>());
-        adjacencyList.putIfAbsent(destination, new ArrayList<>());
-        adjacencyList.get(source).add(destination);
-    }
-
-    public void printTerminalNodes() {
-        List<Integer> terminalNodes = new ArrayList<>();
-        for (int node : adjacencyList.keySet()) {
-            if (adjacencyList.get(node).isEmpty()) {
-                terminalNodes.add(node);
-            }
-        }
-        System.out.println("Terminal Nodes:");
-        for (int node : terminalNodes) {
-            System.out.println(node);
-        }
     }
 
     public static void main(String[] args) {
@@ -42,5 +20,36 @@ public class TerminalNodes {
         graph.addEdge(6, 7);
 
         graph.printTerminalNodes();
+    }
+
+    public void addEdge(int source, int destination) {
+        adjacencyList.putIfAbsent(source, new ArrayList<>());
+        adjacencyList.get(source).add(destination);
+        // Do not initialize destination with an empty list here
+    }
+
+    public void printTerminalNodes() {
+        Set<Integer> nodesWithOutgoingEdges = adjacencyList.keySet();
+        Set<Integer> allNodes = new HashSet<>();
+
+        // Add all sources and destinations to allNodes
+        for (Map.Entry<Integer, List<Integer>> entry : adjacencyList.entrySet()) {
+            allNodes.add(entry.getKey());
+            allNodes.addAll(entry.getValue());
+        }
+
+        List<Integer> terminalNodes = new ArrayList<>();
+
+        // Terminal nodes = allNodes - nodesWithOutgoingEdges
+        for (int node : allNodes) {
+            if (!nodesWithOutgoingEdges.contains(node)) {
+                terminalNodes.add(node);
+            }
+        }
+
+        System.out.println("Terminal Nodes:");
+        for (int node : terminalNodes) {
+            System.out.println(node);
+        }
     }
 }
