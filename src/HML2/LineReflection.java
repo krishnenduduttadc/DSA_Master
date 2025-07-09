@@ -4,32 +4,29 @@ import java.util.HashMap;
 
 public class LineReflection {
     public static boolean isReflected(int[][] points) {
-        // write your code here
-        HashMap<Long,Long> map=new HashMap<>();
-        long xmin=Integer.MAX_VALUE;
-        long xmax=Integer.MIN_VALUE;
+        HashMap<Long, Long> map = new HashMap<>();
+        long xmin = Integer.MAX_VALUE;
+        long xmax = Integer.MIN_VALUE;
 
-        for(int[] point:points){
-            long x=point[0];
-            long y=point[1];
-            xmin=Math.min(xmin,x);;
-            xmax=Math.max(xmax,x);
+        for (int[] point : points) {
+            long x = point[0];
+            long y = point[1];
+            xmin = Math.min(xmin, x);
+            xmax = Math.max(xmax, x);
 
-            long hash=x*100000000+y;
-            map.put(hash,1L);
+            long hash = x * 100000000L + y;
+            map.put(hash, 1L);
         }
 
-        long mirr=xmin+xmax;
+        long mirr = xmin + xmax;
 
-        for(int[] point:points){
-            int x=point[0];
-            int y=point[1];
+        for (int[] point : points) {
+            long x = point[0];
+            long y = point[1];
 
-            long ximg=mirr-x;
-            long yimg=y;
-
-            long imghash=ximg*100000000+y;
-            if(map.containsKey(imghash)==false){
+            long ximg = mirr - x;
+            long hash = ximg * 100000000L + y;
+            if (!map.containsKey(hash)) {
                 return false;
             }
         }
@@ -37,13 +34,12 @@ public class LineReflection {
     }
 
     public static void main(String[] args) {
-        int n = 3;
         int[][] points = {
-                {1,1,9},
-                {1,8,2}
+                {1, 1},
+                {9, 1},
+                {8, 2},
+                {2, 2}
         };
-        System.out.println(isReflected(points));
+        System.out.println(isReflected(points)); // true
     }
-
 }
-
