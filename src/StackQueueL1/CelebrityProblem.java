@@ -1,29 +1,22 @@
 package StackQueueL1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class CelebrityProblem {
     public static void main(String[] args) throws Exception {
-        // write your code here
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[][] arr = new int[n][n];
-
-        for (int j = 0; j < n; j++) {
-            String line = br.readLine();
-            for (int k = 0; k < n; k++) {
-                arr[j][k] = line.charAt(k) - '0';
-            }
-        }
+        int[][] arr = {
+                {0, 0, 0, 0},
+                {1, 0, 1, 1},
+                {1, 1, 0, 1},
+                {1, 1, 1, 0}
+        };
 
         findCelebrity(arr);
     }
 
     public static void findCelebrity(int[][] arr) {
-        // if a celebrity is there print it''s index (not position), if there is not then print "none"
-        Stack< Integer > st = new Stack < > ();
+        // if a celebrity is there print its index (not position), if not then print "none"
+        Stack<Integer> st = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
             st.push(i);
         }
@@ -33,14 +26,15 @@ public class CelebrityProblem {
             int j = st.pop();
 
             if (arr[i][j] == 1) {
-                st.push(j);
+                st.push(j); // i knows j => i can't be celeb
             } else {
-                st.push(i);
+                st.push(i); // i doesn't know j => j can't be celeb
             }
         }
 
         int pot = st.pop();
         boolean flag = true;
+
         for (int i = 0; i < arr.length; i++) {
             if (i != pot) {
                 if (arr[i][pot] == 0 || arr[pot][i] == 1) {
@@ -57,10 +51,3 @@ public class CelebrityProblem {
         }
     }
 }
-/*
-4
-0000
-1011
-1101
-1110
- */
