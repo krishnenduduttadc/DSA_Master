@@ -1,29 +1,25 @@
 package StackL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class ExclusiveTimeOfFunctions {
-    static class Pair{
-        int id;
-        int st;
-        int ct;
-    }
+    public static void main(String[] args) {
+        // Hardcoded input
+        int n = 2; // number of functions
+        String[] logs = {
+                "0:start:0",
+                "1:start:2",
+                "1:end:5",
+                "0:end:6"
+        };
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        // use read for taking inputF
-        int n = Integer.parseInt(read.readLine());
-
-        int timeF[] = new int[n];
-        int len = Integer.parseInt(read.readLine());
+        int[] timeF = new int[n];
         Stack<Pair> st = new Stack<>();
 
-        for(int i = 0; i < len; i++){
-            String log[] = read.readLine().split(":");
+        for (String logEntry : logs) {
+            String[] log = logEntry.split(":");
 
-            if(log[1].equals("start")){
+            if (log[1].equals("start")) {
                 Pair p = new Pair();
                 p.id = Integer.parseInt(log[0]);
                 p.st = Integer.parseInt(log[2]);
@@ -35,14 +31,20 @@ public class ExclusiveTimeOfFunctions {
                 int time = interval - p.ct;
                 timeF[p.id] += time;
 
-                if(st.size() > 0){
+                if (!st.isEmpty()) {
                     st.peek().ct += interval;
                 }
             }
         }
 
-        for(int e: timeF){
+        for (int e : timeF) {
             System.out.println(e);
         }
+    }
+
+    static class Pair {
+        int id;
+        int st;
+        int ct;
     }
 }

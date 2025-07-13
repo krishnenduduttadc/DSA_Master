@@ -1,24 +1,41 @@
 package StackL2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class StackWithIncrement {
-    public static class CustomStack {
+    public static void main(String[] args) {
+        int maxsize = 5; // Stack size
+        CustomStack cs = new CustomStack(maxsize);
 
-        int value[];
-        int increment[];
+        // Hardcoded operations
+        cs.push(1);
+        cs.push(2);
+        System.out.println(cs.pop());       // Should print 2
+        cs.push(3);
+        cs.push(4);
+        cs.push(5);
+        cs.increment(2, 100);               // Increment bottom 2 elements by 100
+        cs.increment(3, 100);               // Increment bottom 3 elements by 100
+        System.out.println(cs.pop());       // Should print 5
+        System.out.println(cs.pop());       // Should print 4 + 100
+        System.out.println(cs.pop());       // Should print 3 + 200
+        System.out.println(cs.pop());       // Should print 1 + 200
+        System.out.println(cs.pop());       // Should print -1 (stack empty)
+
+        System.out.println("exit");
+    }
+
+    public static class CustomStack {
+        int[] value;
+        int[] increment;
         int index;
 
         public CustomStack(int maxSize) {
             value = new int[maxSize];
             increment = new int[maxSize];
-            index=-1;
+            index = -1;
         }
 
         public void push(int x) {
-            // complete this function
-            if(index + 1 == value.length){
+            if (index + 1 == value.length) {
                 return;
             }
             index++;
@@ -27,15 +44,14 @@ public class StackWithIncrement {
         }
 
         public int pop() {
-            // complete this function
-            if(index == -1){
+            if (index == -1) {
                 return -1;
             }
 
             int x = value[index];
             int inc = increment[index];
             index--;
-            if(index >= 0){
+            if (index >= 0) {
                 increment[index] += inc;
             }
 
@@ -43,33 +59,10 @@ public class StackWithIncrement {
         }
 
         public void increment(int k, int val) {
-            // complete this function
             int ind = Math.min(k - 1, index);
-            if(index >= 0){
+            if (index >= 0 && ind >= 0) {
                 increment[ind] += val;
             }
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-
-        int maxsize = Integer.parseInt(read.readLine());
-
-        CustomStack cs = new CustomStack(maxsize);
-
-        while(true){
-            String task[] = read.readLine().split(" ");
-            if(task[0].equals("push")){
-                cs.push(Integer.parseInt(task[1]));
-            }else if(task[0].equals("pop")){
-                System.out.println(cs.pop());
-            }else if(task[0].equals("increment")){
-                cs.increment(Integer.parseInt(task[1]), Integer.parseInt(task[2]));
-            }else{
-                break;
-            }
-        }
-        System.out.println("exit");
     }
 }

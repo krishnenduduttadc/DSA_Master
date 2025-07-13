@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class RenameFiles {
     public static void main(String[] args) {
-        String folderPath = "E:\\Chitsheets\\my tutorials\\DSA-JAVA\\StackL1";
+        String folderPath = "E:\\Chitsheets\\my tutorials\\DSA-JAVA\\StackL2";
         File folder = new File(folderPath);
 
         if (!folder.exists() || !folder.isDirectory()) {
