@@ -1,16 +1,46 @@
 package BSTL1;
 
-import RecursionAndBacktrackingL1.Solution;
 
 public class InorderSuccessor {
-    static class Node {
-        int data;
-        Node left, right;
+    // Main method to test the inorderSuccessor function
+    public static void main(String[] args) {
+        InorderSuccessor solution = new InorderSuccessor();
 
-        Node(int data) {
-            this.data = data;
-            this.left = this.right = null;
-        }
+        // Create a sample BST:
+        //        20
+        //       /  \
+        //     10    30
+        //    /  \     \
+        //   5   15    40
+        //      /  \
+        //     12  18
+
+        Node root = null;
+        root = solution.insert(root, 20);
+        root = solution.insert(root, 10);
+        root = solution.insert(root, 30);
+        root = solution.insert(root, 5);
+        root = solution.insert(root, 15);
+        root = solution.insert(root, 12);
+        root = solution.insert(root, 18);
+        root = solution.insert(root, 40);
+
+        // Test cases for inorder successors
+        Node testNode = root.left;  // Node with data 10
+        Node successor = solution.inorderSuccessor(root, testNode);
+        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
+
+        testNode = root.left.right;  // Node with data 15
+        successor = solution.inorderSuccessor(root, testNode);
+        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
+
+        testNode = root.right;  // Node with data 30
+        successor = solution.inorderSuccessor(root, testNode);
+        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
+
+        testNode = root.right.right;  // Node with data 40
+        successor = solution.inorderSuccessor(root, testNode);
+        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
     }
 
     // Function to find the inorder successor of the Node x in BST (rooted at 'root')
@@ -55,44 +85,13 @@ public class InorderSuccessor {
         return root;
     }
 
-    // Main method to test the inorderSuccessor function
-    public static void main(String[] args) {
-        InorderSuccessor solution = new InorderSuccessor();
+    static class Node {
+        int data;
+        Node left, right;
 
-        // Create a sample BST:
-        //        20
-        //       /  \
-        //     10    30
-        //    /  \     \
-        //   5   15    40
-        //      /  \
-        //     12  18
-
-        Node root = null;
-        root = solution.insert(root, 20);
-        root = solution.insert(root, 10);
-        root = solution.insert(root, 30);
-        root = solution.insert(root, 5);
-        root = solution.insert(root, 15);
-        root = solution.insert(root, 12);
-        root = solution.insert(root, 18);
-        root = solution.insert(root, 40);
-
-        // Test cases for inorder successors
-        Node testNode = root.left;  // Node with data 10
-        Node successor = solution.inorderSuccessor(root, testNode);
-        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
-
-        testNode = root.left.right;  // Node with data 15
-        successor = solution.inorderSuccessor(root, testNode);
-        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
-
-        testNode = root.right;  // Node with data 30
-        successor = solution.inorderSuccessor(root, testNode);
-        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
-
-        testNode = root.right.right;  // Node with data 40
-        successor = solution.inorderSuccessor(root, testNode);
-        System.out.println("Inorder successor of " + testNode.data + " is: " + (successor != null ? successor.data : "null"));
+        Node(int data) {
+            this.data = data;
+            this.left = this.right = null;
+        }
     }
 }

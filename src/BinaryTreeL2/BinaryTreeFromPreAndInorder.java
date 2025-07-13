@@ -1,11 +1,25 @@
 package BinaryTreeL2;
 
-import RecursionAndBacktrackingL1.Solution;
+//import RecursionAndBacktrackingL1.Solution;
 
 import java.util.HashMap;
 
 public class BinaryTreeFromPreAndInorder {
     HashMap<Integer, Integer> map;
+
+    // Main method to test the buildTree function
+    public static void main(String[] args) {
+        BinaryTreeFromPreAndInorder solution = new BinaryTreeFromPreAndInorder();
+
+        // Sample preorder and inorder arrays
+        int[] preorder = {3, 9, 20, 15, 7};
+        int[] inorder = {9, 3, 15, 20, 7};
+
+        TreeNode root = solution.buildTree(preorder, inorder);
+
+        System.out.println("Inorder traversal of the constructed tree:");
+        solution.printInOrder(root);
+    }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         int n = inorder.length;
@@ -35,20 +49,6 @@ public class BinaryTreeFromPreAndInorder {
         printInOrder(node.left);
         System.out.print(node.val + " ");
         printInOrder(node.right);
-    }
-
-    // Main method to test the buildTree function
-    public static void main(String[] args) {
-        BinaryTreeFromPreAndInorder solution = new BinaryTreeFromPreAndInorder();
-
-        // Sample preorder and inorder arrays
-        int[] preorder = {3, 9, 20, 15, 7};
-        int[] inorder = {9, 3, 15, 20, 7};
-
-        TreeNode root = solution.buildTree(preorder, inorder);
-
-        System.out.println("Inorder traversal of the constructed tree:");
-        solution.printInOrder(root);
     }
 
     // TreeNode class definition

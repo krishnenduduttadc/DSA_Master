@@ -1,10 +1,19 @@
 package HML1;
 
-import RecursionAndBacktrackingL1.Solution;
 
 import java.util.HashMap;
 
 public class LongestConsecutiveSequence {
+    public static void main(String[] args) {
+        LongestConsecutiveSequence solution = new LongestConsecutiveSequence();
+
+        // Example usage:
+        int[] nums = {100, 4, 200, 1, 3, 2};
+        int longestLength = solution.longestConsecutive(nums);
+
+        System.out.println("Length of longest consecutive sequence: " + longestLength);
+    }
+
     public int longestConsecutive(int[] nums) {
         HashMap<Integer, Integer> hm = new HashMap<>();
         int maxlen = 0;
@@ -28,15 +37,5 @@ public class LongestConsecutiveSequence {
             }
         }
         return maxlen;
-    }
-
-    public static void main(String[] args) {
-        LongestConsecutiveSequence solution = new LongestConsecutiveSequence();
-
-        // Example usage:
-        int[] nums = {100, 4, 200, 1, 3, 2};
-        int longestLength = solution.longestConsecutive(nums);
-
-        System.out.println("Length of longest consecutive sequence: " + longestLength);
     }
 }

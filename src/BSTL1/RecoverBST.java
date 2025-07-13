@@ -1,39 +1,8 @@
 package BSTL1;
 
-import RecursionAndBacktrackingL1.Solution;
 
 public class RecoverBST {
     TreeNode f, s, prev;
-
-    public void recoverTree(TreeNode root) {
-        f = s = prev = null;
-        inorder(root);
-        int t = f.val;
-        f.val = s.val;
-        s.val = t;
-    }
-
-    private void inorder(TreeNode curr) {
-        if (curr == null) return;
-
-        inorder(curr.left);
-        if (prev != null && curr.val < prev.val) {
-            if (f == null) {
-                f = prev;
-            }
-            s = curr;
-        }
-        prev = curr;
-        inorder(curr.right);
-    }
-
-    // Utility function to print the tree in inorder fashion
-    public void printInOrder(TreeNode node) {
-        if (node == null) return;
-        printInOrder(node.left);
-        System.out.print(node.val + " ");
-        printInOrder(node.right);
-    }
 
     // Main method to test the recoverTree function
     public static void main(String[] args) {
@@ -66,6 +35,36 @@ public class RecoverBST {
         System.out.println("Inorder traversal of the recovered tree:");
         solution.printInOrder(root);
         System.out.println();
+    }
+
+    public void recoverTree(TreeNode root) {
+        f = s = prev = null;
+        inorder(root);
+        int t = f.val;
+        f.val = s.val;
+        s.val = t;
+    }
+
+    private void inorder(TreeNode curr) {
+        if (curr == null) return;
+
+        inorder(curr.left);
+        if (prev != null && curr.val < prev.val) {
+            if (f == null) {
+                f = prev;
+            }
+            s = curr;
+        }
+        prev = curr;
+        inorder(curr.right);
+    }
+
+    // Utility function to print the tree in inorder fashion
+    public void printInOrder(TreeNode node) {
+        if (node == null) return;
+        printInOrder(node.left);
+        System.out.print(node.val + " ");
+        printInOrder(node.right);
     }
 
     // TreeNode class definition

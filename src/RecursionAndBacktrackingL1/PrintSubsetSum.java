@@ -8,14 +8,13 @@ package RecursionAndBacktrackingL1;
 import java.util.Vector;
 
 /**
- *
  * @author krish
  */
 public class PrintSubsetSum {
 
     public static void main(String[] args) {
         int arr[] = {15, 20, 12};
-        printSubsetsSumTok(arr, 0);
+        printSubsetsSumTok(arr, 27);
     }
 
     public static void printSubsetsSumTok(int input[], int k) {

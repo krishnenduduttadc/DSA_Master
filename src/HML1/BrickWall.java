@@ -1,6 +1,5 @@
 package HML1;
 
-import RecursionAndBacktrackingL1.Solution;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,20 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BrickWall {
-    public int leastBricks(List<List<Integer>> wall) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        int ans = 0;
-        for (List<Integer> row : wall) {
-            int len = 0;
-            for (int i = 0; i < row.size() - 1; i++) {
-                len += row.get(i);
-                map.put(len, map.getOrDefault(len, 0) + 1);
-                ans = Math.max(ans, map.get(len));
-            }
-        }
-        return wall.size() - ans;
-    }
-
     public static void main(String[] args) {
         BrickWall solution = new BrickWall();
 
@@ -36,5 +21,19 @@ public class BrickWall {
 
         int minBricks = solution.leastBricks(wall);
         System.out.println("Minimum number of bricks to cross vertically: " + minBricks);
+    }
+
+    public int leastBricks(List<List<Integer>> wall) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int ans = 0;
+        for (List<Integer> row : wall) {
+            int len = 0;
+            for (int i = 0; i < row.size() - 1; i++) {
+                len += row.get(i);
+                map.put(len, map.getOrDefault(len, 0) + 1);
+                ans = Math.max(ans, map.get(len));
+            }
+        }
+        return wall.size() - ans;
     }
 }

@@ -1,15 +1,32 @@
 package BSTL1;
 
-import RecursionAndBacktrackingL1.Solution;
 
 public class PopulatingNextRightPointersinEachNode {
-    static class Node {
-        int val;
-        Node left, right, next;
+    // Main method to test the connect function
+    public static void main(String[] args) {
+        PopulatingNextRightPointersinEachNode solution = new PopulatingNextRightPointersinEachNode();
 
-        Node(int val) {
-            this.val = val;
-        }
+        // Create a sample perfect binary tree:
+        //        1
+        //       / \
+        //      2   3
+        //     / \ / \
+        //    4  5 6  7
+
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+
+        // Connect the tree
+        Node connectedRoot = solution.connect(root);
+
+        // Print the connected structure to verify
+        System.out.println("Connected Tree:");
+        solution.printConnectedTree(connectedRoot);
     }
 
     public Node connect(Node root) {
@@ -46,30 +63,12 @@ public class PopulatingNextRightPointersinEachNode {
         }
     }
 
-    // Main method to test the connect function
-    public static void main(String[] args) {
-        PopulatingNextRightPointersinEachNode solution = new PopulatingNextRightPointersinEachNode();
+    static class Node {
+        int val;
+        Node left, right, next;
 
-        // Create a sample perfect binary tree:
-        //        1
-        //       / \
-        //      2   3
-        //     / \ / \
-        //    4  5 6  7
-
-        Node root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.left = new Node(4);
-        root.left.right = new Node(5);
-        root.right.left = new Node(6);
-        root.right.right = new Node(7);
-
-        // Connect the tree
-        Node connectedRoot = solution.connect(root);
-
-        // Print the connected structure to verify
-        System.out.println("Connected Tree:");
-        solution.printConnectedTree(connectedRoot);
+        Node(int val) {
+            this.val = val;
+        }
     }
 }

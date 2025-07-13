@@ -6,7 +6,6 @@
 package RecursionAndBacktrackingL1;
 
 /**
- *
  * @author krish
  */
 public class Knapsack {
@@ -24,7 +23,8 @@ public class Knapsack {
     public static void main(String[] args) {
         int wt[] = {10, 20, 30};
         int value[] = {100, 50, 150};
-        int W=50;
-        System.out.println(""+knapsack(wt,value,3,W));
+        int W = 50;
+        System.out.println(knapsack(value, wt, 3, W));
+
     }
 }
