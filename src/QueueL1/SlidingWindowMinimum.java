@@ -1,4 +1,4 @@
-package Queue1;
+package QueueL1;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -6,6 +6,17 @@ import java.util.Deque;
 import java.util.List;
 
 public class SlidingWindowMinimum {
+    public static void main(String[] args) {
+        SlidingWindowMinimum swm = new SlidingWindowMinimum();
+
+        // Test case 1
+        ArrayList<Integer> nums1 = new ArrayList<>(List.of(1, 3, -1, -3, 5, 3, 6, 7));
+        int k1 = 3;
+        ArrayList<Integer> result1 = swm.getMinimums(nums1, k1);
+        System.out.println("Minimums for nums1 and k=" + k1 + ": " + result1);
+
+    }
+
     public ArrayList<Integer> getMinimums(ArrayList<Integer> nums, int k) {
         int n = nums.size();
 
@@ -25,17 +36,5 @@ public class SlidingWindowMinimum {
 
         }
         return ans;
-    }
-
-
-    public static void main(String[] args) {
-        SlidingWindowMinimum swm = new SlidingWindowMinimum();
-
-        // Test case 1
-        ArrayList<Integer> nums1 = new ArrayList<>(List.of(1, 3, -1, -3, 5, 3, 6, 7));
-        int k1 = 3;
-        ArrayList<Integer> result1 = swm.getMinimums(nums1, k1);
-        System.out.println("Minimums for nums1 and k=" + k1 + ": " + result1);
-
     }
 }

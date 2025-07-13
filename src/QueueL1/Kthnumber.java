@@ -1,4 +1,4 @@
-package Queue1;
+package QueueL1;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,13 +10,13 @@ public class Kthnumber {
         System.out.println(kth(k));
     }
 
-    public static String kth(int k){
+    public static String kth(int k) {
         Queue<String> q = new LinkedList<>();
         q.add("1");
         q.add("2");
 
         String ans = "";
-        for(int i = 0; i < k; i++){
+        for (int i = 0; i < k; i++) {
             String temp = q.remove();
             ans = temp;
             q.add(temp + "1");

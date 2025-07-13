@@ -1,37 +1,35 @@
 package ArraysL1;
 
+import java.util.Arrays;
+
 public class BrokenEconomy {
-    public static void main(String[] args) throws Exception {
-        // write your code here
-
-        int n = 5;
-
-        int[] a = {4,3,6,2,1};
-
-
+    public static void main(String[] args) {
+        int[] a = {4, 3, 6, 2, 1};
         int d = 2;
+
+        Arrays.sort(a);  // ✅ Fix
 
         int l = 0;
         int h = a.length - 1;
-        int ceil = 0;
-        int floor = 0;
+        int ceil = -1;
+        int floor = -1;
 
-        while(l <= h){
+        while (l <= h) {
             int m = (l + h) / 2;
-            if(d < a[m]){
+
+            if (d < a[m]) {
+                ceil = a[m];  // Possible ceil
                 h = m - 1;
-                ceil = a[m];
-            } else if(d > a[m]){
+            } else if (d > a[m]) {
+                floor = a[m];  // Possible floor
                 l = m + 1;
-                floor = a[m];
             } else {
-                ceil = a[m];
-                floor = a[m];
+                ceil = floor = a[m];  // Exact match
                 break;
             }
         }
 
-        System.out.println(ceil);
-        System.out.println(floor);
+        System.out.println("Ceil: " + ceil);
+        System.out.println("Floor: " + floor);
     }
 }

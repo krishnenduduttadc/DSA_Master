@@ -1,6 +1,4 @@
-package Queue1;
-
-import RecursionAndBacktrackingL1.Solution;
+package QueueL1;
 
 import java.util.HashMap;
 import java.util.LinkedList;
