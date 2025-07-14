@@ -6,17 +6,16 @@
 package SearchAndSortL1;
 
 /**
- *
  * @author krish
  */
 public class Sqrt {
 
     public static void main(String[] args) {
-        System.out.println(sqrt(37));
+        System.out.println(sqrt(36));
     }
 
     private static int sqrt(int x) {
-        int low = 1, high = x,ans=0;
+        int low = 1, high = x, ans = 0;
         while (low <= high) {
             int mid = (low + high) / 2;
             int mSqr = mid * mid;
