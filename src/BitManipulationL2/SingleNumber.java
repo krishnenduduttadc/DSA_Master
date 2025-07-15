@@ -1,8 +1,8 @@
 package BitManipulationL2;
 
-public class SingleNUmber {
+public class SingleNumber {
     public static void main(String[] args) {
-        SingleNUmber solution = new SingleNUmber();
+        SingleNumber solution = new SingleNumber();
 
         // Test case 1
         int[] nums1 = {2, 2, 3, 2};

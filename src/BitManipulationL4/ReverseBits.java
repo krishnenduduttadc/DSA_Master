@@ -9,5 +9,7 @@ public class ReverseBits {
         }
 // 'reversed' now contains the integer with reversed bits (147)
         System.out.println(reversed);
+        System.out.println(Integer.toUnsignedLong(reversed));
+
     }
 }

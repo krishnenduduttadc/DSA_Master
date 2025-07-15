@@ -7,6 +7,7 @@ public class MissingNoInArray {
         for (int i = 0; i < nums.length; i++) {
             missing ^= i ^ nums[i];
         }
+        missing ^= nums.length;
 // 'missing' now contains the missing number (2 in this case)
         System.out.println(missing);
     }
