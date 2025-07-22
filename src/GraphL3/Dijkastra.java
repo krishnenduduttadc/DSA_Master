@@ -4,16 +4,6 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class Dijkastra {
-    static class Pair {
-        int node;
-        int distance;
-
-        public Pair(int distance, int node) {
-            this.node = node;
-            this.distance = distance;
-        }
-    }
-
     public static void main(String[] args) {
         int V = 3, E = 3, S = 2;
         ArrayList<Integer> node1 = new ArrayList<>(); //[1,1]
@@ -75,14 +65,13 @@ public class Dijkastra {
         System.out.println();
     }
 
-
     static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s) {
         PriorityQueue<Pair> pq =
                 new PriorityQueue<Pair>((x, y) -> x.distance - y.distance);
         int[] dist = new int[V];
         for (int i = 0; i < V; i++) dist[i] = (int) (1e9);
         dist[s] = 0;
-        pq.add(new Pair(s, 0));
+        pq.add(new Pair(0, s));
 
         while (pq.size() != 0) {
             int dis = pq.peek().distance;
@@ -90,15 +79,24 @@ public class Dijkastra {
             pq.remove();
             // Check for all adjacent nodes of the popped-out
             for (int i = 0; i < adj.get(node).size(); i++) {
-
                 int adjNode = adj.get(node).get(i).get(0);
                 int edgeWeight = adj.get(node).get(i).get(1);
                 if (dis + edgeWeight < dist[adjNode]) {
                     dist[adjNode] = dis + edgeWeight;
-                    pq.add(new Pair(dist[adjNode], adjNode));
+                    pq.add(new Pair(adjNode, dist[adjNode]));
                 }
             }
         }
         return dist;
+    }
+
+    static class Pair {
+        int node;
+        int distance;
+
+        public Pair(int node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
     }
 }
