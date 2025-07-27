@@ -6,16 +6,16 @@
 package BinaryTreeL1;
 
 /**
- *
  * @author krishnendu
  */
 public class Height {
     public static int height(Node root) {
-        if(root==null){
+        if (root == null) {
             return 0;
         }
-        return 1+Math.max(height(root.left), height(root.right));
+        return 1 + Math.max(height(root.left), height(root.right));
     }
+
     public static void main(String args[]) {
         Node root = new Node(10);
         root.left = new Node(20);
@@ -25,5 +25,16 @@ public class Height {
         root.right.left = new Node(60);
 
         System.out.println("Height is? " + height(root));
+    }
+
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

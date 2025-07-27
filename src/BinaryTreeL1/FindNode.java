@@ -6,7 +6,6 @@
 package BinaryTreeL1;
 
 /**
- *
  * @author krishnendu
  */
 public class FindNode {
@@ -32,5 +31,16 @@ public class FindNode {
         root.right.left = new Node(60);
 
         System.out.println("Node present? " + isNodePresent(root, 400));
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

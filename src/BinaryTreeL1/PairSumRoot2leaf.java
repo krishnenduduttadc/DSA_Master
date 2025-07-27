@@ -6,11 +6,10 @@
 package BinaryTreeL1;
 
 /**
- *
  * @author krish
  */
 public class PairSumRoot2leaf {
-     public static void rootToLeafPathsSumToK(Node root, int k) {
+    public static void rootToLeafPathsSumToK(Node root, int k) {
         rootToLeafPathsSumToK(root, k, "");
     }
 
@@ -38,6 +37,18 @@ public class PairSumRoot2leaf {
         root.right = new Node(9);
         root.right.right = new Node(2);
         root.right.right.left = new Node(6);
-        rootToLeafPathsSumToK(root,13);
+        rootToLeafPathsSumToK(root, 13);
+    }
+
+    public static class Node {
+
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

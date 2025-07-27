@@ -9,11 +9,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- *
  * @author krishnendu
  */
 public class Mirror {
-
     public static void mirrorBinaryTree(Node root) {
         if (root == null) {
             return;
@@ -54,5 +52,16 @@ public class Mirror {
         printLevelWise(root);
         mirrorBinaryTree(root);
         printLevelWise(root);
+    }
+
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

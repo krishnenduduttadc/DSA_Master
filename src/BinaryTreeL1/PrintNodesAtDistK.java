@@ -6,7 +6,6 @@
 package BinaryTreeL1;
 
 /**
- *
  * @author krish
  */
 public class PrintNodesAtDistK {
@@ -71,5 +70,16 @@ public class PrintNodesAtDistK {
         root.right.right = new Node(2);
         root.right.right.left = new Node(6);
         nodesAtDistanceK(root, 3, 2);
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

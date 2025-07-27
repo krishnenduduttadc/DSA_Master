@@ -8,12 +8,11 @@ package BinaryTreeL1;
 import java.util.ArrayList;
 
 /**
- *
  * @author krish
  */
 public class LongestLeaf2Root {
-    public static ArrayList<Integer> longestRootToLeafPath(Node root){
-         if (root == null) {
+    public static ArrayList<Integer> longestRootToLeafPath(Node root) {
+        if (root == null) {
             return null;
         }
         if (root.left == null && root.right == null) {
@@ -23,25 +22,25 @@ public class LongestLeaf2Root {
         }
         ArrayList<Integer> left = longestRootToLeafPath(root.left);
         ArrayList<Integer> right = longestRootToLeafPath(root.right);
-        if(left == null){
+        if (left == null) {
             right.add(root.data);
             return right;
         }
 
-        if(right == null){
+        if (right == null) {
             left.add(root.data);
             return left;
         }
-        if(left.size() > right.size()){
-           left.add(root.data) ;
-           return left;
-        }else{
+        if (left.size() > right.size()) {
+            left.add(root.data);
+            return left;
+        } else {
             right.add(root.data);
             return right;
         }
-	}
-    
-     public static void main(String args[]) {
+    }
+
+    public static void main(String args[]) {
         Node root = new Node(2);
         root.left = new Node(3);
         root.left.left = new Node(4);
@@ -50,9 +49,21 @@ public class LongestLeaf2Root {
         root.right = new Node(9);
         root.right.right = new Node(2);
         root.right.right.left = new Node(6);
-        ArrayList<Integer> a=longestRootToLeafPath(root);
+        ArrayList<Integer> a = longestRootToLeafPath(root);
         for (int i = 0; i < a.size(); i++) {
-            System.out.print(a.get(i)+"-");
+            System.out.print(a.get(i) + "-");
         }
-     }
+    }
+
+    public static class Node {
+
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
+    }
 }

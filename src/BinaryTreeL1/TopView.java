@@ -7,28 +7,6 @@ import java.util.TreeMap;
 
 public class TopView {
 
-    static class Node {
-
-        int key;
-        Node left, right;
-
-        public Node(int item) {
-            key = item;
-            left = right = null;
-        }
-    }
-
-    static class QueueObj {
-
-        Node node;
-        int hd;
-
-        public QueueObj(Node node, int hd) {
-            this.node = node;
-            this.hd = hd;
-        }
-    }
-
     public static void topView(Node root) {
         if (root == null) {
             return;
@@ -36,7 +14,7 @@ public class TopView {
 
         Queue<QueueObj> q = new LinkedList<>();
         Map<Integer, Integer> topViewMap = new TreeMap<>();
-        q.add(new QueueObj(root,0));
+        q.add(new QueueObj(root, 0));
 
         while (!q.isEmpty()) {
             QueueObj f = q.poll();
@@ -51,8 +29,8 @@ public class TopView {
             }
         }
 
-        for(int s:topViewMap.values()){
-            System.out.println(""+s);
+        for (int s : topViewMap.values()) {
+            System.out.println("" + s);
         }
     }
 
@@ -75,5 +53,26 @@ public class TopView {
 
         System.out.println("Top view of the binary tree is:");
         topView(root);
+    }
+
+    static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
+
+    static class QueueObj {
+
+        Node node;
+        int hd;
+
+        public QueueObj(Node node, int hd) {
+            this.node = node;
+            this.hd = hd;
+        }
     }
 }

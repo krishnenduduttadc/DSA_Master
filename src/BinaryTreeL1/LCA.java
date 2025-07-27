@@ -6,9 +6,7 @@
 package BinaryTreeL1;
 
 
-
 /**
- *
  * @author krish
  */
 public class LCA {
@@ -16,10 +14,10 @@ public class LCA {
     static int getLCA(Node root, int a, int b) {
 
         /* Your class should be named Solution
-		 * Don't write main().
-		 * Don't read input, it is passed as function argument.
-		 * Return output and don't print it.
-	 	 * Taking input and printing output is handled automatically.
+         * Don't write main().
+         * Don't read input, it is passed as function argument.
+         * Return output and don't print it.
+         * Taking input and printing output is handled automatically.
          */
         Node node = getLCA2(root, a, b);
         return node.data;
@@ -55,5 +53,16 @@ public class LCA {
         root.right.left = new Node(7);
         root.right.right = new Node(9);
         System.out.println("" + getLCA(root, 3, 7));
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

@@ -6,7 +6,6 @@
 package BinaryTreeL1;
 
 /**
- *
  * @author krish
  */
 public class NodeswithoutSiblings {
@@ -31,5 +30,16 @@ public class NodeswithoutSiblings {
         root.left.right = new Node(50);
         root.right.left = new Node(60);
         printNodesWithoutSibling(root);
+    }
+
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

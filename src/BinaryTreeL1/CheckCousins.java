@@ -6,7 +6,6 @@
 package BinaryTreeL1;
 
 /**
- *
  * @author krish
  */
 public class CheckCousins {
@@ -83,6 +82,17 @@ public class CheckCousins {
         root.right = new Node(9);
         root.right.right = new Node(2);
         root.right.right.left = new Node(6);
-        System.out.println(""+isCousin(root,8,2));
+        System.out.println("" + isCousin(root, 8, 2));
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

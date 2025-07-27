@@ -10,7 +10,6 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- *
  * @author krish
  */
 public class ZigJag {
@@ -76,5 +75,16 @@ public class ZigJag {
         printLevelWise(root);
         System.out.println("------------------------");
         printZigZag(root);
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

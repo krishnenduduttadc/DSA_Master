@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- *
  * @author krish
  */
 public class RemoveLeafNodes {
@@ -56,5 +55,16 @@ public class RemoveLeafNodes {
         System.out.println("");
         Node nrt = removeAllLeaves(root);
         printLevelWise(nrt);
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }

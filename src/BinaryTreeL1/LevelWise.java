@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- *
  * @author krishnendu
  */
 public class LevelWise {
@@ -119,5 +118,16 @@ public class LevelWise {
         printLeftView(root);
         System.out.println("");
         printRightView(root);
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = right = null;
+        }
     }
 }
