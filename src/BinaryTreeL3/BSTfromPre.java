@@ -14,7 +14,18 @@ public class BSTfromPre {
     }
 
     public static void main(String[] args) {
-        int a[]={3,2,4};
+        int a[] = {3, 2, 4};
         System.out.println(bstFromPreorder(a).key);
+    }
+
+    public static class Node {
+
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

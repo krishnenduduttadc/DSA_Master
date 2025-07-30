@@ -2,22 +2,22 @@ package BinaryTreeL3;
 
 public class CountNodesCBT {
     public static int countNodes(Node root) {
-        if(root == null) return 0;
+        if (root == null) return 0;
 
         int left = getHeightLeft(root);
         int right = getHeightRight(root);
 
         //If left and right are equal it means that the tree is complete and hence go for 2^h -1.
-        if(left == right) return ((2<<(left)) -1);
+        if (left == right) return ((2 << (left)) - 1);
 
             //else recursively calculate the number of nodes in left and right and add 1 for root.
-        else return countNodes(root.left)+ countNodes(root.right)+1;
+        else return countNodes(root.left) + countNodes(root.right) + 1;
     }
 
 
-    public static int getHeightLeft(Node root){
-        int count=0;
-        while(root.left!=null){
+    public static int getHeightLeft(Node root) {
+        int count = 0;
+        while (root.left != null) {
             count++;
             root = root.left;
         }
@@ -25,9 +25,9 @@ public class CountNodesCBT {
     }
 
 
-    public static int getHeightRight(Node root){
-        int count=0;
-        while(root.right!=null){
+    public static int getHeightRight(Node root) {
+        int count = 0;
+        while (root.right != null) {
             count++;
             root = root.right;
         }
@@ -43,5 +43,15 @@ public class CountNodesCBT {
         root.left.left.left = new Node(6);
         int dia = countNodes(root);
         System.out.println(dia);
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

@@ -3,18 +3,139 @@ package BinaryTreeL1;
 import java.util.*;
 
 public class BasicTreeOperations {
-    static class Node {
+    static Node root;
 
-        int key;
-        Node left, right;
-
-        public Node(int item) {
-            key = item;
-            left = right = null;
+    static void inorderIter(Node root) {
+        if (root == null) {
+            return;
+        }
+        Stack<Node> s = new Stack<Node>();
+        Node curr = root;
+        while (curr != null & !s.isEmpty()) {
+            while (curr != null) {
+                s.push(curr);
+                curr = curr.left;
+            }
+            curr = s.pop();
+            System.out.print(" " + curr.key);
+            curr = curr.right;
         }
     }
 
-    static Node root;
+    static void pairSum(Node curr, int sum, Node root) {
+        if (curr == null) {
+            return;
+        }
+        int s = sum - curr.key;
+        Node f = null;
+        if (curr.key < s) {
+            f = find(root, s);
+        }
+        if (f != null) {
+            System.out.println(curr.key + " " + f.key);
+        }
+        pairSum(curr.left, sum, root);
+        pairSum(curr.right, sum, root);
+    }
+
+    static Node find(Node root, int x) {
+        if (root == null) {
+            return null;
+        }
+        if (root.key == x) {
+            return root;
+        }
+        Node left = find(root.left, x);
+        if (left != null) {
+            return left;
+        }
+        Node right = find(root.right, x);
+        if (right != null) {
+            return right;
+        }
+        return null;
+    }
+
+    public static ArrayList<Integer> longestRootToLeafPath(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.left == null && root.right == null) {
+            ArrayList<Integer> ans = new ArrayList<Integer>();
+            ans.add(root.key);
+            return ans;
+        }
+        ArrayList<Integer> leftAns = longestRootToLeafPath(root.left);
+        ArrayList<Integer> rightAns = longestRootToLeafPath(root.right);
+        if (leftAns == null) {
+            rightAns.add(root.key);
+            return rightAns;
+        }
+
+        if (rightAns == null) {
+            leftAns.add(root.key);
+            return leftAns;
+        }
+        if (leftAns.size() > rightAns.size()) {
+            leftAns.add(root.key);
+            return leftAns;
+        } else {
+            rightAns.add(root.key);
+            return rightAns;
+        }
+    }
+
+    public static void main(String[] args) {
+        BasicTreeOperations tree = new BasicTreeOperations();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+
+        ArrayList<Integer> p = longestRootToLeafPath(root);
+        for (int i = 0; i < p.size(); i++) {
+            System.out.print(p.get(i) + "--");
+        }
+        System.out.println("\n------------->");
+        tree.binaryTreePaths(root);
+        System.out.println("Preorder traversal of binary tree is ");
+        tree.printPostorder(root);
+
+        System.out.println("Level order traversal of binary tree is ");
+        tree.levelOrder(root);
+
+        System.out.println("Level order line by line traversal of binary tree is ");
+        tree.levelOrderLinebyLine2(root);
+
+        System.out.println("Tree size is " + tree.size(root));
+
+        System.out.println("Tree maximum element is " + tree.max(root));
+
+        System.out.println("Height of tree is " + tree.height(root));
+
+        tree.printKdist(root, 2);
+
+        System.out.println("Left view of tree ");
+        tree.leftView(root);
+
+        System.out.println("\nIs children sum true: " + tree.isChildrenSum(root));
+
+        System.out.println("\nIs height balanced: " + tree.isBalanced(root));
+
+        System.out.println("\nMaximum width is: " + tree.maxWidth(root));
+
+        System.out.println("\nSpiral traversal is: ");
+        tree.printSpiral(root);
+
+        System.out.println("\nDiameter is: " + tree.diameter(root));
+
+        System.out.println("\nNo of nodes is: " + tree.countNodes(root));
+
+        //System.out.println("\nThe nodes is: " + find(root, 5));
+        pairSum(root, 5, root);
+    }
 
     private void printPostorder(Node node) {
         if (node == null) {
@@ -69,7 +190,6 @@ public class BasicTreeOperations {
         }
         return result;
     }
-
 
     public void levelOrderLinebyLine(Node root) {
         Queue<Node> q = new LinkedList<Node>();
@@ -288,145 +408,23 @@ public class BasicTreeOperations {
         return Math.max(d1, Math.max(d2, d3));
     }
 
-    static void inorderIter(Node root) {
-        if (root == null) {
-            return;
-        }
-        Stack<Node> s = new Stack<Node>();
-        Node curr = root;
-        while (curr != null & !s.isEmpty()) {
-            while (curr != null) {
-                s.push(curr);
-                curr = curr.left;
-            }
-            curr = s.pop();
-            System.out.print(" " + curr.key);
-            curr = curr.right;
-        }
-    }
-
-    static void pairSum(Node curr, int sum, Node root) {
-        if (curr == null) {
-            return;
-        }
-        int s = sum - curr.key;
-        Node f = null;
-        if (curr.key < s) {
-            f = find(root, s);
-        }
-        if (f != null) {
-            System.out.println(curr.key + " " + f.key);
-        }
-        pairSum(curr.left, sum, root);
-        pairSum(curr.right, sum, root);
-    }
-
-    static Node find(Node root, int x) {
-        if (root == null) {
-            return null;
-        }
-        if (root.key == x) {
-            return root;
-        }
-        Node left = find(root.left, x);
-        if (left != null) {
-            return left;
-        }
-        Node right = find(root.right, x);
-        if (right != null) {
-            return right;
-        }
-        return null;
-    }
-
-    public static ArrayList<Integer> longestRootToLeafPath(Node root) {
-        if (root == null) {
-            return null;
-        }
-
-        if (root.left == null && root.right == null) {
-            ArrayList<Integer> ans = new ArrayList<Integer>();
-            ans.add(root.key);
-            return ans;
-        }
-        ArrayList<Integer> leftAns = longestRootToLeafPath(root.left);
-        ArrayList<Integer> rightAns = longestRootToLeafPath(root.right);
-        if (leftAns == null) {
-            rightAns.add(root.key);
-            return rightAns;
-        }
-
-        if (rightAns == null) {
-            leftAns.add(root.key);
-            return leftAns;
-        }
-        if (leftAns.size() > rightAns.size()) {
-            leftAns.add(root.key);
-            return leftAns;
-        } else {
-            rightAns.add(root.key);
-            return rightAns;
-        }
-    }
-
     public void binaryTreePaths(Node root) {
-        if(root==null){
-            return ;
+        if (root == null) {
+            return;
         }
-        System.out.print(""+root.key);
+        System.out.print("" + root.key);
         binaryTreePaths(root.left);
         binaryTreePaths(root.right);
 
     }
 
-    public static void main(String[] args) {
-        BasicTreeOperations tree = new BasicTreeOperations();
-        tree.root = new Node(1);
-        tree.root.left = new Node(2);
-        tree.root.right = new Node(3);
-        tree.root.left.left = new Node(4);
-        tree.root.left.right = new Node(5);
+    static class Node {
+        int key;
+        Node left, right;
 
-        ArrayList<Integer> p = longestRootToLeafPath(root);
-        for (int i = 0; i < p.size(); i++) {
-            System.out.print(p.get(i) + "--");
+        public Node(int item) {
+            key = item;
+            left = right = null;
         }
-        System.out.println("\n------------->");
-        tree.binaryTreePaths(root);
-        System.out.println("Preorder traversal of binary tree is ");
-        tree.printPostorder(root);
-
-        System.out.println("Level order traversal of binary tree is ");
-        tree.levelOrder(root);
-
-        System.out.println("Level order line by line traversal of binary tree is ");
-        tree.levelOrderLinebyLine2(root);
-
-        System.out.println("Tree size is " + tree.size(root));
-
-        System.out.println("Tree maximum element is " + tree.max(root));
-
-        System.out.println("Height of tree is " + tree.height(root));
-
-        tree.printKdist(root, 2);
-
-        System.out.println("Left view of tree ");
-        tree.leftView(root);
-
-        System.out.println("\nIs children sum true: " + tree.isChildrenSum(root));
-
-        System.out.println("\nIs height balanced: " + tree.isBalanced(root));
-
-        System.out.println("\nMaximum width is: " + tree.maxWidth(root));
-
-        System.out.println("\nSpiral traversal is: ");
-        tree.printSpiral(root);
-
-        System.out.println("\nDiameter is: " + tree.diameter(root));
-
-        System.out.println("\nNo of nodes is: " + tree.countNodes(root));
-
-        //System.out.println("\nThe nodes is: " + find(root, 5));
-        pairSum(root, 5, root);
     }
 }

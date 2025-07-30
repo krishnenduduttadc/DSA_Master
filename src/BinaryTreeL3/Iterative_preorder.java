@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Iterative_preorder {
-    static ArrayList< Integer > preOrderTrav(Node curr) {
-        ArrayList < Integer > preOrder = new ArrayList < Integer > ();
+
+    static ArrayList<Integer> preOrderTrav(Node curr) {
+        ArrayList<Integer> preOrder = new ArrayList<Integer>();
         if (curr == null)
             return preOrder;
 
-        Stack< Node > s = new Stack < > ();
+        Stack<Node> s = new Stack<>();
         s.push(curr);
 
         while (!s.isEmpty()) {
@@ -25,7 +26,6 @@ public class Iterative_preorder {
 
     }
 
-
     public static void main(String args[]) {
 
         Node root = new Node(1);
@@ -39,11 +39,21 @@ public class Iterative_preorder {
         root.right.right.left = new Node(9);
         root.right.right.right = new Node(10);
 
-        ArrayList < Integer > preOrder = new ArrayList < > ();
+        ArrayList<Integer> preOrder = new ArrayList<>();
         preOrder = preOrderTrav(root);
         System.out.print("The preOrder Traversal is : ");
         for (int i = 0; i < preOrder.size(); i++) {
             System.out.print(preOrder.get(i) + " ");
+        }
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
         }
     }
 }

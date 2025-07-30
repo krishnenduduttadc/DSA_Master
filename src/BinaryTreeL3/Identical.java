@@ -29,4 +29,14 @@ public class Identical {
         else System.out.println("Two trees are non-identical");
 
     }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
 }

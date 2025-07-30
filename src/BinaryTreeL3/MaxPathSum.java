@@ -28,4 +28,14 @@ public class MaxPathSum {
         System.out.println("The Max Path Sum for this tree is " + answer);
 
     }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
 }

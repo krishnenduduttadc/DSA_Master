@@ -3,14 +3,15 @@ package BinaryTreeL3;
 public class CheckBST {
 
     private static boolean checkBST(Node node, long min, long max) {
-        if(node == null) return true;
-        if(node.key <= min || node.key >= max) return false;
+        if (node == null) return true;
+        if (node.key <= min || node.key >= max) return false;
 
-        if(checkBST(node.left, min, node.key) && checkBST(node.right, node.key, max)) {
+        if (checkBST(node.left, min, node.key) && checkBST(node.right, node.key, max)) {
             return true;
         }
         return false;
     }
+
     public static boolean isValidBST(Node root) {
         return checkBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
@@ -26,4 +27,6 @@ public class CheckBST {
 
         System.out.println(isValidBST(root));
     }
+
+    
 }

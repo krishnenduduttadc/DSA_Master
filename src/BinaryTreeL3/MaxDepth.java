@@ -3,6 +3,7 @@ package BinaryTreeL3;
 import java.util.LinkedList;
 
 public class MaxDepth {
+
     //static Node root;
     private static int levelOrder(Node root) {
         if (root == null) {
@@ -47,5 +48,15 @@ public class MaxDepth {
         System.out.print(depth + " ");
 
 
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

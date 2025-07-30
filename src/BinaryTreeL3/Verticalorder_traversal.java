@@ -3,9 +3,10 @@ package BinaryTreeL3;
 import java.util.*;
 
 public class Verticalorder_traversal {
-    public static List < List < Integer >> findVertical(Node root) {
-        TreeMap < Integer, TreeMap < Integer, PriorityQueue< Integer >>> map = new TreeMap< >();
-        Queue< Tuple > q = new LinkedList < Tuple > ();
+
+    public static List<List<Integer>> findVertical(Node root) {
+        TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> map = new TreeMap<>();
+        Queue<Tuple> q = new LinkedList<Tuple>();
         q.offer(new Tuple(root, 0, 0));
         while (!q.isEmpty()) {
             Tuple tuple = q.poll();
@@ -15,10 +16,10 @@ public class Verticalorder_traversal {
 
 
             if (!map.containsKey(x)) {
-                map.put(x, new TreeMap < > ());
+                map.put(x, new TreeMap<>());
             }
             if (!map.get(x).containsKey(y)) {
-                map.get(x).put(y, new PriorityQueue < > ());
+                map.get(x).put(y, new PriorityQueue<>());
             }
             map.get(x).get(y).offer(node.key);
 
@@ -29,10 +30,10 @@ public class Verticalorder_traversal {
                 q.offer(new Tuple(node.right, x + 1, y + 1));
             }
         }
-        List < List < Integer >> list = new ArrayList < > ();
-        for (TreeMap < Integer, PriorityQueue < Integer >> ys: map.values()) {
-            list.add(new ArrayList < > ());
-            for (PriorityQueue < Integer > nodes: ys.values()) {
+        List<List<Integer>> list = new ArrayList<>();
+        for (TreeMap<Integer, PriorityQueue<Integer>> ys : map.values()) {
+            list.add(new ArrayList<>());
+            for (PriorityQueue<Integer> nodes : ys.values()) {
                 while (!nodes.isEmpty()) {
                     list.get(list.size() - 1).add(nodes.poll());
                 }
@@ -53,27 +54,30 @@ public class Verticalorder_traversal {
         root.right.left = new Node(9);
         root.right.right = new Node(10);
 
-        List <List< Integer >> list = new ArrayList< >();
+        List<List<Integer>> list = new ArrayList<>();
         list = findVertical(root);
 
         System.out.println("The Vertical Traversal is : ");
-        for (List < Integer > it: list) {
-            for (int nodeVal: it) {
+        for (List<Integer> it : list) {
+            for (int nodeVal : it) {
                 System.out.print(nodeVal + " ");
             }
             System.out.println();
         }
 
     }
-}
 
-class Tuple {
-    Node node;
-    int row;
-    int col;
-    public Tuple(Node _node, int _row, int _col) {
-        node = _node;
-        row = _row;
-        col = _col;
+    static class Tuple {
+        Node node;
+        int row;
+        int col;
+
+        public Tuple(Node _node, int _row, int _col) {
+            node = _node;
+            row = _row;
+            col = _col;
+        }
     }
 }
+
+

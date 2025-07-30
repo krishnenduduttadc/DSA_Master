@@ -2,8 +2,8 @@ package BinaryTreeL3;
 
 public class SearchBST {
     public static Node searchBST(Node root, int val) {
-        while(root != null && root.key != val){
-            root = val<root.key? root.left:root.right;
+        while (root != null && root.key != val) {
+            root = val < root.key ? root.left : root.right;
         }
         return root;
     }
@@ -23,7 +23,7 @@ public class SearchBST {
         return root;
     }
 
-    public  static int findCeil(Node root, int key) {
+    public static int findCeil(Node root, int key) {
         int ceil = -1;
         while (root != null) {
             if (root.key == key) {
@@ -33,8 +33,7 @@ public class SearchBST {
 
             if (key > root.key) {
                 root = root.right;
-            }
-            else {
+            } else {
                 ceil = root.key;
                 root = root.left;
             }
@@ -53,8 +52,7 @@ public class SearchBST {
             if (key > root.key) {
                 floor = root.key;
                 root = root.right;
-            }
-            else {
+            } else {
                 root = root.left;
             }
         }
@@ -70,11 +68,13 @@ public class SearchBST {
             root = tree.insertRec(root, data[i]);
         }
 
-        Node p=searchBST(root,80);
+        Node p = searchBST(root, 80);
         System.out.println(p.key);
-        int ceil=findCeil(root,80);
+        int ceil = findCeil(root, 80);
         System.out.println(ceil);
-        int floor=findCeil(root,20);
+        int floor = findCeil(root, 20);
         System.out.println(floor);
     }
+
+    
 }

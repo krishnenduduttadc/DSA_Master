@@ -1,6 +1,7 @@
 package BinaryTreeL3;
 
 public class LCA {
+
     public static Node lowestCommonAncestor(Node root, Node p, Node q) {
         //base case
         if (root == null || root == p || root == q) {
@@ -10,13 +11,11 @@ public class LCA {
         Node right = lowestCommonAncestor(root.right, p, q);
 
         //result
-        if(left == null) {
+        if (left == null) {
             return right;
-        }
-        else if(right == null) {
+        } else if (right == null) {
             return left;
-        }
-        else { //both left and right are not null, we found our result
+        } else { //both left and right are not null, we found our result
             return root;
         }
     }
@@ -28,7 +27,17 @@ public class LCA {
         root.left.left = new Node(4);
         root.left.right = new Node(5);
         root.left.left.left = new Node(6);
-        Node r=lowestCommonAncestor(root,root.left.right,root.left.left.left);
+        Node r = lowestCommonAncestor(root, root.left.right, root.left.left.left);
         System.out.println(r.key);
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

@@ -3,8 +3,9 @@ package BinaryTreeL3;
 import java.util.ArrayList;
 
 public class Morris {
-    static ArrayList< Integer > preorderTraversal(Node root) {
-        ArrayList < Integer > preorder = new ArrayList < > ();
+
+    static ArrayList<Integer> preorderTraversal(Node root) {
+        ArrayList<Integer> preorder = new ArrayList<>();
         Node cur = root;
         while (cur != null) {
             if (cur.left == null) {
@@ -38,7 +39,7 @@ public class Morris {
         root.left.right = new Node(5);
         root.left.right.right = new Node(6);
 
-        ArrayList < Integer > preorder = new ArrayList < > ();
+        ArrayList<Integer> preorder = new ArrayList<>();
         preorder = preorderTraversal(root);
 
         System.out.println("The Preorder Traversal is: ");
@@ -46,5 +47,15 @@ public class Morris {
             System.out.print(preorder.get(i) + " ");
         }
 
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

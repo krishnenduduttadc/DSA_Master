@@ -6,20 +6,21 @@ import java.util.Queue;
 
 public class LevelOrder {
     static Node root;
+
     public static List<Integer> levelOrder(Node root) {
 
         Queue<Node> queue = new LinkedList<Node>();
         List<Integer> wrapList = new LinkedList<Integer>();
 
-        if(root == null) return wrapList;
+        if (root == null) return wrapList;
 
         queue.offer(root);
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
 
-            if(queue.peek().left != null)
+            if (queue.peek().left != null)
                 queue.offer(queue.peek().left);
 
-            if(queue.peek().right != null)
+            if (queue.peek().right != null)
                 queue.offer(queue.peek().right);
 
             wrapList.add(queue.poll().key);
@@ -37,10 +38,20 @@ public class LevelOrder {
         tree.root.right.left = new Node(6);
         tree.root.right.right = new Node(7);
 
-        List<Integer> wrapList=levelOrder(root);
-        for(int it:wrapList){
-            System.out.print(it+" ");
+        List<Integer> wrapList = levelOrder(root);
+        for (int it : wrapList) {
+            System.out.print(it + " ");
         }
 
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

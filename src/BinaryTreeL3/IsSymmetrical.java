@@ -2,13 +2,13 @@ package BinaryTreeL3;
 
 public class IsSymmetrical {
     public static boolean isSymmetric(Node root) {
-        return root==null || isSymmetricHelp(root.left, root.right);
+        return root == null || isSymmetricHelp(root.left, root.right);
     }
 
-    private static boolean isSymmetricHelp(Node left, Node right){
-        if(left==null || right==null)
-            return left==right;
-        if(left.key!=right.key)
+    private static boolean isSymmetricHelp(Node left, Node right) {
+        if (left == null || right == null)
+            return left == right;
+        if (left.key != right.key)
             return false;
         return isSymmetricHelp(left.left, right.right) && isSymmetricHelp(left.right, right.left);
     }
@@ -24,5 +24,16 @@ public class IsSymmetrical {
 
         boolean stat = isSymmetric(root);
         System.out.println(stat);
+    }
+
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

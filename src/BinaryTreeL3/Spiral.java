@@ -5,9 +5,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Spiral {
-    public static ArrayList < ArrayList < Integer >> zigzagLevelOrder(Node root) {
-        Queue< Node > queue = new LinkedList< Node >();
-        ArrayList < ArrayList < Integer >> wrapList = new ArrayList < > ();
+
+    public static ArrayList<ArrayList<Integer>> zigzagLevelOrder(Node root) {
+        Queue<Node> queue = new LinkedList<Node>();
+        ArrayList<ArrayList<Integer>> wrapList = new ArrayList<>();
 
         if (root == null) return wrapList;
 
@@ -15,7 +16,7 @@ public class Spiral {
         boolean flag = true;
         while (!queue.isEmpty()) {
             int levelNum = queue.size();
-            ArrayList < Integer > subList = new ArrayList < Integer > (levelNum);
+            ArrayList<Integer> subList = new ArrayList<Integer>(levelNum);
             for (int i = 0; i < levelNum; i++) {
                 int index = i;
                 if (queue.peek().left != null) queue.offer(queue.peek().left);
@@ -36,7 +37,7 @@ public class Spiral {
         root.right = new Node(20);
         root.right.left = new Node(15);
         root.right.right = new Node(7);
-        ArrayList <ArrayList< Integer >> ans;
+        ArrayList<ArrayList<Integer>> ans;
         ans = zigzagLevelOrder(root);
         System.out.println("Zig Zag Traversal of Binary Tree ");
         for (i = 0; i < ans.size(); i++) {
@@ -46,5 +47,15 @@ public class Spiral {
             System.out.println();
         }
 
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

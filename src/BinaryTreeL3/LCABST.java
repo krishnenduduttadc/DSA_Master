@@ -1,13 +1,14 @@
 package BinaryTreeL3;
 
 public class LCABST {
+
     public static Node lowestCommonAncestor(Node root, Node p, Node q) {
-        if(root == null) return null;
+        if (root == null) return null;
         int curr = root.key;
-        if(curr < p.key && curr < q.key) {
+        if (curr < p.key && curr < q.key) {
             return lowestCommonAncestor(root.right, p, q);
         }
-        if(curr > p.key && curr > q.key) {
+        if (curr > p.key && curr > q.key) {
             return lowestCommonAncestor(root.left, p, q);
         }
         return root;
@@ -22,6 +23,8 @@ public class LCABST {
             root = tree.insertRec(root, data[i]);
         }
 
-        System.out.println(lowestCommonAncestor(root,root.left.left,root.right).key);
+        System.out.println(lowestCommonAncestor(root, root.left.left, root.right).key);
     }
+
+
 }

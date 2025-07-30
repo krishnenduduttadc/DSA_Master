@@ -1,36 +1,52 @@
 package BinaryTreeL3;
 
 public class ChildrenSum {
-    static void reorder(Node  root) {
+
+    // Function to modify the tree to satisfy Children Sum Property
+    static void reorder(Node root) {
         if (root == null) return;
-        int child = 0;
-        if (root.left!=null) {
-            child += root.left.key;
-        }
-        if (root.right!=null) {
-            child += root.right.key;
+
+        int childSum = 0;
+
+        if (root.left != null) childSum += root.left.key;
+        if (root.right != null) childSum += root.right.key;
+
+        // If children sum is less than root, propagate root's value down
+        if (childSum < root.key) {
+            if (root.left != null) root.left.key = root.key;
+            if (root.right != null) root.right.key = root.key;
         }
 
-        if (child < root.key) {
-            if (root.left!=null) root.left.key = root.key;
-            else if (root.right!=null) root.right.key = root.key;
-        }
-
+        // Recurse on children
         reorder(root.left);
         reorder(root.right);
 
-        int tot = 0;
-        if (root.left!=null) tot += root.left.key;
-        if (root.right!=null) tot += root.right.key;
-        if (root.left!=null || root.right!=null) root.key = tot;
+        // After recursion, set root's key to sum of children's keys
+        int total = 0;
+        if (root.left != null) total += root.left.key;
+        if (root.right != null) total += root.right.key;
+
+        if (root.left != null || root.right != null) {
+            root.key = total;
+        }
     }
-    static void changeTree(Node  root) {
+
+    // Wrapper method
+    static void changeTree(Node root) {
         reorder(root);
     }
 
-    public static void main(String args[]) {
+    // Helper method to print inorder traversal of tree
+    static void printInorder(Node root) {
+        if (root == null) return;
+        printInorder(root.left);
+        System.out.print(root.key + " ");
+        printInorder(root.right);
+    }
 
-        Node  root = new Node(2);
+    // Driver code
+    public static void main(String[] args) {
+        Node root = new Node(2);
         root.left = new Node(35);
         root.left.left = new Node(2);
         root.left.right = new Node(3);
@@ -40,5 +56,18 @@ public class ChildrenSum {
 
         changeTree(root);
 
+        System.out.print("Inorder traversal after converting to Children Sum Tree: ");
+        printInorder(root);
+    }
+
+    // Node class
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

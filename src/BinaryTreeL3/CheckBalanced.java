@@ -30,4 +30,15 @@ public class CheckBalanced {
         boolean stat = isBalanced(root);
         System.out.println(stat);
     }
+
+    public static class Node {
+
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
 }

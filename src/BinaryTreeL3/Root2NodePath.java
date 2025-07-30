@@ -3,7 +3,8 @@ package BinaryTreeL3;
 import java.util.ArrayList;
 
 public class Root2NodePath {
-    static boolean getPath(Node root, ArrayList< Integer > arr, int x) {
+
+    static boolean getPath(Node root, ArrayList<Integer> arr, int x) {
         // if root is NULL
         // there is no path
         if (root == null)
@@ -42,15 +43,25 @@ public class Root2NodePath {
         root.left.right.right = new Node(7);
         root.right = new Node(3);
 
-        ArrayList < Integer > arr = new ArrayList < > ();
+        ArrayList<Integer> arr = new ArrayList<>();
 
         boolean res;
         res = getPath(root, arr, 7);
 
         System.out.print("The path is ");
-        for (int it: arr) {
+        for (int it : arr) {
             System.out.print(it + " ");
         }
 
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

@@ -11,11 +11,11 @@ public class RightView {
         return result;
     }
 
-    public static void rightView(Node curr, List<Integer> result, int currDepth){
-        if(curr == null){
+    public static void rightView(Node curr, List<Integer> result, int currDepth) {
+        if (curr == null) {
             return;
         }
-        if(currDepth == result.size()){
+        if (currDepth == result.size()) {
             result.add(curr.key);
         }
 
@@ -33,10 +33,20 @@ public class RightView {
         root.left.left.left = new Node(6);
 
 
-        List<Integer> res=rightSideView(root);
-        for(Integer it: res){
+        List<Integer> res = rightSideView(root);
+        for (Integer it : res) {
             System.out.println(it);
         }
 
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

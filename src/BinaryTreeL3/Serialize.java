@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Serialize {
+
     public static String serialize(Node root) {
         if (root == null) return "";
         Queue<Node> q = new LinkedList<>();
@@ -56,5 +57,15 @@ public class Serialize {
 
         Node dser = deserialize(ser);
         System.out.println(dser.key);
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

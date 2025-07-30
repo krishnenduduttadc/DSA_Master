@@ -24,4 +24,6 @@ public class InorderSuccesorBST {
         }
         System.out.println(inorderSuccessor(root, root.left).key);
     }
+
+    
 }

@@ -14,7 +14,6 @@ public class BinTree2LL {
         prev = root;
     }
 
-
     public static void main(String args[]) {
 
         Node root = new Node(1);
@@ -30,5 +29,16 @@ public class BinTree2LL {
             root = root.right;
         }
         System.out.print(root.key);
+    }
+
+    public static class Node {
+
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

@@ -5,9 +5,9 @@ import java.util.Stack;
 
 public class Iterative_inorder {
 
-    static ArrayList < Integer > inOrderTrav(Node curr) {
-        ArrayList < Integer > inOrder = new ArrayList < > ();
-        Stack< Node > s = new Stack < > ();
+    static ArrayList<Integer> inOrderTrav(Node curr) {
+        ArrayList<Integer> inOrder = new ArrayList<>();
+        Stack<Node> s = new Stack<>();
         while (true) {
             if (curr != null) {
                 s.push(curr);
@@ -36,12 +36,22 @@ public class Iterative_inorder {
         root.right.right.left = new Node(9);
         root.right.right.right = new Node(10);
 
-        ArrayList< Integer > inOrder;
+        ArrayList<Integer> inOrder;
         inOrder = inOrderTrav(root);
 
         System.out.println("The inOrder Traversal is : ");
         for (int i = 0; i < inOrder.size(); i++) {
             System.out.print(inOrder.get(i) + " ");
+        }
+    }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
         }
     }
 }
