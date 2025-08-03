@@ -1,4 +1,4 @@
-package LLDL1;
+package DesignPatternL1;
 
 public class FacadeDP {
 

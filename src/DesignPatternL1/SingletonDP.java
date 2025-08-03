@@ -1,4 +1,4 @@
-package LLDL1;
+package DesignPatternL1;
 
 public class SingletonDP {
     public static void main(String[] args) {

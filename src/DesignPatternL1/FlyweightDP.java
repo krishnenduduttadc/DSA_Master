@@ -1,4 +1,4 @@
-package LLDL1;
+package DesignPatternL1;
 
 import java.util.HashMap;
 import java.util.Map;

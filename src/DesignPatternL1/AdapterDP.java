@@ -1,4 +1,4 @@
-package LLDL1;
+package DesignPatternL1;
 
 public class AdapterDP {
     public static void main(String[] args) {

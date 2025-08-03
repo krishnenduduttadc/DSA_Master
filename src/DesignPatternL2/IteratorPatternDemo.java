@@ -1,4 +1,4 @@
-package LLDL2;
+package DesignPatternL2;
 
 import java.util.ArrayList;
 import java.util.List;

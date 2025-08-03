@@ -6,21 +6,9 @@
 package LinkedListL1;
 
 /**
- *
  * @author krish
  */
 public class RevLL {
-
-    static class Node {
-
-        int data;
-        Node next;
-
-        Node(int d) {
-            next = null;
-            data = d;
-        }
-    }
 
     static void display(Node head) {
         while (head != null) {
@@ -73,5 +61,15 @@ public class RevLL {
         System.out.println("\n********************************************");
         Node rev = reverseI(one);
         display(rev);
+    }
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int d) {
+            next = null;
+            data = d;
+        }
     }
 }
