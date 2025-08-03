@@ -6,30 +6,28 @@
 package ArraysL1;
 
 /**
- *
  * @author krish
  */
 public class TraprainWater {
-    
-     public static void main(String a[]) {
-        System.out.print(getWater(new int[]{3,0,1,2,5}));
+
+    public static void main(String a[]) {
+        System.out.print(getWater(new int[]{3, 0, 1, 2, 5}));
     }
 
     private static int getWater(int[] arr) {
-       
-        int res=0;
-        for(int i=0;i<arr.length;i++){
-            int lmax=arr[i];
-            for(int j=0;j<i;j++){
-                lmax=Math.max(arr[j], lmax);
+        int res = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int lmax = arr[i];
+            for (int j = 0; j < i; j++) {
+                lmax = Math.max(arr[j], lmax);
             }
-            int rmax=arr[i];
-            for(int j=i+1;j<arr.length;j++){
-                rmax=Math.max(arr[j], rmax);
+            int rmax = arr[i];
+            for (int j = i + 1; j < arr.length; j++) {
+                rmax = Math.max(arr[j], rmax);
             }
-            
-            res=res+(Math.min(lmax,rmax)-arr[i]);
+
+            res = res + (Math.min(lmax, rmax) - arr[i]);
         }
-       return res; 
+        return res;
     }
 }

@@ -1,25 +1,27 @@
 package ArraysL2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ThreeSum {
     public static List<List<Integer>> twoSum(int[] arr, int target, int si) {
         int n = arr.length;
         List<List<Integer>> res = new ArrayList<>();
-        if(n - si < 2) return res;
-
+        if (n - si < 2) return res;
         int left = si;
         int right = n - 1;
 
 
-        while(left < right) {
-            if(left != si && arr[left] == arr[left - 1]) {
+        while (left < right) {
+            if (left != si && arr[left] == arr[left - 1]) {
                 left++;
                 continue;
             }
             int sum = arr[left] + arr[right];
 
-            if(sum == target) {
+            if (sum == target) {
                 List<Integer> subres = new ArrayList<>();
                 subres.add(arr[left]);
                 subres.add(arr[right]);
@@ -27,7 +29,7 @@ public class ThreeSum {
 
                 left++;
                 right--;
-            } else if(sum > target) {
+            } else if (sum > target) {
                 right--;
             } else {
                 left++;
@@ -38,25 +40,25 @@ public class ThreeSum {
     }
 
     public static List<List<Integer>> kSumHelper(int[] arr, int target, int k, int si) {
-        if(k == 2) {
+        if (k == 2) {
             return twoSum(arr, target, si);
         }
 
         int n = arr.length;
 
         List<List<Integer>> res = new ArrayList<>();
-        if(n - k < 0){
+        if (n - k < 0) {
             return res;
         }
 
-        for(int i = si; i <= n - k; i++) {
-            if(i != si && arr[i] == arr[i - 1]){
+        for (int i = si; i <= n - k; i++) {
+            if (i != si && arr[i] == arr[i - 1]) {
                 continue;
             }
 
             int val1 = arr[i];
             List<List<Integer>> subRes = kSumHelper(arr, target - val1, k - 1, i + 1);
-            for(List<Integer> list : subRes) {
+            for (List<Integer> list : subRes) {
                 list.add(val1);
                 res.add(list);
             }
@@ -72,7 +74,7 @@ public class ThreeSum {
     }
 
     public static void main(String[] args) {
-        int[] arr = {50,30,10,60,20,40,90,80,10,20,40};
+        int[] arr = {50, 30, 10, 60, 20, 40, 90, 80, 10, 20, 40};
         int target = 100;
         List<List<Integer>> res = kSum(arr, target);
         ArrayList<String> finalResult = new ArrayList<>();

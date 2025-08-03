@@ -2,8 +2,6 @@ package ArraysL3;
 
 public class MaxSubmatrixSumofSortedMatrix {
     public static void main(String[] args) {
-
-
         int[][] arr = {
                 {1, 2, 3},
                 {4, 5, 6},
@@ -11,9 +9,7 @@ public class MaxSubmatrixSumofSortedMatrix {
         };
         int n = arr.length;
         int m = arr[0].length;
-
         int[][] pf = prefix(arr);
-
         int ans = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -21,7 +17,6 @@ public class MaxSubmatrixSumofSortedMatrix {
                 ans = Math.max(ans, temp);
             }
         }
-
         System.out.println(ans);
     }
 

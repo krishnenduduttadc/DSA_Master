@@ -10,29 +10,22 @@ public class PrintBoundary {
                 {21, 22, 23, 24, 25}
         };
         int n = mat.length;
-
-
-
-        int i=0;
-        int j=0;
-
-        for(int k = 0;k<n-1;k++){
-            System.out.print(mat[i][j]+" ");
+        int i = 0;
+        int j = 0;
+        for (int k = 0; k < n - 1; k++) {
+            System.out.print(mat[i][j] + " ");
             j++;
         }
-
-        for(int k = 0;k<n-1;k++){
-            System.out.print(mat[i][j]+" ");
+        for (int k = 0; k < n - 1; k++) {
+            System.out.print(mat[i][j] + " ");
             i++;
         }
-
-        for(int k = 0;k<n-1;k++){
-            System.out.print(mat[i][j]+" ");
+        for (int k = 0; k < n - 1; k++) {
+            System.out.print(mat[i][j] + " ");
             j--;
         }
-
-        for(int k = 0;k<n-1;k++){
-            System.out.print(mat[i][j]+" ");
+        for (int k = 0; k < n - 1; k++) {
+            System.out.print(mat[i][j] + " ");
             i--;
         }
     }

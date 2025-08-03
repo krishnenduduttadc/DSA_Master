@@ -46,6 +46,16 @@ public class MaxWidth {
 
     }
 
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
+
     static class Pair2 {
         Node node;
         int num;

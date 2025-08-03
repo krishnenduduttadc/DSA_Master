@@ -2,8 +2,8 @@ package ArraysL2;
 
 public class ContainerWithMostWater {
     public static void main(String[] args) {
-    int arr[]={1,8,6,2,5,4,8,3,7};
-        int res=mostwater(arr);
+        int arr[] = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int res = mostwater(arr);
         System.out.println(res);
     }
 
@@ -21,7 +21,6 @@ public class ContainerWithMostWater {
                 j--;
             }
         }
-
         return water;
     }
 }

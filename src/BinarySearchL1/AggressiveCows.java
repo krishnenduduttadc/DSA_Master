@@ -46,9 +46,7 @@ public class AggressiveCows {
         int n = 5; // Number of stalls
         int k = 3; // Number of cows to place
         int[] dist = {1, 2, 4, 8, 9}; // Positions of the stalls
-
         int result = solve(n, k, dist);
-
         System.out.println("Maximum minimum distance to place " + k + " cows: " + result);
     }
 }

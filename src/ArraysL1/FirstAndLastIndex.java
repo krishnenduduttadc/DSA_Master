@@ -5,7 +5,7 @@ public class FirstAndLastIndex {
         // write your code here
         int n = 15;
         int[] arr = {
-                1, 5, 10, 15, 22, 33, 33, 33, 33, 33, 40, 42, 55, 66, 77,33
+                1, 5, 10, 15, 22, 33, 33, 33, 33, 33, 40, 42, 55, 66, 77, 33
         };
 
 
@@ -53,22 +53,3 @@ public class FirstAndLastIndex {
     }
 }
 
-/*
-15
-1
-5
-10
-15
-22
-33
-33
-33
-33
-33
-40
-42
-55
-66
-77
-33
- */

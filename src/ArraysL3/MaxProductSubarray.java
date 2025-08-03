@@ -1,11 +1,17 @@
 package ArraysL3;
 
 
-
 public class MaxProductSubarray {
+    public static void main(String[] args) {
+        MaxProductSubarray solution = new MaxProductSubarray();
+        int arr[] = {2, 3, -2, 4};
+
+        int result = solution.maxProduct(arr);
+        System.out.println("Maximum product of subarray: " + result); // Expected output: 6 (subarray [2, 3])
+    }
+
     public int maxProduct(int[] nums) {
         int n = nums.length;
-
         int pf1 = 1;
         int max1 = Integer.MIN_VALUE;
         int pf2 = 1;
@@ -30,13 +36,5 @@ public class MaxProductSubarray {
         }
 
         return Math.max(max1, max2);
-    }
-
-    public static void main(String[] args) {
-        MaxProductSubarray solution = new MaxProductSubarray();
-        int arr[] = {2, 3, -2, 4};
-
-        int result = solution.maxProduct(arr);
-        System.out.println("Maximum product of subarray: " + result); // Expected output: 6 (subarray [2, 3])
     }
 }

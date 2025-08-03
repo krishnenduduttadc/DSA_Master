@@ -3,8 +3,6 @@ package BinarySearchL1;
 public class SingleElement {
     public static void main(String[] args) {
         int[] arr = {1, 1, 2, 2, 3, 3, 4};
-
-
         System.out.println(singleNonDuplicate(arr));
     }
 
@@ -37,7 +35,6 @@ public class SingleElement {
                 right = middle - 1;
             }
         }
-
         return nums[left];
 
     }

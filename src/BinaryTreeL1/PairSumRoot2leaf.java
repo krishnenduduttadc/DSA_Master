@@ -41,7 +41,6 @@ public class PairSumRoot2leaf {
     }
 
     public static class Node {
-
         int data;
         Node left;
         Node right;

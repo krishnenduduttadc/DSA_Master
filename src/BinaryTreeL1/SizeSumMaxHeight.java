@@ -1,18 +1,6 @@
 package BinaryTreeL1;
 
 public class SizeSumMaxHeight {
-    public static class Node {
-        int data;
-        Node left;
-        Node right;
-
-        Node(int data, Node left, Node right) {
-            this.data = data;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
     public static void display(Node node) {
         if (node == null) {
             return;
@@ -86,5 +74,17 @@ public class SizeSumMaxHeight {
         System.out.println(sum);
         System.out.println(max);
         System.out.println(ht);
+    }
+
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data, Node left, Node right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
     }
 }

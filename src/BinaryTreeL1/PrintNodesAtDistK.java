@@ -12,7 +12,6 @@ public class PrintNodesAtDistK {
 
     public static void nodesAtDistanceK(Node root, int node, int k) {
         //Your code goes here
-
         nodesAtDistanceKWithRootDistance(root, node, k);
     }
 
@@ -20,7 +19,6 @@ public class PrintNodesAtDistK {
         if (root == null) {
             return -1;
         }
-
         if (root.data == node) {
             printNodesDown(root, k);
             return 0;

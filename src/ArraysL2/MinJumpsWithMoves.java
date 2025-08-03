@@ -7,14 +7,14 @@ public class MinJumpsWithMoves {
         int jump = 1;
         int sum = 0;
 
-        while(sum < x){
+        while (sum < x) {
             sum += jump;
             jump++;
         }
 
-        if((sum - x) % 2 == 0){
+        if ((sum - x) % 2 == 0) {
             return jump - 1;
-        } else if((sum + jump - x) % 2 == 0){
+        } else if ((sum + jump - x) % 2 == 0) {
             return jump;
         } else {
             return jump + 1;
@@ -24,7 +24,6 @@ public class MinJumpsWithMoves {
     //~~~~~~~~~~~~~~~~~~Input Management~~~~~~~~~~~~~~
     public static void main(String[] args) {
         int x = 8;
-
         int jumps = minJumps(x);
         System.out.println(jumps);
     }

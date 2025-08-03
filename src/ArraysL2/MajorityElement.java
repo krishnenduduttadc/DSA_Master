@@ -1,23 +1,20 @@
 package ArraysL2;
 
 public class MajorityElement {
-    public static int majority(int[] arr){
+    public static int majority(int[] arr) {
         int val = arr[0];
         int count = 1;
-
-        for(int  i = 1; i < arr.length; i++){
-            if(val == arr[i]){
+        for (int i = 1; i < arr.length; i++) {
+            if (val == arr[i]) {
                 count++;
             } else {
                 count--;
             }
-
-            if(count == 0){
+            if (count == 0) {
                 val = arr[i];
                 count = 1;
             }
         }
-
         return val;
     }
 
@@ -29,12 +26,12 @@ public class MajorityElement {
 
         int count = 0;
 
-        for(int i = 0; i < arr.length; i++){
-            if(arr[i] == value)
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == value)
                 count++;
         }
 
-        if(count > arr.length / 2){
+        if (count > arr.length / 2) {
             System.out.println(value);
         } else {
             System.out.println("No Majority Element exist");
@@ -44,7 +41,7 @@ public class MajorityElement {
     // ~~~~~~~~~~~~~~~~~~~Input Management~~~~~~~~~~~~~~~~~~~
 
     public static void main(String[] args) {
-        int[] arr = {1,1,2,3,4,1,1,6,1,1};
+        int[] arr = {1, 1, 2, 3, 4, 1, 1, 6, 1, 1};
         printMajorityElement(arr);
     }
 }

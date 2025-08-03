@@ -1,6 +1,16 @@
 package BinarySearchL1;
 
 public class CapcityToShipPackages {
+    public static void main(String[] args) {
+        CapcityToShipPackages solution = new CapcityToShipPackages();
+        // Hardcoded input
+        int[] weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int days = 5;
+        // Calculate and print the minimum ship capacity
+        int result = solution.shipWithinDays(weights, days);
+        System.out.println("Minimum ship capacity required: " + result);
+    }
+
     public int shipWithinDays(int[] weights, int days) {
         int maxWeight = weights[0];
         int totalWeight = weights[0];
@@ -35,17 +45,5 @@ public class CapcityToShipPackages {
             sum += weight;
         }
         return days;
-    }
-
-    public static void main(String[] args) {
-        CapcityToShipPackages solution = new CapcityToShipPackages();
-
-        // Hardcoded input
-        int[] weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int days = 5;
-
-        // Calculate and print the minimum ship capacity
-        int result = solution.shipWithinDays(weights, days);
-        System.out.println("Minimum ship capacity required: " + result);
     }
 }

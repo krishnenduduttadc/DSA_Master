@@ -3,10 +3,16 @@ package ArraysL3;
 
 public class MajorityElement {
 
+    public static void main(String[] args) {
+        MajorityElement solution = new MajorityElement();
+        int[] nums2 = {2, 2, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3};
+        int result2 = solution.majorityElement(nums2);
+        System.out.println("Majority element: " + result2); // Expected output: 2
+    }
+
     public int majorityElement(int[] nums) {
         int val = nums[0];
         int count = 1;
-
         for (int i = 1; i < nums.length; i++) {
             if (count == 0) {
                 val = nums[i];
@@ -17,15 +23,7 @@ public class MajorityElement {
                 count--;
             }
         }
-
         return val;
-    }
-
-    public static void main(String[] args) {
-        MajorityElement solution = new MajorityElement();
-        int[] nums2 = {2, 2, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3};
-        int result2 = solution.majorityElement(nums2);
-        System.out.println("Majority element: " + result2); // Expected output: 2
     }
 
 }

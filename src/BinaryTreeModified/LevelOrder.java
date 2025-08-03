@@ -6,31 +6,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LevelOrder {
-    public static class Node {
-        int key;
-        Node left, right;
-
-        public Node(int item) {
-            key = item;
-            left = right = null;
-        }
-    }
-
     static Node root;
 
     public static ArrayList<ArrayList<Integer>> levelOrder(Node root) {
         Queue<Node> q = new LinkedList<>();
-        ArrayList<ArrayList<Integer>> ll=new ArrayList<>();
+        ArrayList<ArrayList<Integer>> ll = new ArrayList<>();
         q.add(root);
         while (!q.isEmpty()) {
-            ArrayList<Integer> l=new ArrayList<>();
-            int n=q.size();
-            for (int i = 0; i <n ; i++) {
-                Node f=q.poll();
-                if(f.left!=null){
+            ArrayList<Integer> l = new ArrayList<>();
+            int n = q.size();
+            for (int i = 0; i < n; i++) {
+                Node f = q.poll();
+                if (f.left != null) {
                     q.add(f.left);
                 }
-                if(f.right!=null){
+                if (f.right != null) {
                     q.add(f.right);
                 }
                 l.add(f.key);
@@ -50,8 +40,15 @@ public class LevelOrder {
         tree.root.right.left = new Node(6);
         tree.root.right.right = new Node(7);
         System.out.println(levelOrder(root));
+    }
 
+    public static class Node {
+        int key;
+        Node left, right;
 
-
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
     }
 }

@@ -91,4 +91,14 @@ public class Pre_in_post {
             node = _node;
         }
     }
+
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
 }

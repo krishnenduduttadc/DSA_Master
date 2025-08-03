@@ -40,5 +40,14 @@ public class LCABST {
         System.out.println(lowestCommonAncestor(root, root.left.left, root.right).key);
     }
 
+    public static class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item) {
+            key = item;
+            left = right = null;
+        }
+    }
 
 }
