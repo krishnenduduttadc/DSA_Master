@@ -6,7 +6,6 @@
 package BSTL1;
 
 /**
- *
  * @author krish
  */
 public class SearchNode {
@@ -35,8 +34,20 @@ public class SearchNode {
         root.right.right = new Node(9);
 
         for (int i = 0; i < 10; i++) {
-            System.out.println(i+"is Present? "+searchInBST(root, i));
+            System.out.println(i + "is Present? " + searchInBST(root, i));
         }
-        
+
+    }
+
+    public static class Node {
+        int key;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.key = data;
+            this.left = null;
+            this.right = null;
+        }
     }
 }

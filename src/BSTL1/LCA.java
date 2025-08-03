@@ -6,7 +6,6 @@
 package BSTL1;
 
 /**
- *
  * @author krish
  */
 public class LCA {
@@ -36,5 +35,17 @@ public class LCA {
         root.right.left = new Node(7);
         root.right.right = new Node(9);
         System.out.println("" + getLCA(root, 3, 7));
+    }
+
+    public static class Node {
+        int key;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.key = data;
+            this.left = null;
+            this.right = null;
+        }
     }
 }
