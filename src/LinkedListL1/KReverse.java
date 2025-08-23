@@ -1,111 +1,92 @@
 package LinkedListL1;
 
 public class KReverse {
-    public static void main(String[] args) {
-        LinkedList list = new LinkedList();
 
-        // Hardcoded input using addLast only
+    // Print linked list
+    static void display(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    // Add node at the end
+    static Node addLast(Node head, int val) {
+        Node newNode = new Node(val);
+        if (head == null) {
+            return newNode;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+        return head;
+    }
+
+    // Reverse in groups of k
+    static Node kReverse(Node head, int k) {
+        if (head == null) return null;
+
+        Node prev = null, curr = head, next = null;
+        int count = 0;
+
+        // Reverse first k nodes
+        Node temp = head;
+        int size = 0;
+        while (temp != null) { // count total size
+            size++;
+            temp = temp.next;
+        }
+
+        if (size < k) return head; // If remaining < k, keep as is
+
+        while (count < k && curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            count++;
+        }
+
+        // Recursively reverse rest of the list
+        if (next != null) {
+            head.next = kReverse(next, k);
+        }
+
+        return prev;
+    }
+
+    public static void main(String[] args) {
+        Node head = null;
+
+        // Build list [1,2,3,4,5,6,7,8,9,10,11]
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-        for (int val : values) {
-            list.addLast(val);
+        for (int v : values) {
+            head = addLast(head, v);
         }
 
         int k = 3;
 
         System.out.println("Before k-Reverse:");
-        list.display();
+        display(head);
 
-        list.kReverse(k);
+        head = kReverse(head, k);
 
         System.out.println("After k-Reverse (k=" + k + "):");
-        list.display();
+        display(head);
     }
 
-    public static class Node {
+    // Node class
+    static class Node {
         int data;
         Node next;
-    }
 
-    public static class LinkedList {
-        Node head, tail;
-        int size;
-
-        // Add node at end
-        void addLast(int val) {
-            Node temp = new Node();
-            temp.data = val;
-            if (size == 0) {
-                head = tail = temp;
-            } else {
-                tail.next = temp;
-                tail = temp;
-            }
-            size++;
-        }
-
-        // Get first node data
-        int getFirst() {
-            return head != null ? head.data : -1;
-        }
-
-        // Remove first node
-        void removeFirst() {
-            if (head != null) {
-                head = head.next;
-                size--;
-                if (size == 0) tail = null;
-            }
-        }
-
-        // Print the list
-        void display() {
-            Node temp = head;
-            while (temp != null) {
-                System.out.print(temp.data + " ");
-                temp = temp.next;
-            }
-            System.out.println();
-        }
-
-        // K-Group Reverse
-        void kReverse(int k) {
-            LinkedList prev = null;
-
-            while (this.size > 0) {
-                LinkedList curr = new LinkedList();
-
-                if (this.size >= k) {
-                    for (int i = 0; i < k; i++) {
-                        int val = this.getFirst();
-                        this.removeFirst();
-                        // Reverse within group
-                        Node temp = new Node();
-                        temp.data = val;
-                        temp.next = curr.head;
-                        curr.head = temp;
-                        if (curr.size == 0) curr.tail = temp;
-                        curr.size++;
-                    }
-                } else {
-                    while (this.size > 0) {
-                        int val = this.getFirst();
-                        this.removeFirst();
-                        curr.addLast(val);
-                    }
-                }
-
-                if (prev == null) {
-                    prev = curr;
-                } else {
-                    prev.tail.next = curr.head;
-                    prev.tail = curr.tail;
-                    prev.size += curr.size;
-                }
-            }
-
-            this.head = prev.head;
-            this.tail = prev.tail;
-            this.size = prev.size;
+        Node(int val) {
+            data = val;
+            next = null;
         }
     }
 }

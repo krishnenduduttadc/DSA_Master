@@ -1,93 +1,84 @@
 package LinkedListL1;
 
+
 public class MergeTwoSortedLL {
-    public static class Node {
-        int data;
-        Node next;
+    // Utility: addLast (returns new tail)
+    private static Node addLast(Node tail, int val) {
+        Node temp = new Node();
+        temp.data = val;
+        temp.next = null;
+
+        if (tail != null) {
+            tail.next = temp;
+        }
+        return temp;
     }
 
-    public static class LinkedList {
-        Node head;
-        Node tail;
-        int size;
-
-        void addLast(int val) {
-            Node temp = new Node();
-            temp.data = val;
-            temp.next = null;
-
-            if (size == 0) {
-                head = tail = temp;
-            } else {
-                tail.next = temp;
-                tail = temp;
-            }
-
-            size++;
+    // Utility: display a list from given head
+    public static void display(Node head) {
+        for (Node temp = head; temp != null; temp = temp.next) {
+            System.out.print(temp.data + " ");
         }
+        System.out.println();
+    }
 
-        public void display() {
-            for (Node temp = head; temp != null; temp = temp.next) {
-                System.out.print(temp.data + " ");
-            }
-            System.out.println();
-        }
+    // Merge two sorted linked lists
+    public static Node mergeTwoSortedLists(Node one, Node two) {
+        Node dummy = new Node();
+        Node curr = dummy;
 
-        public static LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
-            Node one = l1.head;
-            Node two = l2.head;
-
-            LinkedList res = new LinkedList();
-            while (one != null && two != null) {
-                if (one.data < two.data) {
-                    res.addLast(one.data);
-                    one = one.next;
-                } else {
-                    res.addLast(two.data);
-                    two = two.next;
-                }
-            }
-
-            while (one != null) {
-                res.addLast(one.data);
+        while (one != null && two != null) {
+            if (one.data < two.data) {
+                curr.next = one;
                 one = one.next;
-            }
-
-            while (two != null) {
-                res.addLast(two.data);
+            } else {
+                curr.next = two;
                 two = two.next;
             }
-            return res;
+            curr = curr.next;
         }
+
+        if (one != null) curr.next = one;
+        if (two != null) curr.next = two;
+
+        return dummy.next;
     }
 
     public static void main(String[] args) {
-        // Create the first linked list
-        LinkedList l1 = new LinkedList();
-        l1.addLast(10);
-        l1.addLast(20);
-        l1.addLast(30);
-        l1.addLast(40);
-        l1.addLast(50);
+        // First Linked List
+        Node head1 = null, tail1 = null;
+        int[] arr1 = {10, 20, 30, 40, 50};
+        for (int val : arr1) {
+            if (head1 == null) {
+                head1 = tail1 = new Node();
+                head1.data = val;
+            } else {
+                tail1 = addLast(tail1, val);
+            }
+        }
 
-        // Create the second linked list
-        LinkedList l2 = new LinkedList();
-        l2.addLast(7);
-        l2.addLast(9);
-        l2.addLast(12);
-        l2.addLast(15);
-        l2.addLast(37);
-        l2.addLast(43);
-        l2.addLast(44);
-        l2.addLast(48);
-        l2.addLast(52);
-        l2.addLast(56);
+        // Second Linked List
+        Node head2 = null, tail2 = null;
+        int[] arr2 = {7, 9, 12, 15, 37, 43, 44, 48, 52, 56};
+        for (int val : arr2) {
+            if (head2 == null) {
+                head2 = tail2 = new Node();
+                head2.data = val;
+            } else {
+                tail2 = addLast(tail2, val);
+            }
+        }
 
         // Merge the two sorted linked lists
-        LinkedList merged = LinkedList.mergeTwoSortedLists(l1, l2);
+        Node mergedHead = mergeTwoSortedLists(head1, head2);
 
-        // Display the merged list
+        // Display merged list
         System.out.println("Merged List:");
-        merged.display();
+        display(mergedHead);
+    }
+
+    public static class Node {
+        int data;
+        Node next;
     }
 }

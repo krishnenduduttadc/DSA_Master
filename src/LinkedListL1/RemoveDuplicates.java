@@ -1,96 +1,73 @@
 package LinkedListL1;
 
 public class RemoveDuplicates {
-    public static class Node {
-        int data;
-        Node next;
+    // Add a new node at the end
+    public static Node addLast(Node head, int val) {
+        Node temp = new Node();
+        temp.data = val;
+        temp.next = null;
+
+        if (head == null) {
+            return temp;
+        }
+        Node curr = head;
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+        curr.next = temp;
+        return head;
     }
 
-    public static class LinkedList {
-        Node head;
-        Node tail;
-        int size;
+    // Display the list
+    public static void display(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
 
-        void addLast(int val) {
-            Node temp = new Node();
-            temp.data = val;
-            temp.next = null;
+    // Remove duplicates from sorted list
+    public static Node removeDuplicates(Node head) {
+        if (head == null) return null;
 
-            if (size == 0) {
-                head = tail = temp;
-            } else {
-                tail.next = temp;
-                tail = temp;
+        Node dummy = new Node();
+        Node resTail = dummy;
+        Node curr = head;
+
+        while (curr != null) {
+            if (resTail == dummy || resTail.data != curr.data) {
+                resTail.next = curr;
+                resTail = resTail.next;
             }
-
-            size++;
+            curr = curr.next;
         }
-
-        public int size() {
-            return size;
-        }
-
-        public void display() {
-            for (Node temp = head; temp != null; temp = temp.next) {
-                System.out.print(temp.data + " ");
-            }
-            System.out.println();
-        }
-
-        public void removeFirst() {
-            if (size == 0) {
-                System.out.println("List is empty");
-            } else if (size == 1) {
-                head = tail = null;
-                size = 0;
-            } else {
-                head = head.next;
-                size--;
-            }
-        }
-
-        public int getFirst() {
-            if (size == 0) {
-                System.out.println("List is empty");
-                return -1;
-            } else {
-                return head.data;
-            }
-        }
-
-        public void removeDuplicates(){
-            LinkedList res = new LinkedList();
-
-            while(this.size() > 0){
-                int val = this.getFirst();
-                this.removeFirst();
-
-                if(res.size() == 0 || res.tail.data != val){
-                    res.addLast(val);
-                }
-            }
-
-            this.head = res.head;
-            this.tail = res.tail;
-            this.size = res.size;
-        }
+        resTail.next = null;
+        return dummy.next;
     }
 
     public static void main(String[] args) {
         // Hardcoded input
         int[] elements = {2, 2, 2, 3, 3, 5, 5, 5, 5, 5};
 
-        LinkedList l1 = new LinkedList();
+        Node head = null;
         for (int element : elements) {
-            l1.addLast(element);
+            head = addLast(head, element);
         }
 
         System.out.println("Original List:");
-        l1.display();
+        display(head);
 
-        l1.removeDuplicates();
+        head = removeDuplicates(head);
 
         System.out.println("List after removing duplicates:");
-        l1.display();
+        display(head);
+    }
+
+    // Only allowed inner class
+    public static class Node {
+        int data;
+        Node next;
     }
 }
