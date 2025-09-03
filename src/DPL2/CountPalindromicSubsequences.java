@@ -15,7 +15,7 @@ public class CountPalindromicSubsequences {
         String str = "abccbc";
         int[][] dp = new int[str.length()][str.length()];
         for (int g = 0; g < str.length(); g++) {
-            for (int i = 0, j = g; j < dp[0].length; i++, j++) {
+            for (int i = 0, j = g; j < str.length(); i++, j++) {
                 if (g == 0) {
                     dp[i][j] = 1;
                 } else if (g == 1) {
