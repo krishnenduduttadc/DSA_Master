@@ -15,7 +15,7 @@ public class Kahn {
         }
 
         Queue<Integer> q = new LinkedList<Integer>();
-        ;
+
         for (int i = 0; i < V; i++) {
             if (indegree[i] == 0) {
                 q.add(i);
