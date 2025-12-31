@@ -3,57 +3,94 @@ package HML2;
 import java.util.HashMap;
 
 public class SmallestSubstringOfAStringContainingAllCharactersOfAnotherString {
-    public static String solution(String s1, String s2){
-        // write your code here
-        String ans="";
-        HashMap<Character,Integer> map2=new HashMap<>();
-        for(int i=0;i<s2.length();i++){
-            char ch=s2.charAt(i);
-            map2.put(ch,map2.getOrDefault(ch,0)+1);
+    public static String solution2(String s, String t) {
+        HashMap<Character, Integer> need = new HashMap<>();
+        for (char c : t.toCharArray())
+            need.put(c, need.getOrDefault(c, 0) + 1);
+
+        HashMap<Character, Integer> window = new HashMap<>();
+        int have = 0, needCount = t.length();
+        int left = 0;
+        int minLen = Integer.MAX_VALUE;
+        int start = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            window.put(c, window.getOrDefault(c, 0) + 1);
+
+            if (window.getOrDefault(c, 0) <= need.getOrDefault(c, 0)) {
+                have++;
+            }
+
+            while (have == needCount) {
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
+                    start = left;
+                }
+
+                char lc = s.charAt(left);
+                window.put(lc, window.get(lc) - 1);
+                if (window.get(lc) < need.getOrDefault(lc, 0)) {
+                    have--;
+                }
+                left++;
+            }
         }
 
-        int mct=0;
-        int dmct=s2.length();
-        HashMap<Character,Integer> map1=new HashMap<>();
-        int j=-1;
-        int i=-1;
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+    }
 
-        while(true){
-            boolean f1=false;
-            boolean f2=false;
+    public static String solution(String s1, String s2) {
+        // write your code here
+        String ans = "";
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        for (int i = 0; i < s2.length(); i++) {
+            char ch = s2.charAt(i);
+            map2.put(ch, map2.getOrDefault(ch, 0) + 1);
+        }
 
-            while(i<s1.length()-1 && mct<dmct){
+        int mct = 0;
+        int dmct = s2.length();
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        int j = -1;
+        int i = -1;
+
+        while (true) {
+            boolean f1 = false;
+            boolean f2 = false;
+
+            while (i < s1.length() - 1 && mct < dmct) {
                 i++;
-                char ch=s1.charAt(i);
-                map1.put(ch,map1.getOrDefault(ch,0)+1);
-                if(map1.getOrDefault(ch,0) <= map2.getOrDefault(ch,0)){
+                char ch = s1.charAt(i);
+                map1.put(ch, map1.getOrDefault(ch, 0) + 1);
+                if (map1.getOrDefault(ch, 0) <= map2.getOrDefault(ch, 0)) {
                     mct++;
                 }
-                f1=true;
+                f1 = true;
 
             }
 
-            while(j<i && mct==dmct){
-                String pans=s1.substring(j+1,i+1);
-                if(ans.length()==0 || pans.length()<ans.length()){
-                    ans=pans;
+            while (j < i && mct == dmct) {
+                String pans = s1.substring(j + 1, i + 1);
+                if (ans.length() == 0 || pans.length() < ans.length()) {
+                    ans = pans;
                 }
                 j++;
-                char ch=s1.charAt(j);
-                if(map1.get(ch)==1){
+                char ch = s1.charAt(j);
+                if (map1.get(ch) == 1) {
                     map1.remove(ch);
 
-                }else{
-                    map1.put(ch,map1.get(ch)-1);
+                } else {
+                    map1.put(ch, map1.get(ch) - 1);
                 }
 
-                if(map1.getOrDefault(ch,0)<map2.getOrDefault(ch,0)){
+                if (map1.getOrDefault(ch, 0) < map2.getOrDefault(ch, 0)) {
                     mct--;
                 }
-                f2=true;
+                f2 = true;
             }
 
-            if(f1==false && f2==false){
+            if (f1 == false && f2 == false) {
                 break;
             }
         }
@@ -64,7 +101,8 @@ public class SmallestSubstringOfAStringContainingAllCharactersOfAnotherString {
     public static void main(String[] args) {
         String s1 = "timetopractice";
         String s2 = "toc";
-        System.out.println(solution(s1,s2));
+        System.out.println(solution(s1, s2));
+        System.out.println(solution2(s1, s2));
     }
 }
 

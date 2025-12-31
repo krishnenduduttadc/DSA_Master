@@ -6,8 +6,29 @@ public class LongestSubstringwithoutRepeatingCharacters {
     public static void main(String[] args) {
         String str = "abbacbcdbadbdbbdcb";
         //String str = "abcabcbb";
-        System.out.println(sol(str));
+        //System.out.println(sol(str));
+        System.out.println(sol2(str));
     }
+
+    static int sol2(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int left = 0, ans = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char ch = s.charAt(right);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+
+            while (map.get(ch) > 1) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map.get(leftChar) - 1);
+                left++;
+            }
+
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+
 
     static int sol(String str) {
 

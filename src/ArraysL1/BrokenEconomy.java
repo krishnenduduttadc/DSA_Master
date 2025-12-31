@@ -7,7 +7,7 @@ public class BrokenEconomy {
         int[] a = {4, 3, 6, 2, 1};
         int d = 2;
 
-        Arrays.sort(a);  // ✅ Fix
+        Arrays.sort(a);
 
         int l = 0;
         int h = a.length - 1;

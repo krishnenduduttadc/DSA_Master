@@ -5,59 +5,31 @@ import java.util.HashMap;
 public class LongestSubstringwithatmostKUniqueCharacters {
     public static void main(String[] args) {
         String str = "ddacbbaccdedacebb";
-        int k=3;
-        System.out.println(sol(str,k));
+        int k = 3;
+        System.out.println(longestSubstringAtMostK(str, k));
     }
 
-    static int sol(String str, int k) {
-        int ans = 0;
-        int i = -1;
-        int j = -1;
+    static int longestSubstringAtMostK(String s, int k) {
         HashMap<Character, Integer> map = new HashMap<>();
-        while (true) {
-            boolean f1 = false;
-            boolean f2 = false;
-            while (i < str.length() - 1) {
-                f1 = true;
-                i++;
-                char ch = str.charAt(i);
-                map.put(ch, map.getOrDefault(ch, 0) + 1);
-                if (map.size() <= k) {
-                    int len = i - j;
-                    if (len > ans) {
-                        ans = len;
-                    } else {
-                        break;
-                    }
+        int left = 0, ans = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char ch = s.charAt(right);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+
+            while (map.size() > k) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map.get(leftChar) - 1);
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
                 }
+                left++;
             }
 
-
-            while (j < i) {
-                f2 = true;
-                j++;
-                char ch = str.charAt(j);
-                if (map.get(ch) == 1) {
-                    map.remove(ch);
-                } else {
-                    map.put(ch, map.get(ch) - 1);
-                }
-
-                if (map.size() > k) {
-                    continue;
-                } else {
-                    int len = i - j;
-                    if (len > ans) {
-                        ans = len;
-                    }
-                    break;
-                }
-
-            }
-            if (f1 == false && f2 == false) {
-                break;
-            }
+            ans = Math.max(ans, right - left + 1);
         }
         return ans;
     }
+
+
 }
