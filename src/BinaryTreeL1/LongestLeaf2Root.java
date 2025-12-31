@@ -12,32 +12,22 @@ import java.util.ArrayList;
  */
 public class LongestLeaf2Root {
     public static ArrayList<Integer> longestRootToLeafPath(Node root) {
+        ArrayList<Integer> result = new ArrayList<>();
         if (root == null) {
-            return null;
-        }
-        if (root.left == null && root.right == null) {
-            ArrayList<Integer> ans = new ArrayList<Integer>();
-            ans.add(root.data);
-            return ans;
+            return result;
         }
         ArrayList<Integer> left = longestRootToLeafPath(root.left);
         ArrayList<Integer> right = longestRootToLeafPath(root.right);
-        if (left == null) {
-            right.add(root.data);
-            return right;
+
+        // Pick longer path
+        if (left.size() > right.size()) {
+            result.addAll(left);
+        } else {
+            result.addAll(right);
         }
 
-        if (right == null) {
-            left.add(root.data);
-            return left;
-        }
-        if (left.size() > right.size()) {
-            left.add(root.data);
-            return left;
-        } else {
-            right.add(root.data);
-            return right;
-        }
+        result.add(root.data);
+        return result;
     }
 
     public static void main(String args[]) {

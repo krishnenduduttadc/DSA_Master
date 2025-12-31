@@ -11,39 +11,27 @@ package BinaryTreeL1;
  */
 public class LCA {
 
-    static int getLCA(Node root, int a, int b) {
 
-        /* Your class should be named Solution
-         * Don't write main().
-         * Don't read input, it is passed as function argument.
-         * Return output and don't print it.
-         * Taking input and printing output is handled automatically.
-         */
-        Node node = getLCA2(root, a, b);
-        return node.data;
-
-    }
-
-    static Node getLCA2(Node root, int n1, int n2) {
-
+    public static Node getLCA(Node root, int a, int b) {
         if (root == null) {
             return null;
         }
-        if (root.data == n1 || root.data == n2) {
+
+        // If current node matches either a or b
+        if (root.data == a || root.data == b) {
             return root;
         }
 
-        Node lca1 = getLCA2(root.left, n1, n2);
-        Node lca2 = getLCA2(root.right, n1, n2);
+        Node left = getLCA(root.left, a, b);
+        Node right = getLCA(root.right, a, b);
 
-        if (lca1 != null && lca2 != null) {
+        // If a and b are found in different subtrees
+        if (left != null && right != null) {
             return root;
         }
-        if (lca1 != null) {
-            return lca1;
-        } else {
-            return lca2;
-        }
+
+        // Otherwise return the non-null child
+        return (left != null) ? left : right;
     }
 
     public static void main(String args[]) {
@@ -52,7 +40,7 @@ public class LCA {
         root.right = new Node(8);
         root.right.left = new Node(7);
         root.right.right = new Node(9);
-        System.out.println("" + getLCA(root, 3, 7));
+        System.out.println("" + getLCA(root, 3, 7).data);
     }
 
     public static class Node {
