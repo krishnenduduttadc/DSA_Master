@@ -1,157 +1,88 @@
 package LinkedListL1;
 
-
-
 public class AddAtIndex {
-    public static class Node {
-        int data;
-        Node next;
-    }
 
-    public static class LinkedList {
-        Node head;
-        Node tail;
-        int size;
-
-        void addLast(int val) {
-            Node temp = new Node();
-            temp.data = val;
-            temp.next = null;
-
-            if (size == 0) {
-                head = tail = temp;
-            } else {
-                tail.next = temp;
-                tail = temp;
-            }
-
-            size++;
-        }
-
-        public int size() {
-            return size;
-        }
-
-        public void display() {
-            for (Node temp = head; temp != null; temp = temp.next) {
-                System.out.print(temp.data + " ");
-            }
-            System.out.println();
-        }
-
-        public void removeFirst() {
-            if (size == 0) {
-                System.out.println("List is empty");
-            } else if (size == 1) {
-                head = tail = null;
-                size = 0;
-            } else {
-                head = head.next;
-                size--;
-            }
-        }
-
-        public int getFirst() {
-            if (size == 0) {
-                System.out.println("List is empty");
-                return -1;
-            } else {
-                return head.data;
-            }
-        }
-
-        public int getLast() {
-            if (size == 0) {
-                System.out.println("List is empty");
-                return -1;
-            } else {
-                return tail.data;
-            }
-        }
-
-        public int getAt(int idx) {
-            if (size == 0) {
-                System.out.println("List is empty");
-                return -1;
-            } else if (idx < 0 || idx >= size) {
-                System.out.println("Invalid arguments");
-                return -1;
-            } else {
-                Node temp = head;
-                for (int i = 0; i < idx; i++) {
-                    temp = temp.next;
-                }
-                return temp.data;
-            }
-        }
-
-        public void addFirst(int val) {
-            Node temp = new Node();
-            temp.data = val;
-            temp.next = head;
-            head = temp;
-
-            if (size == 0) {
-                tail = temp;
-            }
-
-            size++;
-        }
-
-        public void addAt(int idx, int val) {
-            if (idx < 0 || idx > size) {
-                System.out.println("Invalid arguments");
-            } else if (idx == 0) {
-                addFirst(val);
-            } else if (idx == size) {
-                addLast(val);
-            } else {
-                Node node = new Node();
-                node.data = val;
-                Node temp = head;
-                for (int i = 0; i < idx - 1; i++) {
-                    temp = temp.next;
-                }
-
-                node.next = temp.next;
-                temp.next = node;
-
-                size++;
-            }
-        }
-    }
+    static Node head, tail;
+    static int size = 0;
 
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
 
-        list.addFirst(10);
-        System.out.println(list.getFirst()); // 10
+        addFirst(10);
+        addAt(0, 20);
+        addAt(2, 40);
+        addAt(1, 50);
+        addFirst(30);
+        addAt(2, 60);
+        display();
 
-        list.addAt(0, 20);
-        System.out.println(list.getFirst()); // 20
-        System.out.println(list.getLast()); // 10
 
-        list.display(); // 20 10
+    }
 
-        System.out.println(list.size()); // 2
+    static void addFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
 
-        list.addAt(2, 40);
-        System.out.println(list.getLast()); // 40
+        if (size == 0) {
+            tail = node;
+        }
+        size++;
+    }
 
-        list.addAt(1, 50);
-        list.addFirst(30);
-        list.removeFirst();
-        System.out.println(list.getFirst()); // 20
+    // ===== Linked List Methods =====
 
-        list.removeFirst();
-        list.removeFirst();
-        list.addAt(2, 60);
-        list.display(); // 50 10 60
+    static void addLast(int val) {
+        Node node = new Node(val);
 
-        System.out.println(list.size()); // 3
+        if (size == 0) {
+            head = tail = node;
+        } else {
+            tail.next = node;
+            tail = node;
+        }
+        size++;
+    }
 
-        list.removeFirst();
-        list.removeFirst();
-        System.out.println(list.getFirst()); // 60
+    static void addAt(int idx, int val) {
+        if (idx < 0 || idx > size) {
+            System.out.println("Invalid arguments");
+            return;
+        }
+
+        if (idx == 0) {
+            addFirst(val);
+        } else if (idx == size) {
+            addLast(val);
+        } else {
+            Node node = new Node(val);
+            Node temp = head;
+
+            for (int i = 0; i < idx - 1; i++) {
+                temp = temp.next;
+            }
+
+            node.next = temp.next;
+            temp.next = node;
+            size++;
+        }
+    }
+
+
+    static void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
     }
 }

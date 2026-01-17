@@ -15,12 +15,9 @@ public class OddEven {
         list.addLast(5);
         list.addLast(4);
         list.addLast(3);
-
         System.out.print("Original List: ");
         list.display();
-
         list.oddEven();
-
         System.out.print("List after Odd-Even Segregation: ");
         list.display();
     }

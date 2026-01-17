@@ -51,7 +51,7 @@ public class IsPalin {
         return true;
     }
 
-    // ✅ Only inner class allowed
+
     public static class Node {
         int data;
         Node next;
