@@ -5,22 +5,9 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class NegativeWtCycle {
-    public static class Pair implements Comparable<Pair>{
-        int vtx, wsf;
-
-        Pair(int vtx, int wsf){
-            this.vtx = vtx;
-            this.wsf = wsf;
-        }
-
-        public int compareTo(Pair other){
-            return this.wsf - other.wsf;
-        }
-    }
-
     // Function to find the shortest distance of all vertices from source vertex S.
-    static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S) {
-        int[] ans = new int[V];
+    static int[] dijkstra(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S) {
+        int[] ans = new int[v];
         Arrays.fill(ans, Integer.MAX_VALUE);
         PriorityQueue<Pair> pq = new PriorityQueue<>();
 
@@ -82,6 +69,19 @@ public class NegativeWtCycle {
         System.out.println("Shortest distances from vertex " + sourceVertex + ": ");
         for (int i = 0; i < V; i++) {
             System.out.println("Vertex " + i + ": " + shortestDistances[i]);
+        }
+    }
+
+    public static class Pair implements Comparable<Pair> {
+        int vtx, wsf;
+
+        Pair(int vtx, int wsf) {
+            this.vtx = vtx;
+            this.wsf = wsf;
+        }
+
+        public int compareTo(Pair other) {
+            return this.wsf - other.wsf;
         }
     }
 }

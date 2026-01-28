@@ -14,7 +14,6 @@ class Tarjan {
                 {2, 0}, {1, 3}
         };
 
-        // ✅ Fix: Parse edges properly
         List<List<Integer>> connections = new ArrayList<>();
         for (int i = 0; i < edges.length; i++) {
             connections.add(Arrays.asList(edges[i][0], edges[i][1]));

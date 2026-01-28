@@ -3,7 +3,7 @@ package GraphL3;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Topo_dfs {
+public class TopoDFS {
 
     private static void dfs(int node, int vis[], Stack<Integer> st,
                             ArrayList<ArrayList<Integer>> adj) {
@@ -47,7 +47,7 @@ public class Topo_dfs {
         adj.get(5).add(0);
         adj.get(5).add(2);
 
-        int[] ans = Topo_dfs.topoSort(V, adj);
+        int[] ans = TopoDFS.topoSort(V, adj);
         for (int node : ans) {
             System.out.print(node + " ");
         }

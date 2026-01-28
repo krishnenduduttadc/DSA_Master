@@ -25,28 +25,23 @@ public class TerminalNodes {
     public void addEdge(int source, int destination) {
         adjacencyList.putIfAbsent(source, new ArrayList<>());
         adjacencyList.get(source).add(destination);
-        // Do not initialize destination with an empty list here
     }
 
     public void printTerminalNodes() {
         Set<Integer> nodesWithOutgoingEdges = adjacencyList.keySet();
         Set<Integer> allNodes = new HashSet<>();
 
-        // Add all sources and destinations to allNodes
         for (Map.Entry<Integer, List<Integer>> entry : adjacencyList.entrySet()) {
             allNodes.add(entry.getKey());
             allNodes.addAll(entry.getValue());
         }
-
         List<Integer> terminalNodes = new ArrayList<>();
-
         // Terminal nodes = allNodes - nodesWithOutgoingEdges
         for (int node : allNodes) {
             if (!nodesWithOutgoingEdges.contains(node)) {
                 terminalNodes.add(node);
             }
         }
-
         System.out.println("Terminal Nodes:");
         for (int node : terminalNodes) {
             System.out.println(node);

@@ -4,20 +4,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class RottenOranges {
-    // Class representing a pair of (row, column) coordinates and the time at which the orange rots.
-    static class Pair {
-        int row;
-        int col;
-        int tm;
-
-        Pair(int _row, int _col, int _tm) {
-            this.row = _row;
-            this.col = _col;
-            this.tm = _tm;
-        }
+    public static void main(String[] args) {
+        int[][] grid = {{0, 1, 2}, {0, 1, 2}, {2, 1, 1}};
+        RottenOranges obj = new RottenOranges();
+        int ans = obj.orangesRotting(grid);
+        System.out.println(ans);
     }
 
-    // Function to find minimum time required to rot all oranges.
     public int orangesRotting(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
@@ -33,7 +26,6 @@ public class RottenOranges {
                 } else {
                     vis[i][j] = 0;
                 }
-
                 if (grid[i][j] == 1) cntFresh++;
             }
         }
@@ -62,17 +54,19 @@ public class RottenOranges {
                 }
             }
         }
-
         if (cnt != cntFresh) return -1;
         return tm;
     }
 
-    // Main method
-    public static void main(String[] args) {
-        int[][] grid =  {{0,1,2},{0,1,2},{2,1,1}};
+    static class Pair {
+        int row;
+        int col;
+        int tm;
 
-        RottenOranges obj = new RottenOranges();
-        int ans = obj.orangesRotting(grid);
-        System.out.println(ans);
+        Pair(int _row, int _col, int _tm) {
+            this.row = _row;
+            this.col = _col;
+            this.tm = _tm;
+        }
     }
 }

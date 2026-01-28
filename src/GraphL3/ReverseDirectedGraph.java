@@ -26,14 +26,14 @@ public class ReverseDirectedGraph {
         }
     }
 
-    public static ArrayList<ArrayList<Integer>> reverseDirectedGraph(ArrayList<ArrayList<Integer>> adj, int V) {
+    public static ArrayList<ArrayList<Integer>> reverseDirectedGraph(ArrayList<ArrayList<Integer>> adj, int v) {
         ArrayList<ArrayList<Integer>> reversedAdj = new ArrayList<>();
-        for (int i = 0; i <=V ; i++) {
+        for (int i = 0; i <= v; i++) {
             reversedAdj.add(new ArrayList<>());
         }
 
-        for (int i = 0; i <=V ; i++) {
-            for (int j:adj.get(i)) {
+        for (int i = 0; i <= v; i++) {
+            for (int j : adj.get(i)) {
                 reversedAdj.get(j).add(i);
             }
         }
