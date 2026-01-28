@@ -5,10 +5,7 @@
  */
 package DPL2;
 
-/**
- *
- * @author krish
- */
+
 public class WildCardPatternMatching {
 
     public static void main(String[] args) {

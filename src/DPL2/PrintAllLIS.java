@@ -1,4 +1,4 @@
-package DPL1;
+package DPL2;
 
 import java.util.ArrayDeque;
 
@@ -8,7 +8,7 @@ public class PrintAllLIS {
         int n = arr.length;
         int[] dp = new int[n];
         int omax = 0;
-        int omi=0;
+        int omi = 0;
 
         for (int i = 0; i < n; i++) {
             int max = 0;
@@ -22,21 +22,21 @@ public class PrintAllLIS {
             dp[i] = max + 1;
             if (dp[i] > omax) {
                 omax = dp[i];
-                omi=i;
+                omi = i;
             }
         }
 
-        ArrayDeque<Pair> q=new ArrayDeque<>();
-        q.add(new Pair(omax,omi,arr[omi],arr[omi]+""));
-        while(!q.isEmpty()){
-            Pair rem=q.removeFirst();
-            if(rem.l==1){
+        ArrayDeque<Pair> q = new ArrayDeque<>();
+        q.add(new Pair(omax, omi, arr[omi], arr[omi] + ""));
+        while (!q.isEmpty()) {
+            Pair rem = q.removeFirst();
+            if (rem.l == 1) {
                 System.out.println(rem.psf);
             }
 
-            for(int j=rem.i-1;j>=0;j--){
-                if(dp[j]==rem.l-1 && arr[j]<=rem.v){
-                    q.add(new Pair(dp[j],j,arr[j],arr[j]+" -> "+rem.psf));
+            for (int j = rem.i - 1; j >= 0; j--) {
+                if (dp[j] == rem.l - 1 && arr[j] <= rem.v) {
+                    q.add(new Pair(dp[j], j, arr[j], arr[j] + " -> " + rem.psf));
                 }
             }
 
@@ -44,8 +44,6 @@ public class PrintAllLIS {
 
 
     }
-
-
 
 
     static class Pair {

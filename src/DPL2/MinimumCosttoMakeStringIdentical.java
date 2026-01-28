@@ -5,10 +5,7 @@
  */
 package DPL2;
 
-/**
- *
- * @author krish
- */
+
 public class MinimumCosttoMakeStringIdentical {
 
     public static void main(String[] args) {
@@ -34,17 +31,17 @@ public class MinimumCosttoMakeStringIdentical {
                     if (s1.charAt(i) == s2.charAt(j)) {
                         dp[i][j] = 1 + dp[i + 1][j + 1];
                     } else {
-                        dp[i][j] = Math.max(dp[i+1][j],dp[i][j+1]);
+                        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
                     }
                 }
 
             }
         }
-        
-        int lcs=dp[0][0];
-        int s1r=s1.length()-lcs;
-        int s2r=s2.length()-lcs;
-        int cost=s1r*c1+s2r*c2;
+
+        int lcs = dp[0][0];
+        int s1r = s1.length() - lcs;
+        int s2r = s2.length() - lcs;
+        int cost = s1r * c1 + s2r * c2;
         return cost;
     }
 }

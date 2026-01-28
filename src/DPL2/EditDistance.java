@@ -30,7 +30,6 @@ public class EditDistance {
             }
         }
 
-        // Print the result (minimum edit distance)
         System.out.println(dp[s1.length()][s2.length()]);
     }
 }

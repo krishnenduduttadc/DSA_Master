@@ -5,10 +5,7 @@
  */
 package DPL2;
 
-/**
- *
- * @author krish
- */
+
 public class TempleOfferings {
 
     public static void main(String[] args) {

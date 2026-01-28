@@ -7,24 +7,8 @@ package DPL2;
 
 import java.util.ArrayDeque;
 
-/**
- *
- * @author krish
- */
+
 public class AllPathsMinimumJumps {
-
-    public static class Pair {
-
-        int i, s, j;
-        String psf;
-
-        Pair(int i, int s, int j, String psf) {
-            this.i = i;
-            this.s = s;
-            this.j = j;
-            this.psf = psf;
-        }
-    }
 
     public static void main(String[] args) {
         int arr[] = {3, 3, 0, 2, 1, 2, 4, 2, 0, 0};
@@ -52,8 +36,8 @@ public class AllPathsMinimumJumps {
         queue.add(new Pair(0, arr[0], dp[0], 0 + ""));
         while (queue.size() > 0) {
             Pair rem = queue.removeFirst();
-            if(rem.j==0){
-                System.out.println(rem.psf+".");
+            if (rem.j == 0) {
+                System.out.println(rem.psf + ".");
             }
             for (int j = 1; j <= rem.s && rem.i + j < arr.length; j++) {
                 int ci = rem.i + j;
@@ -61,6 +45,19 @@ public class AllPathsMinimumJumps {
                     queue.add(new Pair(ci, arr[ci], dp[ci], rem.psf + "->" + ci));
                 }
             }
+        }
+    }
+
+    public static class Pair {
+
+        int i, s, j;
+        String psf;
+
+        Pair(int i, int s, int j, String psf) {
+            this.i = i;
+            this.s = s;
+            this.j = j;
+            this.psf = psf;
         }
     }
 }

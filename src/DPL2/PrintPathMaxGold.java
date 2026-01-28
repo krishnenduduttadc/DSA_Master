@@ -1,36 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DPL2;
 
 import java.util.ArrayDeque;
 
-/**
- *
- * @author krish
- */
+
 public class PrintPathMaxGold {
-
-    public static class Pair {
-
-        int j, i;
-        String psf;
-
-        Pair(String psf, int i, int j) {
-            this.j = j;
-            this.i = i;
-            this.psf = psf;
-        }
-    }
 
     public static void main(String[] args) {
         int arr[][] = {
-            {3, 2, 3, 1},
-            {2, 4, 6, 0},
-            {5, 0, 1, 3},
-            {9, 1, 5, 1}
+                {3, 2, 3, 1},
+                {2, 4, 6, 0},
+                {5, 0, 1, 3},
+                {9, 1, 5, 1}
         };
 
         int[][] dp = new int[arr.length][arr[0].length];
@@ -100,5 +80,17 @@ public class PrintPathMaxGold {
             }
         }
 
+    }
+
+    public static class Pair {
+
+        int j, i;
+        String psf;
+
+        Pair(String psf, int i, int j) {
+            this.j = j;
+            this.i = i;
+            this.psf = psf;
+        }
     }
 }

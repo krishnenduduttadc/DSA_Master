@@ -5,10 +5,7 @@
  */
 package DPL2;
 
-/**
- *
- * @author krish
- */
+
 public class CountPalindromicSubsequences {
 
     public static void main(String[] args) {

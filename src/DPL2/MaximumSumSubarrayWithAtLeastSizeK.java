@@ -5,10 +5,7 @@
  */
 package DPL2;
 
-/**
- *
- * @author krish
- */
+
 public class MaximumSumSubarrayWithAtLeastSizeK {
 
     public static void main(String[] args) {
@@ -30,23 +27,23 @@ public class MaximumSumSubarrayWithAtLeastSizeK {
             }
             maxsum[i] = csum;
         }
-        
-        int exactK=0;
-        for(int i=0;i<k;i++){
-            exactK+=arr[i];
+
+        int exactK = 0;
+        for (int i = 0; i < k; i++) {
+            exactK += arr[i];
         }
-        if(exactK>ans){
-            ans=exactK;
+        if (exactK > ans) {
+            ans = exactK;
         }
-        
-        for(int i=k;i<arr.length;i++){
-            exactK=exactK+arr[i]-arr[i-k];
-            if(exactK>ans){
-                ans=exactK;
+
+        for (int i = k; i < arr.length; i++) {
+            exactK = exactK + arr[i] - arr[i - k];
+            if (exactK > ans) {
+                ans = exactK;
             }
-            int morethanK=maxsum[i-k]+exactK;
-            if(morethanK>ans){
-                ans=morethanK;
+            int morethanK = maxsum[i - k] + exactK;
+            if (morethanK > ans) {
+                ans = morethanK;
             }
         }
         return ans;

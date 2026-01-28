@@ -5,10 +5,7 @@
  */
 package DPL2;
 
-/**
- *
- * @author krish
- */
+
 public class ArithmaticSlices {
 
     public static void main(String[] args) {

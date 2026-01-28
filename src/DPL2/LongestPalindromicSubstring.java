@@ -1,4 +1,4 @@
-package DPL1;
+package DPL2;
 
 public class LongestPalindromicSubstring {
     public static void main(String[] args) {

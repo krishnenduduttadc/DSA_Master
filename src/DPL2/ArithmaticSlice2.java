@@ -7,10 +7,7 @@ package DPL2;
 
 import java.util.HashMap;
 
-/**
- *
- * @author krish
- */
+
 public class ArithmaticSlice2 {
 
     public static void main(String[] args) {
