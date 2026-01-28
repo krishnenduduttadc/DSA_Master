@@ -6,16 +6,28 @@ import java.util.List;
 import java.util.Queue;
 
 public class AlientDict {
-    private List<Integer> topoSort(int V, List<List<Integer>> adj) {
-        int indegree[] = new int[V];
-        for (int i = 0; i < V; i++) {
+    public static void main(String[] args) {
+        int N = 5, K = 4;
+        String[] dict = {"baa", "abcd", "abca", "cab", "cad"};
+        AlientDict obj = new AlientDict();
+        String ans = obj.findOrder(dict, N, K);
+
+        for (int i = 0; i < ans.length(); i++) {
+            System.out.print(ans.charAt(i) + " ");
+        }
+        System.out.println("");
+    }
+
+    private List<Integer> topoSort(int v, List<List<Integer>> adj) {
+        int indegree[] = new int[v];
+        for (int i = 0; i < v; i++) {
             for (int it : adj.get(i)) {
                 indegree[it]++;
             }
         }
 
         Queue<Integer> q = new LinkedList<>();
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < v; i++) {
             if (indegree[i] == 0) {
                 q.add(i);
             }
@@ -36,7 +48,8 @@ public class AlientDict {
 
         return topo;
     }
-    public String findOrder(String [] dict, int N, int K) {
+
+    public String findOrder(String[] dict, int N, int K) {
         List<List<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < K; i++) {
             adj.add(new ArrayList<>());
@@ -58,23 +71,10 @@ public class AlientDict {
         List<Integer> topo = topoSort(K, adj);
         String ans = "";
         for (int it : topo) {
-            ans = ans + (char)(it + (int)('a'));
+            ans = ans + (char) (it + (int) ('a'));
         }
 
         return ans;
 
-    }
-
-
-    public static void main(String[] args) {
-        int N = 5, K = 4;
-        String[] dict = {"baa", "abcd", "abca", "cab", "cad"};
-        AlientDict obj = new AlientDict();
-        String ans = obj.findOrder(dict, N, K);
-
-        for (int i = 0; i < ans.length(); i++) {
-            System.out.print(ans.charAt(i) + " ");
-        }
-        System.out.println("");
     }
 }

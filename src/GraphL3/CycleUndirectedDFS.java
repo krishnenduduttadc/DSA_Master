@@ -21,9 +21,9 @@ public class CycleUndirectedDFS {
             System.out.println("cycle does not exist");
     }
 
-    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
-        boolean vis[] = new boolean[V];
-        for (int i = 0; i < V; i++) {
+    public boolean isCycle(int v, ArrayList<ArrayList<Integer>> adj) {
+        boolean vis[] = new boolean[v];
+        for (int i = 0; i < v; i++) {
             if (vis[i] == false) {
                 if (dfs(i, -1, vis, adj) == true) return true;
             }

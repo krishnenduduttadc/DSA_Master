@@ -65,11 +65,11 @@ public class Dijkastra {
         System.out.println();
     }
 
-    static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s) {
+    static int[] dijkstra(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s) {
         PriorityQueue<Pair> pq =
                 new PriorityQueue<Pair>((x, y) -> x.distance - y.distance);
-        int[] dist = new int[V];
-        for (int i = 0; i < V; i++) dist[i] = (int) (1e9);
+        int[] dist = new int[v];
+        for (int i = 0; i < v; i++) dist[i] = (int) (1e9);
         dist[s] = 0;
         pq.add(new Pair(0, s));
 

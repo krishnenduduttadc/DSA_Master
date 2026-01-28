@@ -9,20 +9,6 @@ public class Kruskal {
     private List<Integer> parent;
     private List<Integer> size;
 
-    private static class Edge implements Comparable<Edge> {
-        int src, dest, weight;
-
-        Edge(int src, int dest, int wt) {
-            this.src = src;
-            this.dest = dest;
-            this.weight = wt;
-        }
-
-        public int compareTo(Edge compareEdge) {
-            return this.weight - compareEdge.weight;
-        }
-    }
-
     public Kruskal(int n) {
         rank = new ArrayList<>();
         parent = new ArrayList<>();
@@ -33,6 +19,39 @@ public class Kruskal {
             parent.add(i);
             size.add(1);
         }
+    }
+
+    public static void main(String[] args) {
+        int V = 5;
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+
+        int[][] edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
+
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<ArrayList<Integer>>());
+        }
+
+        for (int i = 0; i < 6; i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int w = edges[i][2];
+
+            ArrayList<Integer> tmp1 = new ArrayList<>();
+            ArrayList<Integer> tmp2 = new ArrayList<>();
+
+            tmp1.add(v);
+            tmp1.add(w);
+
+            tmp2.add(u);
+            tmp2.add(w);
+
+            adj.get(u).add(tmp1);
+            adj.get(v).add(tmp2);
+        }
+
+        Kruskal kruskal = new Kruskal(V);
+        int mstWt = kruskal.findMST(V, adj);
+        System.out.println("The sum of all the edge weights: " + mstWt);
     }
 
     public int findUPar(int node) {
@@ -72,10 +91,10 @@ public class Kruskal {
         }
     }
 
-    public int findMST(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
+    public int findMST(int ver, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
         List<Edge> edges = new ArrayList<>();
 
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < ver; i++) {
             for (int j = 0; j < adj.get(i).size(); j++) {
                 int adjNode = adj.get(i).get(j).get(0);
                 int wt = adj.get(i).get(j).get(1);
@@ -103,36 +122,17 @@ public class Kruskal {
         return mstWt;
     }
 
-    public static void main(String[] args) {
-        int V = 5;
-        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+    private static class Edge implements Comparable<Edge> {
+        int src, dest, weight;
 
-        int[][] edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
-
-        for (int i = 0; i < V; i++) {
-            adj.add(new ArrayList<ArrayList<Integer>>());
+        Edge(int src, int dest, int wt) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = wt;
         }
 
-        for (int i = 0; i < 6; i++) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            int w = edges[i][2];
-
-            ArrayList<Integer> tmp1 = new ArrayList<>();
-            ArrayList<Integer> tmp2 = new ArrayList<>();
-
-            tmp1.add(v);
-            tmp1.add(w);
-
-            tmp2.add(u);
-            tmp2.add(w);
-
-            adj.get(u).add(tmp1);
-            adj.get(v).add(tmp2);
+        public int compareTo(Edge compareEdge) {
+            return this.weight - compareEdge.weight;
         }
-
-        Kruskal kruskal = new Kruskal(V);
-        int mstWt = kruskal.findMST(V, adj);
-        System.out.println("The sum of all the edge weights: " + mstWt);
     }
 }

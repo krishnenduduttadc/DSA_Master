@@ -3,16 +3,6 @@ package GraphL3;
 import java.util.ArrayList;
 
 public class AdjacencyListToMatrixDirectedWeighted {
-    static class Edge {
-        int d;
-        int wt;
-
-        Edge(int d, int wt) {
-            this.d = d;
-            this.wt = wt;
-        }
-    }
-
     public static void main(String[] args) {
         int V = 5;
         ArrayList<ArrayList<Edge>> adj = new ArrayList<>();
@@ -35,9 +25,9 @@ public class AdjacencyListToMatrixDirectedWeighted {
 
     }
 
-    public static int[][] convertToAdjacencyMatrix(ArrayList<ArrayList<Edge>> adj, int V) {
-        int[][] adjmat = new int[V + 1][V + 1];
-        for (int i = 0; i <= V; i++) {
+    public static int[][] convertToAdjacencyMatrix(ArrayList<ArrayList<Edge>> adj, int v) {
+        int[][] adjmat = new int[v + 1][v + 1];
+        for (int i = 0; i <= v; i++) {
             for (Edge e : adj.get(i)) {
                 int j = e.d;
                 int wt = e.wt;
@@ -45,5 +35,15 @@ public class AdjacencyListToMatrixDirectedWeighted {
             }
         }
         return adjmat;
+    }
+
+    static class Edge {
+        int d;
+        int wt;
+
+        Edge(int d, int wt) {
+            this.d = d;
+            this.wt = wt;
+        }
     }
 }

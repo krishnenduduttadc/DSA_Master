@@ -43,9 +43,6 @@ BFS {
             Integer node = q.poll();
             bfs.add(node);
 
-            // Get all adjacent vertices of the dequeued vertex s
-            // If a adjacent has not been visited, then mark it
-            // visited and enqueue it
             for (Integer it : adj.get(node)) {
                 if (vis[it] == false) {
                     vis[it] = true;

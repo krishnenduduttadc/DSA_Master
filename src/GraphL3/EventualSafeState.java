@@ -32,17 +32,17 @@ public class EventualSafeState {
         System.out.println("");
     }
 
-    List<Integer> eventualSafeNodes(int V, List<List<Integer>> adj) {
-        int vis[] = new int[V];
-        int pathVis[] = new int[V];
-        int check[] = new int[V];
-        for (int i = 0; i < V; i++) {
+    List<Integer> eventualSafeNodes(int v, List<List<Integer>> adj) {
+        int vis[] = new int[v];
+        int pathVis[] = new int[v];
+        int check[] = new int[v];
+        for (int i = 0; i < v; i++) {
             if (vis[i] == 0) {
                 dfsCheck(i, adj, vis, pathVis, check);
             }
         }
         List<Integer> safeNodes = new ArrayList<>();
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < v; i++) {
             if (check[i] == 1) {
                 safeNodes.add(i);
             }

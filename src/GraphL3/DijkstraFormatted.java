@@ -4,39 +4,47 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class DijkstraFormatted {
-    static class Pair {
-        int node;
-        int distance;
-
-        public Pair(int distance, int node) {
-            this.node = node;
-            this.distance = distance;
-        }
-    }
-
     public static void main(String[] args) {
         int V = 4, S = 2;
         ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
 
         ArrayList<ArrayList<Integer>> inter1 = new ArrayList<>();
-        inter1.add(new ArrayList<>() {{ add(1); add(1); }});
-        inter1.add(new ArrayList<>() {{ add(2); add(6); }});
+        inter1.add(new ArrayList<>() {{
+            add(1);
+            add(1);
+        }});
+        inter1.add(new ArrayList<>() {{
+            add(2);
+            add(6);
+        }});
         adj.add(inter1);
 
         ArrayList<ArrayList<Integer>> inter2 = new ArrayList<>();
-        inter2.add(new ArrayList<>() {{ add(2); add(3); }});
-        inter2.add(new ArrayList<>() {{ add(0); add(1); }});
+        inter2.add(new ArrayList<>() {{
+            add(2);
+            add(3);
+        }});
+        inter2.add(new ArrayList<>() {{
+            add(0);
+            add(1);
+        }});
         adj.add(inter2);
 
         ArrayList<ArrayList<Integer>> inter3 = new ArrayList<>();
-        inter3.add(new ArrayList<>() {{ add(1); add(3); }});
-        inter3.add(new ArrayList<>() {{ add(0); add(6); }});
+        inter3.add(new ArrayList<>() {{
+            add(1);
+            add(3);
+        }});
+        inter3.add(new ArrayList<>() {{
+            add(0);
+            add(6);
+        }});
         adj.add(inter3);
 
 
         System.out.println("graph stands as.........");
         for (int i = 0; i < adj.size(); i++) {
-            System.out.println(i+" "+adj.get(i));
+            System.out.println(i + " " + adj.get(i));
         }
         System.out.println("................");
 
@@ -48,10 +56,10 @@ public class DijkstraFormatted {
         System.out.println();
     }
 
-    static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s) {
+    static int[] dijkstra(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s) {
         PriorityQueue<Pair> pq = new PriorityQueue<>((x, y) -> x.distance - y.distance);
-        int[] dist = new int[V];
-        for (int i = 0; i < V; i++) {
+        int[] dist = new int[v];
+        for (int i = 0; i < v; i++) {
             dist[i] = (int) 1e9;
         }
         dist[s] = 0;
@@ -74,5 +82,15 @@ public class DijkstraFormatted {
             }
         }
         return dist;
+    }
+
+    static class Pair {
+        int node;
+        int distance;
+
+        public Pair(int distance, int node) {
+            this.node = node;
+            this.distance = distance;
+        }
     }
 }

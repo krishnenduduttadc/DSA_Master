@@ -24,11 +24,11 @@ public class AdjacencyListToMatrixDirectedNonWeighted {
         }
     }
 
-    public static int[][] convertToAdjacencyMatrix(ArrayList<ArrayList<Integer>> adj, int V) {
-        int[][] adjacencyMatrix = new int[V + 1][V + 1];
-        for (int i = 0; i <=V ; i++) {
-            for(int j:adj.get(i)){
-                adjacencyMatrix[i][j]=1;
+    public static int[][] convertToAdjacencyMatrix(ArrayList<ArrayList<Integer>> adj, int v) {
+        int[][] adjacencyMatrix = new int[v + 1][v + 1];
+        for (int i = 0; i <= v; i++) {
+            for (int j : adj.get(i)) {
+                adjacencyMatrix[i][j] = 1;
             }
         }
         return adjacencyMatrix;
