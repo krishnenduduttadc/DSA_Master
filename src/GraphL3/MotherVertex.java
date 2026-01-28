@@ -8,7 +8,6 @@ public class MotherVertex {
     public static void main(String[] args) {
         MotherVertex solution = new MotherVertex();
 
-        // Example graph representation using adjacency list
         int V = 7; // Number of vertices
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < V; i++) {
@@ -25,7 +24,6 @@ public class MotherVertex {
         adj.get(5).add(6);
         adj.get(6).add(4);
 
-        // Finding the mother vertex
         int motherVertex = solution.findMotherVertex(V, adj);
 
         if (motherVertex != -1) {

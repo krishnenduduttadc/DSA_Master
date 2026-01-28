@@ -16,87 +16,48 @@ class NumberofIslandsII {
         }
     }
 
-    public int findUPar(int node) {
-        if (node == parent.get(node)) {
-            return node;
-        }
-        int ulp = findUPar(parent.get(node));
-        parent.set(node, ulp);
-        return parent.get(node);
+    private static boolean isValid(int adjr, int adjc, int n, int m) {
+        return adjr >= 0 && adjr < n && adjc >= 0 && adjc < m;
     }
 
-    public void unionByRank(int u, int v) {
-        int ulp_u = findUPar(u);
-        int ulp_v = findUPar(v);
-        if (ulp_u == ulp_v) return;
-        if (rank.get(ulp_u) < rank.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
-        } else if (rank.get(ulp_v) < rank.get(ulp_u)) {
-            parent.set(ulp_v, ulp_u);
-        } else {
-            parent.set(ulp_v, ulp_u);
-            int rankU = rank.get(ulp_u);
-            rank.set(ulp_u, rankU + 1);
-        }
-    }
+    public static List<Integer> numOfIslands(int n, int m, int[][] operators) {
+        NumberofIslandsII ds = new NumberofIslandsII(n * m);
+        int[][] vis = new int[n][m];
+        int cnt = 0;
+        List<Integer> ans = new ArrayList<>();
+        int len = operators.length;
 
-    public void unionBySize(int u, int v) {
-        int ulp_u = findUPar(u);
-        int ulp_v = findUPar(v);
-        if (ulp_u == ulp_v) return;
-        if (size.get(ulp_u) < size.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
-            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
-        } else {
-            parent.set(ulp_v, ulp_u);
-            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
-        }
-    }
+        for (int i = 0; i < len; i++) {
+            int row = operators[i][0];
+            int col = operators[i][1];
+            if (vis[row][col] == 1) {
+                ans.add(cnt);
+                continue;
+            }
+            vis[row][col] = 1;
+            cnt++;
 
+            int[] dr = {-1, 0, 1, 0};
+            int[] dc = {0, 1, 0, -1};
 
-        private static boolean isValid(int adjr, int adjc, int n, int m) {
-            return adjr >= 0 && adjr < n && adjc >= 0 && adjc < m;
-        }
-
-        public static List<Integer> numOfIslands(int n, int m, int[][] operators) {
-            NumberofIslandsII ds = new NumberofIslandsII(n * m);
-            int[][] vis = new int[n][m];
-            int cnt = 0;
-            List<Integer> ans = new ArrayList<>();
-            int len = operators.length;
-
-            for (int i = 0; i < len; i++) {
-                int row = operators[i][0];
-                int col = operators[i][1];
-                if (vis[row][col] == 1) {
-                    ans.add(cnt);
-                    continue;
-                }
-                vis[row][col] = 1;
-                cnt++;
-
-                int[] dr = {-1, 0, 1, 0};
-                int[] dc = {0, 1, 0, -1};
-
-                for (int ind = 0; ind < 4; ind++) {
-                    int adjr = row + dr[ind];
-                    int adjc = col + dc[ind];
-                    if (isValid(adjr, adjc, n, m)) {
-                        if (vis[adjr][adjc] == 1) {
-                            int nodeNo = row * m + col;
-                            int adjNodeNo = adjr * m + adjc;
-                            if (ds.findUPar(nodeNo) != ds.findUPar(adjNodeNo)) {
-                                cnt--;
-                                ds.unionBySize(nodeNo, adjNodeNo);
-                            }
+            for (int ind = 0; ind < 4; ind++) {
+                int adjr = row + dr[ind];
+                int adjc = col + dc[ind];
+                if (isValid(adjr, adjc, n, m)) {
+                    if (vis[adjr][adjc] == 1) {
+                        int nodeNo = row * m + col;
+                        int adjNodeNo = adjr * m + adjc;
+                        if (ds.findUPar(nodeNo) != ds.findUPar(adjNodeNo)) {
+                            cnt--;
+                            ds.unionBySize(nodeNo, adjNodeNo);
                         }
                     }
                 }
-                ans.add(cnt);
             }
-            return ans;
+            ans.add(cnt);
         }
-
+        return ans;
+    }
 
     public static void main(String[] args) {
         int n = 4, m = 5;
@@ -112,5 +73,27 @@ class NumberofIslandsII {
             System.out.print(ans.get(i) + " ");
         }
         System.out.println("");
+    }
+
+    public int findUPar(int node) {
+        if (node == parent.get(node)) {
+            return node;
+        }
+        int ulp = findUPar(parent.get(node));
+        parent.set(node, ulp);
+        return parent.get(node);
+    }
+
+    public void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size.get(ulp_u) < size.get(ulp_v)) {
+            parent.set(ulp_u, ulp_v);
+            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
+        } else {
+            parent.set(ulp_v, ulp_u);
+            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
+        }
     }
 }

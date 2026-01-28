@@ -3,7 +3,6 @@ package GraphL3;
 import java.util.ArrayList;
 
 public class NoofProvinces {
-    // dfs traversal function
     private static void dfs(int node,
                             ArrayList<ArrayList<Integer>> adjLs,
                             int vis[]) {
@@ -43,10 +42,7 @@ public class NoofProvinces {
     }
 
     public static void main(String[] args) {
-
-        // adjacency matrix
         ArrayList<ArrayList<Integer>> adj = new ArrayList<ArrayList<Integer>>();
-
         adj.add(new ArrayList<Integer>());
         adj.get(0).add(0, 1);
         adj.get(0).add(1, 0);
