@@ -16,7 +16,7 @@ import java.util.Stack;
 public class FindAllCycles {
 
     static int id = 0;
-    static int[] ids, low;
+    static int[] disc, low;
     static boolean[] onStack;
     static Stack<Integer> stack;
     static List<List<Integer>> graph;
@@ -35,35 +35,35 @@ public class FindAllCycles {
         graph.get(4).add(5);
         graph.get(5).add(3); // cycle 3-4-5
 
-        ids = new int[n];
+        disc = new int[n];
         low = new int[n];
         onStack = new boolean[n];
         stack = new Stack<>();
 
-        Arrays.fill(ids, -1);
+        Arrays.fill(disc, -1);
 
         for (int i = 0; i < n; i++) {
-            if (ids[i] == -1)
+            if (disc[i] == -1)
                 dfs(i);
         }
     }
 
     static void dfs(int u) {
-        ids[u] = low[u] = id++;
+        disc[u] = low[u] = id++;
         stack.push(u);
         onStack[u] = true;
 
         for (int v : graph.get(u)) {
-            if (ids[v] == -1) {
+            if (disc[v] == -1) {
                 dfs(v);
                 low[u] = Math.min(low[u], low[v]);
             } else if (onStack[v]) {
-                low[u] = Math.min(low[u], ids[v]);
+                low[u] = Math.min(low[u], disc[v]);
             }
         }
 
         // SCC root
-        if (ids[u] == low[u]) {
+        if (disc[u] == low[u]) {
             List<Integer> scc = new ArrayList<>();
             while (true) {
                 int node = stack.pop();

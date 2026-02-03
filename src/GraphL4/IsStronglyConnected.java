@@ -9,7 +9,7 @@ import java.util.Stack;
 public class IsStronglyConnected {
 
     static int id = 0, sccCount = 0;
-    static int[] ids, low;
+    static int[] disc, low;
     static boolean[] onStack;
     static Stack<Integer> stack;
     static List<List<Integer>> adj;
@@ -25,34 +25,34 @@ public class IsStronglyConnected {
         adj.get(2).add(3);
         adj.get(3).add(0);
 
-        ids = new int[n];
+        disc = new int[n];
         low = new int[n];
         onStack = new boolean[n];
         stack = new Stack<>();
 
-        Arrays.fill(ids, -1);
+        Arrays.fill(disc, -1);
 
         for (int i = 0; i < n; i++)
-            if (ids[i] == -1)
+            if (disc[i] == -1)
                 dfs(i);
 
         System.out.println("Strongly Connected? " + (sccCount == 1));
     }
 
     static void dfs(int u) {
-        ids[u] = low[u] = id++;
+        disc[u] = low[u] = id++;
         stack.push(u);
         onStack[u] = true;
         for (int it : adj.get(u)) {
-            if (ids[it] == -1) {
+            if (disc[it] == -1) {
                 dfs(it);
                 low[u] = Math.min(low[u], low[it]);
             } else if (onStack[it]) {
-                low[u] = Math.min(low[u], low[it]);
+                low[u] = Math.min(low[u], disc[it]);
             }
         }
 
-        if (ids[u] == low[u]) {
+        if (disc[u] == low[u]) {
             while (true) {
                 int node = stack.pop();
                 onStack[node] = false;

@@ -9,7 +9,7 @@ import java.util.Stack;
 public class TarjanSCC {
     static int id = 0;
     static int sccCount = 0;
-    static int[] ids, low;
+    static int[] disc, low;
     static boolean[] onStack;
     static Stack<Integer> stack;
     static List<List<Integer>> graph;
@@ -29,15 +29,15 @@ public class TarjanSCC {
         graph.get(4).add(5);
         graph.get(5).add(3);
 
-        ids = new int[n];
+        disc = new int[n];
         low = new int[n];
         onStack = new boolean[n];
         stack = new Stack<>();
 
-        Arrays.fill(ids, -1); // unvisited
+        Arrays.fill(disc, -1); // unvisited
 
         for (int i = 0; i < n; i++) {
-            if (ids[i] == -1) {
+            if (disc[i] == -1) {
                 dfs(i);
             }
         }
@@ -46,19 +46,19 @@ public class TarjanSCC {
     }
 
     static void dfs(int u) {
-        ids[u] = low[u] = id++;
+        disc[u] = low[u] = id++;
         stack.push(u);
         onStack[u] = true;
         for (int it : graph.get(u)) {
-            if (ids[it] == -1) {
+            if (disc[it] == -1) {
                 dfs(it);
                 low[u] = Math.min(low[u], low[it]);
             } else if (onStack[it]) {
-                low[u] = Math.min(low[u], ids[it]);
+                low[u] = Math.min(low[u], disc[it]);
             }
         }
 
-        if (ids[u] == low[u]) {
+        if (disc[u] == low[u]) {
             System.out.println("SCC");
             while (true) {
                 int node = stack.pop();
