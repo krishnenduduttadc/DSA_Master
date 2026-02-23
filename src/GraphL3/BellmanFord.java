@@ -1,7 +1,8 @@
 package GraphL3;
 
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class BellmanFord {
 
@@ -21,8 +22,6 @@ public class BellmanFord {
         edges.add(Arrays.asList(2, 4, 3));
 
 
-
-
         int[] dist = BellmanFord.bellman_ford(V, edges, s);
         for (int i = 0; i < V; i++) {
             System.out.print(dist[i] + " ");
@@ -30,12 +29,12 @@ public class BellmanFord {
         System.out.println("");
     }
 
-    static int[] bellman_ford(int V,
+    static int[] bellman_ford(int n,
                               List<List<Integer>> edges, int s) {
-        int[] dist = new int[V];
-        for (int i = 0; i < V; i++) dist[i] = (int)(1e8);
-        dist[s]=0;
-        for (int i = 0; i < V - 1; i++) {
+        int[] dist = new int[n];
+        for (int i = 0; i < n; i++) dist[i] = (int) (1e8);
+        dist[s] = 0;
+        for (int i = 0; i < n - 1; i++) {
             for (List<Integer> it : edges) {
                 int u = it.get(0);
                 int v = it.get(1);

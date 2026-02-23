@@ -30,10 +30,10 @@ public class DFS_directed {
         System.out.println(res);
     }
 
-    public static void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> component) {
-        vis[node] = true;
-        component.add(node);
-        for (int neighbor : adj.get(node)) {
+    public static void dfs(int s, boolean[] vis, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> component) {
+        vis[s] = true;
+        component.add(s);
+        for (int neighbor : adj.get(s)) {
             if (!vis[neighbor]) {
                 dfs(neighbor, vis, adj, component);
             }

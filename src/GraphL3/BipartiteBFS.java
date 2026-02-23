@@ -7,12 +7,14 @@ import java.util.Queue;
 public class BipartiteBFS {
 
     public static void main(String[] args) {
-        // V = 4, E = 4
+
         int V = 6;
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
+
         adj.get(0).add(1);
         adj.get(1).add(0);
         adj.get(0).add(2);
@@ -28,22 +30,22 @@ public class BipartiteBFS {
 
         BipartiteBFS obj = new BipartiteBFS();
         boolean ans = obj.isBipartite(V, adj);
-        //System.out.println(ans);
-        if (ans == true) {
+
+        if (ans) {
             System.out.println("Bipartite");
         } else {
             System.out.println("Non bipartite");
         }
-
     }
 
     public boolean isBipartite(int v, ArrayList<ArrayList<Integer>> adj) {
-        int color[] = new int[v];
-        for (int i = 0; i < v; i++) color[i] = -1;
+
+        boolean[] color = new boolean[v];
+        boolean[] visited = new boolean[v];
 
         for (int i = 0; i < v; i++) {
-            if (color[i] == -1) {
-                if (check(i, v, adj, color) == false) {
+            if (!visited[i]) {
+                if (!check(i, adj, color, visited)) {
                     return false;
                 }
             }
@@ -51,20 +53,23 @@ public class BipartiteBFS {
         return true;
     }
 
-    private boolean check(int s, int v,
-                          ArrayList<ArrayList<Integer>> adj, int color[]) {
+    private boolean check(int s, ArrayList<ArrayList<Integer>> adj,
+                          boolean[] color, boolean[] visited) {
+
         Queue<Integer> q = new LinkedList<>();
+
         q.add(s);
-        color[s] = 0;
-        System.out.println(s + " " + color[s]);
+        visited[s] = true;
+        color[s] = false; // first color
+
         while (!q.isEmpty()) {
-            int node = q.peek();
-            q.remove();
+            int node = q.poll();
 
             for (int it : adj.get(node)) {
-                if (color[it] == -1) {
-                    color[it] = 1 - color[node];
-                    System.out.println(it + " " + color[it]);
+
+                if (!visited[it]) {
+                    visited[it] = true;
+                    color[it] = !color[node]; // opposite color
                     q.add(it);
                 } else if (color[it] == color[node]) {
                     return false;

@@ -45,10 +45,10 @@ public class CycleDirectedDFS {
         return false;
     }
 
-    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
-        int vis[] = new int[V];
-        int pathVis[] = new int[V];
-        for (int i = 0; i < V; i++) {
+    public boolean isCyclic(int v, ArrayList<ArrayList<Integer>> adj) {
+        int vis[] = new int[v];
+        int pathVis[] = new int[v];
+        for (int i = 0; i < v; i++) {
             if (vis[i] == 0) {
                 if (dfsCheck(i, adj, vis, pathVis) == true) return true;
             }

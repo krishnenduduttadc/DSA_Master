@@ -7,6 +7,25 @@ public class RedundantConnection {
     int[] par;
     int[] rank;
 
+    public static void main(String[] args) {
+        RedundantConnection solution = new RedundantConnection();
+
+        // Example 1
+        int[][] edges1 = {{1, 2}, {1, 3}, {2, 3}};
+        int[] redundantEdge1 = solution.findRedundantConnection(edges1);
+        System.out.println("Redundant edge in Example 1: " + Arrays.toString(redundantEdge1));
+
+        // Example 2
+        int[][] edges2 = {{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1, 5}};
+        int[] redundantEdge2 = solution.findRedundantConnection(edges2);
+        System.out.println("Redundant edge in Example 2: " + Arrays.toString(redundantEdge2));
+
+        // Example 3
+        int[][] edges3 = {{1, 2}, {2, 3}, {3, 4}, {4, 1}, {1, 5}};
+        int[] redundantEdge3 = solution.findRedundantConnection(edges3);
+        System.out.println("Redundant edge in Example 3: " + Arrays.toString(redundantEdge3));
+    }
+
     public boolean union(int x, int y) {
         int px = find(x);
         int py = find(y);
@@ -34,11 +53,11 @@ public class RedundantConnection {
     }
 
     public int[] findRedundantConnection(int[][] edges) {
-        int V = edges.length;
-        par = new int[V + 1];
-        rank = new int[V + 1];
+        int n = edges.length;
+        par = new int[n + 1];
+        rank = new int[n + 1];
 
-        for (int i = 0; i <= V; i++) {
+        for (int i = 0; i <= n; i++) {
             par[i] = i;
             rank[i] = 1;
         }
@@ -53,24 +72,5 @@ public class RedundantConnection {
         }
 
         return new int[2];
-    }
-
-    public static void main(String[] args) {
-        RedundantConnection solution = new RedundantConnection();
-
-        // Example 1
-        int[][] edges1 = {{1, 2}, {1, 3}, {2, 3}};
-        int[] redundantEdge1 = solution.findRedundantConnection(edges1);
-        System.out.println("Redundant edge in Example 1: " + Arrays.toString(redundantEdge1));
-
-        // Example 2
-        int[][] edges2 = {{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1, 5}};
-        int[] redundantEdge2 = solution.findRedundantConnection(edges2);
-        System.out.println("Redundant edge in Example 2: " + Arrays.toString(redundantEdge2));
-
-        // Example 3
-        int[][] edges3 = {{1, 2}, {2, 3}, {3, 4}, {4, 1}, {1, 5}};
-        int[] redundantEdge3 = solution.findRedundantConnection(edges3);
-        System.out.println("Redundant edge in Example 3: " + Arrays.toString(redundantEdge3));
     }
 }

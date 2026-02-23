@@ -51,7 +51,7 @@ public class CRiticalConnections {
         // Step 3: Run DFS for all components (handle disconnected graph too)
         for (int i = 0; i < n; i++) {
             if (!vis[i]) {
-                vis[i] = true; // ✅ FIX: Mark the node as visited before DFS
+                vis[i] = true; //
                 bridges(graph, n, i, -1, ans);
             }
         }

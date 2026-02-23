@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 class Prim {
-    static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
+    static int spanningTree(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
         PriorityQueue<Pair> pq =
                 new PriorityQueue<>((x, y) -> x.distance - y.distance);
-        int[] vis = new int[V];
+        int[] vis = new int[v];
         // {wt, node}
         pq.add(new Pair(0, 0));
         int sum = 0;

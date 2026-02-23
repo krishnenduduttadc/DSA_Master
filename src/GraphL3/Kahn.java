@@ -6,9 +6,9 @@ import java.util.Queue;
 
 public class Kahn {
     // Function to return list containing vertices in Topological order.
-    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
-        int indegree[] = new int[V];
-        for (int i = 0; i < V; i++) {
+    static int[] topoSort(int v, ArrayList<ArrayList<Integer>> adj) {
+        int indegree[] = new int[v];
+        for (int i = 0; i < v; i++) {
             for (int it : adj.get(i)) {
                 indegree[it]++;
             }
@@ -16,13 +16,13 @@ public class Kahn {
 
         Queue<Integer> q = new LinkedList<Integer>();
 
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < v; i++) {
             if (indegree[i] == 0) {
                 q.add(i);
             }
         }
 
-        int topo[] = new int[V];
+        int topo[] = new int[v];
         int i = 0;
         while (!q.isEmpty()) {
             int node = q.peek();
