@@ -1,91 +1,105 @@
 package GraphL3;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class ShortestPathInDAG {
 
-    static class Pair {
-        int first, second;
+    public static void main(String[] args) {
 
-        Pair(int _first, int _second) {
-            this.first = _first;
-            this.second = _second;
+        int N = 6;
+
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        // u → v (weight)
+        adj.get(0).add(new Pair(1, 2));
+        adj.get(0).add(new Pair(4, 1));
+        adj.get(4).add(new Pair(5, 4));
+        adj.get(4).add(new Pair(2, 2));
+        adj.get(1).add(new Pair(2, 3));
+        adj.get(2).add(new Pair(3, 6));
+        adj.get(5).add(new Pair(3, 1));
+
+        ShortestPathInDAG obj = new ShortestPathInDAG();
+        int[] res = obj.shortestPath(N, adj);
+
+        for (int x : res) {
+            System.out.print(x + " ");
         }
     }
 
-    private void topologicalSort(int node, ArrayList<ArrayList<Pair>> adj, int[] visited, Stack<Integer> stack) {
+    private void topoSort(int node, ArrayList<ArrayList<Pair>> adj,
+                          int[] visited, Stack<Integer> stack) {
+
         visited[node] = 1;
-        for (Pair neighbor : adj.get(node)) {
-            int v = neighbor.first;
+
+        for (Pair it : adj.get(node)) {
+            int v = it.first;
+
             if (visited[v] == 0) {
-                topologicalSort(v, adj, visited, stack);
+                topoSort(v, adj, visited, stack);
             }
         }
+
         stack.push(node);
     }
 
-    public int[] findShortestPaths(int numNodes, int numEdges, int[][] edges) {
-        ArrayList<ArrayList<Pair>> adjacencyList = new ArrayList<>();
-        for (int i = 0; i < numNodes; i++) {
-            adjacencyList.add(new ArrayList<>());
-        }
+    public int[] shortestPath(int N, ArrayList<ArrayList<Pair>> adj) {
 
-        for (int i = 0; i < numEdges; i++) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            int weight = edges[i][2];
-            adjacencyList.get(u).add(new Pair(v, weight));
-        }
-
-        int[] visited = new int[numNodes];
+        int[] visited = new int[N];
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < numNodes; i++) {
+        // Step 1: Topological Sort
+        for (int i = 0; i < N; i++) {
             if (visited[i] == 0) {
-                topologicalSort(i, adjacencyList, visited, stack);
+                topoSort(i, adj, visited, stack);
             }
         }
 
-        int[] distances = new int[numNodes];
-        for (int i = 0; i < numNodes; i++) {
-            distances[i] = (int) 1e9;
-        }
+        // Step 2: Distance array
+        int[] dist = new int[N];
+        Arrays.fill(dist, (int) 1e9);
 
-        distances[0] = 0;
+        dist[0] = 0; // source = 0
 
+        // Step 3: Relax edges in topo order
         while (!stack.isEmpty()) {
             int node = stack.pop();
 
-            for (Pair neighbor : adjacencyList.get(node)) {
-                int v = neighbor.first;
-                int weight = neighbor.second;
+            if (dist[node] != (int) 1e9) { // important check
 
-                if (distances[node] + weight < distances[v]) {
-                    distances[v] = distances[node] + weight;
+                for (Pair it : adj.get(node)) {
+                    int v = it.first;
+                    int wt = it.second;
+
+                    if (dist[node] + wt < dist[v]) {
+                        dist[v] = dist[node] + wt;
+                    }
                 }
             }
         }
 
-        for (int i = 0; i < numNodes; i++) {
-            if (distances[i] == 1e9) {
-                distances[i] = -1;
+        // Step 4: Replace unreachable with -1
+        for (int i = 0; i < N; i++) {
+            if (dist[i] == (int) 1e9) {
+                dist[i] = -1;
             }
         }
 
-        return distances;
+        return dist;
     }
 
-    public static void main(String[] args) throws IOException {
-        int numNodes = 6, numEdges = 7;
-        int[][] edges = {{0, 1, 2}, {0, 4, 1}, {4, 5, 4}, {4, 2, 2}, {1, 2, 3}, {2, 3, 6}, {5, 3, 1}};
-        ShortestPathInDAG shortestPathFinder = new ShortestPathInDAG();
-        int[] result = shortestPathFinder.findShortestPaths(numNodes, numEdges, edges);
+    static class Pair {
+        int first, second;
 
-        for (int distance : result) {
-            System.out.print(distance + " ");
+        Pair(int first, int second) {
+            this.first = first;     // node
+            this.second = second;   // weight
         }
-        System.out.println();
     }
 }

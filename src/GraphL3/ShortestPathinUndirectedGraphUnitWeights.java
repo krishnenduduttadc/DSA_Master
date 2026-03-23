@@ -1,55 +1,90 @@
 package GraphL3;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class ShortestPathinUndirectedGraphUnitWeights {
 
-    public static void main(String[] args) throws IOException {
-        int n=9, m=10;
-        int[][] edge = {{0,1},{0,3},{3,4},{4,5},{5,6},{1,2},{2,6},{6,7},{7,8},{6,8}};
+    public static void main(String[] args) {
 
-        ShortestPathinUndirectedGraphUnitWeights obj = new ShortestPathinUndirectedGraphUnitWeights();
-        int res[] = obj.shortestPath(edge,n,m,0);
-        for(int i=0;i<n;i++){
-            System.out.print(res[i]+" ");
-        }
-        System.out.println();
-    }
+        int n = 9;
 
-    public int[] shortestPath(int[][] edges,int n,int m ,int s) {
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for(int i = 0;i<n;i++) {
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
 
-        for(int i = 0;i<m;i++) {
-            adj.get(edges[i][0]).add(edges[i][1]);
-            adj.get(edges[i][1]).add(edges[i][0]);
+        // undirected edges (weight = 1)
+        addEdge(adj, 0, 1);
+        addEdge(adj, 0, 3);
+        addEdge(adj, 3, 4);
+        addEdge(adj, 4, 5);
+        addEdge(adj, 5, 6);
+        addEdge(adj, 1, 2);
+        addEdge(adj, 2, 6);
+        addEdge(adj, 6, 7);
+        addEdge(adj, 7, 8);
+        addEdge(adj, 6, 8);
+
+        ShortestPathinUndirectedGraphUnitWeights obj =
+                new ShortestPathinUndirectedGraphUnitWeights();
+
+        int[] res = obj.shortestPath(n, adj, 0);
+
+        for (int x : res) {
+            System.out.print(x + " ");
         }
-        int dist[] = new int[n];
-        for(int i = 0;i<n;i++) dist[i] = (int)1e9;
-        dist[s]=0;
+    }
+
+    // helper to add undirected edge
+    static void addEdge(ArrayList<ArrayList<Pair>> adj, int u, int v) {
+        adj.get(u).add(new Pair(v, 1));
+        adj.get(v).add(new Pair(u, 1));
+    }
+
+    public int[] shortestPath(int n, ArrayList<ArrayList<Pair>> adj, int src) {
+
+        int[] dist = new int[n];
+        Arrays.fill(dist, (int) 1e9);
+
         Queue<Integer> q = new LinkedList<>();
-        q.add(s);
-        while(!q.isEmpty()) {
-            int node = q.peek();
-            q.remove();
-            for(int it:adj.get(node)){
-                if(dist[node]+1<dist[it]){
-                    dist[it]=1+dist[node];
-                    q.add(it);
+
+        dist[src] = 0;
+        q.add(src);
+
+        while (!q.isEmpty()) {
+            int node = q.poll();
+
+            for (Pair it : adj.get(node)) {
+                int v = it.first;
+                int wt = it.second; // always 1
+
+                if (dist[node] + wt < dist[v]) {
+                    dist[v] = dist[node] + wt;
+                    q.add(v);
                 }
             }
         }
 
-        for(int i = 0;i<n;i++) {
-            if(dist[i] == 1e9) {
+        // mark unreachable
+        for (int i = 0; i < n; i++) {
+            if (dist[i] == (int) 1e9) {
                 dist[i] = -1;
             }
         }
+
         return dist;
+    }
+
+    static class Pair {
+        int first, second;
+
+        Pair(int first, int second) {
+            this.first = first;     // node
+            this.second = second;   // weight (will be 1 here)
+        }
     }
 }
