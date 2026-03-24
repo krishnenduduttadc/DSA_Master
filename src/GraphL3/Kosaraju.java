@@ -34,9 +34,9 @@ class Kosaraju {
         st.push(node);
     }
 
-    private void dfsTranspose(int node, int[] vis, ArrayList<ArrayList<Integer>> adjT) {
-        vis[node] = 1;
-        for (Integer it : adjT.get(node)) {
+    private void dfsTranspose(int s, int[] vis, ArrayList<ArrayList<Integer>> adjT) {
+        vis[s] = 1;
+        for (Integer it : adjT.get(s)) {
             if (vis[it] == 0) {
                 dfsTranspose(it, vis, adjT);
             }

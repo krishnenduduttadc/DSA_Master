@@ -8,16 +8,11 @@ import java.util.PriorityQueue;
 class PrintShortestPath {
 
     public static void main(String[] args) {
-
         int V = 5;
-
         ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
-
         for (int i = 0; i <= V; i++) {
             adj.add(new ArrayList<>());
         }
-
-        // helper to add undirected weighted edge
         addEdge(adj, 1, 2, 2);
         addEdge(adj, 2, 5, 5);
         addEdge(adj, 2, 3, 4);
@@ -45,28 +40,20 @@ class PrintShortestPath {
 
         int[] dist = new int[n + 1];
         int[] parent = new int[n + 1];
-
         for (int i = 1; i <= n; i++) {
             dist[i] = (int) 1e9;
             parent[i] = i;
         }
-
         dist[1] = 0;
         pq.add(new Pair(0, 1)); // (distance, node)
-
         while (!pq.isEmpty()) {
             Pair it = pq.poll();
-
             int dis = it.first;
             int node = it.second;
-
-            // Optional optimization (skip outdated entries)
             if (dis > dist[node]) continue;
-
             for (Pair iter : adj.get(node)) {
                 int adjNode = iter.first;
                 int wt = iter.second;
-
                 if (dis + wt < dist[adjNode]) {
                     dist[adjNode] = dis + wt;
                     pq.add(new Pair(dist[adjNode], adjNode));
@@ -74,22 +61,17 @@ class PrintShortestPath {
                 }
             }
         }
-
-        // Reconstruct path
         List<Integer> path = new ArrayList<>();
-
         if (dist[n] == (int) 1e9) {
             path.add(-1);
             return path;
         }
-
         int node = n;
         while (parent[node] != node) {
             path.add(node);
             node = parent[node];
         }
         path.add(1);
-
         Collections.reverse(path);
         return path;
     }

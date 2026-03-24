@@ -1,76 +1,91 @@
 package GraphL3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class CheapestFlights {
-    public static void main(String[] args) {
+public class CheapestFlights {
 
+    public static void main(String[] args) {
         int n = 4, src = 0, dst = 3, K = 1;
-        int[][] flights = {{0, 1, 100}, {1, 2, 100}, {2, 0, 100}, {1, 3, 600}, {2, 3, 200}};
+
+        int[][] flights = {
+                {0, 1, 100},
+                {1, 2, 100},
+                {2, 0, 100},
+                {1, 3, 600},
+                {2, 3, 200}
+        };
 
         CheapestFlights obj = new CheapestFlights();
-        int ans = obj.CheapestFlight(n, flights, src, dst, K);
+        int ans = obj.findCheapestFlight(n, flights, src, dst, K);
 
-        System.out.print(ans);
-        System.out.println();
+        System.out.println(ans);
     }
 
-    public int CheapestFlight(int n, int flights[][], int src, int dst, int K) {
+    // -------- MAIN FUNCTION --------
+    public int findCheapestFlight(int n, int[][] flights, int src, int dst, int K) {
 
+        // Step 1: Build adjacency list
         ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
+        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+
+        for (int[] f : flights) {
+            int u = f[0], v = f[1], wt = f[2];
+            adj.get(u).add(new Pair(v, wt));
         }
-        int m = flights.length;
-        for (int i = 0; i < m; i++) {
-            adj.get(flights[i][0]).add(new Pair(flights[i][1], flights[i][2]));
-        }
-        Queue<Tuple2> q = new LinkedList<>();
-        q.add(new Tuple2(0, src, 0));
+
+        // Step 2: Queue -> (stops, node, cost)
+        Queue<Tuple> q = new LinkedList<>();
+        q.offer(new Tuple(0, src, 0));
+
+        // Step 3: Distance array
         int[] dist = new int[n];
-        for (int i = 0; i < n; i++) {
-            dist[i] = (int) (1e9);
-        }
+        Arrays.fill(dist, (int) 1e9);
         dist[src] = 0;
+
+        // Step 4: BFS traversal
         while (!q.isEmpty()) {
-            Tuple2 it = q.peek();
-            q.remove();
-            int stops = it.first;
-            int node = it.second;
-            int cost = it.third;
+            Tuple curr = q.poll();
+
+            int stops = curr.stops;
+            int node = curr.node;
+            int cost = curr.cost;
+
             if (stops > K) continue;
-            for (Pair iter : adj.get(node)) {
-                int adjNode = iter.first;
-                int edW = iter.second;
-                if (cost + edW < dist[adjNode] && stops <= K) {
-                    dist[adjNode] = cost + edW;
-                    q.add(new Tuple2(stops + 1, adjNode, cost + edW));
+
+            for (Pair edge : adj.get(node)) {
+                int nextNode = edge.node;
+                int weight = edge.weight;
+
+                if (cost + weight < dist[nextNode] && stops <= K) {
+                    dist[nextNode] = cost + weight;
+                    q.offer(new Tuple(stops + 1, nextNode, dist[nextNode]));
                 }
             }
         }
-        if (dist[dst] == (int) (1e9)) return -1;
-        return dist[dst];
+
+        return dist[dst] == (int) 1e9 ? -1 : dist[dst];
     }
 
+    // -------- HELPER CLASSES --------
     static class Pair {
-        int first;
-        int second;
+        int node, weight;
 
-        public Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
+        Pair(int node, int weight) {
+            this.node = node;
+            this.weight = weight;
         }
     }
 
-    static class Tuple2 {
-        int first, second, third;
+    static class Tuple {
+        int stops, node, cost;
 
-        public Tuple2(int first, int second, int third) {
-            this.first = first;
-            this.second = second;
-            this.third = third;
+        Tuple(int stops, int node, int cost) {
+            this.stops = stops;
+            this.node = node;
+            this.cost = cost;
         }
     }
 }

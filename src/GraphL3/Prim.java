@@ -9,43 +9,30 @@ class Prim {
 
         PriorityQueue<NodePair> pq =
                 new PriorityQueue<>((x, y) -> x.dist - y.dist);
-
         int[] vis = new int[v];
-
         pq.add(new NodePair(0, 0)); // (weight, node)
-
         int sum = 0;
-
         while (!pq.isEmpty()) {
             NodePair it = pq.poll();
-
             int node = it.node;
             int wt = it.dist;
-
             if (vis[node] == 1) continue;
-
             vis[node] = 1;
             sum += wt;
-
             for (Pair neigh : adj.get(node)) {
                 int adjNode = neigh.node;
                 int edgeWt = neigh.weight;
-
                 if (vis[adjNode] == 0) {
                     pq.add(new NodePair(edgeWt, adjNode));
                 }
             }
         }
-
         return sum;
     }
 
     public static void main(String[] args) {
-
         int V = 5;
-
         ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
-
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
@@ -56,9 +43,7 @@ class Prim {
         addEdge(adj, 2, 3, 2);
         addEdge(adj, 3, 4, 1);
         addEdge(adj, 4, 2, 2);
-
         int sum = spanningTree(V, adj);
-
         System.out.println("MST weight: " + sum);
     }
 

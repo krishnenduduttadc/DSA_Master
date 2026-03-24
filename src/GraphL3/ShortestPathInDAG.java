@@ -49,20 +49,20 @@ public class ShortestPathInDAG {
         stack.push(node);
     }
 
-    public int[] shortestPath(int N, ArrayList<ArrayList<Pair>> adj) {
+    public int[] shortestPath(int n, ArrayList<ArrayList<Pair>> adj) {
 
-        int[] visited = new int[N];
+        int[] visited = new int[n];
         Stack<Integer> stack = new Stack<>();
 
         // Step 1: Topological Sort
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             if (visited[i] == 0) {
                 topoSort(i, adj, visited, stack);
             }
         }
 
         // Step 2: Distance array
-        int[] dist = new int[N];
+        int[] dist = new int[n];
         Arrays.fill(dist, (int) 1e9);
 
         dist[0] = 0; // source = 0
@@ -85,7 +85,7 @@ public class ShortestPathInDAG {
         }
 
         // Step 4: Replace unreachable with -1
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             if (dist[i] == (int) 1e9) {
                 dist[i] = -1;
             }

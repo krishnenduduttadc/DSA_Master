@@ -22,6 +22,19 @@ class MostStonesRemoved {
         }
     }
 
+    public static void main(String[] args) {
+        int n = 6;
+        int[][] stones = {
+                {0, 0}, {0, 2},
+                {1, 3}, {3, 1},
+                {3, 2}, {4, 3}
+        };
+
+        MostStonesRemoved obj = new MostStonesRemoved(n);
+        int ans = obj.maxRemove(stones, n);
+        System.out.println("The maximum number of stones we can remove is: " + ans);
+    }
+
     public int findUPar(int node) {
         if (node == parent.get(node)) {
             return node;
@@ -45,19 +58,7 @@ class MostStonesRemoved {
             rank.set(ulp_u, rankU + 1);
         }
     }
-
-    public void unionBySize(int u, int v) {
-        int ulp_u = findUPar(u);
-        int ulp_v = findUPar(v);
-        if (ulp_u == ulp_v) return;
-        if (size.get(ulp_u) < size.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
-            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
-        } else {
-            parent.set(ulp_v, ulp_u);
-            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
-        }
-    }
+    
 
     int maxRemove(int[][] stones, int n) {
         int maxRow = 0;
@@ -71,7 +72,7 @@ class MostStonesRemoved {
         for (int i = 0; i < n; i++) {
             int nodeRow = stones[i][0];
             int nodeCol = stones[i][1] + maxRow + 1;
-            ds.unionBySize(nodeRow, nodeCol);
+            ds.unionByRank(nodeRow, nodeCol);
             stoneNodes.put(nodeRow, 1);
             stoneNodes.put(nodeCol, 1);
         }
@@ -83,18 +84,5 @@ class MostStonesRemoved {
             }
         }
         return n - cnt;
-    }
-
-    public static void main(String[] args) {
-        int n = 6;
-        int[][] stones = {
-                {0, 0}, {0, 2},
-                {1, 3}, {3, 1},
-                {3, 2}, {4, 3}
-        };
-
-        MostStonesRemoved obj = new MostStonesRemoved(n);
-        int ans = obj.maxRemove(stones, n);
-        System.out.println("The maximum number of stones we can remove is: " + ans);
     }
 }

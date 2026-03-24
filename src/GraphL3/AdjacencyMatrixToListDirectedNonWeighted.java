@@ -24,14 +24,14 @@ public class AdjacencyMatrixToListDirectedNonWeighted {
     }
 
     public static ArrayList<ArrayList<Integer>> convertToAdjacencyList(int[][] adjacencyMatrix) {
-        int V = adjacencyMatrix.length - 1; // Number of vertices
+        int v = adjacencyMatrix.length - 1; // Number of vertices
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i <= V; i++) {
+        for (int i = 0; i <= v; i++) {
             adj.add(new ArrayList<>());
         }
-        for (int i = 0; i <=V ; i++) {
-            for (int j = 0; j <=V ; j++) {
-                if(adjacencyMatrix[i][j]==1){
+        for (int i = 0; i <= v; i++) {
+            for (int j = 0; j <= v; j++) {
+                if (adjacencyMatrix[i][j] == 1) {
                     adj.get(i).add(j);
                 }
             }

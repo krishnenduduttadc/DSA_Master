@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class NegativeWtCycle {
-    static int[] dijkstra(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S) {
+    static int[] dijkstra(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s) {
         int[] ans = new int[v];
         Arrays.fill(ans, Integer.MAX_VALUE);
         PriorityQueue<Pair> pq = new PriorityQueue<>();
 
-        pq.add(new Pair(S, 0));
+        pq.add(new Pair(s, 0));
 
         while (!pq.isEmpty()) {
             Pair rem = pq.remove();

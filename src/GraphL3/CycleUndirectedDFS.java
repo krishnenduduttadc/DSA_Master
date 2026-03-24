@@ -24,19 +24,19 @@ public class CycleUndirectedDFS {
     public boolean isCycle(int v, ArrayList<ArrayList<Integer>> adj) {
         boolean vis[] = new boolean[v];
         for (int i = 0; i < v; i++) {
-            if (vis[i] == false) {
-                if (dfs(i, -1, vis, adj) == true) return true;
+            if (!vis[i]) {
+                if (dfs(i, -1, vis, adj)) return true;
             }
         }
         return false;
     }
 
-    private boolean dfs(int node, int parent, boolean vis[], ArrayList<ArrayList<Integer>>
+    private boolean dfs(int s, int parent, boolean vis[], ArrayList<ArrayList<Integer>>
             adj) {
-        vis[node] = true;
-        for (int it : adj.get(node)) {
-            if (vis[it] == false) {
-                if (dfs(it, node, vis, adj) == true) {
+        vis[s] = true;
+        for (int it : adj.get(s)) {
+            if (!vis[it]) {
+                if (dfs(it, s, vis, adj)) {
                     return true;
                 }
             } else if (it != parent) {

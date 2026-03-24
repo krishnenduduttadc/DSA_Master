@@ -20,8 +20,6 @@ public class NoofEnclaves {
         int n = grid.length;
         int m = grid[0].length;
         int vis[][] = new int[n][m];
-
-        // Traverse boundary elements
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 // First row, first col, last row, last col
@@ -34,21 +32,15 @@ public class NoofEnclaves {
                 }
             }
         }
-
         int delrow[] = {-1, 0, +1, 0};
         int delcol[] = {0, +1, +0, -1};
-
         while (!q.isEmpty()) {
             int row = q.peek().first;
             int col = q.peek().second;
             q.remove();
-
-            // Traverses all 4 directions
             for (int i = 0; i < 4; i++) {
                 int nrow = row + delrow[i];
                 int ncol = col + delcol[i];
-
-                // Check for valid coordinates and for land cell
                 if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m
                         && vis[nrow][ncol] == 0 && grid[nrow][ncol] == 1) {
                     q.add(new Pair(nrow, ncol));
@@ -60,7 +52,6 @@ public class NoofEnclaves {
         int cnt = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                // Check for unvisited land cell
                 if (grid[i][j] == 1 && vis[i][j] == 0)
                     cnt++;
             }

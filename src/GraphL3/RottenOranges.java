@@ -63,10 +63,10 @@ public class RottenOranges {
         int col;
         int tm;
 
-        Pair(int _row, int _col, int _tm) {
-            this.row = _row;
-            this.col = _col;
-            this.tm = _tm;
+        Pair(int row, int col, int tm) {
+            this.row = row;
+            this.col = col;
+            this.tm = tm;
         }
     }
 }

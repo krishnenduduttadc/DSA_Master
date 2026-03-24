@@ -16,12 +16,9 @@ public class Word_Ladder_1 {
                 "dgt",
                 "dfs"
         };
-
         Word_Ladder_1 obj = new Word_Ladder_1();
         int ans = obj.wordLadderLength(startWord, targetWord, wordList);
-
         System.out.print(ans);
-
         System.out.println();
     }
 

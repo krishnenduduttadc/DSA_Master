@@ -29,19 +29,19 @@ public class CycleDirectedDFS {
 
     }
 
-    private boolean dfsCheck(int node, ArrayList<ArrayList<Integer>> adj, int vis[], int pathVis[]) {
-        vis[node] = 1;
-        pathVis[node] = 1;
+    private boolean dfsCheck(int s, ArrayList<ArrayList<Integer>> adj, int vis[], int pathVis[]) {
+        vis[s] = 1;
+        pathVis[s] = 1;
 
-        for (int it : adj.get(node)) {
+        for (int it : adj.get(s)) {
             if (vis[it] == 0) {
-                if (dfsCheck(it, adj, vis, pathVis) == true)
+                if (dfsCheck(it, adj, vis, pathVis))
                     return true;
             } else if (pathVis[it] == 1) {
                 return true;
             }
         }
-        pathVis[node] = 0;
+        pathVis[s] = 0;
         return false;
     }
 
@@ -50,7 +50,7 @@ public class CycleDirectedDFS {
         int pathVis[] = new int[v];
         for (int i = 0; i < v; i++) {
             if (vis[i] == 0) {
-                if (dfsCheck(i, adj, vis, pathVis) == true) return true;
+                if (dfsCheck(i, adj, vis, pathVis)) return true;
             }
         }
         return false;

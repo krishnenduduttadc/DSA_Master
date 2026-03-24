@@ -3,14 +3,14 @@ package GraphL3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CRiticalConnections {
+public class CriticalConnections {
     boolean[] vis;
     int[] disc;
     int[] low;
     int time = 0;
 
     public static void main(String[] args) {
-        CRiticalConnections solution = new CRiticalConnections();
+        CriticalConnections solution = new CriticalConnections();
 
         int n = 5;
         List<List<Integer>> connections = new ArrayList<>();

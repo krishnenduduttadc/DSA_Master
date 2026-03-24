@@ -31,7 +31,6 @@ public class ReverseDirectedGraph {
         for (int i = 0; i <= v; i++) {
             reversedAdj.add(new ArrayList<>());
         }
-
         for (int i = 0; i <= v; i++) {
             for (int j : adj.get(i)) {
                 reversedAdj.get(j).add(i);

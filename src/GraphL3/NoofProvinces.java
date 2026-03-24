@@ -20,10 +20,8 @@ public class NoofProvinces {
             adjLs.add(new ArrayList<Integer>());
         }
 
-        // to change adjacency matrix to list
         for (int i = 0; i < v; i++) {
             for (int j = 0; j < v; j++) {
-                // self nodes are not considered
                 if (adj.get(i).get(j) == 1 && i != j) {
                     adjLs.get(i).add(j);
                     adjLs.get(j).add(i);

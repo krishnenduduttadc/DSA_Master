@@ -17,7 +17,6 @@ class PathwithMaxEffort {
 
         PriorityQueue<Tuple> pq =
                 new PriorityQueue<>((x, y) -> x.distance - y.distance);
-
         int n = heights.length;
         int m = heights[0].length;
         int[][] dist = new int[n][m];
@@ -39,7 +38,6 @@ class PathwithMaxEffort {
             int col = it.col;
 
             if (row == n - 1 && col == m - 1) return diff;
-
             for (int i = 0; i < 4; i++) {
                 int newr = row + dr[i];
                 int newc = col + dc[i];

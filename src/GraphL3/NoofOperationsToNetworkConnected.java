@@ -8,6 +8,7 @@ class NoofOperationsToNetworkConnected {
     private List<Integer> rank;
     private List<Integer> parent;
     private List<Integer> size;
+
     public NoofOperationsToNetworkConnected(int n) {
         rank = new ArrayList<>();
         parent = new ArrayList<>();
@@ -63,9 +64,7 @@ class NoofOperationsToNetworkConnected {
     private void unionBySize(int u, int v) {
         int ulp_u = findUPar(u);
         int ulp_v = findUPar(v);
-
         if (ulp_u == ulp_v) return;
-
         if (size.get(ulp_u) < size.get(ulp_v)) {
             parent.set(ulp_u, ulp_v);
             size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
@@ -76,14 +75,10 @@ class NoofOperationsToNetworkConnected {
     }
 
     public int solve(int n, ArrayList<ArrayList<Pair>> adj) {
-
         int extraEdges = 0;
-
-        // Traverse adjacency list
         for (int u = 0; u < n; u++) {
             for (Pair it : adj.get(u)) {
                 int v = it.first;
-
                 // To avoid double counting in undirected graph
                 if (u < v) {
                     if (findUPar(u) == findUPar(v)) {
@@ -100,9 +95,7 @@ class NoofOperationsToNetworkConnected {
         for (int i = 0; i < n; i++) {
             if (parent.get(i) == i) components++;
         }
-
         int neededEdges = components - 1;
-
         return (extraEdges >= neededEdges) ? neededEdges : -1;
     }
 

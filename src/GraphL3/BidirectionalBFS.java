@@ -7,8 +7,8 @@ import java.util.Queue;
 
 public class BidirectionalBFS {
 
-    static int bidirectionalBFS(int n, List<List<Integer>> adj, int src, int dest) {
-        if (src == dest) return 0;
+    static int bidirectionalBFS(int n, List<List<Integer>> adj, int s, int d) {
+        if (s == d) return 0;
 
         Queue<Integer> q1 = new LinkedList<>();
         Queue<Integer> q2 = new LinkedList<>();
@@ -18,10 +18,10 @@ public class BidirectionalBFS {
 
         int[] dist1 = new int[n];
         int[] dist2 = new int[n];
-        q1.add(src);
-        q2.add(dest);
-        vis1[src] = true;
-        vis2[dest] = true;
+        q1.add(s);
+        q2.add(d);
+        vis1[s] = true;
+        vis2[d] = true;
         while (!q1.isEmpty() && !q2.isEmpty()) {
             int ans = expand(adj, q1, vis1, vis2, dist1, dist2);
             if (ans != -1) return ans;

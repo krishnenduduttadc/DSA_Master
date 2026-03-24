@@ -4,6 +4,23 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class DistanceofNearestCell {
+    public static void main(String[] args) {
+        int[][] grid = {
+                {0, 1, 1, 0},
+                {1, 1, 0, 0},
+                {0, 0, 1, 1}
+        };
+
+        DistanceofNearestCell obj = new DistanceofNearestCell();
+        int[][] ans = obj.nearest(grid);
+        for (int i = 0; i < ans.length; i++) {
+            for (int j = 0; j < ans[i].length; j++) {
+                System.out.print(ans[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     // Function to find distance of nearest 1 in the grid for each cell.
     public int[][] nearest(int[][] grid) {
         int n = grid.length;
@@ -55,32 +72,15 @@ public class DistanceofNearestCell {
         return dist;
     }
 
-    public static void main(String[] args) {
-        int[][] grid = {
-                {0, 1, 1, 0},
-                {1, 1, 0, 0},
-                {0, 0, 1, 1}
-        };
-
-        DistanceofNearestCell obj = new DistanceofNearestCell();
-        int[][] ans = obj.nearest(grid);
-        for (int i = 0; i < ans.length; i++) {
-            for (int j = 0; j < ans[i].length; j++) {
-                System.out.print(ans[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
     static class NodeT {
         int first;
         int second;
         int third;
 
-        NodeT(int _first, int _second, int _third) {
-            this.first = _first;
-            this.second = _second;
-            this.third = _third;
+        NodeT(int first, int second, int third) {
+            this.first = first;
+            this.second = second;
+            this.third = third;
         }
     }
 }

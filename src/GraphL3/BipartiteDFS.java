@@ -25,13 +25,10 @@ public class BipartiteDFS {
         else System.out.println("0");
     }
 
-    private boolean dfs(int node, int col, int color[],
+    private boolean dfs(int s, int col, int color[],
                         ArrayList<ArrayList<Integer>> adj) {
-
-        color[node] = col;
-
-        // traverse adjacent nodes
-        for (int it : adj.get(node)) {
+        color[s] = col;
+        for (int it : adj.get(s)) {
             // if uncoloured
             if (color[it] == -1) {
                 if (dfs(it, 1 - col, color, adj) == false) return false;

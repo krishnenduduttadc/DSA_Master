@@ -26,7 +26,6 @@ public class DetectCycleDirectedKahnBFS {
     }
 
     public boolean isCyclic(int n, ArrayList<ArrayList<Integer>> adj) {
-        // int topo[] = new int[N];
         int indegree[] = new int[n];
         for (int i = 0; i < n; i++) {
             for (Integer it : adj.get(i)) {
