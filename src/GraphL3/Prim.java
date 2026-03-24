@@ -4,70 +4,84 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 class Prim {
-    static int spanningTree(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
-        PriorityQueue<Pair> pq =
-                new PriorityQueue<>((x, y) -> x.distance - y.distance);
+
+    static int spanningTree(int v, ArrayList<ArrayList<Pair>> adj) {
+
+        PriorityQueue<NodePair> pq =
+                new PriorityQueue<>((x, y) -> x.dist - y.dist);
+
         int[] vis = new int[v];
-        // {wt, node}
-        pq.add(new Pair(0, 0));
+
+        pq.add(new NodePair(0, 0)); // (weight, node)
+
         int sum = 0;
+
         while (!pq.isEmpty()) {
-            int wt = pq.peek().distance;
-            int node = pq.peek().node;
-            pq.remove();
+            NodePair it = pq.poll();
+
+            int node = it.node;
+            int wt = it.dist;
 
             if (vis[node] == 1) continue;
+
             vis[node] = 1;
             sum += wt;
 
-            for (int i = 0; i < adj.get(node).size(); i++) {
-                int adjNode = adj.get(node).get(i).get(0);
-                int edW = adj.get(node).get(i).get(1);
+            for (Pair neigh : adj.get(node)) {
+                int adjNode = neigh.node;
+                int edgeWt = neigh.weight;
+
                 if (vis[adjNode] == 0) {
-                    pq.add(new Pair(edW, adjNode));
+                    pq.add(new NodePair(edgeWt, adjNode));
                 }
             }
         }
+
         return sum;
     }
 
     public static void main(String[] args) {
+
         int V = 5;
-        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
-        int[][] edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
+
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
-        for (int i = 0; i < 6; i++) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            int w = edges[i][2];
 
-            ArrayList<Integer> tmp1 = new ArrayList<>();
-            ArrayList<Integer> tmp2 = new ArrayList<>();
-            tmp1.add(v);
-            tmp1.add(w);
+        addEdge(adj, 0, 1, 2);
+        addEdge(adj, 0, 2, 1);
+        addEdge(adj, 1, 2, 1);
+        addEdge(adj, 2, 3, 2);
+        addEdge(adj, 3, 4, 1);
+        addEdge(adj, 4, 2, 2);
 
-            tmp2.add(u);
-            tmp2.add(w);
+        int sum = spanningTree(V, adj);
 
-            adj.get(u).add(tmp1);
-            adj.get(v).add(tmp2);
-        }
+        System.out.println("MST weight: " + sum);
+    }
 
-        Prim obj = new Prim();
-        int sum = obj.spanningTree(V, adj);
-        System.out.println("The sum of all the edge weights: " + sum);
+    static void addEdge(ArrayList<ArrayList<Pair>> adj, int u, int v, int w) {
+        adj.get(u).add(new Pair(v, w));
+        adj.get(v).add(new Pair(u, w));
     }
 
     static class Pair {
+        int node, weight;
 
-        int distance;
-        int node;
-
-        public Pair(int distance, int node) {
+        Pair(int node, int weight) {
             this.node = node;
-            this.distance = distance;
+            this.weight = weight;
+        }
+    }
+
+    static class NodePair {
+        int dist, node;
+
+        NodePair(int dist, int node) {
+            this.dist = dist;
+            this.node = node;
         }
     }
 }

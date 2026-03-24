@@ -2,85 +2,110 @@ package GraphL3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.PriorityQueue;
 
 public class NumberofWaystoArriveatDestination {
 
-    static class Pair {
-        int first;
-        int second;
+    public static void main(String[] args) {
 
-        public Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
+        int n = 7;
 
-    public int countPaths(int n, List<List<Integer>> roads) {
         ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
-        int m = roads.size();
-        for (int i = 0; i < m; i++) {
-            adj.get(roads.get(i).get(0)).add(new Pair(roads.get(i).get(1), roads.get(i).get(2)));
-            adj.get(roads.get(i).get(1)).add(new Pair(roads.get(i).get(0), roads.get(i).get(2)));
-        }
 
-        PriorityQueue<Pair> pq = new PriorityQueue<>((x, y) -> x.first - y.first);
+        addEdge(adj, 0, 6, 7);
+        addEdge(adj, 0, 1, 2);
+        addEdge(adj, 1, 2, 3);
+        addEdge(adj, 1, 3, 3);
+        addEdge(adj, 6, 3, 3);
+        addEdge(adj, 3, 5, 1);
+        addEdge(adj, 6, 5, 1);
+        addEdge(adj, 2, 5, 1);
+        addEdge(adj, 0, 4, 5);
+        addEdge(adj, 4, 6, 2);
+
+        NumberofWaystoArriveatDestination obj =
+                new NumberofWaystoArriveatDestination();
+
+        int ans = obj.countPaths(n, adj);
+
+        System.out.println(ans);
+    }
+
+    static void addEdge(ArrayList<ArrayList<Pair>> adj,
+                        int u, int v, int w) {
+
+        adj.get(u).add(new Pair(v, w));
+        adj.get(v).add(new Pair(u, w));
+    }
+
+    public int countPaths(int n, ArrayList<ArrayList<Pair>> adj) {
+
+        PriorityQueue<NodePair> pq =
+                new PriorityQueue<>((x, y) -> x.dist - y.dist);
 
         int[] dist = new int[n];
         int[] ways = new int[n];
-        for (int i = 0; i < n; i++) {
-            dist[i] = (int) 1e9;
-            ways[i] = 0;
-        }
+
+        Arrays.fill(dist, (int) 1e9);
+
         dist[0] = 0;
         ways[0] = 1;
-        pq.add(new Pair(0, 0));
+
+        pq.add(new NodePair(0, 0));
 
         int mod = (int) (1e9 + 7);
 
-        while (pq.size() != 0) {
-            int dis = pq.peek().first;
-            int node = pq.peek().second;
-            pq.remove();
+        while (!pq.isEmpty()) {
 
-            for (Pair it : adj.get(node)) {
-                int adjNode = it.first;
-                int edW = it.second;
+            NodePair it = pq.poll();
+            int node = it.node;
+            int dis = it.dist;
 
-                if (dis + edW < dist[adjNode]) {
-                    dist[adjNode] = dis + edW;
-                    pq.add(new Pair(dis + edW, adjNode));
-                    ways[adjNode] = ways[node];
-                } else if (dis + edW == dist[adjNode]) {
-                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;
+            // skip outdated entries
+            if (dis > dist[node]) continue;
+
+            for (Pair neigh : adj.get(node)) {
+
+                int adjNode = neigh.node;
+                int wt = neigh.weight;
+
+                // shorter path found
+                if (dis + wt < dist[adjNode]) {
+                    dist[adjNode] = dis + wt;
+                    pq.add(new NodePair(dist[adjNode], adjNode));
+
+                    ways[adjNode] = ways[node]; // inherit ways
+                }
+                // another shortest path found
+                else if (dis + wt == dist[adjNode]) {
+                    ways[adjNode] =
+                            (ways[adjNode] + ways[node]) % mod;
                 }
             }
         }
+
         return ways[n - 1] % mod;
     }
 
-    public static void main(String[] args) {
-        int n = 7;
-        List<List<Integer>> roads = new ArrayList<>() {{
-            add(new ArrayList<>(Arrays.asList(0, 6, 7)));
-            add(new ArrayList<>(Arrays.asList(0, 1, 2)));
-            add(new ArrayList<>(Arrays.asList(1, 2, 3)));
-            add(new ArrayList<>(Arrays.asList(1, 3, 3)));
-            add(new ArrayList<>(Arrays.asList(6, 3, 3)));
-            add(new ArrayList<>(Arrays.asList(3, 5, 1)));
-            add(new ArrayList<>(Arrays.asList(6, 5, 1)));
-            add(new ArrayList<>(Arrays.asList(2, 5, 1)));
-            add(new ArrayList<>(Arrays.asList(0, 4, 5)));
-            add(new ArrayList<>(Arrays.asList(4, 6, 2)));
-        }};
-        NumberofWaystoArriveatDestination obj = new NumberofWaystoArriveatDestination();
-        int ans = obj.countPaths(n, roads);
+    static class Pair {
+        int node, weight;
 
-        System.out.print(ans);
-        System.out.println();
+        Pair(int node, int weight) {
+            this.node = node;
+            this.weight = weight;
+        }
+    }
+
+    static class NodePair {
+        int dist, node;
+
+        NodePair(int dist, int node) {
+            this.dist = dist;
+            this.node = node;
+        }
     }
 }
