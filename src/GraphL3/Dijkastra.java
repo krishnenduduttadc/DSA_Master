@@ -56,9 +56,7 @@ public class Dijkastra {
           [ [1, 3], [0, 6] ]
         ]
 */
-
         int[] res = dijkstra(V, adj, S);
-
         for (int i = 0; i < V; i++) {
             System.out.print(res[i] + " ");
         }
