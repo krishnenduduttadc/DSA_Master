@@ -45,12 +45,12 @@ public class DeadlockDetection {
         stack.push(u);
         onStack[u] = true;
 
-        for (int v : graph.get(u)) {
-            if (disc[v] == -1) {
-                dfs(v);
-                low[u] = Math.min(low[u], low[v]);
-            } else if (onStack[v]) {
-                low[u] = Math.min(low[u], disc[v]);
+        for (int it : graph.get(u)) {
+            if (disc[it] == -1) {
+                dfs(it);
+                low[u] = Math.min(low[u], low[it]);
+            } else if (onStack[it]) {
+                low[u] = Math.min(low[u], disc[it]);
             }
         }
 
