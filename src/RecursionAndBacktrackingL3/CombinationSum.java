@@ -24,13 +24,10 @@ public class CombinationSum {
         }
 
         for (int i = index; i < nums.length; i++) {
-
             // Choose
             current.add(nums[i]);
-
             // Explore (notice i, not i+1 because reuse allowed)
             backtrack(nums, target - nums[i], i, current);
-
             // Un-choose
             current.remove(current.size() - 1);
         }

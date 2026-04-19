@@ -24,9 +24,7 @@ public class UniquePath3 {
                     startY = j;
                 }
             }
-
         backtrack(grid, startX, startY, -1);
-
         System.out.println(result);
     }
 
