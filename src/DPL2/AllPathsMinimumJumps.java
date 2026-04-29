@@ -13,6 +13,7 @@ public class AllPathsMinimumJumps {
     public static void main(String[] args) {
         int arr[] = {3, 3, 0, 2, 1, 2, 4, 2, 0, 0};
         solution(arr);
+
     }
 
     private static void solution(int[] arr) {
