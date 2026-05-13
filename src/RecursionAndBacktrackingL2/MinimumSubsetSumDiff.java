@@ -1,37 +1,53 @@
 package RecursionAndBacktrackingL2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MinimumSubsetSumDiff {
-    public static void main(String[] args) {
-        int[] arr={1,5,2,4};
-    solve(arr,0,new ArrayList<>(),new ArrayList<>(),0,0);
-        System.out.println(ans);
-    }
-    static String ans="";
-    static int mindiff=Integer.MAX_VALUE;
+    static int minDiff = Integer.MAX_VALUE;
+    static List<Integer> bestSet1 = new ArrayList<>();
+    static List<Integer> bestSet2 = new ArrayList<>();
 
-    static void solve(int[] arr, int vidx, ArrayList<Integer> set1,
-                      ArrayList<Integer> set2,int soset1,int soset2){
-        if(vidx==arr.length){
-            int delta=Math.abs(soset1-soset2);
-            if(delta<mindiff){
-                mindiff=delta;
-                ans=set1+" "+set2;
+    static void solve(int[] arr, int idx,
+                      List<Integer> set1, List<Integer> set2,
+                      int sum1, int sum2) {
+
+        // Base case
+        if (idx == arr.length) {
+            int diff = Math.abs(sum1 - sum2);
+
+            if (diff < minDiff) {
+                minDiff = diff;
+                bestSet1 = new ArrayList<>(set1);
+                bestSet2 = new ArrayList<>(set2);
             }
             return;
         }
 
-        if(set1.size()<(arr.length+1)/2){
-            set1.add(arr[vidx]);
-            solve(arr,vidx+1,set1,set2,soset1+arr[vidx],soset2);
-            set1.remove(set1.size()-1);
+        // Put current element in set1 (limit size)
+        if (set1.size() < (arr.length + 1) / 2) {
+            set1.add(arr[idx]);
+            solve(arr, idx + 1, set1, set2, sum1 + arr[idx], sum2);
+            set1.remove(set1.size() - 1); // backtrack
         }
 
-        if(set2.size()<(arr.length+1)/2){
-            set2.add(arr[vidx]);
-            solve(arr,vidx+1,set1,set2,soset1,soset2+arr[vidx]);
-            set2.remove(set2.size()-1);
+        // Put current element in set2 (limit size)
+        if (set2.size() < (arr.length + 1) / 2) {
+            set2.add(arr[idx]);
+            solve(arr, idx + 1, set1, set2, sum1, sum2 + arr[idx]);
+            set2.remove(set2.size() - 1); // backtrack
         }
+    }
+
+    public static void main(String[] args) {
+
+        // Hardcoded input
+        int[] arr = {1, 5, 2, 4};
+
+        solve(arr, 0, new ArrayList<>(), new ArrayList<>(), 0, 0);
+
+        System.out.println("Minimum Difference: " + minDiff);
+        System.out.println("Set 1: " + bestSet1);
+        System.out.println("Set 2: " + bestSet2);
     }
 }

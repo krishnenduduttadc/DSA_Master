@@ -1,34 +1,43 @@
 package RecursionAndBacktrackingL2;
 
 public class FriendsPairing {
-    public static void main(String[] args) {
-        int n = 3;
-        boolean[] used = new boolean[n + 1];
-        solution(1, n, used, "");
-    }
+    static int count = 1;
 
-    static int counter=1;
-    public static void solution(int i, int n, boolean[] used, String asf) {
-        if(i>n){
-            System.out.println(counter+"."+asf);
-            counter++;
+    static void solve(int i, int n, boolean[] used, String ans) {
+
+        // Base case
+        if (i > n) {
+            System.out.println(count++ + ". " + ans);
             return;
         }
-        if (used[i] == true) {
-            solution(i + 1, n, used, asf);
-        } else {
-            used[i] = true;
-            solution(i + 1, n, used, asf + "(" + i + ") ");
-            for (int j = i + 1; j <= n; j++) {
-                if(used[j]==false) {
-                    used[j] = true;
-                    solution(i + 1, n, used, asf + "(" + i +","+ j + ") ");
-                    used[j] = false;
-                }
 
-            }
-            used[i] = false;
+        // If already paired, skip
+        if (used[i]) {
+            solve(i + 1, n, used, ans);
+            return;
         }
 
+        // Option 1: Stay single
+        used[i] = true;
+        solve(i + 1, n, used, ans + "(" + i + ") ");
+
+        // Option 2: Pair with someone
+        for (int j = i + 1; j <= n; j++) {
+            if (!used[j]) {
+                used[j] = true;
+                solve(i + 1, n, used, ans + "(" + i + "," + j + ") ");
+                used[j] = false;  // backtrack
+            }
+        }
+
+        used[i] = false; // backtrack
+    }
+
+    public static void main(String[] args) {
+
+        int n = 3;   // Hardcoded input
+        boolean[] used = new boolean[n + 1];
+
+        solve(1, n, used, "");
     }
 }

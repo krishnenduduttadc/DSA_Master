@@ -1,76 +1,59 @@
 package RecursionAndBacktrackingL2;
 
-import java.util.Scanner;
-
 public class MaxScore {
-    public static int solution(String[] words, int[] farr, int[] score, int idx) {
-        //write your code here
-        if(idx==words.length){
-            return 0;
-        }
+    // Returns maximum score we can get from words[idx...end]
+    static int maxScore(String[] words, int[] freq, int[] score, int idx) {
 
-        int sno=solution(words,farr,score,idx+1);
-        int sword=0;
-        String word=words[idx];
-        boolean flag=true;
-        for(int i=0;i<word.length();i++){
-            char ch=word.charAt(i);
-            if(farr[ch-'a']==0){
-                flag=false;
+        // Base case
+        if (idx == words.length) return 0;
+
+        // Option 1: Skip current word
+        int skip = maxScore(words, freq, score, idx + 1);
+
+        String word = words[idx];
+        int wordScore = 0;
+        boolean canTake = true;
+
+        // Try to take the word
+        for (char ch : word.toCharArray()) {
+            if (freq[ch - 'a'] == 0) {
+                canTake = false;
             }
-            farr[ch-'a']--;
-            sword+=score[ch-'a'];
-
-        }
-        int syes=0;
-        if(flag){
-            syes=sword+solution(words,farr,score,idx+1);
+            freq[ch - 'a']--;
+            wordScore += score[ch - 'a'];
         }
 
-        for(int i=0;i<word.length();i++){
-            char ch=word.charAt(i);
-            farr[ch-'a']++;
+        int take = 0;
+        if (canTake) {
+            take = wordScore + maxScore(words, freq, score, idx + 1);
         }
 
+        // Backtrack (restore frequency)
+        for (char ch : word.toCharArray()) {
+            freq[ch - 'a']++;
+        }
 
-        return Math.max(sno,syes);
+        return Math.max(skip, take);
     }
 
     public static void main(String[] args) {
 
-        Scanner scn = new Scanner(System.in);
-        int nofWords = scn.nextInt();
-        String[] words = new String[nofWords];
-        for(int i = 0 ; i < words.length; i++) {
-            words[i] = scn.next();
-        }
-        int nofLetters = scn.nextInt();
-        char[] letters = new char[nofLetters];
-        for (int i = 0; i < letters.length; i++) {
-            letters[i] = scn.next().charAt(0);
-        }
-        int[] score = new int[26];
-        for (int i = 0; i < score.length; i++) {
-            score[i] = scn.nextInt();
-        }
-        if (words == null || words.length == 0 || letters == null || letters.length == 0 || score == null
-                || score.length == 0) {
-            System.out.println(0);
-            return;
-        }
-        int[] farr = new int[score.length];
-        for (char ch : letters) {
-            farr[ch - 'a']++;
-        }
-        System.out.println(solution(words, farr, score, 0));
+        // Hardcoded input
+        String[] words = {"dog", "cat", "dad", "good"};
+        char[] letters = {'a', 'b', 'c', 'd', 'd', 'd', 'g', 'o', 'o'};
+        int[] score = {
+                1, 0, 9, 5, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        };
 
+        // Build frequency array
+        int[] freq = new int[26];
+        for (char ch : letters) {
+            freq[ch - 'a']++;
+        }
+
+        int result = maxScore(words, freq, score, 0);
+        System.out.println("Maximum Score: " + result);
     }
 }
 
-/*
-4
-dog cat dad good
-9
-a b c d d d g o o
-1 0 9 5 0 0 3 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0
- */
+
