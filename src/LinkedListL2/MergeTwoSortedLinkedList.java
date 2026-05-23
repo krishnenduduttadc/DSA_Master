@@ -60,12 +60,7 @@ public class MergeTwoSortedLinkedList {
         new_node.next = head1;
         head1 = new_node;
     }
-
-    void push2(int new_data) {
-        Node new_node = new Node(new_data);
-        new_node.next = head2;
-        head2 = new_node;
-    }
+    
 
     public static class Node {
         int val = 0;

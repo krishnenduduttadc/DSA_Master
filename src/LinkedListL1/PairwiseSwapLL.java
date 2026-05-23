@@ -13,39 +13,9 @@ public class PairwiseSwapLL {
 
     static Node head;
 
-    static class Node {
-
-        int data;
-        Node next;
-
-        Node(int d) {
-            data = d;
-            next = null;
-        }
-    }
-
-    void printList(Node node) {
-        while (node != null) {
-            System.out.print(node.data + " ");
-            node = node.next;
-        }
-    }
-    
-    Node pairWiseSwap(Node node) 
-    { 
-        if (node == null || node.next == null) { 
-            return node; 
-        }
-        Node remaing = node.next.next; 
-        Node newhead = node.next; 
-        node.next.next = node; 
-        node.next = pairWiseSwap(remaing); 
-        return newhead; 
-    }
-
     public static void main(String[] args) {
 
-        /* The constructed linked list is: 
+        /* The constructed linked list is:
          1->2->3->4->5->6->7 */
         PairwiseSwapLL list = new PairwiseSwapLL();
         list.head = new Node(1);
@@ -63,5 +33,33 @@ public class PairwiseSwapLL {
         System.out.println("Linked list after calling pairwiseSwap() ");
         list.printList(head);
         System.out.println("");
+    }
+
+    void printList(Node node) {
+        while (node != null) {
+            System.out.print(node.data + " ");
+            node = node.next;
+        }
+    }
+
+    Node pairWiseSwap(Node node) {
+        if (node == null || node.next == null) {
+            return node;
+        }
+        Node remaing = node.next.next;
+        Node newhead = node.next;
+        node.next.next = node;
+        node.next = pairWiseSwap(remaing);
+        return newhead;
+    }
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int d) {
+            data = d;
+            next = null;
+        }
     }
 }

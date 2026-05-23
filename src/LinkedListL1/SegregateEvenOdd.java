@@ -3,16 +3,22 @@ package LinkedListL1;
 public class SegregateEvenOdd {
     Node head;  // head of list
 
-    /* Linked list Node*/
-    class Node {
+    public static void main(String args[]) {
+        SegregateEvenOdd llist = new SegregateEvenOdd();
+        llist.push(11);
+        llist.push(10);
+        llist.push(9);
+        llist.push(6);
+        llist.push(4);
+        llist.push(1);
+        llist.push(0);
+        System.out.println("Origional Linked List");
+        llist.printList();
 
-        int data;
-        Node next;
+        llist.segregateEvenOdd();
 
-        Node(int d) {
-            data = d;
-            next = null;
-        }
+        System.out.println("Modified Linked List");
+        llist.printList();
     }
 
     void printList() {
@@ -73,21 +79,14 @@ public class SegregateEvenOdd {
         head = evenStart;
     }
 
-    public static void main(String args[]) {
-        SegregateEvenOdd llist = new SegregateEvenOdd();
-        llist.push(11);
-        llist.push(10);
-        llist.push(9);
-        llist.push(6);
-        llist.push(4);
-        llist.push(1);
-        llist.push(0);
-        System.out.println("Origional Linked List");
-        llist.printList();
+    /* Linked list Node*/
+    class Node {
+        int data;
+        Node next;
 
-        llist.segregateEvenOdd();
-
-        System.out.println("Modified Linked List");
-        llist.printList();
+        Node(int d) {
+            data = d;
+            next = null;
+        }
     }
 }

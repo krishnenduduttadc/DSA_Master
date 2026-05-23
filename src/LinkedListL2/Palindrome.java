@@ -1,15 +1,6 @@
 package LinkedListL2;
 
 public class Palindrome {
-    public static class Node {
-        int val = 0;
-        Node next = null;
-
-        Node(int val) {
-            this.val = val;
-        }
-    }
-
     public static Node midNode(Node head) {
         if (head == null || head.next == null) return head;
 
@@ -80,5 +71,14 @@ public class Palindrome {
         head.next.next.next.next = new Node(1);
 
         System.out.println(isPalindrome(head)); // should print true
+    }
+
+    public static class Node {
+        int val = 0;
+        Node next = null;
+
+        Node(int val) {
+            this.val = val;
+        }
     }
 }

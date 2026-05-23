@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LinkedListL1;
 
 import java.util.Stack;
@@ -12,17 +7,6 @@ import java.util.Stack;
  * @author krish
  */
 public class Palindrome {
-
-    static class Node {
-
-        int data;
-        Node ptr;
-
-        Node(int d) {
-            ptr = null;
-            data = d;
-        }
-    }
 
     static boolean isPalindrome(Node head) {
 
@@ -48,7 +32,7 @@ public class Palindrome {
         return ispalin;
     }
 
-public static void main(String args[]) {
+    public static void main(String args[]) {
         Node one = new Node(1);
         Node two = new Node(2);
         Node three = new Node(3);
@@ -64,5 +48,16 @@ public static void main(String args[]) {
         six.ptr = seven;
         boolean condition = isPalindrome(one);
         System.out.println("isPalidrome :" + condition);
+    }
+
+    static class Node {
+
+        int data;
+        Node ptr;
+
+        Node(int d) {
+            ptr = null;
+            data = d;
+        }
     }
 }

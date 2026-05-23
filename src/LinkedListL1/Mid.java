@@ -19,14 +19,6 @@ public class Mid {
     }
 
 
-    private static Node getNodeAt(int idx) {
-        Node temp = head;
-        for (int i = 0; i < idx; i++) temp = temp.next;
-        return temp;
-    }
-
-    // ========== Helpers ==========
-
     public static void display() {
         for (Node temp = head; temp != null; temp = temp.next) {
             System.out.print(temp.data + " ");
@@ -53,7 +45,7 @@ public class Mid {
         addLast(50);
         System.out.println(mid());
     }
-    
+
     public static class Node {
         int data;
         Node next;

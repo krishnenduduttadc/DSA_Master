@@ -19,7 +19,6 @@ public class Fold {
             tail.next = temp;
             tail = temp;
         }
-
         size++;
     }
 
@@ -64,12 +63,9 @@ public class Fold {
         for (int val : values) {
             addLast(val);
         }
-
         System.out.println("Before fold:");
         display();
-
         fold();
-
         System.out.println("After fold:");
         display();
     }

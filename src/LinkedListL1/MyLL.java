@@ -13,16 +13,19 @@ public class MyLL {
 
     static Node head;  // head of list 
 
-    /* Linked list Node*/
-    class Node {
-
-        int data;
-        Node next;
-
-        Node(int d) {
-            data = d;
-            next = null;
-        }
+    public static void main(String[] args) {
+        MyLL llist = new MyLL();
+        llist.push(11);
+        llist.push(10);
+        llist.push(9);
+        llist.push(6);
+        llist.push(4);
+        llist.push(1);
+        llist.push(0);
+        System.out.println("Origional Linked List");
+        llist.printList(head);
+        //System.out.println("Reversed Linked List" + llist.reverse(head).data);
+        llist.printList(llist.reverse(head));
     }
 
     void printList(Node head) {
@@ -54,18 +57,14 @@ public class MyLL {
         return prev;
     }
 
-    public static void main(String[] args) {
-        MyLL llist = new MyLL();
-        llist.push(11);
-        llist.push(10);
-        llist.push(9);
-        llist.push(6);
-        llist.push(4);
-        llist.push(1);
-        llist.push(0);
-        System.out.println("Origional Linked List");
-        llist.printList(head);
-        //System.out.println("Reversed Linked List" + llist.reverse(head).data);
-        llist.printList(llist.reverse(head));
+    /* Linked list Node*/
+    class Node {
+        int data;
+        Node next;
+
+        Node(int d) {
+            data = d;
+            next = null;
+        }
     }
 }

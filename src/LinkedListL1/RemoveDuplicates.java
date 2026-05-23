@@ -50,17 +50,13 @@ public class RemoveDuplicates {
     public static void main(String[] args) {
         // Hardcoded input
         int[] elements = {2, 2, 2, 3, 3, 5, 5, 5, 5, 5};
-
         Node head = null;
         for (int element : elements) {
             head = addLast(head, element);
         }
-
         System.out.println("Original List:");
         display(head);
-
         head = removeDuplicates(head);
-
         System.out.println("List after removing duplicates:");
         display(head);
     }

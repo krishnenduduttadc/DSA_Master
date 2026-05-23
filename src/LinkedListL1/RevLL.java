@@ -61,6 +61,9 @@ public class RevLL {
         System.out.println("\n********************************************");
         Node rev = reverseI(one);
         display(rev);
+        System.out.println("\n********************************************");
+        Node rev2 = reverse(seven);
+        display(rev2);
     }
 
     static class Node {
