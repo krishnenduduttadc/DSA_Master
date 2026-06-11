@@ -1,65 +1,55 @@
 package GraphL3;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class ShortestDistanceinaBinaryMaze {
 
-    static class Pair {
-        int x, y;
+    static int shortestDistance(int[][] grid, int[] source, int[] destination) {
 
-        Pair(int _x, int _y) {
-            this.x = _x;
-            this.y = _y;
-        }
-    }
+        int n = grid.length;
+        int m = grid[0].length;
 
-    private boolean isValid(int x, int y, int rows, int cols, int[][] maze, boolean[][] visited) {
-        return x >= 0 && x < rows && y >= 0 && y < cols && maze[x][y] == 1 && !visited[x][y];
-    }
+        int[] dr = {-1, 0, 1, 0};
+        int[] dc = {0, 1, 0, -1};
 
-    public int shortestDistance(int[][] maze, int[] start, int[] destination) {
-        int rows = maze.length;
-        int cols = maze[0].length;
+        boolean[][] visited = new boolean[n][m];
+        Queue<Node> queue = new LinkedList<>();
 
-        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-
-        Queue<Pair> queue = new LinkedList<>();
-        boolean[][] visited = new boolean[rows][cols];
-        int[][] distance = new int[rows][cols];
-
-        queue.offer(new Pair(start[0], start[1]));
-        visited[start[0]][start[1]] = true;
-        distance[start[0]][start[1]] = 0;
+        queue.offer(new Node(source[0], source[1], 0));
+        visited[source[0]][source[1]] = true;
 
         while (!queue.isEmpty()) {
-            Pair current = queue.poll();
 
-            for (int[] dir : directions) {
-                int newX = current.x;
-                int newY = current.y;
-                int steps = 0;
+            Node current = queue.poll();
 
-                while (isValid(newX + dir[0], newY + dir[1], rows, cols, maze, visited)) {
-                    newX += dir[0];
-                    newY += dir[1];
-                    steps++;
-                }
+            if (current.row == destination[0] &&
+                    current.col == destination[1]) {
+                return current.dist;
+            }
 
-                if (!visited[newX][newY]) {
-                    visited[newX][newY] = true;
-                    queue.offer(new Pair(newX, newY));
-                    distance[newX][newY] = distance[current.x][current.y] + steps;
+            for (int i = 0; i < 4; i++) {
+
+                int newRow = current.row + dr[i];
+                int newCol = current.col + dc[i];
+
+                if (newRow >= 0 && newRow < n &&
+                        newCol >= 0 && newCol < m &&
+                        grid[newRow][newCol] == 1 &&
+                        !visited[newRow][newCol]) {
+
+                    visited[newRow][newCol] = true;
+                    queue.offer(new Node(newRow, newCol, current.dist + 1));
                 }
             }
         }
 
-        return (visited[destination[0]][destination[1]]) ? distance[destination[0]][destination[1]] : -1;
+        return -1;
     }
 
-    public static void main(String[] args) throws IOException {
-        int[][] maze = {
+    public static void main(String[] args) {
+
+        int[][] grid = {
                 {1, 0, 1, 0, 1},
                 {1, 1, 1, 1, 1},
                 {0, 0, 0, 0, 1},
@@ -67,12 +57,19 @@ public class ShortestDistanceinaBinaryMaze {
                 {1, 0, 1, 0, 1}
         };
 
-        int[] start = {0, 0};
+        int[] source = {0, 0};
         int[] destination = {4, 4};
 
-        ShortestDistanceinaBinaryMaze distanceFinder = new ShortestDistanceinaBinaryMaze();
-        int result = distanceFinder.shortestDistance(maze, start, destination);
+        System.out.println(shortestDistance(grid, source, destination));
+    }
 
-        System.out.println("Shortest Distance: " + result);
+    static class Node {
+        int row, col, dist;
+
+        Node(int row, int col, int dist) {
+            this.row = row;
+            this.col = col;
+            this.dist = dist;
+        }
     }
 }

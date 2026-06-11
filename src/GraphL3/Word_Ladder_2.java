@@ -1,14 +1,14 @@
 package GraphL3;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 public class Word_Ladder_2 {
-    public static void main(String[] args) throws IOException {
-        String startWord = "der", targetWord = "dfs";
+
+    public static void main(String[] args) {
+
+        String startWord = "der";
+        String targetWord = "dfs";
+
         String[] wordList = {
                 "des",
                 "der",
@@ -17,49 +17,57 @@ public class Word_Ladder_2 {
                 "dfs"
         };
 
-        Word_Ladder_2 obj = new Word_Ladder_2();
-        int ans = obj.wordLadderLength(startWord, targetWord, wordList);
-
-        System.out.print(ans);
-        System.out.println();
+        System.out.println(wordLadderLength(startWord, targetWord, wordList));
     }
 
-    public int wordLadderLength(String startWord, String targetWord, String[] wordList) {
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(startWord, 1));
-        Set<String> st = new HashSet<>();
-        int len = wordList.length;
-        for (int i = 0; i < len; i++) {
-            st.add(wordList[i]);
-        }
-        st.remove(startWord);
-        while (!q.isEmpty()) {
-            String word = q.peek().first;
-            int steps = q.peek().second;
-            q.remove();
-            if (word.equals(targetWord)) return steps;
-            for (int i = 0; i < word.length(); i++) {
+    public static int wordLadderLength(String startWord,
+                                       String targetWord,
+                                       String[] wordList) {
+
+        Set<String> words = new HashSet<>(Arrays.asList(wordList));
+        Queue<Pair> queue = new LinkedList<>();
+
+        queue.offer(new Pair(startWord, 1));
+        words.remove(startWord);
+
+        while (!queue.isEmpty()) {
+
+            Pair current = queue.poll();
+
+            if (current.word.equals(targetWord))
+                return current.steps;
+
+            char[] chars = current.word.toCharArray();
+
+            for (int i = 0; i < chars.length; i++) {
+
+                char original = chars[i];
+
                 for (char ch = 'a'; ch <= 'z'; ch++) {
-                    char[] replacedCharArray = word.toCharArray();
-                    replacedCharArray[i] = ch;
-                    String replacedWord = new String(replacedCharArray);
-                    if (st.contains(replacedWord)) {
-                        st.remove(replacedWord);
-                        q.add(new Pair(replacedWord, steps + 1));
+
+                    chars[i] = ch;
+                    String nextWord = new String(chars);
+
+                    if (words.contains(nextWord)) {
+                        queue.offer(new Pair(nextWord, current.steps + 1));
+                        words.remove(nextWord);
                     }
                 }
+
+                chars[i] = original;
             }
         }
+
         return 0;
     }
 
     static class Pair {
-        String first;
-        int second;
+        String word;
+        int steps;
 
-        Pair(String _first, int _second) {
-            this.first = _first;
-            this.second = _second;
+        Pair(String word, int steps) {
+            this.word = word;
+            this.steps = steps;
         }
     }
 }
