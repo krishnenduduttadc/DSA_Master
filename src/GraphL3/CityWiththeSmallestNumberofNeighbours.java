@@ -5,17 +5,24 @@ import java.util.Arrays;
 
 public class CityWiththeSmallestNumberofNeighbours {
 
+    static void addEdge(ArrayList<ArrayList<Edge>> adj,
+                        int u, int v, int w) {
+
+        adj.get(u).add(new Edge(v, w));
+        adj.get(v).add(new Edge(u, w));
+    }
+
     public static void main(String[] args) {
 
         int n = 4;
 
-        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        ArrayList<ArrayList<Edge>> adj = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
 
-        // undirected weighted graph
+        // Hardcoded graph
         addEdge(adj, 0, 1, 3);
         addEdge(adj, 1, 2, 1);
         addEdge(adj, 1, 3, 4);
@@ -26,81 +33,78 @@ public class CityWiththeSmallestNumberofNeighbours {
         CityWiththeSmallestNumberofNeighbours obj =
                 new CityWiththeSmallestNumberofNeighbours();
 
-        int ans = obj.findCity(n, adj, threshold);
+        int city = obj.findCity(n, adj, threshold);
 
-        System.out.println("The answer is node: " + ans);
+        System.out.println("City with smallest number of neighbours = " + city);
     }
 
-    static void addEdge(ArrayList<ArrayList<Pair>> adj, int u, int v, int w) {
-        adj.get(u).add(new Pair(v, w));
-        adj.get(v).add(new Pair(u, w));
-    }
+    public int findCity(int n,
+                        ArrayList<ArrayList<Edge>> adj,
+                        int threshold) {
 
-    int findCity(int n, ArrayList<ArrayList<Pair>> adj,
-                 int distanceThreshold) {
-
+        int INF = (int) 1e9;
         int[][] dist = new int[n][n];
 
-        // Step 1: initialize
+        // Initialize distances
         for (int i = 0; i < n; i++) {
-            Arrays.fill(dist[i], (int) 1e9);
+            Arrays.fill(dist[i], INF);
             dist[i][i] = 0;
         }
 
-        // Step 2: fill from adjacency list
+        // Fill direct edges
         for (int u = 0; u < n; u++) {
-            for (Pair it : adj.get(u)) {
-                int v = it.first;
-                int wt = it.second;
-
-                dist[u][v] = wt;
+            for (Edge edge : adj.get(u)) {
+                dist[u][edge.to] = edge.weight;
             }
         }
 
-        // Step 3: Floyd Warshall
+        // Floyd-Warshall
         for (int via = 0; via < n; via++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
 
-                    if (dist[i][via] == (int) 1e9 ||
-                            dist[via][j] == (int) 1e9) continue;
+                    if (dist[i][via] == INF ||
+                            dist[via][j] == INF)
+                        continue;
 
-                    dist[i][j] = Math.min(dist[i][j],
-                            dist[i][via] + dist[via][j]);
+                    dist[i][j] = Math.min(
+                            dist[i][j],
+                            dist[i][via] + dist[via][j]
+                    );
                 }
             }
         }
 
-        // Step 4: find answer
-        int minCount = n;
-        int cityNo = -1;
+        // Find city with minimum reachable neighbors
+        int answer = -1;
+        int minReachable = n;
 
         for (int city = 0; city < n; city++) {
 
-            int count = 0;
+            int reachable = 0;
 
-            for (int adjCity = 0; adjCity < n; adjCity++) {
-                if (dist[city][adjCity] <= distanceThreshold) {
-                    count++;
-                }
+            for (int next = 0; next < n; next++) {
+                if (dist[city][next] <= threshold)
+                    reachable++;
             }
 
-            // IMPORTANT: <= for larger index preference
-            if (count <= minCount) {
-                minCount = count;
-                cityNo = city;
+            // Choose larger index in case of tie
+            if (reachable <= minReachable) {
+                minReachable = reachable;
+                answer = city;
             }
         }
 
-        return cityNo;
+        return answer;
     }
 
-    static class Pair {
-        int first, second;
+    static class Edge {
+        int to, weight;
 
-        Pair(int first, int second) {
-            this.first = first;     // node
-            this.second = second;   // weight
+        Edge(int to, int weight) {
+            this.to = to;
+            this.weight = weight;
         }
     }
+
 }

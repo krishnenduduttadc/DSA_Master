@@ -13,6 +13,36 @@ public class NumberofWaystoArriveatDestination {
         adj.get(v).add(new Edge(u, w));
     }
 
+    public static void main(String[] args) {
+
+        int n = 7;
+
+        ArrayList<ArrayList<Edge>> adj = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        // Hardcoded graph
+        addEdge(adj, 0, 6, 7);
+        addEdge(adj, 0, 1, 2);
+        addEdge(adj, 1, 2, 3);
+        addEdge(adj, 1, 3, 3);
+        addEdge(adj, 6, 3, 3);
+        addEdge(adj, 3, 5, 1);
+        addEdge(adj, 6, 5, 1);
+        addEdge(adj, 2, 5, 1);
+        addEdge(adj, 0, 4, 5);
+        addEdge(adj, 4, 6, 2);
+
+        NumberofWaystoArriveatDestination obj =
+                new NumberofWaystoArriveatDestination();
+
+        int ans = obj.countPaths(n, adj);
+
+        System.out.println("Number of shortest paths = " + ans);
+    }
+
     public int countPaths(int n, ArrayList<ArrayList<Edge>> adj) {
 
         int MOD = 1_000_000_007;
