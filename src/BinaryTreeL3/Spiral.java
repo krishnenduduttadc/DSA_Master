@@ -2,60 +2,68 @@ package BinaryTreeL3;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Spiral {
 
-    public static ArrayList<ArrayList<Integer>> zigzagLevelOrder(Node root) {
-        Queue<Node> queue = new LinkedList<Node>();
-        ArrayList<ArrayList<Integer>> wrapList = new ArrayList<>();
+    static List<List<Integer>> zigzagLevelOrder(Node root) {
 
-        if (root == null) return wrapList;
+        List<List<Integer>> ans = new ArrayList<>();
 
-        queue.offer(root);
-        boolean flag = true;
-        while (!queue.isEmpty()) {
-            int levelNum = queue.size();
-            ArrayList<Integer> subList = new ArrayList<Integer>(levelNum);
-            for (int i = 0; i < levelNum; i++) {
-                int index = i;
-                if (queue.peek().left != null) queue.offer(queue.peek().left);
-                if (queue.peek().right != null) queue.offer(queue.peek().right);
-                if (flag == true) subList.add(queue.poll().key);
-                else subList.add(0, queue.poll().key);
+        if (root == null)
+            return ans;
+
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+
+        boolean leftToRight = true;
+
+        while (!q.isEmpty()) {
+
+            int size = q.size();
+            List<Integer> level = new ArrayList<>();
+
+            for (int i = 0; i < size; i++) {
+
+                Node curr = q.poll();
+
+                if (leftToRight)
+                    level.add(curr.key);
+                else
+                    level.add(0, curr.key);
+
+                if (curr.left != null)
+                    q.offer(curr.left);
+
+                if (curr.right != null)
+                    q.offer(curr.right);
             }
-            flag = !flag;
-            wrapList.add(subList);
+
+            ans.add(level);
+            leftToRight = !leftToRight;
         }
-        return wrapList;
+
+        return ans;
     }
 
-    public static void main(String args[]) {
-        int i, j;
+    public static void main(String[] args) {
+
         Node root = new Node(3);
         root.left = new Node(9);
         root.right = new Node(20);
         root.right.left = new Node(15);
         root.right.right = new Node(7);
-        ArrayList<ArrayList<Integer>> ans;
-        ans = zigzagLevelOrder(root);
-        System.out.println("Zig Zag Traversal of Binary Tree ");
-        for (i = 0; i < ans.size(); i++) {
-            for (j = 0; j < ans.get(i).size(); j++) {
-                System.out.print(ans.get(i).get(j) + " ");
-            }
-            System.out.println();
-        }
 
+        System.out.println(zigzagLevelOrder(root));
     }
 
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

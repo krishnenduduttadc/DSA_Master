@@ -1,31 +1,35 @@
 package BinaryTreeL3;
 
-public class BSTfromPre {
-    public static Node bstFromPreorder(int[] A) {
-        return bstFromPreorder(A, Integer.MAX_VALUE, new int[]{0});
+class BSTfromPre {
+
+    static int idx = 0;
+
+    static Node bstFromPreorder(int[] preorder) {
+        idx = 0;
+        return build(preorder, Integer.MAX_VALUE);
     }
 
-    public static Node bstFromPreorder(int[] A, int bound, int[] i) {
-        if (i[0] == A.length || A[i[0]] > bound) return null;
-        Node root = new Node(A[i[0]++]);
-        root.left = bstFromPreorder(A, root.key, i);
-        root.right = bstFromPreorder(A, bound, i);
+    static Node build(int[] preorder, int bound) {
+        if (idx == preorder.length || preorder[idx] > bound)
+            return null;
+        Node root = new Node(preorder[idx++]);
+        root.left = build(preorder, root.key);
+        root.right = build(preorder, bound);
         return root;
     }
 
     public static void main(String[] args) {
-        int a[] = {3, 2, 4};
-        System.out.println(bstFromPreorder(a).key);
+        int[] preorder = {3, 2, 4};
+        Node root = bstFromPreorder(preorder);
+        System.out.println(root.key);
     }
 
-    public static class Node {
-
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

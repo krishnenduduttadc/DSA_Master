@@ -9,15 +9,11 @@ public class MaxDepth {
         if (root == null) {
             return 0;
         }
-
         LinkedList<Node> queue = new LinkedList<>();
         queue.addLast(root);
-
         int level = 0;
-
         while (queue.size() > 0) {
             int size = queue.size();
-
             while (size-- > 0) {
                 Node remNode = queue.removeFirst();
                 if (remNode.left != null) {
@@ -27,10 +23,8 @@ public class MaxDepth {
                     queue.addLast(remNode.right);
                 }
             }
-
             level++;
         }
-
         return level;
     }
 
@@ -42,12 +36,8 @@ public class MaxDepth {
         root.left.right = new Node(5);
         root.right.left = new Node(6);
         root.right.right = new Node(7);
-
         int depth = levelOrder(root);
-
         System.out.print(depth + " ");
-
-
     }
 
     public static class Node {

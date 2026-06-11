@@ -5,67 +5,87 @@ import java.util.Queue;
 
 public class Serialize {
 
-    public static String serialize(Node root) {
-        if (root == null) return "";
+    static String serialize(Node root) {
+
+        if (root == null)
+            return "";
+
+        StringBuilder sb = new StringBuilder();
         Queue<Node> q = new LinkedList<>();
-        StringBuilder res = new StringBuilder();
-        q.add(root);
+        q.offer(root);
+
         while (!q.isEmpty()) {
-            Node node = q.poll();
-            if (node == null) {
-                res.append("n ");
+
+            Node curr = q.poll();
+
+            if (curr == null) {
+                sb.append("n ");
                 continue;
             }
-            res.append(node.key + " ");
-            q.add(node.left);
-            q.add(node.right);
+
+            sb.append(curr.key).append(" ");
+
+            q.offer(curr.left);
+            q.offer(curr.right);
         }
-        return res.toString();
+
+        return sb.toString();
     }
 
-    public static Node deserialize(String data) {
-        if (data == "") return null;
-        Queue<Node> q = new LinkedList<>();
+    static Node deserialize(String data) {
+
+        if (data.isEmpty())
+            return null;
+
         String[] values = data.split(" ");
+
         Node root = new Node(Integer.parseInt(values[0]));
-        q.add(root);
-        for (int i = 1; i < values.length; i++) {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+
+        int i = 1;
+
+        while (!q.isEmpty()) {
+
             Node parent = q.poll();
+
             if (!values[i].equals("n")) {
-                Node left = new Node(Integer.parseInt(values[i]));
-                parent.left = left;
-                q.add(left);
+                parent.left = new Node(Integer.parseInt(values[i]));
+                q.offer(parent.left);
             }
-            if (!values[++i].equals("n")) {
-                Node right = new Node(Integer.parseInt(values[i]));
-                parent.right = right;
-                q.add(right);
+            i++;
+
+            if (!values[i].equals("n")) {
+                parent.right = new Node(Integer.parseInt(values[i]));
+                q.offer(parent.right);
             }
+            i++;
         }
+
         return root;
     }
 
     public static void main(String[] args) {
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
-        root.left.left.left = new Node(6);
-        String ser = serialize(root);
-        System.out.println(ser);
 
-        Node dser = deserialize(ser);
-        System.out.println(dser.key);
+        String s = serialize(root);
+        System.out.println(s);
+
+        Node newRoot = deserialize(s);
+        System.out.println(newRoot.key);
     }
 
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

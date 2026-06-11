@@ -1,36 +1,44 @@
 package BinaryTreeL3;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Morris {
 
-    static ArrayList<Integer> preorderTraversal(Node root) {
-        ArrayList<Integer> preorder = new ArrayList<>();
-        Node cur = root;
-        while (cur != null) {
-            if (cur.left == null) {
-                preorder.add(cur.key);
-                cur = cur.right;
+    static List<Integer> preorderTraversal(Node root) {
+
+        List<Integer> preorder = new ArrayList<>();
+        Node curr = root;
+
+        while (curr != null) {
+
+            if (curr.left == null) {
+                preorder.add(curr.key);
+                curr = curr.right;
             } else {
-                Node prev = cur.left;
-                while (prev.right != null && prev.right != cur) {
+
+                Node prev = curr.left;
+
+                while (prev.right != null && prev.right != curr)
                     prev = prev.right;
-                }
 
                 if (prev.right == null) {
-                    prev.right = cur;
-                    preorder.add(cur.key);
-                    cur = cur.left;
+
+                    preorder.add(curr.key); // visit node
+                    prev.right = curr;      // create thread
+                    curr = curr.left;
                 } else {
-                    prev.right = null;
-                    cur = cur.right;
+
+                    prev.right = null;      // remove thread
+                    curr = curr.right;
                 }
             }
         }
+
         return preorder;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         Node root = new Node(1);
         root.left = new Node(2);
@@ -39,23 +47,15 @@ public class Morris {
         root.left.right = new Node(5);
         root.left.right.right = new Node(6);
 
-        ArrayList<Integer> preorder = new ArrayList<>();
-        preorder = preorderTraversal(root);
-
-        System.out.println("The Preorder Traversal is: ");
-        for (int i = 0; i < preorder.size(); i++) {
-            System.out.print(preorder.get(i) + " ");
-        }
-
+        System.out.println(preorderTraversal(root));
     }
 
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

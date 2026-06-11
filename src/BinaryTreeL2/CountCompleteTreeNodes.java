@@ -1,17 +1,39 @@
 package BinaryTreeL2;
 
 public class CountCompleteTreeNodes {
-    public static class Node {
-        int val;
-        Node left, right;
 
-        Node(int x) {
-            val = x;
+    static int leftHeight(Node root) {
+        int h = 0;
+        while (root != null) {
+            h++;
+            root = root.left;
         }
+        return h;
+    }
+
+    static int rightHeight(Node root) {
+        int h = 0;
+        while (root != null) {
+            h++;
+            root = root.right;
+        }
+        return h;
+    }
+
+    static int countNodes(Node root) {
+        if (root == null) return 0;
+
+        int lh = leftHeight(root);
+        int rh = rightHeight(root);
+
+        if (lh == rh)
+            return (1 << lh) - 1;    // perfect tree
+
+        return 1 + countNodes(root.left) + countNodes(root.right);
     }
 
     public static void main(String[] args) {
-        CountCompleteTreeNodes solution = new CountCompleteTreeNodes();
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
@@ -19,32 +41,15 @@ public class CountCompleteTreeNodes {
         root.left.right = new Node(5);
         root.right.left = new Node(6);
 
-        System.out.println("Number of nodes: " + solution.countNodes(root));  // Output: 6
+        System.out.println(countNodes(root));
     }
 
-    public int countNodes(Node root) {
-        if (root == null) return 0;
-        int leftHeight = getHeight(root, true);
-        int rightHeight = getHeight(root, false);
-        if (leftHeight == rightHeight) {
-            return (int) Math.pow(2, leftHeight) - 1;
+    static class Node {
+        int val;
+        Node left, right;
+
+        Node(int val) {
+            this.val = val;
         }
-        return 1 + countNodes(root.left) + countNodes(root.right);
     }
-
-    private int getHeight(Node node, boolean isLeft) {
-        int height = 0;
-        while (node != null) {
-            height++;
-            node = isLeft ? node.left : node.right;
-        }
-        return height;
-    }
-
-//    private int getHeight(Node node) {
-//        if (node == null) {
-//            return 0;
-//        }
-//        return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
-//    }
 }

@@ -1,40 +1,45 @@
 package BinaryTreeL3;
 
 public class Diameter {
-    public static int diameterOfBinaryTree(Node root) {
-        int[] diameter = new int[1];
-        height(root, diameter);
-        return diameter[0];
+
+    static int diameter = 0;
+
+    static int diameterOfBinaryTree(Node root) {
+        height(root);
+        return diameter;
     }
 
-    private static int height(Node node, int[] diameter) {
-        if (node == null) {
+    static int height(Node root) {
+
+        if (root == null)
             return 0;
-        }
-        int lh = height(node.left, diameter);
-        int rh = height(node.right, diameter);
-        diameter[0] = Math.max(diameter[0], lh + rh);
-        return 1 + Math.max(lh, rh);
+
+        int left = height(root.left);
+        int right = height(root.right);
+
+        diameter = Math.max(diameter, left + right);
+
+        return 1 + Math.max(left, right);
     }
 
     public static void main(String[] args) {
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
         root.left.left.left = new Node(6);
-        int dia = diameterOfBinaryTree(root);
-        System.out.println(dia);
+
+        System.out.println(diameterOfBinaryTree(root));
     }
 
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

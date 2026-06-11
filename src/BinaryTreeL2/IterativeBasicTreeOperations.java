@@ -4,102 +4,105 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class IterativeBasicTreeOperations {
-    public static class Node {
-        int val;
-        Node left, right;
 
-        Node(int x) {
-            val = x;
-        }
-    }
-
-    public int getHeight(Node root) {
+    static int height(Node root) {
         if (root == null) return 0;
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        int height = 0;
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
 
-        while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-            height++;
-            for (int i = 0; i < levelSize; i++) {
-                Node node = queue.poll();
-                if (node.left != null) queue.offer(node.left);
-                if (node.right != null) queue.offer(node.right);
+        int h = 0;
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            h++;
+
+            while (size-- > 0) {
+                Node node = q.poll();
+
+                if (node.left != null) q.offer(node.left);
+                if (node.right != null) q.offer(node.right);
             }
         }
 
-        return height;
+        return h;
     }
 
-    public int getNodeCount(Node root) {
+    static int countNodes(Node root) {
         if (root == null) return 0;
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+
         int count = 0;
 
-        while (!queue.isEmpty()) {
-            Node node = queue.poll();
+        while (!q.isEmpty()) {
+            Node node = q.poll();
             count++;
-            if (node.left != null) queue.offer(node.left);
-            if (node.right != null) queue.offer(node.right);
+
+            if (node.left != null) q.offer(node.left);
+            if (node.right != null) q.offer(node.right);
         }
 
         return count;
     }
 
-    public int getMax(Node root) {
-        if (root == null) throw new IllegalArgumentException("Tree is empty");
+    static int maxValue(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        int maxValue = Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
 
-        while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            maxValue = Math.max(maxValue, node.val);
+        while (!q.isEmpty()) {
+            Node node = q.poll();
 
-            if (node.left != null) queue.offer(node.left);
-            if (node.right != null) queue.offer(node.right);
+            max = Math.max(max, node.val);
+
+            if (node.left != null) q.offer(node.left);
+            if (node.right != null) q.offer(node.right);
         }
 
-        return maxValue;
+        return max;
     }
 
-    public int getMin(Node root) {
-        if (root == null) throw new IllegalArgumentException("Tree is empty");
+    static int minValue(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        int minValue = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
 
-        while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            minValue = Math.min(minValue, node.val);
+        while (!q.isEmpty()) {
+            Node node = q.poll();
 
-            if (node.left != null) queue.offer(node.left);
-            if (node.right != null) queue.offer(node.right);
+            min = Math.min(min, node.val);
+
+            if (node.left != null) q.offer(node.left);
+            if (node.right != null) q.offer(node.right);
         }
 
-        return minValue;
+        return min;
     }
 
     public static void main(String[] args) {
-        IterativeBasicTreeOperations solution = new IterativeBasicTreeOperations();
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
 
-        System.out.println("Height of the tree: " + solution.getHeight(root));
-        System.out.println("Number of nodes in the tree: " + solution.getNodeCount(root));
-        System.out.println("Maximum value in the tree: " + solution.getMax(root));
-        System.out.println("Maximum value in the tree: " + solution.getMin(root));
+        System.out.println(height(root));
+        System.out.println(countNodes(root));
+        System.out.println(maxValue(root));
+        System.out.println(minValue(root));
+    }
 
+    static class Node {
+        int val;
+        Node left, right;
 
-
+        Node(int val) {
+            this.val = val;
+        }
     }
 }

@@ -19,7 +19,6 @@ public class CheckBST {
     public static void main(String[] args) {
         Node root = null;
 
-
         int[] data = {50, 30, 20, 40, 70, 60, 80};
         for (int i = 0; i < data.length; i++) {
             root = insertRec(root, data[i]);

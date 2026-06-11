@@ -1,21 +1,25 @@
 package BinaryTreeL2;
 
+
 public class MaxPathSum {
 
-    static int maxSum = Integer.MIN_VALUE;
+    static int maxSum;
 
-    // single recursive function
-    static int maxPathSum(Node root) {
+    static int dfs(Node root) {
         if (root == null) return 0;
 
-        int left = Math.max(0, maxPathSum(root.left));
-        int right = Math.max(0, maxPathSum(root.right));
+        int left = Math.max(0, dfs(root.left));
+        int right = Math.max(0, dfs(root.right));
 
-        // path passing through current node
         maxSum = Math.max(maxSum, left + right + root.val);
 
-        // return max root-to-node path
-        return Math.max(left, right) + root.val;
+        return root.val + Math.max(left, right);
+    }
+
+    static int maxPathSum(Node root) {
+        maxSum = Integer.MIN_VALUE;
+        dfs(root);
+        return maxSum;
     }
 
     public static void main(String[] args) {
@@ -28,8 +32,7 @@ public class MaxPathSum {
         root.right.left = new Node(6);
         root.right.right = new Node(7);
 
-        maxPathSum(root);
-        System.out.println(maxSum); // Output: 18
+        System.out.println(maxPathSum(root)); // 18
     }
 
     static class Node {

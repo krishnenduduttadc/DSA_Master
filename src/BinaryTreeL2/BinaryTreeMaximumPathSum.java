@@ -1,16 +1,18 @@
 package BinaryTreeL2;
 
 public class BinaryTreeMaximumPathSum {
-    public static class Node {
-        int val;
-        Node left, right;
-
-        Node(int x) {
-            val = x;
-        }
-    }
-
     private int maxSum;
+
+    public static void main(String[] args) {
+        BinaryTreeMaximumPathSum solution = new BinaryTreeMaximumPathSum();
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        System.out.println("Maximum Path Sum: " + solution.maxPathSum(root));  // Output: 6
+    }
 
     public int maxPathSum(Node root) {
         maxSum = Integer.MIN_VALUE;
@@ -27,18 +29,12 @@ public class BinaryTreeMaximumPathSum {
         return node.val + Math.max(left, right);
     }
 
-    public static void main(String[] args) {
-        BinaryTreeMaximumPathSum solution = new BinaryTreeMaximumPathSum();
-//        Node root = new Node(1);
-//        root.left = new Node(2);
-//        root.right = new Node(3);
+    public static class Node {
+        int val;
+        Node left, right;
 
-        Node root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.left = new Node(4);
-        root.left.right = new Node(5);
-        root.right.left = new Node(6);
-        System.out.println("Maximum Path Sum: " + solution.maxPathSum(root));  // Output: 6
+        Node(int x) {
+            val = x;
+        }
     }
 }

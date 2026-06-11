@@ -4,67 +4,81 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class SerializeDeserializeBinaryTree {
+
+    // Serialize
+    static String serialize(Node root) {
+        if (root == null) return "";
+
+        StringBuilder sb = new StringBuilder();
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
+
+            if (curr == null) {
+                sb.append("null,");
+            } else {
+                sb.append(curr.val).append(",");
+                q.offer(curr.left);
+                q.offer(curr.right);
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // Deserialize
+    static Node deserialize(String data) {
+        if (data.isEmpty()) return null;
+
+        String[] arr = data.split(",");
+        Node root = new Node(Integer.parseInt(arr[0]));
+
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+
+        int i = 1;
+
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
+
+            if (!arr[i].equals("null")) {
+                curr.left = new Node(Integer.parseInt(arr[i]));
+                q.offer(curr.left);
+            }
+            i++;
+
+            if (!arr[i].equals("null")) {
+                curr.right = new Node(Integer.parseInt(arr[i]));
+                q.offer(curr.right);
+            }
+            i++;
+        }
+
+        return root;
+    }
+
     public static void main(String[] args) {
-        SerializeDeserializeBinaryTree serDeser = new SerializeDeserializeBinaryTree();
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.right.left = new Node(4);
         root.right.right = new Node(5);
 
+        String s = serialize(root);
+        System.out.println(s);
 
-        String serialized = serDeser.serialize(root);
-        System.out.println("Serialized: " + serialized);
-
-        Node deserialized = serDeser.deserialize(serialized);
-        System.out.println("Deserialized: " + serDeser.serialize(deserialized));
+        Node newRoot = deserialize(s);
+        System.out.println(serialize(newRoot));
     }
 
-    public static class Node {
+    static class Node {
         int val;
-        Node left;
-        Node right;
-        Node(int x) { val = x; }
-    }
+        Node left, right;
 
-    // Encodes a tree to a single string.
-    public String serialize(Node root) {
-        if (root == null) return "null";
-        StringBuilder sb = new StringBuilder();
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            Node node = queue.remove();
-            if (node == null) {
-                sb.append("null,");
-                continue;
-            }
-            sb.append(node.val).append(",");
-            queue.add(node.left);
-            queue.add(node.right);
+        Node(int val) {
+            this.val = val;
         }
-        return sb.toString();
-    }
-
-    public Node deserialize(String data) {
-        if (data.equals("null")) return null;
-        String[] nodes = data.split(",");
-        Node root = new Node(Integer.parseInt(nodes[0]));
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        for (int i = 1; i < nodes.length; i++) {
-            Node parent = queue.poll();
-            if (!nodes[i].equals("null")) {
-                Node left = new Node(Integer.parseInt(nodes[i]));
-                parent.left = left;
-                queue.offer(left);
-            }
-            if (!nodes[++i].equals("null")) {
-                Node right = new Node(Integer.parseInt(nodes[i]));
-                parent.right = right;
-                queue.offer(right);
-            }
-        }
-        return root;
     }
 }

@@ -1,58 +1,70 @@
 package BinaryTreeL3;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class BinTreePostandIn {
+class BinTreePostandIn {
 
-    public static Node buildTree(int[] inorder, int[] postorder) {
-        if (inorder == null || postorder == null || inorder.length != postorder.length)
-            return null;
-        HashMap<Integer, Integer> hm = new HashMap<>();
-        for (int i = 0; i < inorder.length; ++i)
-            hm.put(inorder[i], i);
-        return buildTreePostIn(inorder, 0, inorder.length - 1,
-                postorder, 0, postorder.length - 1, hm);
+    static Node buildTree(int[] inorder, int[] postorder) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < inorder.length; i++)
+            map.put(inorder[i], i);
+
+        return build(inorder, 0, inorder.length - 1,
+                postorder, 0, postorder.length - 1,
+                map);
     }
 
-    private static Node buildTreePostIn(int[] inorder, int is, int ie,
-                                        int[] postorder, int ps, int pe,
-                                        HashMap<Integer, Integer> hm) {
-        if (ps > pe || is > ie) return null;
+    static Node build(int[] in, int inStart, int inEnd,
+                      int[] post, int postStart, int postEnd,
+                      Map<Integer, Integer> map) {
 
-        Node root = new Node(postorder[pe]);
-        int ri = hm.get(postorder[pe]);
+        if (inStart > inEnd || postStart > postEnd)
+            return null;
 
-        int leftSize = ri - is;
-        root.left = buildTreePostIn(inorder, is, ri - 1,
-                postorder, ps, ps + leftSize - 1, hm);
-        root.right = buildTreePostIn(inorder, ri + 1, ie,
-                postorder, ps + leftSize, pe - 1, hm);
+        Node root = new Node(post[postEnd]);
+
+        int idx = map.get(root.key);
+        int leftSize = idx - inStart;
+
+        root.left = build(in, inStart, idx - 1,
+                post, postStart, postStart + leftSize - 1,
+                map);
+
+        root.right = build(in, idx + 1, inEnd,
+                post, postStart + leftSize, postEnd - 1,
+                map);
+
         return root;
     }
 
+    static void preorder(Node root) {
+        if (root == null)
+            return;
+
+        System.out.print(root.key + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
     public static void main(String[] args) {
-        int postorder[] = {3, 1, 2};
-        int inorder[] = {2, 1, 3};
+
+        int[] inorder = {2, 1, 3};
+        int[] postorder = {3, 1, 2};
+
         Node root = buildTree(inorder, postorder);
 
-        // Optional: print tree in preorder to verify
-        printPreorder(root);
+        preorder(root);
     }
 
-    public static void printPreorder(Node node) {
-        if (node == null) return;
-        System.out.print(node.key + " ");
-        printPreorder(node.left);
-        printPreorder(node.right);
-    }
-
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

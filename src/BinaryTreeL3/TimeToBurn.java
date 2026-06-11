@@ -1,90 +1,92 @@
 package BinaryTreeL3;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class TimeToBurn {
 
-    private static Node bfsToMapParents(Node root, HashMap<Node, Node> mpp, int start) {
+    // Build parent map and find target node
+    static Node buildParentMap(Node root, int start,
+                               HashMap<Node, Node> parent) {
+
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
-        Node res = new Node(-1);
+
+        Node target = null;
+
         while (!q.isEmpty()) {
-            Node node = q.poll();
-            if (node.key == start) res = node;
-            if (node.left != null) {
-                mpp.put(node.left, node);
-                q.offer(node.left);
+            Node curr = q.poll();
+
+            if (curr.key == start)
+                target = curr;
+
+            if (curr.left != null) {
+                parent.put(curr.left, curr);
+                q.offer(curr.left);
             }
-            if (node.right != null) {
-                mpp.put(node.right, node);
-                q.offer(node.right);
+
+            if (curr.right != null) {
+                parent.put(curr.right, curr);
+                q.offer(curr.right);
             }
         }
-        return res;
+
+        return target;
     }
 
-    private static int findMaxDistance(HashMap<Node, Node> mpp, Node target) {
+    static int timeToBurnTree(Node root, int start) {
+
+        HashMap<Node, Node> parent = new HashMap<>();
+        Node target = buildParentMap(root, start, parent);
         Queue<Node> q = new LinkedList<>();
+        HashSet<Node> visited = new HashSet<>();
         q.offer(target);
-        HashMap<Node, Integer> vis = new HashMap<>();
-        vis.put(target, 1);
-        int maxi = 0;
-
+        visited.add(target);
+        int time = -1;
         while (!q.isEmpty()) {
-            int sz = q.size();
-            int fl = 0;
-
-            for (int i = 0; i < sz; i++) {
-                Node node = q.poll();
-                if (node.left != null && vis.get(node.left) == null) {
-                    fl = 1;
-                    vis.put(node.left, 1);
-                    q.offer(node.left);
+            int size = q.size();
+            time++;
+            for (int i = 0; i < size; i++) {
+                Node curr = q.poll();
+                if (curr.left != null && !visited.contains(curr.left)) {
+                    visited.add(curr.left);
+                    q.offer(curr.left);
                 }
-                if (node.right != null && vis.get(node.right) == null) {
-                    fl = 1;
-                    vis.put(node.right, 1);
-                    q.offer(node.right);
+                if (curr.right != null && !visited.contains(curr.right)) {
+                    visited.add(curr.right);
+                    q.offer(curr.right);
                 }
-
-                if (mpp.get(node) != null && vis.get(mpp.get(node)) == null) {
-                    fl = 1;
-                    vis.put(mpp.get(node), 1);
-                    q.offer(mpp.get(node));
+                if (parent.containsKey(curr) &&
+                        !visited.contains(parent.get(curr))) {
+                    visited.add(parent.get(curr));
+                    q.offer(parent.get(curr));
                 }
             }
-            if (fl == 1) maxi++;
         }
-        return maxi;
-    }
 
-    public static int timeToBurnTree(Node root, int start) {
-        HashMap<Node, Node> mpp = new HashMap<>();
-        Node target = bfsToMapParents(root, mpp, start);
-        int maxi = findMaxDistance(mpp, target);
-        return maxi;
+        return time;
     }
 
     public static void main(String[] args) {
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
         root.left.left.left = new Node(6);
-        int dia = timeToBurnTree(root, 3);
-        System.out.println(dia);
+
+        System.out.println(timeToBurnTree(root, 3));
     }
 
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }

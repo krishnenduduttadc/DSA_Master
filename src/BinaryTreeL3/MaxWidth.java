@@ -5,32 +5,49 @@ import java.util.Queue;
 
 public class MaxWidth {
 
-    public static int widthOfBinaryTree(Node root) {
-        if (root == null) return 0;
-        int ans = 0;
-        Queue<Pair2> q = new LinkedList<>();
-        q.offer(new Pair2(root, 0));
+    static int widthOfBinaryTree(Node root) {
+
+        if (root == null)
+            return 0;
+
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(root, 0));
+
+        int maxWidth = 0;
+
         while (!q.isEmpty()) {
+
             int size = q.size();
-            int mmin = q.peek().num;    //to make the id starting from zero
+            int minIndex = q.peek().index;
+
             int first = 0, last = 0;
+
             for (int i = 0; i < size; i++) {
-                int cur_id = q.peek().num - mmin;
-                Node node = q.peek().node;
-                q.poll();
-                if (i == 0) first = cur_id;
-                if (i == size - 1) last = cur_id;
-                if (node.left != null)
-                    q.offer(new Pair2(node.left, cur_id * 2 + 1));
-                if (node.right != null)
-                    q.offer(new Pair2(node.right, cur_id * 2 + 2));
+
+                Pair curr = q.poll();
+
+                int index = curr.index - minIndex;
+
+                if (i == 0)
+                    first = index;
+
+                if (i == size - 1)
+                    last = index;
+
+                if (curr.node.left != null)
+                    q.offer(new Pair(curr.node.left, 2 * index + 1));
+
+                if (curr.node.right != null)
+                    q.offer(new Pair(curr.node.right, 2 * index + 2));
             }
-            ans = Math.max(ans, last - first + 1);
+
+            maxWidth = Math.max(maxWidth, last - first + 1);
         }
-        return ans;
+
+        return maxWidth;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         Node root = new Node(1);
         root.left = new Node(3);
@@ -40,31 +57,25 @@ public class MaxWidth {
         root.right.right = new Node(4);
         root.right.right.right = new Node(6);
 
-        int maxWidth = widthOfBinaryTree(root);
-        System.out.println("The maximum width of the Binary Tree is " + maxWidth);
-
-
+        System.out.println(widthOfBinaryTree(root));
     }
 
-    public static class Node {
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 
-    static class Pair2 {
+    static class Pair {
         Node node;
-        int num;
+        int index;
 
-        Pair2(Node _node, int _num) {
-            num = _num;
-            node = _node;
+        Pair(Node node, int index) {
+            this.node = node;
+            this.index = index;
         }
     }
 }
-
-

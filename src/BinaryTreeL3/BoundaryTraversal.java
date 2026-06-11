@@ -1,54 +1,72 @@
 package BinaryTreeL3;
 
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
-public class BoundaryTraversal {
-    static Boolean isLeaf(Node root) {
-        return (root.left == null) && (root.right == null);
+class BoundaryTraversal {
+
+    static boolean isLeaf(Node root) {
+        return root.left == null && root.right == null;
     }
 
-    static void addLeftBoundary(Node root, ArrayList<Integer> res) {
-        Node cur = root.left;
-        while (cur != null) {
-            if (isLeaf(cur) == false) res.add(cur.key);
-            if (cur.left != null) cur = cur.left;
-            else cur = cur.right;
+    static void leftBoundary(Node root, List<Integer> res) {
+        root = root.left;
+
+        while (root != null) {
+            if (!isLeaf(root))
+                res.add(root.key);
+
+            root = (root.left != null) ? root.left : root.right;
         }
     }
 
-    static void addRightBoundary(Node root, ArrayList<Integer> res) {
-        Node cur = root.right;
-        ArrayList<Integer> tmp = new ArrayList<Integer>();
-        while (cur != null) {
-            if (isLeaf(cur) == false) tmp.add(cur.key);
-            if (cur.right != null) cur = cur.right;
-            else cur = cur.left;
-        }
-        int i;
-        for (i = tmp.size() - 1; i >= 0; --i) {
-            res.add(tmp.get(i));
-        }
-    }
+    static void leaves(Node root, List<Integer> res) {
+        if (root == null)
+            return;
 
-    static void addLeaves(Node root, ArrayList<Integer> res) {
         if (isLeaf(root)) {
             res.add(root.key);
             return;
         }
-        if (root.left != null) addLeaves(root.left, res);
-        if (root.right != null) addLeaves(root.right, res);
+
+        leaves(root.left, res);
+        leaves(root.right, res);
     }
 
-    static ArrayList<Integer> printBoundary(Node node) {
-        ArrayList<Integer> ans = new ArrayList<Integer>();
-        if (isLeaf(node) == false) ans.add(node.key);
-        addLeftBoundary(node, ans);
-        addLeaves(node, ans);
-        addRightBoundary(node, ans);
-        return ans;
+    static void rightBoundary(Node root, List<Integer> res) {
+        Stack<Integer> stack = new Stack<>();
+        root = root.right;
+
+        while (root != null) {
+            if (!isLeaf(root))
+                stack.push(root.key);
+
+            root = (root.right != null) ? root.right : root.left;
+        }
+
+        while (!stack.isEmpty())
+            res.add(stack.pop());
     }
 
-    public static void main(String args[]) {
+    static List<Integer> boundaryTraversal(Node root) {
+        List<Integer> res = new ArrayList<>();
+
+        if (root == null)
+            return res;
+
+        if (!isLeaf(root))
+            res.add(root.key);
+
+        leftBoundary(root, res);
+        leaves(root, res);
+        rightBoundary(root, res);
+
+        return res;
+    }
+
+    public static void main(String[] args) {
 
         Node root = new Node(1);
         root.left = new Node(2);
@@ -62,24 +80,15 @@ public class BoundaryTraversal {
         root.right.right.left.left = new Node(10);
         root.right.right.left.right = new Node(11);
 
-        ArrayList<Integer> boundaryTraversal;
-        boundaryTraversal = printBoundary(root);
-
-        System.out.println("The Boundary Traversal is : ");
-        for (int i = 0; i < boundaryTraversal.size(); i++) {
-            System.out.print(boundaryTraversal.get(i) + " ");
-        }
-
+        System.out.println(boundaryTraversal(root));
     }
 
-    public static class Node {
-
+    static class Node {
         int key;
         Node left, right;
 
-        public Node(int item) {
-            key = item;
-            left = right = null;
+        Node(int key) {
+            this.key = key;
         }
     }
 }
