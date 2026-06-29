@@ -9,18 +9,15 @@ public class Combination1 {
 
     public static void combinations(int cb, int nboxes, int ssf, int ritems, String asf) {
         if (cb > nboxes) {
-            if(ssf==ritems){
+            if (ssf == ritems) {
                 System.out.println(asf);
             }
             return;
         }
-        combinations(cb+1,nboxes,ssf+1,ritems,asf+"i");
-        combinations(cb+1,nboxes,ssf,ritems,asf+"-");
+        combinations(cb + 1, nboxes, ssf + 1, ritems, asf + "i");
+        combinations(cb + 1, nboxes, ssf, ritems, asf + "-");
 
     }
 }
 
-/*
-5
-3
- */
+
