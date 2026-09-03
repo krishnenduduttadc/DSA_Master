@@ -5,10 +5,7 @@
  */
 package ArraysL1;
 
-/**
- *
- * @author krish
- */
+
 public class CheckRotation {
 
     public static void main(String[] args) {
