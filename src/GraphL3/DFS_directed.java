@@ -33,9 +33,9 @@ public class DFS_directed {
     public static void dfs(int s, boolean[] vis, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> component) {
         vis[s] = true;
         component.add(s);
-        for (int neighbor : adj.get(s)) {
-            if (!vis[neighbor]) {
-                dfs(neighbor, vis, adj, component);
+        for (int it : adj.get(s)) {
+            if (!vis[it]) {
+                dfs(it, vis, adj, component);
             }
         }
     }
