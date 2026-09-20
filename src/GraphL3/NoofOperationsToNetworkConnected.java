@@ -41,8 +41,7 @@ class NoofOperationsToNetworkConnected {
         addEdge(adj, 5, 6);
         addEdge(adj, 7, 8);
 
-        NoofOperationsToNetworkConnected obj =
-                new NoofOperationsToNetworkConnected(V);
+        NoofOperationsToNetworkConnected obj = new NoofOperationsToNetworkConnected(V);
 
         int ans = obj.solve(V, adj);
 
