@@ -31,7 +31,7 @@ public class CycleUndirectedDFS {
         return false;
     }
 
-    private boolean dfs(int s, int parent, boolean vis[], ArrayList<ArrayList<Integer>>
+    private boolean dfs(int s, int par, boolean vis[], ArrayList<ArrayList<Integer>>
             adj) {
         vis[s] = true;
         for (int it : adj.get(s)) {
@@ -39,7 +39,7 @@ public class CycleUndirectedDFS {
                 if (dfs(it, s, vis, adj)) {
                     return true;
                 }
-            } else if (it != parent) {
+            } else if (it != par) {
                 return true;
             }
         }
