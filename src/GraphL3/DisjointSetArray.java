@@ -29,7 +29,7 @@ public class DisjointSetArray {
             parent[ulp_u] = ulp_v;
         } else if (rank[ulp_u] > rank[ulp_v]) {
             parent[ulp_v] = ulp_u;
-        } else {
+        } else if(rank[ulp_u]==rank[ulp_v]){
             parent[ulp_v] = ulp_u;
             int nrank = rank[ulp_u];
             rank[ulp_u] = nrank + 1;
