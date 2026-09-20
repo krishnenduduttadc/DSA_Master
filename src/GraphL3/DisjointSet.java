@@ -41,18 +41,18 @@ public class DisjointSet {
         }
     }
 
-//    public void unionBySize(int u, int v) {
-//        int ulp_u = findUPar(u);
-//        int ulp_v = findUPar(v);
-//        if (ulp_u == ulp_v) return;
-//        if (size.get(ulp_u) < size.get(ulp_v)) {
-//            parent.set(ulp_u, ulp_v);
-//            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
-//        } else {
-//            parent.set(ulp_v, ulp_u);
-//            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
-//        }
-//    }
+    public void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size.get(ulp_u) < size.get(ulp_v)) {
+            parent.set(ulp_u, ulp_v);
+            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
+        } else {
+            parent.set(ulp_v, ulp_u);
+            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
+        }
+    }
 
 
     public static void main(String[] args) {
